@@ -6,12 +6,12 @@ from tvscreener import StockField, get_columns_to_request, get_recommendation, m
 class TestUtil(unittest.TestCase):
 
     def test_get_columns_type(self):
-        columns = get_columns_to_request(StockField, "1D")
+        columns = get_columns_to_request(StockField)
         self.assertIsInstance(columns, dict)
         self.assertEqual(len(columns), 302)
 
     def test_get_columns_len(self):
-        columns = get_columns_to_request(StockField, "1D")
+        columns = get_columns_to_request(StockField)
         self.assertIsInstance(columns, dict)
 
     def test_get_recommendation(self):

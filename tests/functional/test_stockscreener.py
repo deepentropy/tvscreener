@@ -28,11 +28,6 @@ class TestScreener(unittest.TestCase):
         df = ss.get()
         self.assertEqual(150, len(df))
 
-    def test_update_mode(self):
-        ss = StockScreener()
-        df = ss.get(update_mode="240")
-        self.assertEqual(150, len(df))
-
     def test_search(self):
         ss = StockScreener()
         ss.set_symbol_types(SymbolType.COMMON_STOCK)

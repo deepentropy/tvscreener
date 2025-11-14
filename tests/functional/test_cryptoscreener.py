@@ -9,8 +9,3 @@ class TestScreener(unittest.TestCase):
         ss = CryptoScreener()
         df = ss.get()
         self.assertEqual(150, len(df))
-
-    def test_update_mode(self):
-        ss = CryptoScreener()
-        df = ss.get(update_mode="240")
-        self.assertEqual(150, len(df))

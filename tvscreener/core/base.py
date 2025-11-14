@@ -133,18 +133,17 @@ class Screener:
         }
         return payload
 
-    def get(self, update_mode: str = "1D", print_request=False):
+    def get(self, print_request=False):
         """
         Get the screener data from TradingView.
 
-        :param update_mode: The update mode for the data (default is "1D"). Options: "1", "5", "15", "30", "60", "120", "240", "1D", "1W"
         :param print_request: If True, prints the request URL and payload for debugging.
         :return: ScreenerDataFrame containing the screener results
         :raises MalformedRequestException: If the API request fails
         :raises requests.RequestException: If there's a network error
         """
         # Build columns
-        columns = get_columns_to_request(self.specific_fields, update_mode)
+        columns = get_columns_to_request(self.specific_fields)
 
         payload = self._build_payload(list(columns.keys()))
         payload_json = json.dumps(payload, indent=4)

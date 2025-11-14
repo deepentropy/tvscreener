@@ -1,15 +1,14 @@
 import math
 from typing import Type
 
-from tvscreener.field import Field, add_historical, add_time_interval, add_rec, add_rec_to_label, \
+from tvscreener.field import Field, add_historical, add_rec, add_rec_to_label, \
     add_historical_to_label
 
 
-def format_historical_field(field_, update_mode, historical=1):
+def format_historical_field(field_, historical=1):
     """
-    Format the technical field to the update mode
+    Format the technical field to include historical offset
     :param field_: Field to format
-    :param update_mode: Update mode for the field (e.g., "1", "5", "15", "1D")
     :param historical: Historical offset (default 1)
     :return: Formatted field name
     :raises ValueError: If field is not a historical field
@@ -19,32 +18,24 @@ def format_historical_field(field_, update_mode, historical=1):
         raise ValueError(f"{field_} is not a historical field")
     formatted_technical_field = add_historical(field_.field_name, historical)
 
-    if field_.interval and update_mode != "1D":
-        formatted_technical_field = add_time_interval(formatted_technical_field, update_mode)
-
     return formatted_technical_field
 
 
-def get_columns_to_request(fields_: Type[Field], update_mode: str = "1D"):
+def get_columns_to_request(fields_: Type[Field]):
     """
     Assemble the technical columns for the request
     :param fields_: type of fields to be requested (StockField, ForexField, CryptoField)
-    :param update_mode: Update mode for the request (e.g., "1", "5", "15", "1D")
     :return:
     """
 
     # Build a dict of technical label and field label
-    # Format the technical field to the update mode
-    columns = {add_time_interval(field.field_name, update_mode)
-               if update_mode != "1D" and field.interval
-               else field.field_name: field.label
-               for field in fields_}
+    columns = {field.field_name: field.label for field in fields_}
 
     # Drop column that starts with "pattern"
     columns = {k: v for k, v in columns.items() if not k.startswith("candlestick")}
 
     # Add the update mode column to every request
-    columns[f"update_mode|{update_mode}"] = "Update Mode"
+    columns["update_mode"] = "Update Mode"
 
     # Format the fields that embed the time interval in the name
     columns = {_format_timed_fields(k): v for k, v in columns.items()}
@@ -54,7 +45,7 @@ def get_columns_to_request(fields_: Type[Field], update_mode: str = "1D"):
                    for field in fields_ if field.has_recommendation()}
 
     # Add the historical columns
-    hist_columns = {format_historical_field(field, update_mode): add_historical_to_label(field.label)
+    hist_columns = {format_historical_field(field): add_historical_to_label(field.label)
                     for field in fields_ if field.historical}
 
     # Merge the dicts

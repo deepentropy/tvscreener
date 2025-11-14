@@ -11,11 +11,6 @@ class TestForexScreener(unittest.TestCase):
         df = fs.get()
         self.assertEqual(150, len(df))
 
-    def test_update_mode(self):
-        fs = ForexScreener()
-        df = fs.get(update_mode="240")
-        self.assertEqual(150, len(df))
-
     def test_region(self):
         fs = ForexScreener()
         fs.add_filter(ForexField.REGION, FilterOperator.EQUAL, Region.AFRICA)
