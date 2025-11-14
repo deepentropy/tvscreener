@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from tvscreener import StockScreener, TimeInterval, MalformedRequestException, \
+from tvscreener import StockScreener, MalformedRequestException, \
     ExtraFilter, FilterOperator, StockField
 from tvscreener.field import SymbolType, Market, SubMarket, Country, Exchange
 
@@ -28,9 +28,9 @@ class TestScreener(unittest.TestCase):
         df = ss.get()
         self.assertEqual(150, len(df))
 
-    def test_time_interval(self):
+    def test_update_mode(self):
         ss = StockScreener()
-        df = ss.get(time_interval=TimeInterval.FOUR_HOURS)
+        df = ss.get(update_mode="240")
         self.assertEqual(150, len(df))
 
     def test_search(self):

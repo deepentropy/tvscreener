@@ -2,8 +2,8 @@ import math
 from enum import Enum
 
 
-def add_time_interval(field_name, time_interval):
-    return f"{field_name}|{time_interval.value}"
+def add_time_interval(field_name, update_mode):
+    return f"{field_name}|{update_mode}"
 
 
 def add_historical(field_name, historical=1):
@@ -88,21 +88,6 @@ class Rating(Enum):
     @classmethod
     def values(cls):
         return list(map(lambda c: c.value, cls))
-
-
-class TimeInterval(Enum):
-    ONE_MINUTE = "1"
-    FIVE_MINUTES = "5"
-    FIFTEEN_MINUTES = "15"
-    THIRTY_MINUTES = "30"
-    SIXTY_MINUTES = "60"
-    TWO_HOURS = "120"
-    FOUR_HOURS = "240"
-    ONE_DAY = "1D"
-    ONE_WEEK = "1W"
-
-    def update_mode(self):
-        return f"update_mode|{self.value}"
 
 
 class Country(Enum):

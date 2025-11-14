@@ -16,5 +16,5 @@ __all__ = [
     "MalformedRequestException",
     "Field", "Filter", "FilterOperator", "ExtraFilter",
     "StockField", "ForexField", "CryptoField",
-    "Market", "Exchange", "Country", "Sector", "Industry", "TimeInterval",
+    "Market", "Exchange", "Country", "Sector", "Industry",
 ]

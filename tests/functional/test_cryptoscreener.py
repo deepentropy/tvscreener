@@ -1,6 +1,6 @@
 import unittest
 
-from tvscreener import CryptoScreener, TimeInterval
+from tvscreener import CryptoScreener
 
 
 class TestScreener(unittest.TestCase):
@@ -10,7 +10,7 @@ class TestScreener(unittest.TestCase):
         df = ss.get()
         self.assertEqual(150, len(df))
 
-    def test_timeinterval(self):
+    def test_update_mode(self):
         ss = CryptoScreener()
-        df = ss.get(time_interval=TimeInterval.FOUR_HOURS)
+        df = ss.get(update_mode="240")
         self.assertEqual(150, len(df))

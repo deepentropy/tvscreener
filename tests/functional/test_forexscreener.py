@@ -1,6 +1,6 @@
 import unittest
 
-from tvscreener import ForexScreener, TimeInterval, ForexField, FilterOperator
+from tvscreener import ForexScreener, ForexField, FilterOperator
 from tvscreener.field import Region
 
 
@@ -11,9 +11,9 @@ class TestForexScreener(unittest.TestCase):
         df = fs.get()
         self.assertEqual(150, len(df))
 
-    def test_time_interval(self):
+    def test_update_mode(self):
         fs = ForexScreener()
-        df = fs.get(time_interval=TimeInterval.FOUR_HOURS)
+        df = fs.get(update_mode="240")
         self.assertEqual(150, len(df))
 
     def test_region(self):

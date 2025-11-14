@@ -4,7 +4,7 @@ import requests
 from enum import Enum
 
 from tvscreener.exceptions import MalformedRequestException
-from tvscreener.field import TimeInterval, Field, Market
+from tvscreener.field import Field, Market
 from tvscreener.field.crypto import CryptoField
 from tvscreener.field.forex import ForexField
 from tvscreener.field.stock import StockField
@@ -133,18 +133,18 @@ class Screener:
         }
         return payload
 
-    def get(self, time_interval=TimeInterval.ONE_DAY, print_request=False):
+    def get(self, update_mode: str = "1D", print_request=False):
         """
         Get the screener data from TradingView.
 
-        :param time_interval: The time interval for the data (default is ONE_DAY).
+        :param update_mode: The update mode for the data (default is "1D"). Options: "1", "5", "15", "30", "60", "120", "240", "1D", "1W"
         :param print_request: If True, prints the request URL and payload for debugging.
         :return: ScreenerDataFrame containing the screener results
         :raises MalformedRequestException: If the API request fails
         :raises requests.RequestException: If there's a network error
         """
         # Build columns
-        columns = get_columns_to_request(self.specific_fields, time_interval)
+        columns = get_columns_to_request(self.specific_fields, update_mode)
 
         payload = self._build_payload(list(columns.keys()))
         payload_json = json.dumps(payload, indent=4)
