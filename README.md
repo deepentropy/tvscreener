@@ -6,33 +6,24 @@
        role="img"
        aria-labelledby="title">
     <title>Grid logo for screener API</title>
-
-    <!-- Couleur de fond optionnelle (à supprimer si tu veux du transparent) -->
-    <rect x="0" y="0" width="130" height="130" fill="#151320"/>
-
-    <!-- 3x3 grille de carrés -->
     <g fill="#ff4b5c">
-      <!-- Ligne 1 -->
       <rect x="10" y="10" width="30" height="30" rx="6"/>
       <rect x="50" y="10" width="30" height="30" rx="6"/>
       <rect x="90" y="10" width="30" height="30" rx="6"/>
-
-      <!-- Ligne 2 -->
       <rect x="10" y="50" width="30" height="30" rx="6"/>
       <rect x="50" y="50" width="30" height="30" rx="6"/>
       <rect x="90" y="50" width="30" height="30" rx="6"/>
-
-      <!-- Ligne 3 -->
       <rect x="10" y="90" width="30" height="30" rx="6"/>
       <rect x="50" y="90" width="30" height="30" rx="6"/>
       <rect x="90" y="90" width="30" height="30" rx="6"/>
     </g>
   </svg><br>
+  <h1>TradingView™ Screener API</h1>
 </div>
 
 -----------------
 
-# TradingView Screener API: simple Python library to retrieve data from TradingView Screener
+# TradingView™ Screener API: simple Python library to retrieve data from TradingView™ Screener
 
 [![PyPI version](https://badge.fury.io/py/tvscreener.svg)](https://badge.fury.io/py/tvscreener)
 [![Downloads](https://pepy.tech/badge/tvscreener)](https://pepy.tech/project/tvscreener)
@@ -45,7 +36,7 @@ Get the results as a Pandas Dataframe
 
 ## Disclaimer
 
-**This is an unofficial, third-party library and is not affiliated with, endorsed by, or connected to TradingView in any way.** TradingView is a trademark of TradingView, Inc. This independent project provides a Python interface to publicly available data from TradingView's screener. Use of this library is at your own risk and subject to TradingView's terms of service.
+**This is an unofficial, third-party library and is not affiliated with, endorsed by, or connected to TradingView™ in any way.** TradingView™ is a trademark of TradingView™, Inc. This independent project provides a Python interface to publicly available data from TradingView's screener. Use of this library is at your own risk and subject to TradingView's terms of service.
 
 # Main Features
 
