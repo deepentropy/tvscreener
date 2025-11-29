@@ -22,6 +22,7 @@ DEFAULT_SORT_STOCKS = StockField.MARKET_CAPITALIZATION
 DEFAULT_SORT_CRYPTO = CryptoField.VOLUME_24H_IN_USD
 DEFAULT_SORT_FOREX = ForexField.NAME
 REQUEST_TIMEOUT = 30  # seconds
+MIN_STREAM_INTERVAL = 1.0  # minimum interval for streaming to avoid rate limiting
 
 # Backward compatibility aliases
 default_market = DEFAULT_MARKET
@@ -211,8 +212,7 @@ class Screener:
             ...     print(f"Updated: {len(df)} rows")
         """
         # Enforce minimum interval to be respectful of TradingView's API
-        MIN_INTERVAL = 1.0
-        interval = max(interval, MIN_INTERVAL)
+        interval = max(interval, MIN_STREAM_INTERVAL)
 
         iteration = 0
         while max_iterations is None or iteration < max_iterations:
