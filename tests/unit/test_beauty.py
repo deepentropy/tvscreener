@@ -43,6 +43,12 @@ class TestBeautifyHelpers(unittest.TestCase):
     def test_rating_colors_neutral(self):
         self.assertEqual(COLOR_GRAY_NEUTRAL, _rating_colors(f"1.5 {NEUTRAL_CHAR}"))
 
+    def test_rating_colors_non_string(self):
+        """Test that non-string values return neutral color."""
+        self.assertEqual(COLOR_GRAY_NEUTRAL, _rating_colors(123))
+        self.assertEqual(COLOR_GRAY_NEUTRAL, _rating_colors(None))
+        self.assertEqual(COLOR_GRAY_NEUTRAL, _rating_colors(1.5))
+
     def test_rating_letter_buy(self):
         self.assertEqual(BUY_CHAR, _rating_letter(Rating.BUY))
         self.assertEqual(BUY_CHAR, _rating_letter(Rating.STRONG_BUY))

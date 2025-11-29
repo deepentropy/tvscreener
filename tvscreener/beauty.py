@@ -72,6 +72,8 @@ def _percent_colors(value):
 
 def _rating_colors(value):
     """Return color style based on rating indicator."""
+    if not isinstance(value, str):
+        return COLOR_GRAY_NEUTRAL
     if value.endswith(BUY_CHAR):
         return COLOR_BLUE_BUY
     elif value.endswith(SELL_CHAR):
@@ -201,9 +203,11 @@ class Beautify:
 
     def _format_adx(self, field: Field):
         """Format ADX column with recommendation."""
+        required_cols = ['ADX', 'ADX-DI', 'ADX+DI', 'ADX-DI[1]', 'ADX+DI[1]']
         self.df[field.field_name] = self.df.apply(
             lambda x: f"{x[field.field_name]} {_rating_letter(ta.adx(x['ADX'], x['ADX-DI'], x['ADX+DI'], x['ADX-DI[1]'], x['ADX+DI[1]']))}"
-            if 'ADX-DI' in x.index and 'ADX+DI' in x.index else str(x[field.field_name]),
+            if all(col in x.index for col in required_cols) and not _is_nan(x[field.field_name])
+            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
             axis=1
         )
         self.styled_df = self.styled_df.map(
@@ -212,9 +216,11 @@ class Beautify:
 
     def _format_ao(self, field: Field):
         """Format Awesome Oscillator column with recommendation."""
+        required_cols = ['AO', 'AO[1]', 'AO[2]']
         self.df[field.field_name] = self.df.apply(
             lambda x: f"{x[field.field_name]} {_rating_letter(ta.ao(x['AO'], x['AO[1]'], x['AO[2]']))}"
-            if 'AO[1]' in x.index and 'AO[2]' in x.index else str(x[field.field_name]),
+            if all(col in x.index for col in required_cols) and not _is_nan(x[field.field_name])
+            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
             axis=1
         )
         self.styled_df = self.styled_df.map(
@@ -225,7 +231,8 @@ class Beautify:
         """Format Bollinger Bands lower band column with recommendation."""
         self.df[field.field_name] = self.df.apply(
             lambda x: f"{x[field.field_name]} {_rating_letter(ta.bb_lower(x[field.field_name], x['close']))}"
-            if 'close' in x.index else str(x[field.field_name]),
+            if 'close' in x.index and not _is_nan(x[field.field_name]) and not _is_nan(x['close'])
+            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
             axis=1
         )
         self.styled_df = self.styled_df.map(
@@ -236,7 +243,8 @@ class Beautify:
         """Format Bollinger Bands upper band column with recommendation."""
         self.df[field.field_name] = self.df.apply(
             lambda x: f"{x[field.field_name]} {_rating_letter(ta.bb_upper(x[field.field_name], x['close']))}"
-            if 'close' in x.index else str(x[field.field_name]),
+            if 'close' in x.index and not _is_nan(x[field.field_name]) and not _is_nan(x['close'])
+            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
             axis=1
         )
         self.styled_df = self.styled_df.map(
