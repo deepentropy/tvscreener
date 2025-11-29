@@ -1,23 +1,5 @@
 <div align="center">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       viewBox="0 0 130 130"
-       width="200"
-       height="200"
-       role="img"
-       aria-labelledby="title">
-    <title>Grid logo for screener API</title>
-    <g fill="#ff4b5c">
-      <rect x="10" y="10" width="30" height="30" rx="6"/>
-      <rect x="50" y="10" width="30" height="30" rx="6"/>
-      <rect x="90" y="10" width="30" height="30" rx="6"/>
-      <rect x="10" y="50" width="30" height="30" rx="6"/>
-      <rect x="50" y="50" width="30" height="30" rx="6"/>
-      <rect x="90" y="50" width="30" height="30" rx="6"/>
-      <rect x="10" y="90" width="30" height="30" rx="6"/>
-      <rect x="50" y="90" width="30" height="30" rx="6"/>
-      <rect x="90" y="90" width="30" height="30" rx="6"/>
-    </g>
-  </svg><br>
+  <img src="https://raw.githubusercontent.com/deepentropy/tvscreener/main/.github/img/logo.svg" alt="TradingView Screener API Logo" width="200" height="200"><br>
   <h1>TradingView™ Screener API</h1>
 </div>
 
