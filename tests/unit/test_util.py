@@ -10,7 +10,8 @@ class TestUtil(unittest.TestCase):
     def test_get_columns_type(self):
         columns = get_columns_to_request(StockField)
         self.assertIsInstance(columns, dict)
-        self.assertEqual(len(columns), 302)
+        # StockField has 3509 fields after expanding technical indicators with intervals
+        self.assertGreater(len(columns), 3000)
 
     def test_get_columns_len(self):
         columns = get_columns_to_request(StockField)

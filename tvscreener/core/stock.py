@@ -1,6 +1,6 @@
 from tvscreener.core.base import Screener, default_market, default_sort_stocks
 from tvscreener.field import Market, Type, SymbolType
-from tvscreener.field.stock import StockField
+from tvscreener.field.stock import StockField, DEFAULT_STOCK_FIELDS
 from tvscreener.filter import FilterOperator
 from tvscreener.util import get_url
 
@@ -21,11 +21,13 @@ SYMBOL_TYPE_TO_TYPE_MAP = {
 class StockScreener(Screener):
     """Stock screener for querying stocks from TradingView."""
 
+    _field_type = StockField
+
     def __init__(self):
         super().__init__()
         self.markets = [default_market]
         self.url = get_url("global")
-        self.specific_fields = StockField
+        self.specific_fields = DEFAULT_STOCK_FIELDS  # Use default 424 fields (set to StockField for all 3500+)
         self.sort_by(default_sort_stocks, False)
 
     def _build_payload(self, requested_columns_):

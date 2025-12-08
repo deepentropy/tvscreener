@@ -1,15 +1,25 @@
 from tvscreener.field import Field
 
 
-class ForexField(Field):
+class CoinField(Field):
     """
-    ForexField enum with 2965 fields discovered from TradingView API.
+    CoinField enum with 3026 fields discovered from TradingView API.
 
     Each field is defined as:
     ENUM_NAME = 'Label', 'api_name', 'format_type', is_technical, is_oscillator
     """
 
-    AVERAGE_DAY_RANGE_14 = 'Average Day Range (14)', 'ADR', 'float', True, False
+    N24H_CLOSE_CHANGE_ABS_5 = '24H Close Change Abs|5', '24h_close_change_abs|5', 'percent', True, False
+    N24H_CLOSE_CHANGE_5 = '24H Close Change|5', '24h_close_change|5', 'percent', True, False
+    N24H_CLOSE_PREV_5 = '24H Close Prev|5', '24h_close_prev|5', 'float', True, False
+    N24H_VOL_CHANGE_ABS_5 = '24H Vol Change Abs|5', '24h_vol_change_abs|5', 'percent', True, False
+    N24H_VOL_CHANGE_CMC = '24H Vol Change Cmc', '24h_vol_change_cmc', 'percent', True, False
+    N24H_VOL_CHANGE_5 = '24H Vol Change|5', '24h_vol_change|5', 'percent', True, False
+    N24H_VOL_CMC = '24H Vol Cmc', '24h_vol_cmc', 'float', False, False
+    N24H_VOL_PREV_5 = '24H Vol Prev|5', '24h_vol_prev|5', 'float', False, False
+    N24H_VOL_TO_MARKET_CAP = '24H Vol To Market Cap', '24h_vol_to_market_cap', 'float', False, False
+    N24H_VOL_5 = '24H Vol|5', '24h_vol|5', 'float', False, False
+    ADR = 'Adr', 'ADR', 'float', False, False
     ADRP = 'Adrp', 'ADRP', 'float', False, False
     ADRP_1 = 'Adrp|1', 'ADRP|1', 'float', False, False
     ADRP_120 = 'Adrp|120', 'ADRP|120', 'float', False, False
@@ -29,8 +39,8 @@ class ForexField(Field):
     ADR_30 = 'Adr|30', 'ADR|30', 'float', False, False
     ADR_5 = 'Adr|5', 'ADR|5', 'float', False, False
     ADR_60 = 'Adr|60', 'ADR|60', 'float', False, False
-    AVERAGE_DIRECTIONAL_INDEX_14 = 'Average Directional Index (14)', 'ADX', 'computed_recommendation', True, False
-    POSITIVE_DIRECTIONAL_INDICATOR_14 = 'Positive Directional Indicator (14)', 'ADX+DI', 'round', True, True
+    ADX = 'ADX', 'ADX', 'float', True, False
+    ADX_PLUS_DI = 'ADX+Di', 'ADX+DI', 'float', True, True
     ADX_PLUS_DI_1 = 'ADX+Di[1]', 'ADX+DI[1]', 'float', True, True
     ADX_PLUS_DI_1_1 = 'ADX+Di[1]|1', 'ADX+DI[1]|1', 'float', True, True
     ADX_PLUS_DI_1_120 = 'ADX+Di[1]|120', 'ADX+DI[1]|120', 'float', True, True
@@ -130,7 +140,7 @@ class ForexField(Field):
     ADX_PLUS_DI_30 = 'ADX+Di|30', 'ADX+DI|30', 'float', True, True
     ADX_PLUS_DI_5 = 'ADX+Di|5', 'ADX+DI|5', 'float', True, True
     ADX_PLUS_DI_60 = 'ADX+Di|60', 'ADX+DI|60', 'float', True, True
-    NEGATIVE_DIRECTIONAL_INDICATOR_14 = 'Negative Directional Indicator (14)', 'ADX-DI', 'round', True, True
+    ADX_MINUS_DI = 'ADX-Di', 'ADX-DI', 'float', True, True
     ADX_MINUS_DI_1 = 'ADX-Di[1]', 'ADX-DI[1]', 'float', True, True
     ADX_MINUS_DI_1_1 = 'ADX-Di[1]|1', 'ADX-DI[1]|1', 'float', True, True
     ADX_MINUS_DI_1_120 = 'ADX-Di[1]|120', 'ADX-DI[1]|120', 'float', True, True
@@ -279,7 +289,7 @@ class ForexField(Field):
     ADX_30 = 'ADX|30', 'ADX|30', 'float', True, False
     ADX_5 = 'ADX|5', 'ADX|5', 'float', True, False
     ADX_60 = 'ADX|60', 'ADX|60', 'float', True, False
-    AWESOME_OSCILLATOR = 'Awesome Oscillator', 'AO', 'computed_recommendation', True, True
+    AO = 'AO', 'AO', 'float', True, True
     AO_1 = 'AO[1]', 'AO[1]', 'float', True, True
     AO_1_1 = 'AO[1]|1', 'AO[1]|1', 'float', True, True
     AO_1_120 = 'AO[1]|120', 'AO[1]|120', 'float', True, True
@@ -309,7 +319,7 @@ class ForexField(Field):
     AO_30 = 'AO|30', 'AO|30', 'float', True, True
     AO_5 = 'AO|5', 'AO|5', 'float', True, True
     AO_60 = 'AO|60', 'AO|60', 'float', True, True
-    AVERAGE_TRUE_RANGE_14 = 'Average True Range (14)', 'ATR', 'float', True, False
+    ATR = 'ATR', 'ATR', 'float', True, False
     ATRP = 'Atrp', 'ATRP', 'float', True, False
     ATRP_1 = 'Atrp|1', 'ATRP|1', 'float', True, False
     ATRP_120 = 'Atrp|120', 'ATRP|120', 'float', True, False
@@ -329,7 +339,7 @@ class ForexField(Field):
     ATR_30 = 'ATR|30', 'ATR|30', 'float', True, False
     ATR_5 = 'ATR|5', 'ATR|5', 'float', True, False
     ATR_60 = 'ATR|60', 'ATR|60', 'float', True, False
-    AROON_DOWN_14 = 'Aroon Down (14)', 'Aroon.Down', 'round', True, False
+    AROON_DOWN = 'Aroon Down', 'Aroon.Down', 'float', True, False
     AROON_DOWN_1 = 'Aroon Down|1', 'Aroon.Down|1', 'float', True, False
     AROON_DOWN_120 = 'Aroon Down|120', 'Aroon.Down|120', 'float', True, False
     AROON_DOWN_15 = 'Aroon Down|15', 'Aroon.Down|15', 'float', True, False
@@ -339,7 +349,7 @@ class ForexField(Field):
     AROON_DOWN_30 = 'Aroon Down|30', 'Aroon.Down|30', 'float', True, False
     AROON_DOWN_5 = 'Aroon Down|5', 'Aroon.Down|5', 'float', True, False
     AROON_DOWN_60 = 'Aroon Down|60', 'Aroon.Down|60', 'float', True, False
-    AROON_UP_14 = 'Aroon Up (14)', 'Aroon.Up', 'round', True, False
+    AROON_UP = 'Aroon Up', 'Aroon.Up', 'float', True, False
     AROON_UP_1 = 'Aroon Up|1', 'Aroon.Up|1', 'float', True, False
     AROON_UP_120 = 'Aroon Up|120', 'Aroon.Up|120', 'float', True, False
     AROON_UP_15 = 'Aroon Up|15', 'Aroon.Up|15', 'float', True, False
@@ -349,10 +359,6 @@ class ForexField(Field):
     AROON_UP_30 = 'Aroon Up|30', 'Aroon.Up|30', 'float', True, False
     AROON_UP_5 = 'Aroon Up|5', 'Aroon.Up|5', 'float', True, False
     AROON_UP_60 = 'Aroon Up|60', 'Aroon.Up|60', 'float', True, False
-    AVGVALUE_TRADED_10D = 'Avgvalue Traded 10D', 'AvgValue.Traded_10d', 'float', False, False
-    AVGVALUE_TRADED_30D = 'Avgvalue Traded 30D', 'AvgValue.Traded_30d', 'float', False, False
-    AVGVALUE_TRADED_60D = 'Avgvalue Traded 60D', 'AvgValue.Traded_60d', 'float', False, False
-    AVGVALUE_TRADED_90D = 'Avgvalue Traded 90D', 'AvgValue.Traded_90d', 'float', False, False
     BB_BASIS = 'Bb Basis', 'BB.basis', 'float', True, False
     BB_BASIS_50 = 'Bb Basis 50', 'BB.basis_50', 'float', True, False
     BB_BASIS_50_1 = 'Bb Basis 50|1', 'BB.basis_50|1', 'float', True, False
@@ -373,7 +379,7 @@ class ForexField(Field):
     BB_BASIS_30 = 'Bb Basis|30', 'BB.basis|30', 'float', True, False
     BB_BASIS_5 = 'Bb Basis|5', 'BB.basis|5', 'float', True, False
     BB_BASIS_60 = 'Bb Basis|60', 'BB.basis|60', 'float', True, False
-    BOLLINGER_LOWER_BAND_20 = 'Bollinger Lower Band (20)', 'BB.lower', 'computed_recommendation', True, False
+    BB_LOWER = 'Bb Lower', 'BB.lower', 'float', True, False
     BB_LOWER_50 = 'Bb Lower 50', 'BB.lower_50', 'float', True, False
     BB_LOWER_50_1 = 'Bb Lower 50|1', 'BB.lower_50|1', 'float', True, False
     BB_LOWER_50_120 = 'Bb Lower 50|120', 'BB.lower_50|120', 'float', True, False
@@ -393,7 +399,7 @@ class ForexField(Field):
     BB_LOWER_30 = 'Bb Lower|30', 'BB.lower|30', 'float', True, False
     BB_LOWER_5 = 'Bb Lower|5', 'BB.lower|5', 'float', True, False
     BB_LOWER_60 = 'Bb Lower|60', 'BB.lower|60', 'float', True, False
-    BOLLINGER_UPPER_BAND_20 = 'Bollinger Upper Band (20)', 'BB.upper', 'computed_recommendation', True, False
+    BB_UPPER = 'Bb Upper', 'BB.upper', 'float', True, False
     BB_UPPER_50 = 'Bb Upper 50', 'BB.upper_50', 'float', True, False
     BB_UPPER_50_1 = 'Bb Upper 50|1', 'BB.upper_50|1', 'float', True, False
     BB_UPPER_50_120 = 'Bb Upper 50|120', 'BB.upper_50|120', 'float', True, False
@@ -413,7 +419,7 @@ class ForexField(Field):
     BB_UPPER_30 = 'Bb Upper|30', 'BB.upper|30', 'float', True, False
     BB_UPPER_5 = 'Bb Upper|5', 'BB.upper|5', 'float', True, False
     BB_UPPER_60 = 'Bb Upper|60', 'BB.upper|60', 'float', True, False
-    BULL_BEAR_POWER = 'Bull Bear Power', 'BBPower', 'recommendation', True, False
+    BBPOWER = 'Bbpower', 'BBPower', 'float', False, False
     BBPOWER_1 = 'Bbpower|1', 'BBPower|1', 'float', False, False
     BBPOWER_120 = 'Bbpower|120', 'BBPower|120', 'float', False, False
     BBPOWER_15 = 'Bbpower|15', 'BBPower|15', 'float', False, False
@@ -423,7 +429,7 @@ class ForexField(Field):
     BBPOWER_30 = 'Bbpower|30', 'BBPower|30', 'float', False, False
     BBPOWER_5 = 'Bbpower|5', 'BBPower|5', 'float', False, False
     BBPOWER_60 = 'Bbpower|60', 'BBPower|60', 'float', False, False
-    COMMODITY_CHANNEL_INDEX_20 = 'Commodity Channel Index (20)', 'CCI20', 'computed_recommendation', True, True
+    CCI20 = 'Cci20', 'CCI20', 'float', True, True
     CCI20_1 = 'Cci20[1]', 'CCI20[1]', 'float', True, True
     CCI20_1_1 = 'Cci20[1]|1', 'CCI20[1]|1', 'float', True, True
     CCI20_1_120 = 'Cci20[1]|120', 'CCI20[1]|120', 'float', True, True
@@ -443,7 +449,7 @@ class ForexField(Field):
     CCI20_30 = 'Cci20|30', 'CCI20|30', 'float', True, True
     CCI20_5 = 'Cci20|5', 'CCI20|5', 'float', True, True
     CCI20_60 = 'Cci20|60', 'CCI20|60', 'float', True, True
-    CANDLE_3BLACKCROWS = 'Candle.3BlackCrows', 'Candle.3BlackCrows', 'bool', True, False
+    CANDLE_3BLACKCROWS = 'Candle 3Blackcrows', 'Candle.3BlackCrows', 'bool', True, False
     CANDLE_3BLACKCROWS_1 = 'Candle 3Blackcrows|1', 'Candle.3BlackCrows|1', 'bool', True, False
     CANDLE_3BLACKCROWS_120 = 'Candle 3Blackcrows|120', 'Candle.3BlackCrows|120', 'bool', True, False
     CANDLE_3BLACKCROWS_15 = 'Candle 3Blackcrows|15', 'Candle.3BlackCrows|15', 'bool', True, False
@@ -453,7 +459,7 @@ class ForexField(Field):
     CANDLE_3BLACKCROWS_30 = 'Candle 3Blackcrows|30', 'Candle.3BlackCrows|30', 'bool', True, False
     CANDLE_3BLACKCROWS_5 = 'Candle 3Blackcrows|5', 'Candle.3BlackCrows|5', 'bool', True, False
     CANDLE_3BLACKCROWS_60 = 'Candle 3Blackcrows|60', 'Candle.3BlackCrows|60', 'bool', True, False
-    CANDLE_3WHITESOLDIERS = 'Candle.3WhiteSoldiers', 'Candle.3WhiteSoldiers', 'bool', True, False
+    CANDLE_3WHITESOLDIERS = 'Candle 3Whitesoldiers', 'Candle.3WhiteSoldiers', 'bool', True, False
     CANDLE_3WHITESOLDIERS_1 = 'Candle 3Whitesoldiers|1', 'Candle.3WhiteSoldiers|1', 'bool', True, False
     CANDLE_3WHITESOLDIERS_120 = 'Candle 3Whitesoldiers|120', 'Candle.3WhiteSoldiers|120', 'bool', True, False
     CANDLE_3WHITESOLDIERS_15 = 'Candle 3Whitesoldiers|15', 'Candle.3WhiteSoldiers|15', 'bool', True, False
@@ -463,7 +469,7 @@ class ForexField(Field):
     CANDLE_3WHITESOLDIERS_30 = 'Candle 3Whitesoldiers|30', 'Candle.3WhiteSoldiers|30', 'bool', True, False
     CANDLE_3WHITESOLDIERS_5 = 'Candle 3Whitesoldiers|5', 'Candle.3WhiteSoldiers|5', 'bool', True, False
     CANDLE_3WHITESOLDIERS_60 = 'Candle 3Whitesoldiers|60', 'Candle.3WhiteSoldiers|60', 'bool', True, False
-    CANDLE_ABANDONEDBABY_BEARISH = 'Candle.AbandonedBaby.Bearish', 'Candle.AbandonedBaby.Bearish', 'bool', True, False
+    CANDLE_ABANDONEDBABY_BEARISH = 'Candle Abandonedbaby Bearish', 'Candle.AbandonedBaby.Bearish', 'bool', True, False
     CANDLE_ABANDONEDBABY_BEARISH_1 = 'Candle Abandonedbaby Bearish|1', 'Candle.AbandonedBaby.Bearish|1', 'bool', True, False
     CANDLE_ABANDONEDBABY_BEARISH_120 = 'Candle Abandonedbaby Bearish|120', 'Candle.AbandonedBaby.Bearish|120', 'bool', True, False
     CANDLE_ABANDONEDBABY_BEARISH_15 = 'Candle Abandonedbaby Bearish|15', 'Candle.AbandonedBaby.Bearish|15', 'bool', True, False
@@ -473,7 +479,7 @@ class ForexField(Field):
     CANDLE_ABANDONEDBABY_BEARISH_30 = 'Candle Abandonedbaby Bearish|30', 'Candle.AbandonedBaby.Bearish|30', 'bool', True, False
     CANDLE_ABANDONEDBABY_BEARISH_5 = 'Candle Abandonedbaby Bearish|5', 'Candle.AbandonedBaby.Bearish|5', 'bool', True, False
     CANDLE_ABANDONEDBABY_BEARISH_60 = 'Candle Abandonedbaby Bearish|60', 'Candle.AbandonedBaby.Bearish|60', 'bool', True, False
-    CANDLE_ABANDONEDBABY_BULLISH = 'Candle.AbandonedBaby.Bullish', 'Candle.AbandonedBaby.Bullish', 'bool', True, False
+    CANDLE_ABANDONEDBABY_BULLISH = 'Candle Abandonedbaby Bullish', 'Candle.AbandonedBaby.Bullish', 'bool', True, False
     CANDLE_ABANDONEDBABY_BULLISH_1 = 'Candle Abandonedbaby Bullish|1', 'Candle.AbandonedBaby.Bullish|1', 'bool', True, False
     CANDLE_ABANDONEDBABY_BULLISH_120 = 'Candle Abandonedbaby Bullish|120', 'Candle.AbandonedBaby.Bullish|120', 'bool', True, False
     CANDLE_ABANDONEDBABY_BULLISH_15 = 'Candle Abandonedbaby Bullish|15', 'Candle.AbandonedBaby.Bullish|15', 'bool', True, False
@@ -483,8 +489,8 @@ class ForexField(Field):
     CANDLE_ABANDONEDBABY_BULLISH_30 = 'Candle Abandonedbaby Bullish|30', 'Candle.AbandonedBaby.Bullish|30', 'bool', True, False
     CANDLE_ABANDONEDBABY_BULLISH_5 = 'Candle Abandonedbaby Bullish|5', 'Candle.AbandonedBaby.Bullish|5', 'bool', True, False
     CANDLE_ABANDONEDBABY_BULLISH_60 = 'Candle Abandonedbaby Bullish|60', 'Candle.AbandonedBaby.Bullish|60', 'bool', True, False
-    CANDLE_DOJI = 'Candle.Doji', 'Candle.Doji', 'bool', True, False
-    CANDLE_DOJI_DRAGONFLY = 'Candle.Doji.Dragonfly', 'Candle.Doji.Dragonfly', 'bool', True, False
+    CANDLE_DOJI = 'Candle Doji', 'Candle.Doji', 'bool', True, False
+    CANDLE_DOJI_DRAGONFLY = 'Candle Doji Dragonfly', 'Candle.Doji.Dragonfly', 'bool', True, False
     CANDLE_DOJI_DRAGONFLY_1 = 'Candle Doji Dragonfly|1', 'Candle.Doji.Dragonfly|1', 'bool', True, False
     CANDLE_DOJI_DRAGONFLY_120 = 'Candle Doji Dragonfly|120', 'Candle.Doji.Dragonfly|120', 'bool', True, False
     CANDLE_DOJI_DRAGONFLY_15 = 'Candle Doji Dragonfly|15', 'Candle.Doji.Dragonfly|15', 'bool', True, False
@@ -494,7 +500,7 @@ class ForexField(Field):
     CANDLE_DOJI_DRAGONFLY_30 = 'Candle Doji Dragonfly|30', 'Candle.Doji.Dragonfly|30', 'bool', True, False
     CANDLE_DOJI_DRAGONFLY_5 = 'Candle Doji Dragonfly|5', 'Candle.Doji.Dragonfly|5', 'bool', True, False
     CANDLE_DOJI_DRAGONFLY_60 = 'Candle Doji Dragonfly|60', 'Candle.Doji.Dragonfly|60', 'bool', True, False
-    CANDLE_DOJI_GRAVESTONE = 'Candle.Doji.Gravestone', 'Candle.Doji.Gravestone', 'bool', True, False
+    CANDLE_DOJI_GRAVESTONE = 'Candle Doji Gravestone', 'Candle.Doji.Gravestone', 'bool', True, False
     CANDLE_DOJI_GRAVESTONE_1 = 'Candle Doji Gravestone|1', 'Candle.Doji.Gravestone|1', 'bool', True, False
     CANDLE_DOJI_GRAVESTONE_120 = 'Candle Doji Gravestone|120', 'Candle.Doji.Gravestone|120', 'bool', True, False
     CANDLE_DOJI_GRAVESTONE_15 = 'Candle Doji Gravestone|15', 'Candle.Doji.Gravestone|15', 'bool', True, False
@@ -513,7 +519,7 @@ class ForexField(Field):
     CANDLE_DOJI_30 = 'Candle Doji|30', 'Candle.Doji|30', 'bool', True, False
     CANDLE_DOJI_5 = 'Candle Doji|5', 'Candle.Doji|5', 'bool', True, False
     CANDLE_DOJI_60 = 'Candle Doji|60', 'Candle.Doji|60', 'bool', True, False
-    CANDLE_ENGULFING_BEARISH = 'Candle.Engulfing.Bearish', 'Candle.Engulfing.Bearish', 'bool', True, False
+    CANDLE_ENGULFING_BEARISH = 'Candle Engulfing Bearish', 'Candle.Engulfing.Bearish', 'bool', True, False
     CANDLE_ENGULFING_BEARISH_1 = 'Candle Engulfing Bearish|1', 'Candle.Engulfing.Bearish|1', 'bool', True, False
     CANDLE_ENGULFING_BEARISH_120 = 'Candle Engulfing Bearish|120', 'Candle.Engulfing.Bearish|120', 'bool', True, False
     CANDLE_ENGULFING_BEARISH_15 = 'Candle Engulfing Bearish|15', 'Candle.Engulfing.Bearish|15', 'bool', True, False
@@ -523,7 +529,7 @@ class ForexField(Field):
     CANDLE_ENGULFING_BEARISH_30 = 'Candle Engulfing Bearish|30', 'Candle.Engulfing.Bearish|30', 'bool', True, False
     CANDLE_ENGULFING_BEARISH_5 = 'Candle Engulfing Bearish|5', 'Candle.Engulfing.Bearish|5', 'bool', True, False
     CANDLE_ENGULFING_BEARISH_60 = 'Candle Engulfing Bearish|60', 'Candle.Engulfing.Bearish|60', 'bool', True, False
-    CANDLE_ENGULFING_BULLISH = 'Candle.Engulfing.Bullish', 'Candle.Engulfing.Bullish', 'bool', True, False
+    CANDLE_ENGULFING_BULLISH = 'Candle Engulfing Bullish', 'Candle.Engulfing.Bullish', 'bool', True, False
     CANDLE_ENGULFING_BULLISH_1 = 'Candle Engulfing Bullish|1', 'Candle.Engulfing.Bullish|1', 'bool', True, False
     CANDLE_ENGULFING_BULLISH_120 = 'Candle Engulfing Bullish|120', 'Candle.Engulfing.Bullish|120', 'bool', True, False
     CANDLE_ENGULFING_BULLISH_15 = 'Candle Engulfing Bullish|15', 'Candle.Engulfing.Bullish|15', 'bool', True, False
@@ -533,7 +539,7 @@ class ForexField(Field):
     CANDLE_ENGULFING_BULLISH_30 = 'Candle Engulfing Bullish|30', 'Candle.Engulfing.Bullish|30', 'bool', True, False
     CANDLE_ENGULFING_BULLISH_5 = 'Candle Engulfing Bullish|5', 'Candle.Engulfing.Bullish|5', 'bool', True, False
     CANDLE_ENGULFING_BULLISH_60 = 'Candle Engulfing Bullish|60', 'Candle.Engulfing.Bullish|60', 'bool', True, False
-    CANDLE_EVENINGSTAR = 'Candle.EveningStar', 'Candle.EveningStar', 'bool', True, False
+    CANDLE_EVENINGSTAR = 'Candle Eveningstar', 'Candle.EveningStar', 'bool', True, False
     CANDLE_EVENINGSTAR_1 = 'Candle Eveningstar|1', 'Candle.EveningStar|1', 'bool', True, False
     CANDLE_EVENINGSTAR_120 = 'Candle Eveningstar|120', 'Candle.EveningStar|120', 'bool', True, False
     CANDLE_EVENINGSTAR_15 = 'Candle Eveningstar|15', 'Candle.EveningStar|15', 'bool', True, False
@@ -543,7 +549,7 @@ class ForexField(Field):
     CANDLE_EVENINGSTAR_30 = 'Candle Eveningstar|30', 'Candle.EveningStar|30', 'bool', True, False
     CANDLE_EVENINGSTAR_5 = 'Candle Eveningstar|5', 'Candle.EveningStar|5', 'bool', True, False
     CANDLE_EVENINGSTAR_60 = 'Candle Eveningstar|60', 'Candle.EveningStar|60', 'bool', True, False
-    CANDLE_HAMMER = 'Candle.Hammer', 'Candle.Hammer', 'bool', True, False
+    CANDLE_HAMMER = 'Candle Hammer', 'Candle.Hammer', 'bool', True, False
     CANDLE_HAMMER_1 = 'Candle Hammer|1', 'Candle.Hammer|1', 'bool', True, False
     CANDLE_HAMMER_120 = 'Candle Hammer|120', 'Candle.Hammer|120', 'bool', True, False
     CANDLE_HAMMER_15 = 'Candle Hammer|15', 'Candle.Hammer|15', 'bool', True, False
@@ -553,7 +559,7 @@ class ForexField(Field):
     CANDLE_HAMMER_30 = 'Candle Hammer|30', 'Candle.Hammer|30', 'bool', True, False
     CANDLE_HAMMER_5 = 'Candle Hammer|5', 'Candle.Hammer|5', 'bool', True, False
     CANDLE_HAMMER_60 = 'Candle Hammer|60', 'Candle.Hammer|60', 'bool', True, False
-    CANDLE_HANGINGMAN = 'Candle.HangingMan', 'Candle.HangingMan', 'bool', True, False
+    CANDLE_HANGINGMAN = 'Candle Hangingman', 'Candle.HangingMan', 'bool', True, False
     CANDLE_HANGINGMAN_1 = 'Candle Hangingman|1', 'Candle.HangingMan|1', 'bool', True, False
     CANDLE_HANGINGMAN_120 = 'Candle Hangingman|120', 'Candle.HangingMan|120', 'bool', True, False
     CANDLE_HANGINGMAN_15 = 'Candle Hangingman|15', 'Candle.HangingMan|15', 'bool', True, False
@@ -563,7 +569,7 @@ class ForexField(Field):
     CANDLE_HANGINGMAN_30 = 'Candle Hangingman|30', 'Candle.HangingMan|30', 'bool', True, False
     CANDLE_HANGINGMAN_5 = 'Candle Hangingman|5', 'Candle.HangingMan|5', 'bool', True, False
     CANDLE_HANGINGMAN_60 = 'Candle Hangingman|60', 'Candle.HangingMan|60', 'bool', True, False
-    CANDLE_HARAMI_BEARISH = 'Candle.Harami.Bearish', 'Candle.Harami.Bearish', 'bool', True, False
+    CANDLE_HARAMI_BEARISH = 'Candle Harami Bearish', 'Candle.Harami.Bearish', 'bool', True, False
     CANDLE_HARAMI_BEARISH_1 = 'Candle Harami Bearish|1', 'Candle.Harami.Bearish|1', 'bool', True, False
     CANDLE_HARAMI_BEARISH_120 = 'Candle Harami Bearish|120', 'Candle.Harami.Bearish|120', 'bool', True, False
     CANDLE_HARAMI_BEARISH_15 = 'Candle Harami Bearish|15', 'Candle.Harami.Bearish|15', 'bool', True, False
@@ -573,7 +579,7 @@ class ForexField(Field):
     CANDLE_HARAMI_BEARISH_30 = 'Candle Harami Bearish|30', 'Candle.Harami.Bearish|30', 'bool', True, False
     CANDLE_HARAMI_BEARISH_5 = 'Candle Harami Bearish|5', 'Candle.Harami.Bearish|5', 'bool', True, False
     CANDLE_HARAMI_BEARISH_60 = 'Candle Harami Bearish|60', 'Candle.Harami.Bearish|60', 'bool', True, False
-    CANDLE_HARAMI_BULLISH = 'Candle.Harami.Bullish', 'Candle.Harami.Bullish', 'bool', True, False
+    CANDLE_HARAMI_BULLISH = 'Candle Harami Bullish', 'Candle.Harami.Bullish', 'bool', True, False
     CANDLE_HARAMI_BULLISH_1 = 'Candle Harami Bullish|1', 'Candle.Harami.Bullish|1', 'bool', True, False
     CANDLE_HARAMI_BULLISH_120 = 'Candle Harami Bullish|120', 'Candle.Harami.Bullish|120', 'bool', True, False
     CANDLE_HARAMI_BULLISH_15 = 'Candle Harami Bullish|15', 'Candle.Harami.Bullish|15', 'bool', True, False
@@ -583,7 +589,7 @@ class ForexField(Field):
     CANDLE_HARAMI_BULLISH_30 = 'Candle Harami Bullish|30', 'Candle.Harami.Bullish|30', 'bool', True, False
     CANDLE_HARAMI_BULLISH_5 = 'Candle Harami Bullish|5', 'Candle.Harami.Bullish|5', 'bool', True, False
     CANDLE_HARAMI_BULLISH_60 = 'Candle Harami Bullish|60', 'Candle.Harami.Bullish|60', 'bool', True, False
-    CANDLE_INVERTEDHAMMER = 'Candle.InvertedHammer', 'Candle.InvertedHammer', 'bool', True, False
+    CANDLE_INVERTEDHAMMER = 'Candle Invertedhammer', 'Candle.InvertedHammer', 'bool', True, False
     CANDLE_INVERTEDHAMMER_1 = 'Candle Invertedhammer|1', 'Candle.InvertedHammer|1', 'bool', True, False
     CANDLE_INVERTEDHAMMER_120 = 'Candle Invertedhammer|120', 'Candle.InvertedHammer|120', 'bool', True, False
     CANDLE_INVERTEDHAMMER_15 = 'Candle Invertedhammer|15', 'Candle.InvertedHammer|15', 'bool', True, False
@@ -593,7 +599,7 @@ class ForexField(Field):
     CANDLE_INVERTEDHAMMER_30 = 'Candle Invertedhammer|30', 'Candle.InvertedHammer|30', 'bool', True, False
     CANDLE_INVERTEDHAMMER_5 = 'Candle Invertedhammer|5', 'Candle.InvertedHammer|5', 'bool', True, False
     CANDLE_INVERTEDHAMMER_60 = 'Candle Invertedhammer|60', 'Candle.InvertedHammer|60', 'bool', True, False
-    CANDLE_KICKING_BEARISH = 'Candle.Kicking.Bearish', 'Candle.Kicking.Bearish', 'bool', True, False
+    CANDLE_KICKING_BEARISH = 'Candle Kicking Bearish', 'Candle.Kicking.Bearish', 'bool', True, False
     CANDLE_KICKING_BEARISH_1 = 'Candle Kicking Bearish|1', 'Candle.Kicking.Bearish|1', 'bool', True, False
     CANDLE_KICKING_BEARISH_120 = 'Candle Kicking Bearish|120', 'Candle.Kicking.Bearish|120', 'bool', True, False
     CANDLE_KICKING_BEARISH_15 = 'Candle Kicking Bearish|15', 'Candle.Kicking.Bearish|15', 'bool', True, False
@@ -603,7 +609,7 @@ class ForexField(Field):
     CANDLE_KICKING_BEARISH_30 = 'Candle Kicking Bearish|30', 'Candle.Kicking.Bearish|30', 'bool', True, False
     CANDLE_KICKING_BEARISH_5 = 'Candle Kicking Bearish|5', 'Candle.Kicking.Bearish|5', 'bool', True, False
     CANDLE_KICKING_BEARISH_60 = 'Candle Kicking Bearish|60', 'Candle.Kicking.Bearish|60', 'bool', True, False
-    CANDLE_KICKING_BULLISH = 'Candle.Kicking.Bullish', 'Candle.Kicking.Bullish', 'bool', True, False
+    CANDLE_KICKING_BULLISH = 'Candle Kicking Bullish', 'Candle.Kicking.Bullish', 'bool', True, False
     CANDLE_KICKING_BULLISH_1 = 'Candle Kicking Bullish|1', 'Candle.Kicking.Bullish|1', 'bool', True, False
     CANDLE_KICKING_BULLISH_120 = 'Candle Kicking Bullish|120', 'Candle.Kicking.Bullish|120', 'bool', True, False
     CANDLE_KICKING_BULLISH_15 = 'Candle Kicking Bullish|15', 'Candle.Kicking.Bullish|15', 'bool', True, False
@@ -613,7 +619,7 @@ class ForexField(Field):
     CANDLE_KICKING_BULLISH_30 = 'Candle Kicking Bullish|30', 'Candle.Kicking.Bullish|30', 'bool', True, False
     CANDLE_KICKING_BULLISH_5 = 'Candle Kicking Bullish|5', 'Candle.Kicking.Bullish|5', 'bool', True, False
     CANDLE_KICKING_BULLISH_60 = 'Candle Kicking Bullish|60', 'Candle.Kicking.Bullish|60', 'bool', True, False
-    CANDLE_LONGSHADOW_LOWER = 'Candle.LongShadow.Lower', 'Candle.LongShadow.Lower', 'bool', True, False
+    CANDLE_LONGSHADOW_LOWER = 'Candle Longshadow Lower', 'Candle.LongShadow.Lower', 'bool', True, False
     CANDLE_LONGSHADOW_LOWER_1 = 'Candle Longshadow Lower|1', 'Candle.LongShadow.Lower|1', 'bool', True, False
     CANDLE_LONGSHADOW_LOWER_120 = 'Candle Longshadow Lower|120', 'Candle.LongShadow.Lower|120', 'bool', True, False
     CANDLE_LONGSHADOW_LOWER_15 = 'Candle Longshadow Lower|15', 'Candle.LongShadow.Lower|15', 'bool', True, False
@@ -623,7 +629,7 @@ class ForexField(Field):
     CANDLE_LONGSHADOW_LOWER_30 = 'Candle Longshadow Lower|30', 'Candle.LongShadow.Lower|30', 'bool', True, False
     CANDLE_LONGSHADOW_LOWER_5 = 'Candle Longshadow Lower|5', 'Candle.LongShadow.Lower|5', 'bool', True, False
     CANDLE_LONGSHADOW_LOWER_60 = 'Candle Longshadow Lower|60', 'Candle.LongShadow.Lower|60', 'bool', True, False
-    CANDLE_LONGSHADOW_UPPER = 'Candle.LongShadow.Upper', 'Candle.LongShadow.Upper', 'bool', True, False
+    CANDLE_LONGSHADOW_UPPER = 'Candle Longshadow Upper', 'Candle.LongShadow.Upper', 'bool', True, False
     CANDLE_LONGSHADOW_UPPER_1 = 'Candle Longshadow Upper|1', 'Candle.LongShadow.Upper|1', 'bool', True, False
     CANDLE_LONGSHADOW_UPPER_120 = 'Candle Longshadow Upper|120', 'Candle.LongShadow.Upper|120', 'bool', True, False
     CANDLE_LONGSHADOW_UPPER_15 = 'Candle Longshadow Upper|15', 'Candle.LongShadow.Upper|15', 'bool', True, False
@@ -633,7 +639,7 @@ class ForexField(Field):
     CANDLE_LONGSHADOW_UPPER_30 = 'Candle Longshadow Upper|30', 'Candle.LongShadow.Upper|30', 'bool', True, False
     CANDLE_LONGSHADOW_UPPER_5 = 'Candle Longshadow Upper|5', 'Candle.LongShadow.Upper|5', 'bool', True, False
     CANDLE_LONGSHADOW_UPPER_60 = 'Candle Longshadow Upper|60', 'Candle.LongShadow.Upper|60', 'bool', True, False
-    CANDLE_MARUBOZU_BLACK = 'Candle.Marubozu.Black', 'Candle.Marubozu.Black', 'bool', True, False
+    CANDLE_MARUBOZU_BLACK = 'Candle Marubozu Black', 'Candle.Marubozu.Black', 'bool', True, False
     CANDLE_MARUBOZU_BLACK_1 = 'Candle Marubozu Black|1', 'Candle.Marubozu.Black|1', 'bool', True, False
     CANDLE_MARUBOZU_BLACK_120 = 'Candle Marubozu Black|120', 'Candle.Marubozu.Black|120', 'bool', True, False
     CANDLE_MARUBOZU_BLACK_15 = 'Candle Marubozu Black|15', 'Candle.Marubozu.Black|15', 'bool', True, False
@@ -643,7 +649,7 @@ class ForexField(Field):
     CANDLE_MARUBOZU_BLACK_30 = 'Candle Marubozu Black|30', 'Candle.Marubozu.Black|30', 'bool', True, False
     CANDLE_MARUBOZU_BLACK_5 = 'Candle Marubozu Black|5', 'Candle.Marubozu.Black|5', 'bool', True, False
     CANDLE_MARUBOZU_BLACK_60 = 'Candle Marubozu Black|60', 'Candle.Marubozu.Black|60', 'bool', True, False
-    CANDLE_MARUBOZU_WHITE = 'Candle.Marubozu.White', 'Candle.Marubozu.White', 'bool', True, False
+    CANDLE_MARUBOZU_WHITE = 'Candle Marubozu White', 'Candle.Marubozu.White', 'bool', True, False
     CANDLE_MARUBOZU_WHITE_1 = 'Candle Marubozu White|1', 'Candle.Marubozu.White|1', 'bool', True, False
     CANDLE_MARUBOZU_WHITE_120 = 'Candle Marubozu White|120', 'Candle.Marubozu.White|120', 'bool', True, False
     CANDLE_MARUBOZU_WHITE_15 = 'Candle Marubozu White|15', 'Candle.Marubozu.White|15', 'bool', True, False
@@ -653,7 +659,7 @@ class ForexField(Field):
     CANDLE_MARUBOZU_WHITE_30 = 'Candle Marubozu White|30', 'Candle.Marubozu.White|30', 'bool', True, False
     CANDLE_MARUBOZU_WHITE_5 = 'Candle Marubozu White|5', 'Candle.Marubozu.White|5', 'bool', True, False
     CANDLE_MARUBOZU_WHITE_60 = 'Candle Marubozu White|60', 'Candle.Marubozu.White|60', 'bool', True, False
-    CANDLE_MORNINGSTAR = 'Candle.MorningStar', 'Candle.MorningStar', 'bool', True, False
+    CANDLE_MORNINGSTAR = 'Candle Morningstar', 'Candle.MorningStar', 'bool', True, False
     CANDLE_MORNINGSTAR_1 = 'Candle Morningstar|1', 'Candle.MorningStar|1', 'bool', True, False
     CANDLE_MORNINGSTAR_120 = 'Candle Morningstar|120', 'Candle.MorningStar|120', 'bool', True, False
     CANDLE_MORNINGSTAR_15 = 'Candle Morningstar|15', 'Candle.MorningStar|15', 'bool', True, False
@@ -663,7 +669,7 @@ class ForexField(Field):
     CANDLE_MORNINGSTAR_30 = 'Candle Morningstar|30', 'Candle.MorningStar|30', 'bool', True, False
     CANDLE_MORNINGSTAR_5 = 'Candle Morningstar|5', 'Candle.MorningStar|5', 'bool', True, False
     CANDLE_MORNINGSTAR_60 = 'Candle Morningstar|60', 'Candle.MorningStar|60', 'bool', True, False
-    CANDLE_SHOOTINGSTAR = 'Candle.ShootingStar', 'Candle.ShootingStar', 'bool', True, False
+    CANDLE_SHOOTINGSTAR = 'Candle Shootingstar', 'Candle.ShootingStar', 'bool', True, False
     CANDLE_SHOOTINGSTAR_1 = 'Candle Shootingstar|1', 'Candle.ShootingStar|1', 'bool', True, False
     CANDLE_SHOOTINGSTAR_120 = 'Candle Shootingstar|120', 'Candle.ShootingStar|120', 'bool', True, False
     CANDLE_SHOOTINGSTAR_15 = 'Candle Shootingstar|15', 'Candle.ShootingStar|15', 'bool', True, False
@@ -673,7 +679,7 @@ class ForexField(Field):
     CANDLE_SHOOTINGSTAR_30 = 'Candle Shootingstar|30', 'Candle.ShootingStar|30', 'bool', True, False
     CANDLE_SHOOTINGSTAR_5 = 'Candle Shootingstar|5', 'Candle.ShootingStar|5', 'bool', True, False
     CANDLE_SHOOTINGSTAR_60 = 'Candle Shootingstar|60', 'Candle.ShootingStar|60', 'bool', True, False
-    CANDLE_SPINNINGTOP_BLACK = 'Candle.SpinningTop.Black', 'Candle.SpinningTop.Black', 'bool', True, False
+    CANDLE_SPINNINGTOP_BLACK = 'Candle Spinningtop Black', 'Candle.SpinningTop.Black', 'bool', True, False
     CANDLE_SPINNINGTOP_BLACK_1 = 'Candle Spinningtop Black|1', 'Candle.SpinningTop.Black|1', 'bool', True, False
     CANDLE_SPINNINGTOP_BLACK_120 = 'Candle Spinningtop Black|120', 'Candle.SpinningTop.Black|120', 'bool', True, False
     CANDLE_SPINNINGTOP_BLACK_15 = 'Candle Spinningtop Black|15', 'Candle.SpinningTop.Black|15', 'bool', True, False
@@ -683,7 +689,7 @@ class ForexField(Field):
     CANDLE_SPINNINGTOP_BLACK_30 = 'Candle Spinningtop Black|30', 'Candle.SpinningTop.Black|30', 'bool', True, False
     CANDLE_SPINNINGTOP_BLACK_5 = 'Candle Spinningtop Black|5', 'Candle.SpinningTop.Black|5', 'bool', True, False
     CANDLE_SPINNINGTOP_BLACK_60 = 'Candle Spinningtop Black|60', 'Candle.SpinningTop.Black|60', 'bool', True, False
-    CANDLE_SPINNINGTOP_WHITE = 'Candle.SpinningTop.White', 'Candle.SpinningTop.White', 'bool', True, False
+    CANDLE_SPINNINGTOP_WHITE = 'Candle Spinningtop White', 'Candle.SpinningTop.White', 'bool', True, False
     CANDLE_SPINNINGTOP_WHITE_1 = 'Candle Spinningtop White|1', 'Candle.SpinningTop.White|1', 'bool', True, False
     CANDLE_SPINNINGTOP_WHITE_120 = 'Candle Spinningtop White|120', 'Candle.SpinningTop.White|120', 'bool', True, False
     CANDLE_SPINNINGTOP_WHITE_15 = 'Candle Spinningtop White|15', 'Candle.SpinningTop.White|15', 'bool', True, False
@@ -693,7 +699,7 @@ class ForexField(Field):
     CANDLE_SPINNINGTOP_WHITE_30 = 'Candle Spinningtop White|30', 'Candle.SpinningTop.White|30', 'bool', True, False
     CANDLE_SPINNINGTOP_WHITE_5 = 'Candle Spinningtop White|5', 'Candle.SpinningTop.White|5', 'bool', True, False
     CANDLE_SPINNINGTOP_WHITE_60 = 'Candle Spinningtop White|60', 'Candle.SpinningTop.White|60', 'bool', True, False
-    CANDLE_TRISTAR_BEARISH = 'Candle.TriStar.Bearish', 'Candle.TriStar.Bearish', 'bool', True, False
+    CANDLE_TRISTAR_BEARISH = 'Candle Tristar Bearish', 'Candle.TriStar.Bearish', 'bool', True, False
     CANDLE_TRISTAR_BEARISH_1 = 'Candle Tristar Bearish|1', 'Candle.TriStar.Bearish|1', 'bool', True, False
     CANDLE_TRISTAR_BEARISH_120 = 'Candle Tristar Bearish|120', 'Candle.TriStar.Bearish|120', 'bool', True, False
     CANDLE_TRISTAR_BEARISH_15 = 'Candle Tristar Bearish|15', 'Candle.TriStar.Bearish|15', 'bool', True, False
@@ -703,7 +709,7 @@ class ForexField(Field):
     CANDLE_TRISTAR_BEARISH_30 = 'Candle Tristar Bearish|30', 'Candle.TriStar.Bearish|30', 'bool', True, False
     CANDLE_TRISTAR_BEARISH_5 = 'Candle Tristar Bearish|5', 'Candle.TriStar.Bearish|5', 'bool', True, False
     CANDLE_TRISTAR_BEARISH_60 = 'Candle Tristar Bearish|60', 'Candle.TriStar.Bearish|60', 'bool', True, False
-    CANDLE_TRISTAR_BULLISH = 'Candle.TriStar.Bullish', 'Candle.TriStar.Bullish', 'bool', True, False
+    CANDLE_TRISTAR_BULLISH = 'Candle Tristar Bullish', 'Candle.TriStar.Bullish', 'bool', True, False
     CANDLE_TRISTAR_BULLISH_1 = 'Candle Tristar Bullish|1', 'Candle.TriStar.Bullish|1', 'bool', True, False
     CANDLE_TRISTAR_BULLISH_120 = 'Candle Tristar Bullish|120', 'Candle.TriStar.Bullish|120', 'bool', True, False
     CANDLE_TRISTAR_BULLISH_15 = 'Candle Tristar Bullish|15', 'Candle.TriStar.Bullish|15', 'bool', True, False
@@ -723,7 +729,7 @@ class ForexField(Field):
     CHAIKINMONEYFLOW_30 = 'Chaikinmoneyflow|30', 'ChaikinMoneyFlow|30', 'float', True, False
     CHAIKINMONEYFLOW_5 = 'Chaikinmoneyflow|5', 'ChaikinMoneyFlow|5', 'float', True, False
     CHAIKINMONEYFLOW_60 = 'Chaikinmoneyflow|60', 'ChaikinMoneyFlow|60', 'float', True, False
-    DONCHIAN_CHANNELS_LOWER_BAND_20 = 'Donchian Channels Lower Band (20)', 'DonchCh20.Lower', 'float', True, False
+    DONCHCH20_LOWER = 'Donchch20 Lower', 'DonchCh20.Lower', 'float', True, False
     DONCHCH20_LOWER_1 = 'Donchch20 Lower|1', 'DonchCh20.Lower|1', 'float', True, False
     DONCHCH20_LOWER_120 = 'Donchch20 Lower|120', 'DonchCh20.Lower|120', 'float', True, False
     DONCHCH20_LOWER_15 = 'Donchch20 Lower|15', 'DonchCh20.Lower|15', 'float', True, False
@@ -743,7 +749,7 @@ class ForexField(Field):
     DONCHCH20_MIDDLE_30 = 'Donchch20 Middle|30', 'DonchCh20.Middle|30', 'float', True, False
     DONCHCH20_MIDDLE_5 = 'Donchch20 Middle|5', 'DonchCh20.Middle|5', 'float', True, False
     DONCHCH20_MIDDLE_60 = 'Donchch20 Middle|60', 'DonchCh20.Middle|60', 'float', True, False
-    DONCHIAN_CHANNELS_UPPER_BAND_20 = 'Donchian Channels Upper Band (20)', 'DonchCh20.Upper', 'float', True, False
+    DONCHCH20_UPPER = 'Donchch20 Upper', 'DonchCh20.Upper', 'float', True, False
     DONCHCH20_UPPER_1 = 'Donchch20 Upper|1', 'DonchCh20.Upper|1', 'float', True, False
     DONCHCH20_UPPER_120 = 'Donchch20 Upper|120', 'DonchCh20.Upper|120', 'float', True, False
     DONCHCH20_UPPER_15 = 'Donchch20 Upper|15', 'DonchCh20.Upper|15', 'float', True, False
@@ -753,8 +759,8 @@ class ForexField(Field):
     DONCHCH20_UPPER_30 = 'Donchch20 Upper|30', 'DonchCh20.Upper|30', 'float', True, False
     DONCHCH20_UPPER_5 = 'Donchch20 Upper|5', 'DonchCh20.Upper|5', 'float', True, False
     DONCHCH20_UPPER_60 = 'Donchch20 Upper|60', 'DonchCh20.Upper|60', 'float', True, False
-    EXPONENTIAL_MOVING_AVERAGE_10 = 'Exponential Moving Average (10)', 'EMA10', 'computed_recommendation', True, False
-    EXPONENTIAL_MOVING_AVERAGE_100 = 'Exponential Moving Average (100)', 'EMA100', 'computed_recommendation', True, False
+    EMA10 = 'Ema10', 'EMA10', 'float', True, False
+    EMA100 = 'Ema100', 'EMA100', 'float', True, False
     EMA100_1 = 'Ema100|1', 'EMA100|1', 'float', True, False
     EMA100_120 = 'Ema100|120', 'EMA100|120', 'float', True, False
     EMA100_15 = 'Ema100|15', 'EMA100|15', 'float', True, False
@@ -844,8 +850,8 @@ class ForexField(Field):
     EMA15_5 = 'Ema15|5', 'EMA15|5', 'float', True, False
     EMA15_60 = 'Ema15|60', 'EMA15|60', 'float', True, False
     EMA2 = 'Ema2', 'EMA2', 'float', True, False
-    EXPONENTIAL_MOVING_AVERAGE_20 = 'Exponential Moving Average (20)', 'EMA20', 'computed_recommendation', True, False
-    EXPONENTIAL_MOVING_AVERAGE_200 = 'Exponential Moving Average (200)', 'EMA200', 'computed_recommendation', True, False
+    EMA20 = 'Ema20', 'EMA20', 'float', True, False
+    EMA200 = 'Ema200', 'EMA200', 'float', True, False
     EMA200_1 = 'Ema200|1', 'EMA200|1', 'float', True, False
     EMA200_120 = 'Ema200|120', 'EMA200|120', 'float', True, False
     EMA200_15 = 'Ema200|15', 'EMA200|15', 'float', True, False
@@ -914,7 +920,7 @@ class ForexField(Field):
     EMA2_5 = 'Ema2|5', 'EMA2|5', 'float', True, False
     EMA2_60 = 'Ema2|60', 'EMA2|60', 'float', True, False
     EMA3 = 'Ema3', 'EMA3', 'float', True, False
-    EXPONENTIAL_MOVING_AVERAGE_30 = 'Exponential Moving Average (30)', 'EMA30', 'computed_recommendation', True, False
+    EMA30 = 'Ema30', 'EMA30', 'float', True, False
     EMA300 = 'Ema300', 'EMA300', 'float', True, False
     EMA300_1 = 'Ema300|1', 'EMA300|1', 'float', True, False
     EMA300_120 = 'Ema300|120', 'EMA300|120', 'float', True, False
@@ -963,8 +969,8 @@ class ForexField(Field):
     EMA40_30 = 'Ema40|30', 'EMA40|30', 'float', True, False
     EMA40_5 = 'Ema40|5', 'EMA40|5', 'float', True, False
     EMA40_60 = 'Ema40|60', 'EMA40|60', 'float', True, False
-    EXPONENTIAL_MOVING_AVERAGE_5 = 'Exponential Moving Average (5)', 'EMA5', 'computed_recommendation', True, False
-    EXPONENTIAL_MOVING_AVERAGE_50 = 'Exponential Moving Average (50)', 'EMA50', 'computed_recommendation', True, False
+    EMA5 = 'Ema5', 'EMA5', 'float', True, False
+    EMA50 = 'Ema50', 'EMA50', 'float', True, False
     EMA50_1 = 'Ema50|1', 'EMA50|1', 'float', True, False
     EMA50_120 = 'Ema50|120', 'EMA50|120', 'float', True, False
     EMA50_15 = 'Ema50|15', 'EMA50|15', 'float', True, False
@@ -1063,14 +1069,14 @@ class ForexField(Field):
     EMA9_30 = 'Ema9|30', 'EMA9|30', 'float', True, False
     EMA9_5 = 'Ema9|5', 'EMA9|5', 'float', True, False
     EMA9_60 = 'Ema9|60', 'EMA9|60', 'float', True, False
-    MONTH_HIGH_1 = '1-Month High', 'High.1M', 'float', False, False
+    HIGH_1M = 'High 1M', 'High.1M', 'float', True, False
     HIGH_1M_DATE = 'High 1M Date', 'High.1M.Date', 'date', True, False
-    MONTH_HIGH_3 = '3-Month High', 'High.3M', 'float', False, False
+    HIGH_3M = 'High 3M', 'High.3M', 'float', True, False
     HIGH_3M_DATE = 'High 3M Date', 'High.3M.Date', 'date', True, False
     HIGH_5D = 'High 5D', 'High.5D', 'float', True, False
-    MONTH_HIGH_6 = '6-Month High', 'High.6M', 'float', False, False
+    HIGH_6M = 'High 6M', 'High.6M', 'float', True, False
     HIGH_6M_DATE = 'High 6M Date', 'High.6M.Date', 'date', True, False
-    ALL_TIME_HIGH = 'All Time High', 'High.All', 'float', False, False
+    HIGH_ALL = 'High All', 'High.All', 'float', True, False
     HIGH_ALL_CALC = 'High All Calc', 'High.All.Calc', 'float', True, False
     HIGH_ALL_CALC_DATE = 'High All Calc Date', 'High.All.Calc.Date', 'date', True, False
     HIGH_ALL_DATE = 'High All Date', 'High.All.Date', 'date', True, False
@@ -1094,7 +1100,7 @@ class ForexField(Field):
     HULLMA20_30 = 'Hullma20|30', 'HullMA20|30', 'float', True, False
     HULLMA20_5 = 'Hullma20|5', 'HullMA20|5', 'float', True, False
     HULLMA20_60 = 'Hullma20|60', 'HullMA20|60', 'float', True, False
-    HULL_MOVING_AVERAGE_9 = 'Hull Moving Average (9)', 'HullMA9', 'recommendation', True, False
+    HULLMA9 = 'Hullma9', 'HullMA9', 'float', True, False
     HULLMA9_1 = 'Hullma9|1', 'HullMA9|1', 'float', True, False
     HULLMA9_120 = 'Hullma9|120', 'HullMA9|120', 'float', True, False
     HULLMA9_15 = 'Hullma9|15', 'HullMA9|15', 'float', True, False
@@ -1104,7 +1110,7 @@ class ForexField(Field):
     HULLMA9_30 = 'Hullma9|30', 'HullMA9|30', 'float', True, False
     HULLMA9_5 = 'Hullma9|5', 'HullMA9|5', 'float', True, False
     HULLMA9_60 = 'Hullma9|60', 'HullMA9|60', 'float', True, False
-    ICHIMOKU_BASE_LINE_9_26_52_26 = 'Ichimoku Base Line (9, 26, 52, 26)', 'Ichimoku.BLine', 'computed_recommendation', True, False
+    ICHIMOKU_BLINE = 'Ichimoku Bline', 'Ichimoku.BLine', 'float', True, False
     ICHIMOKU_BLINE_20_60_120_30 = 'Ichimoku Bline 20 60 120 30', 'Ichimoku.BLine_20_60_120_30', 'float', True, False
     ICHIMOKU_BLINE_20_60_120_30_1 = 'Ichimoku Bline 20 60 120 30|1', 'Ichimoku.BLine_20_60_120_30|1', 'float', True, False
     ICHIMOKU_BLINE_20_60_120_30_120 = 'Ichimoku Bline 20 60 120 30|120', 'Ichimoku.BLine_20_60_120_30|120', 'float', True, False
@@ -1124,7 +1130,7 @@ class ForexField(Field):
     ICHIMOKU_BLINE_30 = 'Ichimoku Bline|30', 'Ichimoku.BLine|30', 'float', True, False
     ICHIMOKU_BLINE_5 = 'Ichimoku Bline|5', 'Ichimoku.BLine|5', 'float', True, False
     ICHIMOKU_BLINE_60 = 'Ichimoku Bline|60', 'Ichimoku.BLine|60', 'float', True, False
-    ICHIMOKU_CONVERSION_LINE_9_26_52_26 = 'Ichimoku Conversion Line (9, 26, 52, 26)', 'Ichimoku.CLine', 'float', True, False
+    ICHIMOKU_CLINE = 'Ichimoku Cline', 'Ichimoku.CLine', 'float', True, False
     ICHIMOKU_CLINE_20_60_120_30 = 'Ichimoku Cline 20 60 120 30', 'Ichimoku.CLine_20_60_120_30', 'float', True, False
     ICHIMOKU_CLINE_20_60_120_30_1 = 'Ichimoku Cline 20 60 120 30|1', 'Ichimoku.CLine_20_60_120_30|1', 'float', True, False
     ICHIMOKU_CLINE_20_60_120_30_120 = 'Ichimoku Cline 20 60 120 30|120', 'Ichimoku.CLine_20_60_120_30|120', 'float', True, False
@@ -1144,7 +1150,7 @@ class ForexField(Field):
     ICHIMOKU_CLINE_30 = 'Ichimoku Cline|30', 'Ichimoku.CLine|30', 'float', True, False
     ICHIMOKU_CLINE_5 = 'Ichimoku Cline|5', 'Ichimoku.CLine|5', 'float', True, False
     ICHIMOKU_CLINE_60 = 'Ichimoku Cline|60', 'Ichimoku.CLine|60', 'float', True, False
-    ICHIMOKU_LEADING_SPAN_A_9_26_52_26 = 'Ichimoku Leading Span A (9, 26, 52, 26)', 'Ichimoku.Lead1', 'float', True, False
+    ICHIMOKU_LEAD1 = 'Ichimoku Lead1', 'Ichimoku.Lead1', 'float', True, False
     ICHIMOKU_LEAD1_20_60_120_30 = 'Ichimoku Lead1 20 60 120 30', 'Ichimoku.Lead1_20_60_120_30', 'float', True, False
     ICHIMOKU_LEAD1_20_60_120_30_1 = 'Ichimoku Lead1 20 60 120 30|1', 'Ichimoku.Lead1_20_60_120_30|1', 'float', True, False
     ICHIMOKU_LEAD1_20_60_120_30_120 = 'Ichimoku Lead1 20 60 120 30|120', 'Ichimoku.Lead1_20_60_120_30|120', 'float', True, False
@@ -1164,7 +1170,7 @@ class ForexField(Field):
     ICHIMOKU_LEAD1_30 = 'Ichimoku Lead1|30', 'Ichimoku.Lead1|30', 'float', True, False
     ICHIMOKU_LEAD1_5 = 'Ichimoku Lead1|5', 'Ichimoku.Lead1|5', 'float', True, False
     ICHIMOKU_LEAD1_60 = 'Ichimoku Lead1|60', 'Ichimoku.Lead1|60', 'float', True, False
-    ICHIMOKU_LEADING_SPAN_B_9_26_52_26 = 'Ichimoku Leading Span B (9, 26, 52, 26)', 'Ichimoku.Lead2', 'float', True, False
+    ICHIMOKU_LEAD2 = 'Ichimoku Lead2', 'Ichimoku.Lead2', 'float', True, False
     ICHIMOKU_LEAD2_20_60_120_30 = 'Ichimoku Lead2 20 60 120 30', 'Ichimoku.Lead2_20_60_120_30', 'float', True, False
     ICHIMOKU_LEAD2_20_60_120_30_1 = 'Ichimoku Lead2 20 60 120 30|1', 'Ichimoku.Lead2_20_60_120_30|1', 'float', True, False
     ICHIMOKU_LEAD2_20_60_120_30_120 = 'Ichimoku Lead2 20 60 120 30|120', 'Ichimoku.Lead2_20_60_120_30|120', 'float', True, False
@@ -1194,7 +1200,7 @@ class ForexField(Field):
     KLTCHNL_BASIS_30 = 'Kltchnl Basis|30', 'KltChnl.basis|30', 'float', True, False
     KLTCHNL_BASIS_5 = 'Kltchnl Basis|5', 'KltChnl.basis|5', 'float', True, False
     KLTCHNL_BASIS_60 = 'Kltchnl Basis|60', 'KltChnl.basis|60', 'float', True, False
-    KELTNER_CHANNELS_LOWER_BAND_20 = 'Keltner Channels Lower Band (20)', 'KltChnl.lower', 'float', True, False
+    KLTCHNL_LOWER = 'Kltchnl Lower', 'KltChnl.lower', 'float', True, False
     KLTCHNL_LOWER_1 = 'Kltchnl Lower|1', 'KltChnl.lower|1', 'float', True, False
     KLTCHNL_LOWER_120 = 'Kltchnl Lower|120', 'KltChnl.lower|120', 'float', True, False
     KLTCHNL_LOWER_15 = 'Kltchnl Lower|15', 'KltChnl.lower|15', 'float', True, False
@@ -1204,7 +1210,7 @@ class ForexField(Field):
     KLTCHNL_LOWER_30 = 'Kltchnl Lower|30', 'KltChnl.lower|30', 'float', True, False
     KLTCHNL_LOWER_5 = 'Kltchnl Lower|5', 'KltChnl.lower|5', 'float', True, False
     KLTCHNL_LOWER_60 = 'Kltchnl Lower|60', 'KltChnl.lower|60', 'float', True, False
-    KELTNER_CHANNELS_UPPER_BAND_20 = 'Keltner Channels Upper Band (20)', 'KltChnl.upper', 'float', True, False
+    KLTCHNL_UPPER = 'Kltchnl Upper', 'KltChnl.upper', 'float', True, False
     KLTCHNL_UPPER_1 = 'Kltchnl Upper|1', 'KltChnl.upper|1', 'float', True, False
     KLTCHNL_UPPER_120 = 'Kltchnl Upper|120', 'KltChnl.upper|120', 'float', True, False
     KLTCHNL_UPPER_15 = 'Kltchnl Upper|15', 'KltChnl.upper|15', 'float', True, False
@@ -1214,15 +1220,15 @@ class ForexField(Field):
     KLTCHNL_UPPER_30 = 'Kltchnl Upper|30', 'KltChnl.upper|30', 'float', True, False
     KLTCHNL_UPPER_5 = 'Kltchnl Upper|5', 'KltChnl.upper|5', 'float', True, False
     KLTCHNL_UPPER_60 = 'Kltchnl Upper|60', 'KltChnl.upper|60', 'float', True, False
-    MONTH_LOW_1 = '1-Month Low', 'Low.1M', 'float', False, False
+    LOW_1M = 'Low 1M', 'Low.1M', 'float', True, False
     LOW_1M_DATE = 'Low 1M Date', 'Low.1M.Date', 'date', True, False
-    MONTH_LOW_3 = '3-Month Low', 'Low.3M', 'float', False, False
+    LOW_3M = 'Low 3M', 'Low.3M', 'float', True, False
     LOW_3M_DATE = 'Low 3M Date', 'Low.3M.Date', 'date', True, False
     LOW_5D = 'Low 5D', 'Low.5D', 'float', True, False
-    MONTH_LOW_6 = '6-Month Low', 'Low.6M', 'float', False, False
+    LOW_6M = 'Low 6M', 'Low.6M', 'float', True, False
     LOW_6M_DATE = 'Low 6M Date', 'Low.6M.Date', 'date', True, False
     LOW_AFTER_HIGH_ALL = 'Low After High All', 'Low.After.High.All', 'float', True, False
-    ALL_TIME_LOW = 'All Time Low', 'Low.All', 'float', False, False
+    LOW_ALL = 'Low All', 'Low.All', 'float', True, False
     LOW_ALL_CALC = 'Low All Calc', 'Low.All.Calc', 'float', True, False
     LOW_ALL_CALC_DATE = 'Low All Calc Date', 'Low.All.Calc.Date', 'date', True, False
     LOW_ALL_DATE = 'Low All Date', 'Low.All.Date', 'date', True, False
@@ -1236,7 +1242,7 @@ class ForexField(Field):
     MACD_HIST_30 = 'MACD Hist|30', 'MACD.hist|30', 'float', True, False
     MACD_HIST_5 = 'MACD Hist|5', 'MACD.hist|5', 'float', True, False
     MACD_HIST_60 = 'MACD Hist|60', 'MACD.hist|60', 'float', True, False
-    MACD_LEVEL_12_26 = 'MACD Level (12, 26)', 'MACD.macd', 'computed_recommendation', True, False
+    MACD_MACD = 'MACD MACD', 'MACD.macd', 'float', True, False
     MACD_MACD_1 = 'MACD MACD|1', 'MACD.macd|1', 'float', True, False
     MACD_MACD_120 = 'MACD MACD|120', 'MACD.macd|120', 'float', True, False
     MACD_MACD_15 = 'MACD MACD|15', 'MACD.macd|15', 'float', True, False
@@ -1246,7 +1252,7 @@ class ForexField(Field):
     MACD_MACD_30 = 'MACD MACD|30', 'MACD.macd|30', 'float', True, False
     MACD_MACD_5 = 'MACD MACD|5', 'MACD.macd|5', 'float', True, False
     MACD_MACD_60 = 'MACD MACD|60', 'MACD.macd|60', 'float', True, False
-    MACD_SIGNAL_12_26 = 'MACD Signal (12, 26)', 'MACD.signal', 'float', True, False
+    MACD_SIGNAL = 'MACD Signal', 'MACD.signal', 'float', True, False
     MACD_SIGNAL_1 = 'MACD Signal|1', 'MACD.signal|1', 'float', True, False
     MACD_SIGNAL_120 = 'MACD Signal|120', 'MACD.signal|120', 'float', True, False
     MACD_SIGNAL_15 = 'MACD Signal|15', 'MACD.signal|15', 'float', True, False
@@ -1256,7 +1262,7 @@ class ForexField(Field):
     MACD_SIGNAL_30 = 'MACD Signal|30', 'MACD.signal|30', 'float', True, False
     MACD_SIGNAL_5 = 'MACD Signal|5', 'MACD.signal|5', 'float', True, False
     MACD_SIGNAL_60 = 'MACD Signal|60', 'MACD.signal|60', 'float', True, False
-    MOMENTUM_10 = 'Momentum (10)', 'Mom', 'computed_recommendation', True, True
+    MOM = 'Mom', 'Mom', 'float', True, True
     MOM_1 = 'Mom[1]', 'Mom[1]', 'float', True, True
     MOM_1_1 = 'Mom[1]|1', 'Mom[1]|1', 'float', True, True
     MOM_1_120 = 'Mom[1]|120', 'Mom[1]|120', 'float', True, True
@@ -1307,7 +1313,7 @@ class ForexField(Field):
     MONEYFLOW_5 = 'Moneyflow|5', 'MoneyFlow|5', 'float', True, False
     MONEYFLOW_60 = 'Moneyflow|60', 'MoneyFlow|60', 'float', True, False
     OPEN_ALL_CALC = 'Open All Calc', 'Open.All.Calc', 'float', True, False
-    PARABOLIC_SAR = 'Parabolic SAR', 'P.SAR', 'computed_recommendation', True, False
+    P_SAR = 'P Sar', 'P.SAR', 'float', True, False
     P_SAR_1 = 'P Sar|1', 'P.SAR|1', 'float', True, False
     P_SAR_120 = 'P Sar|120', 'P.SAR|120', 'float', True, False
     P_SAR_15 = 'P Sar|15', 'P.SAR|15', 'float', True, False
@@ -1318,24 +1324,17 @@ class ForexField(Field):
     P_SAR_5 = 'P Sar|5', 'P.SAR|5', 'float', True, False
     P_SAR_60 = 'P Sar|60', 'P.SAR|60', 'float', True, False
     PERF_10Y = 'Perf 10Y', 'Perf.10Y', 'percent', False, False
-    MONTHLY_PERFORMANCE = 'Monthly Performance', 'Perf.1M', 'percent', False, False
-    PERF_1M_MARKETCAP = 'Perf 1M Marketcap', 'Perf.1M.MarketCap', 'percent', False, False
-    PERF_1W_MARKETCAP = 'Perf 1W Marketcap', 'Perf.1W.MarketCap', 'percent', False, False
-    PERF_1Y_MARKETCAP = 'Perf 1Y Marketcap', 'Perf.1Y.MarketCap', 'percent', False, False
-    MONTH_PERFORMANCE_3 = '3-Month Performance', 'Perf.3M', 'percent', False, False
-    PERF_3M_MARKETCAP = 'Perf 3M Marketcap', 'Perf.3M.MarketCap', 'percent', False, False
+    PERF_1M = 'Perf 1M', 'Perf.1M', 'percent', False, False
+    PERF_3M = 'Perf 3M', 'Perf.3M', 'percent', False, False
     PERF_3Y = 'Perf 3Y', 'Perf.3Y', 'percent', False, False
     PERF_5D = 'Perf 5D', 'Perf.5D', 'percent', False, False
-    Y_PERFORMANCE_5 = '5Y Performance', 'Perf.5Y', 'percent', False, False
-    PERF_5Y_MARKETCAP = 'Perf 5Y Marketcap', 'Perf.5Y.MarketCap', 'percent', False, False
-    MONTH_PERFORMANCE_6 = '6-Month Performance', 'Perf.6M', 'percent', False, False
-    PERF_6M_MARKETCAP = 'Perf 6M Marketcap', 'Perf.6M.MarketCap', 'percent', False, False
-    ALL_TIME_PERFORMANCE = 'All Time Performance', 'Perf.All', 'percent', False, False
-    WEEKLY_PERFORMANCE = 'Weekly Performance', 'Perf.W', 'percent', False, False
-    YEARLY_PERFORMANCE = 'Yearly Performance', 'Perf.Y', 'percent', False, False
-    YTD_PERFORMANCE = 'YTD Performance', 'Perf.YTD', 'percent', False, False
-    PERF_YTD_MARKETCAP = 'Perf YTD Marketcap', 'Perf.YTD.MarketCap', 'percent', False, False
-    PIVOT_CAMARILLA_P = 'Pivot Camarilla P', 'Pivot.M.Camarilla.Middle', 'float', True, False
+    PERF_5Y = 'Perf 5Y', 'Perf.5Y', 'percent', False, False
+    PERF_6M = 'Perf 6M', 'Perf.6M', 'percent', False, False
+    PERF_ALL = 'Perf All', 'Perf.All', 'percent', False, False
+    PERF_W = 'Perf W', 'Perf.W', 'percent', False, False
+    PERF_Y = 'Perf Y', 'Perf.Y', 'percent', False, False
+    PERF_YTD = 'Perf YTD', 'Perf.YTD', 'percent', False, False
+    PIVOT_M_CAMARILLA_MIDDLE = 'Pivot M Camarilla Middle', 'Pivot.M.Camarilla.Middle', 'float', True, False
     PIVOT_M_CAMARILLA_MIDDLE_1 = 'Pivot M Camarilla Middle|1', 'Pivot.M.Camarilla.Middle|1', 'float', True, False
     PIVOT_M_CAMARILLA_MIDDLE_120 = 'Pivot M Camarilla Middle|120', 'Pivot.M.Camarilla.Middle|120', 'float', True, False
     PIVOT_M_CAMARILLA_MIDDLE_15 = 'Pivot M Camarilla Middle|15', 'Pivot.M.Camarilla.Middle|15', 'float', True, False
@@ -1345,7 +1344,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_MIDDLE_30 = 'Pivot M Camarilla Middle|30', 'Pivot.M.Camarilla.Middle|30', 'float', True, False
     PIVOT_M_CAMARILLA_MIDDLE_5 = 'Pivot M Camarilla Middle|5', 'Pivot.M.Camarilla.Middle|5', 'float', True, False
     PIVOT_M_CAMARILLA_MIDDLE_60 = 'Pivot M Camarilla Middle|60', 'Pivot.M.Camarilla.Middle|60', 'float', True, False
-    PIVOT_CAMARILLA_R1 = 'Pivot Camarilla R1', 'Pivot.M.Camarilla.R1', 'float', True, False
+    PIVOT_M_CAMARILLA_R1 = 'Pivot M Camarilla R1', 'Pivot.M.Camarilla.R1', 'float', True, False
     PIVOT_M_CAMARILLA_R1_1 = 'Pivot M Camarilla R1|1', 'Pivot.M.Camarilla.R1|1', 'float', True, False
     PIVOT_M_CAMARILLA_R1_120 = 'Pivot M Camarilla R1|120', 'Pivot.M.Camarilla.R1|120', 'float', True, False
     PIVOT_M_CAMARILLA_R1_15 = 'Pivot M Camarilla R1|15', 'Pivot.M.Camarilla.R1|15', 'float', True, False
@@ -1355,7 +1354,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_R1_30 = 'Pivot M Camarilla R1|30', 'Pivot.M.Camarilla.R1|30', 'float', True, False
     PIVOT_M_CAMARILLA_R1_5 = 'Pivot M Camarilla R1|5', 'Pivot.M.Camarilla.R1|5', 'float', True, False
     PIVOT_M_CAMARILLA_R1_60 = 'Pivot M Camarilla R1|60', 'Pivot.M.Camarilla.R1|60', 'float', True, False
-    PIVOT_CAMARILLA_R2 = 'Pivot Camarilla R2', 'Pivot.M.Camarilla.R2', 'float', True, False
+    PIVOT_M_CAMARILLA_R2 = 'Pivot M Camarilla R2', 'Pivot.M.Camarilla.R2', 'float', True, False
     PIVOT_M_CAMARILLA_R2_1 = 'Pivot M Camarilla R2|1', 'Pivot.M.Camarilla.R2|1', 'float', True, False
     PIVOT_M_CAMARILLA_R2_120 = 'Pivot M Camarilla R2|120', 'Pivot.M.Camarilla.R2|120', 'float', True, False
     PIVOT_M_CAMARILLA_R2_15 = 'Pivot M Camarilla R2|15', 'Pivot.M.Camarilla.R2|15', 'float', True, False
@@ -1365,7 +1364,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_R2_30 = 'Pivot M Camarilla R2|30', 'Pivot.M.Camarilla.R2|30', 'float', True, False
     PIVOT_M_CAMARILLA_R2_5 = 'Pivot M Camarilla R2|5', 'Pivot.M.Camarilla.R2|5', 'float', True, False
     PIVOT_M_CAMARILLA_R2_60 = 'Pivot M Camarilla R2|60', 'Pivot.M.Camarilla.R2|60', 'float', True, False
-    PIVOT_CAMARILLA_R3 = 'Pivot Camarilla R3', 'Pivot.M.Camarilla.R3', 'float', True, False
+    PIVOT_M_CAMARILLA_R3 = 'Pivot M Camarilla R3', 'Pivot.M.Camarilla.R3', 'float', True, False
     PIVOT_M_CAMARILLA_R3_1 = 'Pivot M Camarilla R3|1', 'Pivot.M.Camarilla.R3|1', 'float', True, False
     PIVOT_M_CAMARILLA_R3_120 = 'Pivot M Camarilla R3|120', 'Pivot.M.Camarilla.R3|120', 'float', True, False
     PIVOT_M_CAMARILLA_R3_15 = 'Pivot M Camarilla R3|15', 'Pivot.M.Camarilla.R3|15', 'float', True, False
@@ -1375,7 +1374,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_R3_30 = 'Pivot M Camarilla R3|30', 'Pivot.M.Camarilla.R3|30', 'float', True, False
     PIVOT_M_CAMARILLA_R3_5 = 'Pivot M Camarilla R3|5', 'Pivot.M.Camarilla.R3|5', 'float', True, False
     PIVOT_M_CAMARILLA_R3_60 = 'Pivot M Camarilla R3|60', 'Pivot.M.Camarilla.R3|60', 'float', True, False
-    PIVOT_CAMARILLA_S1 = 'Pivot Camarilla S1', 'Pivot.M.Camarilla.S1', 'float', True, False
+    PIVOT_M_CAMARILLA_S1 = 'Pivot M Camarilla S1', 'Pivot.M.Camarilla.S1', 'float', True, False
     PIVOT_M_CAMARILLA_S1_1 = 'Pivot M Camarilla S1|1', 'Pivot.M.Camarilla.S1|1', 'float', True, False
     PIVOT_M_CAMARILLA_S1_120 = 'Pivot M Camarilla S1|120', 'Pivot.M.Camarilla.S1|120', 'float', True, False
     PIVOT_M_CAMARILLA_S1_15 = 'Pivot M Camarilla S1|15', 'Pivot.M.Camarilla.S1|15', 'float', True, False
@@ -1385,7 +1384,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_S1_30 = 'Pivot M Camarilla S1|30', 'Pivot.M.Camarilla.S1|30', 'float', True, False
     PIVOT_M_CAMARILLA_S1_5 = 'Pivot M Camarilla S1|5', 'Pivot.M.Camarilla.S1|5', 'float', True, False
     PIVOT_M_CAMARILLA_S1_60 = 'Pivot M Camarilla S1|60', 'Pivot.M.Camarilla.S1|60', 'float', True, False
-    PIVOT_CAMARILLA_S2 = 'Pivot Camarilla S2', 'Pivot.M.Camarilla.S2', 'float', True, False
+    PIVOT_M_CAMARILLA_S2 = 'Pivot M Camarilla S2', 'Pivot.M.Camarilla.S2', 'float', True, False
     PIVOT_M_CAMARILLA_S2_1 = 'Pivot M Camarilla S2|1', 'Pivot.M.Camarilla.S2|1', 'float', True, False
     PIVOT_M_CAMARILLA_S2_120 = 'Pivot M Camarilla S2|120', 'Pivot.M.Camarilla.S2|120', 'float', True, False
     PIVOT_M_CAMARILLA_S2_15 = 'Pivot M Camarilla S2|15', 'Pivot.M.Camarilla.S2|15', 'float', True, False
@@ -1395,7 +1394,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_S2_30 = 'Pivot M Camarilla S2|30', 'Pivot.M.Camarilla.S2|30', 'float', True, False
     PIVOT_M_CAMARILLA_S2_5 = 'Pivot M Camarilla S2|5', 'Pivot.M.Camarilla.S2|5', 'float', True, False
     PIVOT_M_CAMARILLA_S2_60 = 'Pivot M Camarilla S2|60', 'Pivot.M.Camarilla.S2|60', 'float', True, False
-    PIVOT_CAMARILLA_S3 = 'Pivot Camarilla S3', 'Pivot.M.Camarilla.S3', 'float', True, False
+    PIVOT_M_CAMARILLA_S3 = 'Pivot M Camarilla S3', 'Pivot.M.Camarilla.S3', 'float', True, False
     PIVOT_M_CAMARILLA_S3_1 = 'Pivot M Camarilla S3|1', 'Pivot.M.Camarilla.S3|1', 'float', True, False
     PIVOT_M_CAMARILLA_S3_120 = 'Pivot M Camarilla S3|120', 'Pivot.M.Camarilla.S3|120', 'float', True, False
     PIVOT_M_CAMARILLA_S3_15 = 'Pivot M Camarilla S3|15', 'Pivot.M.Camarilla.S3|15', 'float', True, False
@@ -1405,7 +1404,7 @@ class ForexField(Field):
     PIVOT_M_CAMARILLA_S3_30 = 'Pivot M Camarilla S3|30', 'Pivot.M.Camarilla.S3|30', 'float', True, False
     PIVOT_M_CAMARILLA_S3_5 = 'Pivot M Camarilla S3|5', 'Pivot.M.Camarilla.S3|5', 'float', True, False
     PIVOT_M_CAMARILLA_S3_60 = 'Pivot M Camarilla S3|60', 'Pivot.M.Camarilla.S3|60', 'float', True, False
-    PIVOT_CLASSIC_P = 'Pivot Classic P', 'Pivot.M.Classic.Middle', 'float', True, False
+    PIVOT_M_CLASSIC_MIDDLE = 'Pivot M Classic Middle', 'Pivot.M.Classic.Middle', 'float', True, False
     PIVOT_M_CLASSIC_MIDDLE_1 = 'Pivot M Classic Middle|1', 'Pivot.M.Classic.Middle|1', 'float', True, False
     PIVOT_M_CLASSIC_MIDDLE_120 = 'Pivot M Classic Middle|120', 'Pivot.M.Classic.Middle|120', 'float', True, False
     PIVOT_M_CLASSIC_MIDDLE_15 = 'Pivot M Classic Middle|15', 'Pivot.M.Classic.Middle|15', 'float', True, False
@@ -1415,7 +1414,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_MIDDLE_30 = 'Pivot M Classic Middle|30', 'Pivot.M.Classic.Middle|30', 'float', True, False
     PIVOT_M_CLASSIC_MIDDLE_5 = 'Pivot M Classic Middle|5', 'Pivot.M.Classic.Middle|5', 'float', True, False
     PIVOT_M_CLASSIC_MIDDLE_60 = 'Pivot M Classic Middle|60', 'Pivot.M.Classic.Middle|60', 'float', True, False
-    PIVOT_CLASSIC_R1 = 'Pivot Classic R1', 'Pivot.M.Classic.R1', 'float', True, False
+    PIVOT_M_CLASSIC_R1 = 'Pivot M Classic R1', 'Pivot.M.Classic.R1', 'float', True, False
     PIVOT_M_CLASSIC_R1_1 = 'Pivot M Classic R1|1', 'Pivot.M.Classic.R1|1', 'float', True, False
     PIVOT_M_CLASSIC_R1_120 = 'Pivot M Classic R1|120', 'Pivot.M.Classic.R1|120', 'float', True, False
     PIVOT_M_CLASSIC_R1_15 = 'Pivot M Classic R1|15', 'Pivot.M.Classic.R1|15', 'float', True, False
@@ -1425,7 +1424,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_R1_30 = 'Pivot M Classic R1|30', 'Pivot.M.Classic.R1|30', 'float', True, False
     PIVOT_M_CLASSIC_R1_5 = 'Pivot M Classic R1|5', 'Pivot.M.Classic.R1|5', 'float', True, False
     PIVOT_M_CLASSIC_R1_60 = 'Pivot M Classic R1|60', 'Pivot.M.Classic.R1|60', 'float', True, False
-    PIVOT_CLASSIC_R2 = 'Pivot Classic R2', 'Pivot.M.Classic.R2', 'float', True, False
+    PIVOT_M_CLASSIC_R2 = 'Pivot M Classic R2', 'Pivot.M.Classic.R2', 'float', True, False
     PIVOT_M_CLASSIC_R2_1 = 'Pivot M Classic R2|1', 'Pivot.M.Classic.R2|1', 'float', True, False
     PIVOT_M_CLASSIC_R2_120 = 'Pivot M Classic R2|120', 'Pivot.M.Classic.R2|120', 'float', True, False
     PIVOT_M_CLASSIC_R2_15 = 'Pivot M Classic R2|15', 'Pivot.M.Classic.R2|15', 'float', True, False
@@ -1435,7 +1434,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_R2_30 = 'Pivot M Classic R2|30', 'Pivot.M.Classic.R2|30', 'float', True, False
     PIVOT_M_CLASSIC_R2_5 = 'Pivot M Classic R2|5', 'Pivot.M.Classic.R2|5', 'float', True, False
     PIVOT_M_CLASSIC_R2_60 = 'Pivot M Classic R2|60', 'Pivot.M.Classic.R2|60', 'float', True, False
-    PIVOT_CLASSIC_R3 = 'Pivot Classic R3', 'Pivot.M.Classic.R3', 'float', True, False
+    PIVOT_M_CLASSIC_R3 = 'Pivot M Classic R3', 'Pivot.M.Classic.R3', 'float', True, False
     PIVOT_M_CLASSIC_R3_1 = 'Pivot M Classic R3|1', 'Pivot.M.Classic.R3|1', 'float', True, False
     PIVOT_M_CLASSIC_R3_120 = 'Pivot M Classic R3|120', 'Pivot.M.Classic.R3|120', 'float', True, False
     PIVOT_M_CLASSIC_R3_15 = 'Pivot M Classic R3|15', 'Pivot.M.Classic.R3|15', 'float', True, False
@@ -1445,7 +1444,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_R3_30 = 'Pivot M Classic R3|30', 'Pivot.M.Classic.R3|30', 'float', True, False
     PIVOT_M_CLASSIC_R3_5 = 'Pivot M Classic R3|5', 'Pivot.M.Classic.R3|5', 'float', True, False
     PIVOT_M_CLASSIC_R3_60 = 'Pivot M Classic R3|60', 'Pivot.M.Classic.R3|60', 'float', True, False
-    PIVOT_CLASSIC_S1 = 'Pivot Classic S1', 'Pivot.M.Classic.S1', 'float', True, False
+    PIVOT_M_CLASSIC_S1 = 'Pivot M Classic S1', 'Pivot.M.Classic.S1', 'float', True, False
     PIVOT_M_CLASSIC_S1_1 = 'Pivot M Classic S1|1', 'Pivot.M.Classic.S1|1', 'float', True, False
     PIVOT_M_CLASSIC_S1_120 = 'Pivot M Classic S1|120', 'Pivot.M.Classic.S1|120', 'float', True, False
     PIVOT_M_CLASSIC_S1_15 = 'Pivot M Classic S1|15', 'Pivot.M.Classic.S1|15', 'float', True, False
@@ -1455,7 +1454,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_S1_30 = 'Pivot M Classic S1|30', 'Pivot.M.Classic.S1|30', 'float', True, False
     PIVOT_M_CLASSIC_S1_5 = 'Pivot M Classic S1|5', 'Pivot.M.Classic.S1|5', 'float', True, False
     PIVOT_M_CLASSIC_S1_60 = 'Pivot M Classic S1|60', 'Pivot.M.Classic.S1|60', 'float', True, False
-    PIVOT_CLASSIC_S2 = 'Pivot Classic S2', 'Pivot.M.Classic.S2', 'float', True, False
+    PIVOT_M_CLASSIC_S2 = 'Pivot M Classic S2', 'Pivot.M.Classic.S2', 'float', True, False
     PIVOT_M_CLASSIC_S2_1 = 'Pivot M Classic S2|1', 'Pivot.M.Classic.S2|1', 'float', True, False
     PIVOT_M_CLASSIC_S2_120 = 'Pivot M Classic S2|120', 'Pivot.M.Classic.S2|120', 'float', True, False
     PIVOT_M_CLASSIC_S2_15 = 'Pivot M Classic S2|15', 'Pivot.M.Classic.S2|15', 'float', True, False
@@ -1465,7 +1464,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_S2_30 = 'Pivot M Classic S2|30', 'Pivot.M.Classic.S2|30', 'float', True, False
     PIVOT_M_CLASSIC_S2_5 = 'Pivot M Classic S2|5', 'Pivot.M.Classic.S2|5', 'float', True, False
     PIVOT_M_CLASSIC_S2_60 = 'Pivot M Classic S2|60', 'Pivot.M.Classic.S2|60', 'float', True, False
-    PIVOT_CLASSIC_S3 = 'Pivot Classic S3', 'Pivot.M.Classic.S3', 'float', True, False
+    PIVOT_M_CLASSIC_S3 = 'Pivot M Classic S3', 'Pivot.M.Classic.S3', 'float', True, False
     PIVOT_M_CLASSIC_S3_1 = 'Pivot M Classic S3|1', 'Pivot.M.Classic.S3|1', 'float', True, False
     PIVOT_M_CLASSIC_S3_120 = 'Pivot M Classic S3|120', 'Pivot.M.Classic.S3|120', 'float', True, False
     PIVOT_M_CLASSIC_S3_15 = 'Pivot M Classic S3|15', 'Pivot.M.Classic.S3|15', 'float', True, False
@@ -1475,7 +1474,7 @@ class ForexField(Field):
     PIVOT_M_CLASSIC_S3_30 = 'Pivot M Classic S3|30', 'Pivot.M.Classic.S3|30', 'float', True, False
     PIVOT_M_CLASSIC_S3_5 = 'Pivot M Classic S3|5', 'Pivot.M.Classic.S3|5', 'float', True, False
     PIVOT_M_CLASSIC_S3_60 = 'Pivot M Classic S3|60', 'Pivot.M.Classic.S3|60', 'float', True, False
-    PIVOT_DM_P = 'Pivot DM P', 'Pivot.M.Demark.Middle', 'float', True, False
+    PIVOT_M_DEMARK_MIDDLE = 'Pivot M Demark Middle', 'Pivot.M.Demark.Middle', 'float', True, False
     PIVOT_M_DEMARK_MIDDLE_1 = 'Pivot M Demark Middle|1', 'Pivot.M.Demark.Middle|1', 'float', True, False
     PIVOT_M_DEMARK_MIDDLE_120 = 'Pivot M Demark Middle|120', 'Pivot.M.Demark.Middle|120', 'float', True, False
     PIVOT_M_DEMARK_MIDDLE_15 = 'Pivot M Demark Middle|15', 'Pivot.M.Demark.Middle|15', 'float', True, False
@@ -1485,7 +1484,7 @@ class ForexField(Field):
     PIVOT_M_DEMARK_MIDDLE_30 = 'Pivot M Demark Middle|30', 'Pivot.M.Demark.Middle|30', 'float', True, False
     PIVOT_M_DEMARK_MIDDLE_5 = 'Pivot M Demark Middle|5', 'Pivot.M.Demark.Middle|5', 'float', True, False
     PIVOT_M_DEMARK_MIDDLE_60 = 'Pivot M Demark Middle|60', 'Pivot.M.Demark.Middle|60', 'float', True, False
-    PIVOT_DM_R1 = 'Pivot DM R1', 'Pivot.M.Demark.R1', 'float', True, False
+    PIVOT_M_DEMARK_R1 = 'Pivot M Demark R1', 'Pivot.M.Demark.R1', 'float', True, False
     PIVOT_M_DEMARK_R1_1 = 'Pivot M Demark R1|1', 'Pivot.M.Demark.R1|1', 'float', True, False
     PIVOT_M_DEMARK_R1_120 = 'Pivot M Demark R1|120', 'Pivot.M.Demark.R1|120', 'float', True, False
     PIVOT_M_DEMARK_R1_15 = 'Pivot M Demark R1|15', 'Pivot.M.Demark.R1|15', 'float', True, False
@@ -1495,7 +1494,7 @@ class ForexField(Field):
     PIVOT_M_DEMARK_R1_30 = 'Pivot M Demark R1|30', 'Pivot.M.Demark.R1|30', 'float', True, False
     PIVOT_M_DEMARK_R1_5 = 'Pivot M Demark R1|5', 'Pivot.M.Demark.R1|5', 'float', True, False
     PIVOT_M_DEMARK_R1_60 = 'Pivot M Demark R1|60', 'Pivot.M.Demark.R1|60', 'float', True, False
-    PIVOT_DM_S1 = 'Pivot DM S1', 'Pivot.M.Demark.S1', 'float', True, False
+    PIVOT_M_DEMARK_S1 = 'Pivot M Demark S1', 'Pivot.M.Demark.S1', 'float', True, False
     PIVOT_M_DEMARK_S1_1 = 'Pivot M Demark S1|1', 'Pivot.M.Demark.S1|1', 'float', True, False
     PIVOT_M_DEMARK_S1_120 = 'Pivot M Demark S1|120', 'Pivot.M.Demark.S1|120', 'float', True, False
     PIVOT_M_DEMARK_S1_15 = 'Pivot M Demark S1|15', 'Pivot.M.Demark.S1|15', 'float', True, False
@@ -1505,7 +1504,7 @@ class ForexField(Field):
     PIVOT_M_DEMARK_S1_30 = 'Pivot M Demark S1|30', 'Pivot.M.Demark.S1|30', 'float', True, False
     PIVOT_M_DEMARK_S1_5 = 'Pivot M Demark S1|5', 'Pivot.M.Demark.S1|5', 'float', True, False
     PIVOT_M_DEMARK_S1_60 = 'Pivot M Demark S1|60', 'Pivot.M.Demark.S1|60', 'float', True, False
-    PIVOT_FIBONACCI_P = 'Pivot Fibonacci P', 'Pivot.M.Fibonacci.Middle', 'float', True, False
+    PIVOT_M_FIBONACCI_MIDDLE = 'Pivot M Fibonacci Middle', 'Pivot.M.Fibonacci.Middle', 'float', True, True
     PIVOT_M_FIBONACCI_MIDDLE_1 = 'Pivot M Fibonacci Middle|1', 'Pivot.M.Fibonacci.Middle|1', 'float', True, True
     PIVOT_M_FIBONACCI_MIDDLE_120 = 'Pivot M Fibonacci Middle|120', 'Pivot.M.Fibonacci.Middle|120', 'float', True, True
     PIVOT_M_FIBONACCI_MIDDLE_15 = 'Pivot M Fibonacci Middle|15', 'Pivot.M.Fibonacci.Middle|15', 'float', True, True
@@ -1515,7 +1514,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_MIDDLE_30 = 'Pivot M Fibonacci Middle|30', 'Pivot.M.Fibonacci.Middle|30', 'float', True, True
     PIVOT_M_FIBONACCI_MIDDLE_5 = 'Pivot M Fibonacci Middle|5', 'Pivot.M.Fibonacci.Middle|5', 'float', True, True
     PIVOT_M_FIBONACCI_MIDDLE_60 = 'Pivot M Fibonacci Middle|60', 'Pivot.M.Fibonacci.Middle|60', 'float', True, True
-    PIVOT_FIBONACCI_R1 = 'Pivot Fibonacci R1', 'Pivot.M.Fibonacci.R1', 'float', True, False
+    PIVOT_M_FIBONACCI_R1 = 'Pivot M Fibonacci R1', 'Pivot.M.Fibonacci.R1', 'float', True, True
     PIVOT_M_FIBONACCI_R1_1 = 'Pivot M Fibonacci R1|1', 'Pivot.M.Fibonacci.R1|1', 'float', True, True
     PIVOT_M_FIBONACCI_R1_120 = 'Pivot M Fibonacci R1|120', 'Pivot.M.Fibonacci.R1|120', 'float', True, True
     PIVOT_M_FIBONACCI_R1_15 = 'Pivot M Fibonacci R1|15', 'Pivot.M.Fibonacci.R1|15', 'float', True, True
@@ -1525,7 +1524,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_R1_30 = 'Pivot M Fibonacci R1|30', 'Pivot.M.Fibonacci.R1|30', 'float', True, True
     PIVOT_M_FIBONACCI_R1_5 = 'Pivot M Fibonacci R1|5', 'Pivot.M.Fibonacci.R1|5', 'float', True, True
     PIVOT_M_FIBONACCI_R1_60 = 'Pivot M Fibonacci R1|60', 'Pivot.M.Fibonacci.R1|60', 'float', True, True
-    PIVOT_FIBONACCI_R2 = 'Pivot Fibonacci R2', 'Pivot.M.Fibonacci.R2', 'float', True, False
+    PIVOT_M_FIBONACCI_R2 = 'Pivot M Fibonacci R2', 'Pivot.M.Fibonacci.R2', 'float', True, True
     PIVOT_M_FIBONACCI_R2_1 = 'Pivot M Fibonacci R2|1', 'Pivot.M.Fibonacci.R2|1', 'float', True, True
     PIVOT_M_FIBONACCI_R2_120 = 'Pivot M Fibonacci R2|120', 'Pivot.M.Fibonacci.R2|120', 'float', True, True
     PIVOT_M_FIBONACCI_R2_15 = 'Pivot M Fibonacci R2|15', 'Pivot.M.Fibonacci.R2|15', 'float', True, True
@@ -1535,7 +1534,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_R2_30 = 'Pivot M Fibonacci R2|30', 'Pivot.M.Fibonacci.R2|30', 'float', True, True
     PIVOT_M_FIBONACCI_R2_5 = 'Pivot M Fibonacci R2|5', 'Pivot.M.Fibonacci.R2|5', 'float', True, True
     PIVOT_M_FIBONACCI_R2_60 = 'Pivot M Fibonacci R2|60', 'Pivot.M.Fibonacci.R2|60', 'float', True, True
-    PIVOT_FIBONACCI_R3 = 'Pivot Fibonacci R3', 'Pivot.M.Fibonacci.R3', 'float', True, False
+    PIVOT_M_FIBONACCI_R3 = 'Pivot M Fibonacci R3', 'Pivot.M.Fibonacci.R3', 'float', True, True
     PIVOT_M_FIBONACCI_R3_1 = 'Pivot M Fibonacci R3|1', 'Pivot.M.Fibonacci.R3|1', 'float', True, True
     PIVOT_M_FIBONACCI_R3_120 = 'Pivot M Fibonacci R3|120', 'Pivot.M.Fibonacci.R3|120', 'float', True, True
     PIVOT_M_FIBONACCI_R3_15 = 'Pivot M Fibonacci R3|15', 'Pivot.M.Fibonacci.R3|15', 'float', True, True
@@ -1545,7 +1544,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_R3_30 = 'Pivot M Fibonacci R3|30', 'Pivot.M.Fibonacci.R3|30', 'float', True, True
     PIVOT_M_FIBONACCI_R3_5 = 'Pivot M Fibonacci R3|5', 'Pivot.M.Fibonacci.R3|5', 'float', True, True
     PIVOT_M_FIBONACCI_R3_60 = 'Pivot M Fibonacci R3|60', 'Pivot.M.Fibonacci.R3|60', 'float', True, True
-    PIVOT_FIBONACCI_S1 = 'Pivot Fibonacci S1', 'Pivot.M.Fibonacci.S1', 'float', True, False
+    PIVOT_M_FIBONACCI_S1 = 'Pivot M Fibonacci S1', 'Pivot.M.Fibonacci.S1', 'float', True, True
     PIVOT_M_FIBONACCI_S1_1 = 'Pivot M Fibonacci S1|1', 'Pivot.M.Fibonacci.S1|1', 'float', True, True
     PIVOT_M_FIBONACCI_S1_120 = 'Pivot M Fibonacci S1|120', 'Pivot.M.Fibonacci.S1|120', 'float', True, True
     PIVOT_M_FIBONACCI_S1_15 = 'Pivot M Fibonacci S1|15', 'Pivot.M.Fibonacci.S1|15', 'float', True, True
@@ -1555,7 +1554,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_S1_30 = 'Pivot M Fibonacci S1|30', 'Pivot.M.Fibonacci.S1|30', 'float', True, True
     PIVOT_M_FIBONACCI_S1_5 = 'Pivot M Fibonacci S1|5', 'Pivot.M.Fibonacci.S1|5', 'float', True, True
     PIVOT_M_FIBONACCI_S1_60 = 'Pivot M Fibonacci S1|60', 'Pivot.M.Fibonacci.S1|60', 'float', True, True
-    PIVOT_FIBONACCI_S2 = 'Pivot Fibonacci S2', 'Pivot.M.Fibonacci.S2', 'float', True, False
+    PIVOT_M_FIBONACCI_S2 = 'Pivot M Fibonacci S2', 'Pivot.M.Fibonacci.S2', 'float', True, True
     PIVOT_M_FIBONACCI_S2_1 = 'Pivot M Fibonacci S2|1', 'Pivot.M.Fibonacci.S2|1', 'float', True, True
     PIVOT_M_FIBONACCI_S2_120 = 'Pivot M Fibonacci S2|120', 'Pivot.M.Fibonacci.S2|120', 'float', True, True
     PIVOT_M_FIBONACCI_S2_15 = 'Pivot M Fibonacci S2|15', 'Pivot.M.Fibonacci.S2|15', 'float', True, True
@@ -1565,7 +1564,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_S2_30 = 'Pivot M Fibonacci S2|30', 'Pivot.M.Fibonacci.S2|30', 'float', True, True
     PIVOT_M_FIBONACCI_S2_5 = 'Pivot M Fibonacci S2|5', 'Pivot.M.Fibonacci.S2|5', 'float', True, True
     PIVOT_M_FIBONACCI_S2_60 = 'Pivot M Fibonacci S2|60', 'Pivot.M.Fibonacci.S2|60', 'float', True, True
-    PIVOT_FIBONACCI_S3 = 'Pivot Fibonacci S3', 'Pivot.M.Fibonacci.S3', 'float', True, False
+    PIVOT_M_FIBONACCI_S3 = 'Pivot M Fibonacci S3', 'Pivot.M.Fibonacci.S3', 'float', True, True
     PIVOT_M_FIBONACCI_S3_1 = 'Pivot M Fibonacci S3|1', 'Pivot.M.Fibonacci.S3|1', 'float', True, True
     PIVOT_M_FIBONACCI_S3_120 = 'Pivot M Fibonacci S3|120', 'Pivot.M.Fibonacci.S3|120', 'float', True, True
     PIVOT_M_FIBONACCI_S3_15 = 'Pivot M Fibonacci S3|15', 'Pivot.M.Fibonacci.S3|15', 'float', True, True
@@ -1575,7 +1574,7 @@ class ForexField(Field):
     PIVOT_M_FIBONACCI_S3_30 = 'Pivot M Fibonacci S3|30', 'Pivot.M.Fibonacci.S3|30', 'float', True, True
     PIVOT_M_FIBONACCI_S3_5 = 'Pivot M Fibonacci S3|5', 'Pivot.M.Fibonacci.S3|5', 'float', True, True
     PIVOT_M_FIBONACCI_S3_60 = 'Pivot M Fibonacci S3|60', 'Pivot.M.Fibonacci.S3|60', 'float', True, True
-    PIVOT_WOODIE_P = 'Pivot Woodie P', 'Pivot.M.Woodie.Middle', 'float', True, False
+    PIVOT_M_WOODIE_MIDDLE = 'Pivot M Woodie Middle', 'Pivot.M.Woodie.Middle', 'float', True, False
     PIVOT_M_WOODIE_MIDDLE_1 = 'Pivot M Woodie Middle|1', 'Pivot.M.Woodie.Middle|1', 'float', True, False
     PIVOT_M_WOODIE_MIDDLE_120 = 'Pivot M Woodie Middle|120', 'Pivot.M.Woodie.Middle|120', 'float', True, False
     PIVOT_M_WOODIE_MIDDLE_15 = 'Pivot M Woodie Middle|15', 'Pivot.M.Woodie.Middle|15', 'float', True, False
@@ -1585,7 +1584,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_MIDDLE_30 = 'Pivot M Woodie Middle|30', 'Pivot.M.Woodie.Middle|30', 'float', True, False
     PIVOT_M_WOODIE_MIDDLE_5 = 'Pivot M Woodie Middle|5', 'Pivot.M.Woodie.Middle|5', 'float', True, False
     PIVOT_M_WOODIE_MIDDLE_60 = 'Pivot M Woodie Middle|60', 'Pivot.M.Woodie.Middle|60', 'float', True, False
-    PIVOT_WOODIE_R1 = 'Pivot Woodie R1', 'Pivot.M.Woodie.R1', 'float', True, False
+    PIVOT_M_WOODIE_R1 = 'Pivot M Woodie R1', 'Pivot.M.Woodie.R1', 'float', True, False
     PIVOT_M_WOODIE_R1_1 = 'Pivot M Woodie R1|1', 'Pivot.M.Woodie.R1|1', 'float', True, False
     PIVOT_M_WOODIE_R1_120 = 'Pivot M Woodie R1|120', 'Pivot.M.Woodie.R1|120', 'float', True, False
     PIVOT_M_WOODIE_R1_15 = 'Pivot M Woodie R1|15', 'Pivot.M.Woodie.R1|15', 'float', True, False
@@ -1595,7 +1594,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_R1_30 = 'Pivot M Woodie R1|30', 'Pivot.M.Woodie.R1|30', 'float', True, False
     PIVOT_M_WOODIE_R1_5 = 'Pivot M Woodie R1|5', 'Pivot.M.Woodie.R1|5', 'float', True, False
     PIVOT_M_WOODIE_R1_60 = 'Pivot M Woodie R1|60', 'Pivot.M.Woodie.R1|60', 'float', True, False
-    PIVOT_WOODIE_R2 = 'Pivot Woodie R2', 'Pivot.M.Woodie.R2', 'float', True, False
+    PIVOT_M_WOODIE_R2 = 'Pivot M Woodie R2', 'Pivot.M.Woodie.R2', 'float', True, False
     PIVOT_M_WOODIE_R2_1 = 'Pivot M Woodie R2|1', 'Pivot.M.Woodie.R2|1', 'float', True, False
     PIVOT_M_WOODIE_R2_120 = 'Pivot M Woodie R2|120', 'Pivot.M.Woodie.R2|120', 'float', True, False
     PIVOT_M_WOODIE_R2_15 = 'Pivot M Woodie R2|15', 'Pivot.M.Woodie.R2|15', 'float', True, False
@@ -1605,7 +1604,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_R2_30 = 'Pivot M Woodie R2|30', 'Pivot.M.Woodie.R2|30', 'float', True, False
     PIVOT_M_WOODIE_R2_5 = 'Pivot M Woodie R2|5', 'Pivot.M.Woodie.R2|5', 'float', True, False
     PIVOT_M_WOODIE_R2_60 = 'Pivot M Woodie R2|60', 'Pivot.M.Woodie.R2|60', 'float', True, False
-    PIVOT_WOODIE_R3 = 'Pivot Woodie R3', 'Pivot.M.Woodie.R3', 'float', True, False
+    PIVOT_M_WOODIE_R3 = 'Pivot M Woodie R3', 'Pivot.M.Woodie.R3', 'float', True, False
     PIVOT_M_WOODIE_R3_1 = 'Pivot M Woodie R3|1', 'Pivot.M.Woodie.R3|1', 'float', True, False
     PIVOT_M_WOODIE_R3_120 = 'Pivot M Woodie R3|120', 'Pivot.M.Woodie.R3|120', 'float', True, False
     PIVOT_M_WOODIE_R3_15 = 'Pivot M Woodie R3|15', 'Pivot.M.Woodie.R3|15', 'float', True, False
@@ -1615,7 +1614,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_R3_30 = 'Pivot M Woodie R3|30', 'Pivot.M.Woodie.R3|30', 'float', True, False
     PIVOT_M_WOODIE_R3_5 = 'Pivot M Woodie R3|5', 'Pivot.M.Woodie.R3|5', 'float', True, False
     PIVOT_M_WOODIE_R3_60 = 'Pivot M Woodie R3|60', 'Pivot.M.Woodie.R3|60', 'float', True, False
-    PIVOT_WOODIE_S1 = 'Pivot Woodie S1', 'Pivot.M.Woodie.S1', 'float', True, False
+    PIVOT_M_WOODIE_S1 = 'Pivot M Woodie S1', 'Pivot.M.Woodie.S1', 'float', True, False
     PIVOT_M_WOODIE_S1_1 = 'Pivot M Woodie S1|1', 'Pivot.M.Woodie.S1|1', 'float', True, False
     PIVOT_M_WOODIE_S1_120 = 'Pivot M Woodie S1|120', 'Pivot.M.Woodie.S1|120', 'float', True, False
     PIVOT_M_WOODIE_S1_15 = 'Pivot M Woodie S1|15', 'Pivot.M.Woodie.S1|15', 'float', True, False
@@ -1625,7 +1624,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_S1_30 = 'Pivot M Woodie S1|30', 'Pivot.M.Woodie.S1|30', 'float', True, False
     PIVOT_M_WOODIE_S1_5 = 'Pivot M Woodie S1|5', 'Pivot.M.Woodie.S1|5', 'float', True, False
     PIVOT_M_WOODIE_S1_60 = 'Pivot M Woodie S1|60', 'Pivot.M.Woodie.S1|60', 'float', True, False
-    PIVOT_WOODIE_S2 = 'Pivot Woodie S2', 'Pivot.M.Woodie.S2', 'float', True, False
+    PIVOT_M_WOODIE_S2 = 'Pivot M Woodie S2', 'Pivot.M.Woodie.S2', 'float', True, False
     PIVOT_M_WOODIE_S2_1 = 'Pivot M Woodie S2|1', 'Pivot.M.Woodie.S2|1', 'float', True, False
     PIVOT_M_WOODIE_S2_120 = 'Pivot M Woodie S2|120', 'Pivot.M.Woodie.S2|120', 'float', True, False
     PIVOT_M_WOODIE_S2_15 = 'Pivot M Woodie S2|15', 'Pivot.M.Woodie.S2|15', 'float', True, False
@@ -1635,7 +1634,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_S2_30 = 'Pivot M Woodie S2|30', 'Pivot.M.Woodie.S2|30', 'float', True, False
     PIVOT_M_WOODIE_S2_5 = 'Pivot M Woodie S2|5', 'Pivot.M.Woodie.S2|5', 'float', True, False
     PIVOT_M_WOODIE_S2_60 = 'Pivot M Woodie S2|60', 'Pivot.M.Woodie.S2|60', 'float', True, False
-    PIVOT_WOODIE_S3 = 'Pivot Woodie S3', 'Pivot.M.Woodie.S3', 'float', True, False
+    PIVOT_M_WOODIE_S3 = 'Pivot M Woodie S3', 'Pivot.M.Woodie.S3', 'float', True, False
     PIVOT_M_WOODIE_S3_1 = 'Pivot M Woodie S3|1', 'Pivot.M.Woodie.S3|1', 'float', True, False
     PIVOT_M_WOODIE_S3_120 = 'Pivot M Woodie S3|120', 'Pivot.M.Woodie.S3|120', 'float', True, False
     PIVOT_M_WOODIE_S3_15 = 'Pivot M Woodie S3|15', 'Pivot.M.Woodie.S3|15', 'float', True, False
@@ -1645,7 +1644,7 @@ class ForexField(Field):
     PIVOT_M_WOODIE_S3_30 = 'Pivot M Woodie S3|30', 'Pivot.M.Woodie.S3|30', 'float', True, False
     PIVOT_M_WOODIE_S3_5 = 'Pivot M Woodie S3|5', 'Pivot.M.Woodie.S3|5', 'float', True, False
     PIVOT_M_WOODIE_S3_60 = 'Pivot M Woodie S3|60', 'Pivot.M.Woodie.S3|60', 'float', True, False
-    RATE_OF_CHANGE_9 = 'Rate Of Change (9)', 'ROC', 'round', True, False
+    ROC = 'Roc', 'ROC', 'float', True, False
     ROC_1 = 'Roc|1', 'ROC|1', 'float', True, False
     ROC_120 = 'Roc|120', 'ROC|120', 'float', True, False
     ROC_15 = 'Roc|15', 'ROC|15', 'float', True, False
@@ -1655,7 +1654,7 @@ class ForexField(Field):
     ROC_30 = 'Roc|30', 'ROC|30', 'float', True, False
     ROC_5 = 'Roc|5', 'ROC|5', 'float', True, False
     ROC_60 = 'Roc|60', 'ROC|60', 'float', True, False
-    RELATIVE_STRENGTH_INDEX_14 = 'Relative Strength Index (14)', 'RSI', 'computed_recommendation', True, True
+    RSI = 'RSI', 'RSI', 'float', True, True
     RSI10 = 'Rsi10', 'RSI10', 'float', True, True
     RSI10_1 = 'Rsi10[1]', 'RSI10[1]', 'float', True, True
     RSI10_1_1 = 'Rsi10[1]|1', 'RSI10[1]|1', 'float', True, True
@@ -1816,7 +1815,7 @@ class ForexField(Field):
     RSI5_30 = 'Rsi5|30', 'RSI5|30', 'float', True, True
     RSI5_5 = 'Rsi5|5', 'RSI5|5', 'float', True, True
     RSI5_60 = 'Rsi5|60', 'RSI5|60', 'float', True, True
-    RELATIVE_STRENGTH_INDEX_7 = 'Relative Strength Index (7)', 'RSI7', 'computed_recommendation', True, True
+    RSI7 = 'Rsi7', 'RSI7', 'float', True, True
     RSI7_1 = 'Rsi7[1]', 'RSI7[1]', 'float', True, True
     RSI7_1_1 = 'Rsi7[1]|1', 'RSI7[1]|1', 'float', True, True
     RSI7_1_120 = 'Rsi7[1]|120', 'RSI7[1]|120', 'float', True, True
@@ -1945,7 +1944,7 @@ class ForexField(Field):
     REC_WR_30 = 'Rec Wr|30', 'Rec.WR|30', 'rating', False, False
     REC_WR_5 = 'Rec Wr|5', 'Rec.WR|5', 'rating', False, False
     REC_WR_60 = 'Rec Wr|60', 'Rec.WR|60', 'rating', False, False
-    TECHNICAL_RATING = 'Technical Rating', 'Recommend.All', 'rating', True, False
+    RECOMMEND_ALL = 'Recommend All', 'Recommend.All', 'rating', True, False
     RECOMMEND_ALL_1 = 'Recommend All|1', 'Recommend.All|1', 'rating', True, False
     RECOMMEND_ALL_120 = 'Recommend All|120', 'Recommend.All|120', 'rating', True, False
     RECOMMEND_ALL_15 = 'Recommend All|15', 'Recommend.All|15', 'rating', True, False
@@ -1955,7 +1954,7 @@ class ForexField(Field):
     RECOMMEND_ALL_30 = 'Recommend All|30', 'Recommend.All|30', 'rating', True, False
     RECOMMEND_ALL_5 = 'Recommend All|5', 'Recommend.All|5', 'rating', True, False
     RECOMMEND_ALL_60 = 'Recommend All|60', 'Recommend.All|60', 'rating', True, False
-    MOVING_AVERAGES_RATING = 'Moving Averages Rating', 'Recommend.MA', 'text', True, False
+    RECOMMEND_MA = 'Recommend Ma', 'Recommend.MA', 'rating', True, False
     RECOMMEND_MA_1 = 'Recommend Ma|1', 'Recommend.MA|1', 'rating', True, False
     RECOMMEND_MA_120 = 'Recommend Ma|120', 'Recommend.MA|120', 'rating', True, False
     RECOMMEND_MA_15 = 'Recommend Ma|15', 'Recommend.MA|15', 'rating', True, False
@@ -1965,7 +1964,7 @@ class ForexField(Field):
     RECOMMEND_MA_30 = 'Recommend Ma|30', 'Recommend.MA|30', 'rating', True, False
     RECOMMEND_MA_5 = 'Recommend Ma|5', 'Recommend.MA|5', 'rating', True, False
     RECOMMEND_MA_60 = 'Recommend Ma|60', 'Recommend.MA|60', 'rating', True, False
-    OSCILLATORS_RATING = 'Oscillators Rating', 'Recommend.Other', 'text', True, False
+    RECOMMEND_OTHER = 'Recommend Other', 'Recommend.Other', 'rating', True, False
     RECOMMEND_OTHER_1 = 'Recommend Other|1', 'Recommend.Other|1', 'rating', True, False
     RECOMMEND_OTHER_120 = 'Recommend Other|120', 'Recommend.Other|120', 'rating', True, False
     RECOMMEND_OTHER_15 = 'Recommend Other|15', 'Recommend.Other|15', 'rating', True, False
@@ -1975,8 +1974,8 @@ class ForexField(Field):
     RECOMMEND_OTHER_30 = 'Recommend Other|30', 'Recommend.Other|30', 'rating', True, False
     RECOMMEND_OTHER_5 = 'Recommend Other|5', 'Recommend.Other|5', 'rating', True, False
     RECOMMEND_OTHER_60 = 'Recommend Other|60', 'Recommend.Other|60', 'rating', True, False
-    SIMPLE_MOVING_AVERAGE_10 = 'Simple Moving Average (10)', 'SMA10', 'computed_recommendation', True, False
-    SIMPLE_MOVING_AVERAGE_100 = 'Simple Moving Average (100)', 'SMA100', 'computed_recommendation', True, False
+    SMA10 = 'Sma10', 'SMA10', 'float', True, False
+    SMA100 = 'Sma100', 'SMA100', 'float', True, False
     SMA100_1 = 'Sma100|1', 'SMA100|1', 'float', True, False
     SMA100_120 = 'Sma100|120', 'SMA100|120', 'float', True, False
     SMA100_15 = 'Sma100|15', 'SMA100|15', 'float', True, False
@@ -2066,8 +2065,8 @@ class ForexField(Field):
     SMA15_5 = 'Sma15|5', 'SMA15|5', 'float', True, False
     SMA15_60 = 'Sma15|60', 'SMA15|60', 'float', True, False
     SMA2 = 'Sma2', 'SMA2', 'float', True, False
-    SIMPLE_MOVING_AVERAGE_20 = 'Simple Moving Average (20)', 'SMA20', 'computed_recommendation', True, False
-    SIMPLE_MOVING_AVERAGE_200 = 'Simple Moving Average (200)', 'SMA200', 'computed_recommendation', True, False
+    SMA20 = 'Sma20', 'SMA20', 'float', True, False
+    SMA200 = 'Sma200', 'SMA200', 'float', True, False
     SMA200_1 = 'Sma200|1', 'SMA200|1', 'float', True, False
     SMA200_120 = 'Sma200|120', 'SMA200|120', 'float', True, False
     SMA200_15 = 'Sma200|15', 'SMA200|15', 'float', True, False
@@ -2136,7 +2135,7 @@ class ForexField(Field):
     SMA2_5 = 'Sma2|5', 'SMA2|5', 'float', True, False
     SMA2_60 = 'Sma2|60', 'SMA2|60', 'float', True, False
     SMA3 = 'Sma3', 'SMA3', 'float', True, False
-    SIMPLE_MOVING_AVERAGE_30 = 'Simple Moving Average (30)', 'SMA30', 'computed_recommendation', True, False
+    SMA30 = 'Sma30', 'SMA30', 'float', True, False
     SMA300 = 'Sma300', 'SMA300', 'float', True, False
     SMA300_1 = 'Sma300|1', 'SMA300|1', 'float', True, False
     SMA300_120 = 'Sma300|120', 'SMA300|120', 'float', True, False
@@ -2185,8 +2184,8 @@ class ForexField(Field):
     SMA40_30 = 'Sma40|30', 'SMA40|30', 'float', True, False
     SMA40_5 = 'Sma40|5', 'SMA40|5', 'float', True, False
     SMA40_60 = 'Sma40|60', 'SMA40|60', 'float', True, False
-    SIMPLE_MOVING_AVERAGE_5 = 'Simple Moving Average (5)', 'SMA5', 'computed_recommendation', True, False
-    SIMPLE_MOVING_AVERAGE_50 = 'Simple Moving Average (50)', 'SMA50', 'computed_recommendation', True, False
+    SMA5 = 'Sma5', 'SMA5', 'float', True, False
+    SMA50 = 'Sma50', 'SMA50', 'float', True, False
     SMA50_1 = 'Sma50|1', 'SMA50|1', 'float', True, False
     SMA50_120 = 'Sma50|120', 'SMA50|120', 'float', True, False
     SMA50_15 = 'Sma50|15', 'SMA50|15', 'float', True, False
@@ -2285,7 +2284,7 @@ class ForexField(Field):
     SMA9_30 = 'Sma9|30', 'SMA9|30', 'float', True, False
     SMA9_5 = 'Sma9|5', 'SMA9|5', 'float', True, False
     SMA9_60 = 'Sma9|60', 'SMA9|60', 'float', True, False
-    STOCHASTIC_PERCENTD_14_3_3 = 'Stochastic %D (14, 3, 3)', 'Stoch.D', 'round', True, True
+    STOCH_D = 'Stoch D', 'Stoch.D', 'float', True, True
     STOCH_D_1 = 'Stoch D[1]', 'Stoch.D[1]', 'float', True, True
     STOCH_D_1_1 = 'Stoch D[1]|1', 'Stoch.D[1]|1', 'float', True, True
     STOCH_D_1_120 = 'Stoch D[1]|120', 'Stoch.D[1]|120', 'float', True, True
@@ -2385,7 +2384,7 @@ class ForexField(Field):
     STOCH_D_30 = 'Stoch D|30', 'Stoch.D|30', 'float', True, True
     STOCH_D_5 = 'Stoch D|5', 'Stoch.D|5', 'float', True, True
     STOCH_D_60 = 'Stoch D|60', 'Stoch.D|60', 'float', True, True
-    STOCHASTIC_PERCENTK_14_3_3 = 'Stochastic %K (14, 3, 3)', 'Stoch.K', 'computed_recommendation', True, True
+    STOCH_K = 'Stoch K', 'Stoch.K', 'float', True, True
     STOCH_K_1 = 'Stoch K[1]', 'Stoch.K[1]', 'float', True, True
     STOCH_K_1_1 = 'Stoch K[1]|1', 'Stoch.K[1]|1', 'float', True, True
     STOCH_K_1_120 = 'Stoch K[1]|120', 'Stoch.K[1]|120', 'float', True, True
@@ -2485,7 +2484,7 @@ class ForexField(Field):
     STOCH_K_30 = 'Stoch K|30', 'Stoch.K|30', 'float', True, True
     STOCH_K_5 = 'Stoch K|5', 'Stoch.K|5', 'float', True, True
     STOCH_K_60 = 'Stoch K|60', 'Stoch.K|60', 'float', True, True
-    STOCHASTIC_RSI_SLOW_3_3_14_14 = 'Stochastic RSI Slow (3, 3, 14, 14)', 'Stoch.RSI.D', 'round', True, False
+    STOCH_RSI_D = 'Stoch RSI D', 'Stoch.RSI.D', 'float', True, True
     STOCH_RSI_D_1 = 'Stoch RSI D|1', 'Stoch.RSI.D|1', 'float', True, True
     STOCH_RSI_D_120 = 'Stoch RSI D|120', 'Stoch.RSI.D|120', 'float', True, True
     STOCH_RSI_D_15 = 'Stoch RSI D|15', 'Stoch.RSI.D|15', 'float', True, True
@@ -2495,7 +2494,7 @@ class ForexField(Field):
     STOCH_RSI_D_30 = 'Stoch RSI D|30', 'Stoch.RSI.D|30', 'float', True, True
     STOCH_RSI_D_5 = 'Stoch RSI D|5', 'Stoch.RSI.D|5', 'float', True, True
     STOCH_RSI_D_60 = 'Stoch RSI D|60', 'Stoch.RSI.D|60', 'float', True, True
-    STOCHASTIC_RSI_FAST_3_3_14_14 = 'Stochastic RSI Fast (3, 3, 14, 14)', 'Stoch.RSI.K', 'computed_recommendation', True, False
+    STOCH_RSI_K = 'Stoch RSI K', 'Stoch.RSI.K', 'float', True, True
     STOCH_RSI_K_1 = 'Stoch RSI K|1', 'Stoch.RSI.K|1', 'float', True, True
     STOCH_RSI_K_120 = 'Stoch RSI K|120', 'Stoch.RSI.K|120', 'float', True, True
     STOCH_RSI_K_15 = 'Stoch RSI K|15', 'Stoch.RSI.K|15', 'float', True, True
@@ -2505,7 +2504,7 @@ class ForexField(Field):
     STOCH_RSI_K_30 = 'Stoch RSI K|30', 'Stoch.RSI.K|30', 'float', True, True
     STOCH_RSI_K_5 = 'Stoch RSI K|5', 'Stoch.RSI.K|5', 'float', True, True
     STOCH_RSI_K_60 = 'Stoch RSI K|60', 'Stoch.RSI.K|60', 'float', True, True
-    ULTIMATE_OSCILLATOR_7_14_28 = 'Ultimate Oscillator (7, 14, 28)', 'UO', 'recommendation', True, False
+    UO = 'UO', 'UO', 'float', True, True
     UO_1 = 'UO|1', 'UO|1', 'float', True, True
     UO_120 = 'UO|120', 'UO|120', 'float', True, True
     UO_15 = 'UO|15', 'UO|15', 'float', True, True
@@ -2515,7 +2514,7 @@ class ForexField(Field):
     UO_30 = 'UO|30', 'UO|30', 'float', True, True
     UO_5 = 'UO|5', 'UO|5', 'float', True, True
     UO_60 = 'UO|60', 'UO|60', 'float', True, True
-    VOLUME_WEIGHTED_AVERAGE_PRICE = 'Volume Weighted Average Price', 'VWAP', 'missing', True, False
+    VWAP = 'VWAP', 'VWAP', 'float', True, False
     VWAP_1 = 'VWAP|1', 'VWAP|1', 'float', True, False
     VWAP_120 = 'VWAP|120', 'VWAP|120', 'float', True, False
     VWAP_15 = 'VWAP|15', 'VWAP|15', 'float', True, False
@@ -2525,7 +2524,7 @@ class ForexField(Field):
     VWAP_30 = 'VWAP|30', 'VWAP|30', 'float', True, False
     VWAP_5 = 'VWAP|5', 'VWAP|5', 'float', True, False
     VWAP_60 = 'VWAP|60', 'VWAP|60', 'float', True, False
-    VOLUME_WEIGHTED_MOVING_AVERAGE_20 = 'Volume Weighted Moving Average (20)', 'VWMA', 'missing', True, False
+    VWMA = 'VWMA', 'VWMA', 'float', True, False
     VWMA_1 = 'VWMA|1', 'VWMA|1', 'float', True, False
     VWMA_120 = 'VWMA|120', 'VWMA|120', 'float', True, False
     VWMA_15 = 'VWMA|15', 'VWMA|15', 'float', True, False
@@ -2545,10 +2544,10 @@ class ForexField(Field):
     VALUE_TRADED_30 = 'Value Traded|30', 'Value.Traded|30', 'float', False, False
     VALUE_TRADED_5 = 'Value Traded|5', 'Value.Traded|5', 'float', False, False
     VALUE_TRADED_60 = 'Value Traded|60', 'Value.Traded|60', 'float', False, False
-    VOLATILITY = 'Volatility', 'Volatility.D', 'percent', False, False
-    VOLATILITY_MONTH = 'Volatility Month', 'Volatility.M', 'percent', False, False
-    VOLATILITY_WEEK = 'Volatility Week', 'Volatility.W', 'percent', False, False
-    WILLIAMS_PERCENT_RANGE_14 = 'Williams Percent Range (14)', 'W.R', 'computed_recommendation', True, False
+    VOLATILITY_D = 'Volatility D', 'Volatility.D', 'float', True, False
+    VOLATILITY_M = 'Volatility M', 'Volatility.M', 'float', True, False
+    VOLATILITY_W = 'Volatility W', 'Volatility.W', 'float', True, False
+    W_R = 'W R', 'W.R', 'float', True, True
     W_R_1 = 'W R|1', 'W.R|1', 'float', True, True
     W_R_120 = 'W R|120', 'W.R|120', 'float', True, True
     W_R_15 = 'W R|15', 'W.R|15', 'float', True, True
@@ -2558,19 +2557,21 @@ class ForexField(Field):
     W_R_30 = 'W R|30', 'W.R|30', 'float', True, True
     W_R_5 = 'W R|5', 'W.R|5', 'float', True, True
     W_R_60 = 'W R|60', 'W.R|60', 'float', True, True
+    ACTIVE_ADDRESSES_RATIO = 'Active Addresses Ratio', 'active_addresses_ratio', 'percent', False, False
     ACTIVE_SYMBOL = 'Active Symbol', 'active_symbol', 'float', False, False
-    ALL_TIME_HIGH_2 = 'All Time High', 'all_time_high', 'date', True, False
+    ADDRESSES_ACTIVE = 'Addresses Active', 'addresses_active', 'float', False, False
+    ADDRESSES_NEW = 'Addresses New', 'addresses_new', 'float', False, False
+    ADDRESSES_TOTAL = 'Addresses Total', 'addresses_total', 'float', False, False
+    ADDRESSES_ZERO_BALANCE = 'Addresses Zero Balance', 'addresses_zero_balance', 'float', False, False
+    ALL_TIME_HIGH = 'All Time High', 'all_time_high', 'date', True, False
     ALL_TIME_HIGH_DAY = 'All Time High Day', 'all_time_high_day', 'date', True, False
-    ALL_TIME_LOW_2 = 'All Time Low', 'all_time_low', 'date', True, False
+    ALL_TIME_LOW = 'All Time Low', 'all_time_low', 'date', True, False
     ALL_TIME_LOW_DAY = 'All Time Low Day', 'all_time_low_day', 'date', True, False
     ALL_TIME_OPEN = 'All Time Open', 'all_time_open', 'date', True, False
+    ALTRANK = 'Altrank', 'altrank', 'float', False, False
     ASK = 'Ask', 'ask', 'float', False, False
-    AUM_PERF_1M = 'Aum Perf 1M', 'aum_perf.1M', 'percent', False, False
-    AUM_PERF_1Y = 'Aum Perf 1Y', 'aum_perf.1Y', 'percent', False, False
-    AUM_PERF_3M = 'Aum Perf 3M', 'aum_perf.3M', 'percent', False, False
-    AUM_PERF_3Y = 'Aum Perf 3Y', 'aum_perf.3Y', 'percent', False, False
-    AUM_PERF_5Y = 'Aum Perf 5Y', 'aum_perf.5Y', 'percent', False, False
-    AUM_PERF_YTD = 'Aum Perf YTD', 'aum_perf.YTD', 'percent', False, False
+    AT_THE_MONEY_ADDRESSES_PERCENTAGE = 'At The Money Addresses Percentage', 'at_the_money_addresses_percentage', 'percent', False, False
+    AVERAGE_TRANSACTION_USD = 'Average Transaction Usd', 'average_transaction_usd', 'float', False, False
     AVERAGE_VOLUME_10D_CALC = 'Average Volume 10D Calc', 'average_volume_10d_calc', 'number_group', False, False
     AVERAGE_VOLUME_10D_CALC_1 = 'Average Volume 10D Calc|1', 'average_volume_10d_calc|1', 'number_group', False, False
     AVERAGE_VOLUME_10D_CALC_120 = 'Average Volume 10D Calc|120', 'average_volume_10d_calc|120', 'number_group', False, False
@@ -2611,6 +2612,7 @@ class ForexField(Field):
     AVERAGE_VOLUME_90D_CALC_30 = 'Average Volume 90D Calc|30', 'average_volume_90d_calc|30', 'number_group', False, False
     AVERAGE_VOLUME_90D_CALC_5 = 'Average Volume 90D Calc|5', 'average_volume_90d_calc|5', 'number_group', False, False
     AVERAGE_VOLUME_90D_CALC_60 = 'Average Volume 90D Calc|60', 'average_volume_90d_calc|60', 'number_group', False, False
+    AVG_BALANCE = 'Avg Balance', 'avg_balance', 'float', False, False
     BARS_COUNT = 'Bars Count', 'bars_count', 'float', False, False
     BARS_COUNT_1 = 'Bars Count|1', 'bars_count|1', 'float', False, False
     BARS_COUNT_120 = 'Bars Count|120', 'bars_count|120', 'float', False, False
@@ -2624,23 +2626,11 @@ class ForexField(Field):
     BASE_CURRENCY_KIND = 'Base Currency Kind', 'base_currency_kind', 'text', False, False
     BID = 'Bid', 'bid', 'float', False, False
     BID_ASK_SPREAD_PCT = 'Bid Ask Spread Pct', 'bid_ask_spread_pct', 'percent', False, False
-    PATTERN = 'Pattern', 'candlestick', 'missing', True, False
-    CHANGE_PERCENT = 'Change %', 'change', 'percent', True, False
-    CHANGE_1MIN_PERCENT = 'Change 1m, %', 'change.1', 'percent', False, False
-    CHANGE_15MIN_PERCENT = 'Change 15m, %', 'change.15', 'percent', False, False
-    CHANGE_1M_PERCENT = 'Change 1M, %', 'change.1M', 'percent', False, False
-    CHANGE_1W_PERCENT = 'Change 1W, %', 'change.1W', 'percent', False, False
-    CHANGE_4H_PERCENT = 'Change 4h, %', 'change.240', 'percent', False, False
-    CHANGE_5MIN_PERCENT = 'Change 5m, %', 'change.5', 'percent', False, False
-    CHANGE_1H_PERCENT = 'Change 1h, %', 'change.60', 'percent', False, False
-    CHANGE = 'Change', 'change_abs', 'float', True, False
-    CHANGE_1MIN = 'Change 1m', 'change_abs.1', 'float', False, False
-    CHANGE_15MIN = 'Change 15m', 'change_abs.15', 'float', False, False
-    CHANGE_1M = 'Change 1M', 'change_abs.1M', 'float', False, False
-    CHANGE_1W = 'Change 1W', 'change_abs.1W', 'float', False, False
-    CHANGE_4H = 'Change 4h', 'change_abs.240', 'float', False, False
-    CHANGE_5MIN = 'Change 5m', 'change_abs.5', 'float', False, False
-    CHANGE_1H = 'Change 1h', 'change_abs.60', 'float', False, False
+    BLOCKCHAIN_MINUS_ID = 'Blockchain-Id', 'blockchain-id', 'float', False, False
+    BREAK_EVEN_ADDRESSES_PERCENTAGE = 'Break Even Addresses Percentage', 'break_even_addresses_percentage', 'percent', False, False
+    CENTRALIZATION = 'Centralization', 'centralization', 'float', False, False
+    CHANGE = 'Change', 'change', 'percent', True, False
+    CHANGE_ABS = 'Change Abs', 'change_abs', 'percent', True, False
     CHANGE_ABS_1 = 'Change Abs|1', 'change_abs|1', 'percent', True, False
     CHANGE_ABS_120 = 'Change Abs|120', 'change_abs|120', 'percent', True, False
     CHANGE_ABS_15 = 'Change Abs|15', 'change_abs|15', 'percent', True, False
@@ -2650,8 +2640,8 @@ class ForexField(Field):
     CHANGE_ABS_30 = 'Change Abs|30', 'change_abs|30', 'percent', True, False
     CHANGE_ABS_5 = 'Change Abs|5', 'change_abs|5', 'percent', True, False
     CHANGE_ABS_60 = 'Change Abs|60', 'change_abs|60', 'percent', True, False
-    CHANGE_FROM_OPEN_PERCENT = 'Change from Open %', 'change_from_open', 'percent', True, False
-    CHANGE_FROM_OPEN = 'Change from Open', 'change_from_open_abs', 'float', True, False
+    CHANGE_FROM_OPEN = 'Change From Open', 'change_from_open', 'percent', True, False
+    CHANGE_FROM_OPEN_ABS = 'Change From Open Abs', 'change_from_open_abs', 'percent', True, False
     CHANGE_FROM_OPEN_ABS_1 = 'Change From Open Abs|1', 'change_from_open_abs|1', 'percent', True, False
     CHANGE_FROM_OPEN_ABS_120 = 'Change From Open Abs|120', 'change_from_open_abs|120', 'percent', True, False
     CHANGE_FROM_OPEN_ABS_15 = 'Change From Open Abs|15', 'change_from_open_abs|15', 'percent', True, False
@@ -2673,13 +2663,16 @@ class ForexField(Field):
     CHANGE_1 = 'Change|1', 'change|1', 'percent', True, False
     CHANGE_120 = 'Change|120', 'change|120', 'percent', True, False
     CHANGE_15 = 'Change|15', 'change|15', 'percent', True, False
-    CHANGE_1M_2 = 'Change|1M', 'change|1M', 'percent', True, False
-    CHANGE_1W_2 = 'Change|1W', 'change|1W', 'percent', True, False
+    CHANGE_1M = 'Change|1M', 'change|1M', 'percent', True, False
+    CHANGE_1W = 'Change|1W', 'change|1W', 'percent', True, False
     CHANGE_240 = 'Change|240', 'change|240', 'percent', True, False
     CHANGE_30 = 'Change|30', 'change|30', 'percent', True, False
     CHANGE_5 = 'Change|5', 'change|5', 'percent', True, False
     CHANGE_60 = 'Change|60', 'change|60', 'percent', True, False
-    PRICE = 'Price', 'close', 'float', True, False
+    CIRCULATING_SUPPLY = 'Circulating Supply', 'circulating_supply', 'float', False, False
+    CIRCULATING_TO_MAX_SUPPLY_RATIO = 'Circulating To Max Supply Ratio', 'circulating_to_max_supply_ratio', 'percent', False, False
+    CLOSE = 'Close', 'close', 'float', True, False
+    CLOSE_USD_5 = 'Close Usd|5', 'close_usd|5', 'float', True, False
     CLOSE_1 = 'Close|1', 'close|1', 'float', True, False
     CLOSE_120 = 'Close|120', 'close|120', 'float', True, False
     CLOSE_15 = 'Close|15', 'close|15', 'float', True, False
@@ -2689,10 +2682,16 @@ class ForexField(Field):
     CLOSE_30 = 'Close|30', 'close|30', 'float', True, False
     CLOSE_5 = 'Close|5', 'close|5', 'float', True, False
     CLOSE_60 = 'Close|60', 'close|60', 'float', True, False
-    REGION = 'Region', 'country', 'text', False, False
-    COUNTRY2 = 'Country2', 'country2', 'text', False, False
-    COUNTRY_CODE = 'Country Code', 'country_code', 'text', False, False
+    CONTRIBUTORSACTIVE = 'Contributorsactive', 'contributorsactive', 'float', False, False
+    CONTRIBUTORSCREATED = 'Contributorscreated', 'contributorscreated', 'float', False, False
+    COUNTRY = 'Country', 'country', 'text', False, False
     COUPON = 'Coupon', 'coupon', 'float', False, False
+    CRYPTO_BLOCKCHAIN_ECOSYSTEMS = 'Crypto Blockchain Ecosystems', 'crypto_blockchain_ecosystems', 'float', False, False
+    CRYPTO_CATEGORIES = 'Crypto Categories', 'crypto_categories', 'float', False, False
+    CRYPTO_CODE = 'Crypto Code', 'crypto_code', 'float', False, False
+    CRYPTO_COMMON_CATEGORIES = 'Crypto Common Categories', 'crypto_common_categories', 'float', False, False
+    CRYPTO_CONSENSUS_ALGORITHMS = 'Crypto Consensus Algorithms', 'crypto_consensus_algorithms', 'float', False, False
+    CRYPTO_TOTAL_RANK = 'Crypto Total Rank', 'crypto_total_rank', 'float', False, False
     CRYPTOASSET_MINUS_INFO_DESCRIPTION = 'Cryptoasset-Info Description', 'cryptoasset-info.description', 'text', False, False
     CRYPTOASSET_MINUS_INFO_ID = 'Cryptoasset-Info Id', 'cryptoasset-info.id', 'float', False, False
     CURRENCY = 'Currency', 'currency', 'text', False, False
@@ -2701,21 +2700,61 @@ class ForexField(Field):
     CURRENT_SESSION = 'Current Session', 'current_session', 'float', False, False
     DAYS_TO_MATURITY = 'Days To Maturity', 'days_to_maturity', 'float', False, False
     DESCRIPTION = 'Description', 'description', 'text', False, False
+    DEX_BUY_VOLUME_12H = 'DEX Buy Volume 12H', 'dex_buy_volume_12h', 'number_group', False, False
+    DEX_BUY_VOLUME_15M = 'DEX Buy Volume 15M', 'dex_buy_volume_15m', 'number_group', False, False
+    DEX_BUY_VOLUME_1H = 'DEX Buy Volume 1H', 'dex_buy_volume_1h', 'number_group', False, False
+    DEX_BUY_VOLUME_24H = 'DEX Buy Volume 24H', 'dex_buy_volume_24h', 'number_group', False, False
+    DEX_BUY_VOLUME_4H = 'DEX Buy Volume 4H', 'dex_buy_volume_4h', 'number_group', False, False
+    DEX_BUYERS_12H = 'DEX Buyers 12H', 'dex_buyers_12h', 'float', False, False
+    DEX_BUYERS_15M = 'DEX Buyers 15M', 'dex_buyers_15m', 'float', False, False
+    DEX_BUYERS_1H = 'DEX Buyers 1H', 'dex_buyers_1h', 'float', False, False
+    DEX_BUYERS_24H = 'DEX Buyers 24H', 'dex_buyers_24h', 'float', False, False
+    DEX_BUYERS_4H = 'DEX Buyers 4H', 'dex_buyers_4h', 'float', False, False
+    DEX_BUYS_12H = 'DEX Buys 12H', 'dex_buys_12h', 'float', False, False
+    DEX_BUYS_15M = 'DEX Buys 15M', 'dex_buys_15m', 'float', False, False
+    DEX_BUYS_1H = 'DEX Buys 1H', 'dex_buys_1h', 'float', False, False
+    DEX_BUYS_24H = 'DEX Buys 24H', 'dex_buys_24h', 'float', False, False
+    DEX_BUYS_4H = 'DEX Buys 4H', 'dex_buys_4h', 'float', False, False
+    DEX_CREATED_TIME = 'DEX Created Time', 'dex_created_time', 'date', False, False
+    DEX_SELL_VOLUME_12H = 'DEX Sell Volume 12H', 'dex_sell_volume_12h', 'number_group', False, False
+    DEX_SELL_VOLUME_15M = 'DEX Sell Volume 15M', 'dex_sell_volume_15m', 'number_group', False, False
+    DEX_SELL_VOLUME_1H = 'DEX Sell Volume 1H', 'dex_sell_volume_1h', 'number_group', False, False
+    DEX_SELL_VOLUME_24H = 'DEX Sell Volume 24H', 'dex_sell_volume_24h', 'number_group', False, False
+    DEX_SELL_VOLUME_4H = 'DEX Sell Volume 4H', 'dex_sell_volume_4h', 'number_group', False, False
+    DEX_SELLERS_12H = 'DEX Sellers 12H', 'dex_sellers_12h', 'float', False, False
+    DEX_SELLERS_15M = 'DEX Sellers 15M', 'dex_sellers_15m', 'float', False, False
+    DEX_SELLERS_1H = 'DEX Sellers 1H', 'dex_sellers_1h', 'float', False, False
+    DEX_SELLERS_24H = 'DEX Sellers 24H', 'dex_sellers_24h', 'float', False, False
+    DEX_SELLERS_4H = 'DEX Sellers 4H', 'dex_sellers_4h', 'float', False, False
+    DEX_SELLS_12H = 'DEX Sells 12H', 'dex_sells_12h', 'float', False, False
+    DEX_SELLS_15M = 'DEX Sells 15M', 'dex_sells_15m', 'float', False, False
+    DEX_SELLS_1H = 'DEX Sells 1H', 'dex_sells_1h', 'float', False, False
+    DEX_SELLS_24H = 'DEX Sells 24H', 'dex_sells_24h', 'float', False, False
+    DEX_SELLS_4H = 'DEX Sells 4H', 'dex_sells_4h', 'float', False, False
+    DEX_TOTAL_LIQUIDITY = 'DEX Total Liquidity', 'dex_total_liquidity', 'float', False, False
+    DEX_TOTAL_SUPPLY = 'DEX Total Supply', 'dex_total_supply', 'float', False, False
+    DEX_TRADING_VOLUME_12H = 'DEX Trading Volume 12H', 'dex_trading_volume_12h', 'number_group', False, False
+    DEX_TRADING_VOLUME_15M = 'DEX Trading Volume 15M', 'dex_trading_volume_15m', 'number_group', False, False
+    DEX_TRADING_VOLUME_1H = 'DEX Trading Volume 1H', 'dex_trading_volume_1h', 'number_group', False, False
+    DEX_TRADING_VOLUME_24H = 'DEX Trading Volume 24H', 'dex_trading_volume_24h', 'number_group', False, False
+    DEX_TRADING_VOLUME_4H = 'DEX Trading Volume 4H', 'dex_trading_volume_4h', 'number_group', False, False
+    DEX_TXS_COUNT_12H = 'DEX Txs Count 12H', 'dex_txs_count_12h', 'float', False, False
+    DEX_TXS_COUNT_15M = 'DEX Txs Count 15M', 'dex_txs_count_15m', 'float', False, False
+    DEX_TXS_COUNT_1H = 'DEX Txs Count 1H', 'dex_txs_count_1h', 'float', False, False
+    DEX_TXS_COUNT_24H = 'DEX Txs Count 24H', 'dex_txs_count_24h', 'float', False, False
+    DEX_TXS_COUNT_4H = 'DEX Txs Count 4H', 'dex_txs_count_4h', 'float', False, False
+    DEX_TXS_COUNT_UNIQ_12H = 'DEX Txs Count Uniq 12H', 'dex_txs_count_uniq_12h', 'float', False, False
+    DEX_TXS_COUNT_UNIQ_15M = 'DEX Txs Count Uniq 15M', 'dex_txs_count_uniq_15m', 'float', False, False
+    DEX_TXS_COUNT_UNIQ_1H = 'DEX Txs Count Uniq 1H', 'dex_txs_count_uniq_1h', 'float', False, False
+    DEX_TXS_COUNT_UNIQ_24H = 'DEX Txs Count Uniq 24H', 'dex_txs_count_uniq_24h', 'float', False, False
+    DEX_TXS_COUNT_UNIQ_4H = 'DEX Txs Count Uniq 4H', 'dex_txs_count_uniq_4h', 'float', False, False
     EXCHANGE = 'Exchange', 'exchange', 'percent', True, False
     EXPIRATION = 'Expiration', 'expiration', 'percent', False, False
     FIRST_BAR_TIME = 'First Bar Time', 'first_bar_time', 'date', False, False
-    FOREX_EXOTIC_PRIORITY = 'Forex Exotic Priority', 'forex_exotic_priority', 'float', False, False
-    FOREX_MINOR_PRIORITY = 'Forex Minor Priority', 'forex_minor_priority', 'float', False, False
-    FOREX_PRIORITY = 'Forex Priority', 'forex_priority', 'float', False, False
     FRACTIONAL = 'Fractional', 'fractional', 'float', False, False
-    FUND_FLOWS_1M = 'Fund Flows 1M', 'fund_flows.1M', 'float', True, False
-    FUND_FLOWS_1Y = 'Fund Flows 1Y', 'fund_flows.1Y', 'float', True, False
-    FUND_FLOWS_3M = 'Fund Flows 3M', 'fund_flows.3M', 'float', True, False
-    FUND_FLOWS_3Y = 'Fund Flows 3Y', 'fund_flows.3Y', 'float', True, False
-    FUND_FLOWS_5Y = 'Fund Flows 5Y', 'fund_flows.5Y', 'float', True, False
-    FUND_FLOWS_YTD = 'Fund Flows YTD', 'fund_flows.YTD', 'float', True, False
-    FUNDAMENTAL_CURRENCY_CODE = 'Fundamental Currency Code', 'fundamental_currency_code', 'text', False, False
-    GAP_PERCENT = 'Gap %', 'gap', 'percent', True, False
+    FULLY_DILUTED_VALUE = 'Fully Diluted Value', 'fully_diluted_value', 'float', False, False
+    GALAXYSCORE = 'Galaxyscore', 'galaxyscore', 'float', False, False
+    GAP = 'Gap', 'gap', 'float', True, False
     GAP_DOWN = 'Gap Down', 'gap_down', 'float', True, False
     GAP_DOWN_ABS = 'Gap Down Abs', 'gap_down_abs', 'float', True, False
     GAP_DOWN_ABS_1 = 'Gap Down Abs|1', 'gap_down_abs|1', 'float', True, False
@@ -2765,17 +2804,18 @@ class ForexField(Field):
     GAP_30 = 'Gap|30', 'gap|30', 'float', True, False
     GAP_5 = 'Gap|5', 'gap|5', 'float', True, False
     GAP_60 = 'Gap|60', 'gap|60', 'float', True, False
+    GITHUB_COMMITS = 'Github Commits', 'github_commits', 'float', False, False
     HIGH = 'High', 'high', 'float', True, False
     HIGH_1 = 'High|1', 'high|1', 'float', True, False
     HIGH_120 = 'High|120', 'high|120', 'float', True, False
     HIGH_15 = 'High|15', 'high|15', 'float', True, False
-    HIGH_1M = 'High|1M', 'high|1M', 'float', True, False
+    HIGH_1M_2 = 'High|1M', 'high|1M', 'float', True, False
     HIGH_1W = 'High|1W', 'high|1W', 'float', True, False
     HIGH_240 = 'High|240', 'high|240', 'float', True, False
     HIGH_30 = 'High|30', 'high|30', 'float', True, False
     HIGH_5 = 'High|5', 'high|5', 'float', True, False
     HIGH_60 = 'High|60', 'high|60', 'float', True, False
-    INDEX_PRIORITY = 'Index Priority', 'index_priority', 'float', False, False
+    IN_THE_MONEY_ADDRESSES_PERCENTAGE = 'In The Money Addresses Percentage', 'in_the_money_addresses_percentage', 'percent', False, False
     INDEXES = 'Indexes', 'indexes', 'float', False, False
     INDICATORS_BARS_COUNT = 'Indicators Bars Count', 'indicators_bars_count', 'float', False, False
     INDICATORS_BARS_COUNT_1 = 'Indicators Bars Count|1', 'indicators_bars_count|1', 'float', False, False
@@ -2787,12 +2827,15 @@ class ForexField(Field):
     INDICATORS_BARS_COUNT_30 = 'Indicators Bars Count|30', 'indicators_bars_count|30', 'float', False, False
     INDICATORS_BARS_COUNT_5 = 'Indicators Bars Count|5', 'indicators_bars_count|5', 'float', False, False
     INDICATORS_BARS_COUNT_60 = 'Indicators Bars Count|60', 'indicators_bars_count|60', 'float', False, False
+    INTERACTIONS = 'Interactions', 'interactions', 'float', False, False
     IS_BLACKLISTED = 'Is Blacklisted', 'is_blacklisted', 'float', False, False
     IS_PRIMARY = 'Is Primary', 'is_primary', 'float', False, False
     IS_SHARIAH_COMPLIANT = 'Is Shariah Compliant', 'is_shariah_compliant', 'float', False, False
     IS_SYMBOL_PRIMARY_LISTING = 'Is Symbol Primary Listing', 'is_symbol_primary_listing', 'float', False, False
     KIND = 'Kind', 'kind', 'float', False, False
     KIND_MINUS_DELAY = 'Kind-Delay', 'kind-delay', 'float', False, False
+    LARGE_TX_COUNT = 'Large Tx Count', 'large_tx_count', 'float', False, False
+    LARGE_TX_VOLUME_USD = 'Large Tx Volume Usd', 'large_tx_volume_usd', 'number_group', False, False
     LAST_BAR_UPDATE_TIME = 'Last Bar Update Time', 'last_bar_update_time', 'date', False, False
     LAST_BAR_UPDATE_TIME_1 = 'Last Bar Update Time|1', 'last_bar_update_time|1', 'date', False, False
     LAST_BAR_UPDATE_TIME_120 = 'Last Bar Update Time|120', 'last_bar_update_time|120', 'date', False, False
@@ -2804,37 +2847,30 @@ class ForexField(Field):
     LAST_BAR_UPDATE_TIME_5 = 'Last Bar Update Time|5', 'last_bar_update_time|5', 'date', False, False
     LAST_BAR_UPDATE_TIME_60 = 'Last Bar Update Time|60', 'last_bar_update_time|60', 'date', False, False
     LOGOID = 'Logoid', 'logoid', 'text', False, False
+    LOSSES_ADDRESSES_PERCENTAGE = 'Losses Addresses Percentage', 'losses_addresses_percentage', 'percent', False, False
     LOW = 'Low', 'low', 'float', True, False
     LOW_AFTER_HIGH_ALL_CHANGE = 'Low After High All Change', 'low_after_high_all_change', 'percent', True, False
     LOW_AFTER_HIGH_ALL_CHANGE_ABS = 'Low After High All Change Abs', 'low_after_high_all_change_abs', 'percent', True, False
     LOW_1 = 'Low|1', 'low|1', 'float', True, False
     LOW_120 = 'Low|120', 'low|120', 'float', True, False
     LOW_15 = 'Low|15', 'low|15', 'float', True, False
-    LOW_1M = 'Low|1M', 'low|1M', 'float', True, False
+    LOW_1M_2 = 'Low|1M', 'low|1M', 'float', True, False
     LOW_1W = 'Low|1W', 'low|1W', 'float', True, False
     LOW_240 = 'Low|240', 'low|240', 'float', True, False
     LOW_30 = 'Low|30', 'low|30', 'float', True, False
     LOW_5 = 'Low|5', 'low|5', 'float', True, False
     LOW_60 = 'Low|60', 'low|60', 'float', True, False
     MARKET = 'Market', 'market', 'float', False, False
+    MARKET_CAP = 'Market Cap', 'market_cap', 'float', False, False
+    MARKET_CAP_CALC = 'Market Cap Calc', 'market_cap_calc', 'float', False, False
+    MARKET_CAP_DILUTED_CALC = 'Market Cap Diluted Calc', 'market_cap_diluted_calc', 'float', False, False
+    MARKET_CAP_TO_TVL = 'Market Cap To Tvl', 'market_cap_to_tvl', 'float', False, False
     MATURITY_DATE = 'Maturity Date', 'maturity_date', 'date', False, False
+    MAX_SUPPLY = 'Max Supply', 'max_supply', 'float', False, False
     MINMOV = 'Minmov', 'minmov', 'float', False, False
     MINMOVE2 = 'Minmove2', 'minmove2', 'float', False, False
     NAME = 'Name', 'name', 'text', False, False
-    NAV_DISCOUNT_PREMIUM = 'Nav Discount Premium', 'nav_discount_premium', 'float', False, False
-    NAV_PERF_1M = 'Nav Perf 1M', 'nav_perf.1M', 'percent', False, False
-    NAV_PERF_1Y = 'Nav Perf 1Y', 'nav_perf.1Y', 'percent', False, False
-    NAV_PERF_3M = 'Nav Perf 3M', 'nav_perf.3M', 'percent', False, False
-    NAV_PERF_3Y = 'Nav Perf 3Y', 'nav_perf.3Y', 'percent', False, False
-    NAV_PERF_5Y = 'Nav Perf 5Y', 'nav_perf.5Y', 'percent', False, False
-    NAV_PERF_YTD = 'Nav Perf YTD', 'nav_perf.YTD', 'percent', False, False
-    NAV_TOTAL_RETURN_1M = 'Nav Total Return 1M', 'nav_total_return.1M', 'float', False, False
-    NAV_TOTAL_RETURN_1Y = 'Nav Total Return 1Y', 'nav_total_return.1Y', 'float', False, False
-    NAV_TOTAL_RETURN_3M = 'Nav Total Return 3M', 'nav_total_return.3M', 'float', False, False
-    NAV_TOTAL_RETURN_3Y = 'Nav Total Return 3Y', 'nav_total_return.3Y', 'float', False, False
-    NAV_TOTAL_RETURN_5Y = 'Nav Total Return 5Y', 'nav_total_return.5Y', 'float', False, False
-    NAV_TOTAL_RETURN_6M = 'Nav Total Return 6M', 'nav_total_return.6M', 'float', False, False
-    NAV_TOTAL_RETURN_YTD = 'Nav Total Return YTD', 'nav_total_return.YTD', 'float', False, False
+    NVT = 'Nvt', 'nvt', 'float', False, False
     OPEN = 'Open', 'open', 'float', True, False
     OPEN_1 = 'Open|1', 'open|1', 'float', True, False
     OPEN_120 = 'Open|120', 'open|120', 'float', True, False
@@ -2845,7 +2881,7 @@ class ForexField(Field):
     OPEN_30 = 'Open|30', 'open|30', 'float', True, False
     OPEN_5 = 'Open|5', 'open|5', 'float', True, False
     OPEN_60 = 'Open|60', 'open|60', 'float', True, False
-    POPULARITY_RANK = 'Popularity Rank', 'popularity_rank', 'float', False, False
+    OUT_THE_MONEY_ADDRESSES_PERCENTAGE = 'Out The Money Addresses Percentage', 'out_the_money_addresses_percentage', 'percent', False, False
     POST_CHANGE = 'Post Change', 'post_change', 'percent', True, False
     POST_CHANGE_1 = 'Post Change|1', 'post_change|1', 'percent', True, False
     POST_CHANGE_120 = 'Post Change|120', 'post_change|120', 'percent', True, False
@@ -2858,6 +2894,8 @@ class ForexField(Field):
     POST_CHANGE_60 = 'Post Change|60', 'post_change|60', 'percent', True, False
     POSTMARKET_CHANGE = 'Postmarket Change', 'postmarket_change', 'percent', True, False
     POSTMARKET_CHANGE_ABS = 'Postmarket Change Abs', 'postmarket_change_abs', 'percent', True, False
+    POSTSACTIVE = 'Postsactive', 'postsactive', 'float', False, False
+    POSTSCREATED = 'Postscreated', 'postscreated', 'float', False, False
     PRE_CHANGE = 'Pre Change', 'pre_change', 'percent', True, False
     PRE_CHANGE_ABS = 'Pre Change Abs', 'pre_change_abs', 'percent', True, False
     PRE_CHANGE_ABS_1 = 'Pre Change Abs|1', 'pre_change_abs|1', 'percent', True, False
@@ -2883,11 +2921,12 @@ class ForexField(Field):
     PREMARKET_CHANGE_FROM_OPEN = 'Premarket Change From Open', 'premarket_change_from_open', 'percent', True, False
     PREMARKET_CHANGE_FROM_OPEN_ABS = 'Premarket Change From Open Abs', 'premarket_change_from_open_abs', 'percent', True, False
     PREMARKET_GAP = 'Premarket Gap', 'premarket_gap', 'float', True, False
-    WEEK_HIGH_52 = '52 Week High', 'price_52_week_high', 'float', False, False
+    PRICE_52_WEEK_HIGH = 'Price 52 Week High', 'price_52_week_high', 'float', True, False
     PRICE_52_WEEK_HIGH_DATE = 'Price 52 Week High Date', 'price_52_week_high_date', 'date', True, False
-    WEEK_LOW_52 = '52 Week Low', 'price_52_week_low', 'float', False, False
+    PRICE_52_WEEK_LOW = 'Price 52 Week Low', 'price_52_week_low', 'float', True, False
     PRICE_52_WEEK_LOW_DATE = 'Price 52 Week Low Date', 'price_52_week_low_date', 'date', True, False
     PRICESCALE = 'Pricescale', 'pricescale', 'float', False, False
+    PROFIT_ADDRESSES_PERCENTAGE = 'Profit Addresses Percentage', 'profit_addresses_percentage', 'percent', False, False
     PROVIDER_MINUS_ID = 'Provider-Id', 'provider-id', 'float', False, False
     RATES_CF = 'Rates Cf', 'rates_cf', 'float', False, False
     RATES_CURRENT = 'Rates Current', 'rates_current', 'float', False, False
@@ -2912,13 +2951,18 @@ class ForexField(Field):
     RELATIVE_VOLUME_10D_CALC_30 = 'Relative Volume 10D Calc|30', 'relative_volume_10d_calc|30', 'number_group', False, False
     RELATIVE_VOLUME_10D_CALC_5 = 'Relative Volume 10D Calc|5', 'relative_volume_10d_calc|5', 'number_group', False, False
     RELATIVE_VOLUME_10D_CALC_60 = 'Relative Volume 10D Calc|60', 'relative_volume_10d_calc|60', 'number_group', False, False
-    RELATIVE_VOLUME_INTRADAY_5 = 'Relative Volume Intraday|5', 'relative_volume_intraday|5', 'number_group', False, False
     RTC = 'Rtc', 'rtc', 'float', False, False
-    GROUP = 'Group', 'sector', 'text', False, False
+    SECTOR = 'Sector', 'sector', 'text', False, False
+    SENTIMENT = 'Sentiment', 'sentiment', 'date', False, False
+    SOCIAL_VOLUME_24H = 'Social Volume 24H', 'social_volume_24h', 'number_group', False, False
+    SOCIALDOMINANCE = 'Socialdominance', 'socialdominance', 'float', False, False
     SOURCE_MINUS_LOGOID = 'Source-Logoid', 'source-logoid', 'text', False, False
     SUBMARKET = 'Submarket', 'submarket', 'float', False, False
     SUBTYPE = 'Subtype', 'subtype', 'text', False, False
     SYMBOL = 'Symbol', 'symbol', 'float', False, False
+    TELEGRAM_MEMBERS = 'Telegram Members', 'telegram_members', 'float', False, False
+    TELEGRAM_NEGATIVE = 'Telegram Negative', 'telegram_negative', 'float', False, False
+    TELEGRAM_POSITIVE = 'Telegram Positive', 'telegram_positive', 'float', False, False
     TIME = 'Time', 'time', 'date', False, False
     TIME_BUSINESS_DAY = 'Time Business Day', 'time_business_day', 'date', False, False
     TIME_1 = 'Time|1', 'time|1', 'date', False, False
@@ -2930,6 +2974,19 @@ class ForexField(Field):
     TIME_30 = 'Time|30', 'time|30', 'date', False, False
     TIME_5 = 'Time|5', 'time|5', 'date', False, False
     TIME_60 = 'Time|60', 'time|60', 'date', False, False
+    TOTAL_ADDRESSES_WITH_BALANCE = 'Total Addresses With Balance', 'total_addresses_with_balance', 'float', False, False
+    TOTAL_SHARES_DILUTED = 'Total Shares Diluted', 'total_shares_diluted', 'float', False, False
+    TOTAL_SHARES_OUTSTANDING = 'Total Shares Outstanding', 'total_shares_outstanding', 'float', False, False
+    TOTAL_SUPPLY = 'Total Supply', 'total_supply', 'float', False, False
+    TOTAL_TO_MAX_SUPPLY_RATIO = 'Total To Max Supply Ratio', 'total_to_max_supply_ratio', 'percent', False, False
+    TOTAL_VALUE_TRADED = 'Total Value Traded', 'total_value_traded', 'float', False, False
+    TVL = 'Tvl', 'tvl', 'float', False, False
+    TWEETS = 'Tweets', 'tweets', 'float', False, False
+    TWITTER_NEGATIVE = 'Twitter Negative', 'twitter_negative', 'float', False, False
+    TWITTER_POSITIVE = 'Twitter Positive', 'twitter_positive', 'float', False, False
+    TXS_COUNT = 'Txs Count', 'txs_count', 'float', False, False
+    TXS_VOLUME = 'Txs Volume', 'txs_volume', 'number_group', False, False
+    TXS_VOLUME_USD = 'Txs Volume Usd', 'txs_volume_usd', 'number_group', False, False
     TYPE = 'Type', 'type', 'text', False, False
     TYPESPECS = 'Typespecs', 'typespecs', 'text', False, False
     UPDATE_MINUS_TIME = 'Update-Time', 'update-time', 'date', False, False
@@ -2944,7 +3001,10 @@ class ForexField(Field):
     UPDATE_MODE_5 = 'Update Mode|5', 'update_mode|5', 'date', False, False
     UPDATE_MODE_60 = 'Update Mode|60', 'update_mode|60', 'date', False, False
     UPDATE_TIME = 'Update Time', 'update_time', 'date', False, False
+    VELOCITY = 'Velocity', 'velocity', 'float', False, False
     VOLUME = 'Volume', 'volume', 'number_group', False, False
+    VOLUME_MINUS_TYPE = 'Volume-Type', 'volume-type', 'number_group', False, False
+    VOLUME_BASE_5 = 'Volume Base|5', 'volume_base|5', 'number_group', False, False
     VOLUME_CHANGE = 'Volume Change', 'volume_change', 'percent', True, False
     VOLUME_CHANGE_ABS = 'Volume Change Abs', 'volume_change_abs', 'percent', True, False
     VOLUME_CHANGE_ABS_1 = 'Volume Change Abs|1', 'volume_change_abs|1', 'percent', True, False
@@ -2965,6 +3025,7 @@ class ForexField(Field):
     VOLUME_CHANGE_30 = 'Volume Change|30', 'volume_change|30', 'percent', True, False
     VOLUME_CHANGE_5 = 'Volume Change|5', 'volume_change|5', 'percent', True, False
     VOLUME_CHANGE_60 = 'Volume Change|60', 'volume_change|60', 'percent', True, False
+    VOLUME_QUOTE_5 = 'Volume Quote|5', 'volume_quote|5', 'number_group', True, True
     VOLUME_1 = 'Volume|1', 'volume|1', 'number_group', False, False
     VOLUME_120 = 'Volume|120', 'volume|120', 'number_group', False, False
     VOLUME_15 = 'Volume|15', 'volume|15', 'number_group', False, False
@@ -2976,173 +3037,7 @@ class ForexField(Field):
     VOLUME_60 = 'Volume|60', 'volume|60', 'number_group', False, False
 
 
-# Default fields for backward compatibility (original 167 fields)
-DEFAULT_FOREX_FIELDS = [
-    ForexField.ALL_TIME_HIGH,
-    ForexField.ALL_TIME_LOW,
-    ForexField.ALL_TIME_PERFORMANCE,
-    ForexField.AROON_DOWN_14,
-    ForexField.AROON_UP_14,
-    ForexField.ASK,
-    ForexField.AVERAGE_DAY_RANGE_14,
-    ForexField.AVERAGE_DIRECTIONAL_INDEX_14,
-    ForexField.AVERAGE_TRUE_RANGE_14,
-    ForexField.AWESOME_OSCILLATOR,
-    ForexField.BID,
-    ForexField.BOLLINGER_LOWER_BAND_20,
-    ForexField.BOLLINGER_UPPER_BAND_20,
-    ForexField.BULL_BEAR_POWER,
-    ForexField.CANDLE_3BLACKCROWS,
-    ForexField.CANDLE_3WHITESOLDIERS,
-    ForexField.CANDLE_ABANDONEDBABY_BEARISH,
-    ForexField.CANDLE_ABANDONEDBABY_BULLISH,
-    ForexField.CANDLE_DOJI,
-    ForexField.CANDLE_DOJI_DRAGONFLY,
-    ForexField.CANDLE_DOJI_GRAVESTONE,
-    ForexField.CANDLE_ENGULFING_BEARISH,
-    ForexField.CANDLE_ENGULFING_BULLISH,
-    ForexField.CANDLE_EVENINGSTAR,
-    ForexField.CANDLE_HAMMER,
-    ForexField.CANDLE_HANGINGMAN,
-    ForexField.CANDLE_HARAMI_BEARISH,
-    ForexField.CANDLE_HARAMI_BULLISH,
-    ForexField.CANDLE_INVERTEDHAMMER,
-    ForexField.CANDLE_KICKING_BEARISH,
-    ForexField.CANDLE_KICKING_BULLISH,
-    ForexField.CANDLE_LONGSHADOW_LOWER,
-    ForexField.CANDLE_LONGSHADOW_UPPER,
-    ForexField.CANDLE_MARUBOZU_BLACK,
-    ForexField.CANDLE_MARUBOZU_WHITE,
-    ForexField.CANDLE_MORNINGSTAR,
-    ForexField.CANDLE_SHOOTINGSTAR,
-    ForexField.CANDLE_SPINNINGTOP_BLACK,
-    ForexField.CANDLE_SPINNINGTOP_WHITE,
-    ForexField.CANDLE_TRISTAR_BEARISH,
-    ForexField.CANDLE_TRISTAR_BULLISH,
-    ForexField.CHANGE,
-    ForexField.CHANGE_15MIN,
-    ForexField.CHANGE_15MIN_PERCENT,
-    ForexField.CHANGE_1H,
-    ForexField.CHANGE_1H_PERCENT,
-    ForexField.CHANGE_1M,
-    ForexField.CHANGE_1MIN,
-    ForexField.CHANGE_1MIN_PERCENT,
-    ForexField.CHANGE_1M_PERCENT,
-    ForexField.CHANGE_1W,
-    ForexField.CHANGE_1W_PERCENT,
-    ForexField.CHANGE_4H,
-    ForexField.CHANGE_4H_PERCENT,
-    ForexField.CHANGE_5MIN,
-    ForexField.CHANGE_5MIN_PERCENT,
-    ForexField.CHANGE_FROM_OPEN,
-    ForexField.CHANGE_FROM_OPEN_PERCENT,
-    ForexField.CHANGE_PERCENT,
-    ForexField.COMMODITY_CHANNEL_INDEX_20,
-    ForexField.CURRENCY,
-    ForexField.DESCRIPTION,
-    ForexField.DONCHIAN_CHANNELS_LOWER_BAND_20,
-    ForexField.DONCHIAN_CHANNELS_UPPER_BAND_20,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_10,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_100,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_20,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_200,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_30,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_5,
-    ForexField.EXPONENTIAL_MOVING_AVERAGE_50,
-    ForexField.FUNDAMENTAL_CURRENCY_CODE,
-    ForexField.GAP_PERCENT,
-    ForexField.GROUP,
-    ForexField.HIGH,
-    ForexField.HULL_MOVING_AVERAGE_9,
-    ForexField.ICHIMOKU_BASE_LINE_9_26_52_26,
-    ForexField.ICHIMOKU_CONVERSION_LINE_9_26_52_26,
-    ForexField.ICHIMOKU_LEADING_SPAN_A_9_26_52_26,
-    ForexField.ICHIMOKU_LEADING_SPAN_B_9_26_52_26,
-    ForexField.KELTNER_CHANNELS_LOWER_BAND_20,
-    ForexField.KELTNER_CHANNELS_UPPER_BAND_20,
-    ForexField.LOGOID,
-    ForexField.LOW,
-    ForexField.MACD_LEVEL_12_26,
-    ForexField.MACD_SIGNAL_12_26,
-    ForexField.MOMENTUM_10,
-    ForexField.MONTHLY_PERFORMANCE,
-    ForexField.MONTH_HIGH_1,
-    ForexField.MONTH_HIGH_3,
-    ForexField.MONTH_HIGH_6,
-    ForexField.MONTH_LOW_1,
-    ForexField.MONTH_LOW_3,
-    ForexField.MONTH_LOW_6,
-    ForexField.MONTH_PERFORMANCE_3,
-    ForexField.MONTH_PERFORMANCE_6,
-    ForexField.MOVING_AVERAGES_RATING,
-    ForexField.NAME,
-    ForexField.NEGATIVE_DIRECTIONAL_INDICATOR_14,
-    ForexField.OPEN,
-    ForexField.OSCILLATORS_RATING,
-    ForexField.PARABOLIC_SAR,
-    ForexField.PATTERN,
-    ForexField.PIVOT_CAMARILLA_P,
-    ForexField.PIVOT_CAMARILLA_R1,
-    ForexField.PIVOT_CAMARILLA_R2,
-    ForexField.PIVOT_CAMARILLA_R3,
-    ForexField.PIVOT_CAMARILLA_S1,
-    ForexField.PIVOT_CAMARILLA_S2,
-    ForexField.PIVOT_CAMARILLA_S3,
-    ForexField.PIVOT_CLASSIC_P,
-    ForexField.PIVOT_CLASSIC_R1,
-    ForexField.PIVOT_CLASSIC_R2,
-    ForexField.PIVOT_CLASSIC_R3,
-    ForexField.PIVOT_CLASSIC_S1,
-    ForexField.PIVOT_CLASSIC_S2,
-    ForexField.PIVOT_CLASSIC_S3,
-    ForexField.PIVOT_DM_P,
-    ForexField.PIVOT_DM_R1,
-    ForexField.PIVOT_DM_S1,
-    ForexField.PIVOT_FIBONACCI_P,
-    ForexField.PIVOT_FIBONACCI_R1,
-    ForexField.PIVOT_FIBONACCI_R2,
-    ForexField.PIVOT_FIBONACCI_R3,
-    ForexField.PIVOT_FIBONACCI_S1,
-    ForexField.PIVOT_FIBONACCI_S2,
-    ForexField.PIVOT_FIBONACCI_S3,
-    ForexField.PIVOT_WOODIE_P,
-    ForexField.PIVOT_WOODIE_R1,
-    ForexField.PIVOT_WOODIE_R2,
-    ForexField.PIVOT_WOODIE_R3,
-    ForexField.PIVOT_WOODIE_S1,
-    ForexField.PIVOT_WOODIE_S2,
-    ForexField.PIVOT_WOODIE_S3,
-    ForexField.POSITIVE_DIRECTIONAL_INDICATOR_14,
-    ForexField.PRICE,
-    ForexField.RATE_OF_CHANGE_9,
-    ForexField.REGION,
-    ForexField.RELATIVE_STRENGTH_INDEX_14,
-    ForexField.RELATIVE_STRENGTH_INDEX_7,
-    ForexField.SIMPLE_MOVING_AVERAGE_10,
-    ForexField.SIMPLE_MOVING_AVERAGE_100,
-    ForexField.SIMPLE_MOVING_AVERAGE_20,
-    ForexField.SIMPLE_MOVING_AVERAGE_200,
-    ForexField.SIMPLE_MOVING_AVERAGE_30,
-    ForexField.SIMPLE_MOVING_AVERAGE_5,
-    ForexField.SIMPLE_MOVING_AVERAGE_50,
-    ForexField.STOCHASTIC_PERCENTD_14_3_3,
-    ForexField.STOCHASTIC_PERCENTK_14_3_3,
-    ForexField.STOCHASTIC_RSI_FAST_3_3_14_14,
-    ForexField.STOCHASTIC_RSI_SLOW_3_3_14_14,
-    ForexField.SUBTYPE,
-    ForexField.TECHNICAL_RATING,
-    ForexField.TYPE,
-    ForexField.ULTIMATE_OSCILLATOR_7_14_28,
-    ForexField.VOLATILITY,
-    ForexField.VOLATILITY_MONTH,
-    ForexField.VOLATILITY_WEEK,
-    ForexField.VOLUME_WEIGHTED_AVERAGE_PRICE,
-    ForexField.VOLUME_WEIGHTED_MOVING_AVERAGE_20,
-    ForexField.WEEKLY_PERFORMANCE,
-    ForexField.WEEK_HIGH_52,
-    ForexField.WEEK_LOW_52,
-    ForexField.WILLIAMS_PERCENT_RANGE_14,
-    ForexField.YEARLY_PERFORMANCE,
-    ForexField.YTD_PERFORMANCE,
-    ForexField.Y_PERFORMANCE_5,
+# Default fields for backward compatibility (original 0 fields)
+DEFAULT_COIN_FIELDS = [
+
 ]

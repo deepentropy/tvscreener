@@ -1,16 +1,18 @@
 from tvscreener.core.base import Screener, default_sort_forex
-from tvscreener.field.forex import ForexField
+from tvscreener.field.forex import ForexField, DEFAULT_FOREX_FIELDS
 from tvscreener.util import get_url
 
 
 class ForexScreener(Screener):
     """Forex screener for querying forex/currency pairs from TradingView."""
 
+    _field_type = ForexField
+
     def __init__(self):
         super().__init__()
         subtype = "forex"
         self.url = get_url(subtype)
         self.markets = {subtype}  # Fixed: set literal instead of set(string)
-        self.specific_fields = ForexField
+        self.specific_fields = DEFAULT_FOREX_FIELDS  # Use default fields (set to ForexField for all 2900+ fields)
         self.sort_by(default_sort_forex)
         self.add_misc("symbols", {"query": {"types": ["forex"]}})

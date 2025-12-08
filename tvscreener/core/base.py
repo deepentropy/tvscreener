@@ -1,6 +1,6 @@
 import json
 import time
-from typing import Iterator, Callable, Optional
+from typing import Iterator, Callable, Optional, Union, List
 
 import pandas as pd
 import requests
@@ -39,9 +39,9 @@ class ScreenerDataFrame(pd.DataFrame):
         columns = {"symbol": "Symbol", **columns}
         super().__init__(data, columns=list(columns.values()), *args, **kwargs)
 
-        # Reorder columns
+        # Reorder columns - only include first_columns that exist in the request
         first_columns = ['symbol', 'name', 'description']
-        ordered_columns = {k: columns.get(k) for k in first_columns}
+        ordered_columns = {k: columns.get(k) for k in first_columns if k in columns}
         ordered_columns.update({k: v for k, v in columns.items() if k not in first_columns})
         self.attrs['original_columns'] = ordered_columns
         self._update_inplace(self[ordered_columns.values()])
@@ -55,6 +55,9 @@ class ScreenerDataFrame(pd.DataFrame):
 
 class Screener:
     """Base screener class for querying TradingView screeners."""
+
+    # Subclasses should override this to enable field type validation
+    _field_type: type = None
 
     def __init__(self):
         self.sort = None
@@ -104,7 +107,24 @@ class Screener:
             filter_.operation = FilterOperator.EQUAL
         self.filters.append(filter_)
 
+    def _validate_field_type(self, field: Field | ExtraFilter):
+        """Validate that the field type matches the screener's expected field type."""
+        # Skip validation for ExtraFilter (search, etc.)
+        if isinstance(field, ExtraFilter):
+            return
+        # Skip validation if no field type is set
+        if self._field_type is None:
+            return
+        # Validate field type
+        if not isinstance(field, self._field_type):
+            raise TypeError(
+                f"Invalid field type: expected {self._field_type.__name__}, "
+                f"got {type(field).__name__}. "
+                f"Use {self._field_type.__name__} fields with {type(self).__name__}."
+            )
+
     def add_filter(self, filter_type: Field | ExtraFilter, operation: FilterOperator, values: Enum or str):
+        self._validate_field_type(filter_type)
         filter_ = Filter(filter_type, operation, values)
         # Case where the filter already exists, and we want to add more values
         existing_filter = self._get_filter(filter_.field)
@@ -112,6 +132,37 @@ class Screener:
             self._merge_filters(existing_filter, filter_)
         else:
             self._add_new_filter(filter_)
+
+    def where(self, field: Field, operation: FilterOperator, value) -> 'Screener':
+        """
+        Add a filter condition (fluent alias for add_filter).
+
+        :param field: Field to filter on
+        :param operation: Filter operation (ABOVE, BELOW, EQUAL, etc.)
+        :param value: Value to compare against
+        :return: self for method chaining
+
+        Example:
+            >>> ss = StockScreener()
+            >>> ss.where(StockField.PRICE, FilterOperator.ABOVE, 100)
+            ...   .where(StockField.VOLUME, FilterOperator.ABOVE, 1000000)
+        """
+        self.add_filter(field, operation, value)
+        return self
+
+    def select(self, *fields: Field) -> 'Screener':
+        """
+        Set fields to retrieve (fluent method).
+
+        :param fields: Fields to include in results
+        :return: self for method chaining
+
+        Example:
+            >>> ss = StockScreener()
+            >>> ss.select(StockField.NAME, StockField.PRICE, StockField.VOLUME)
+        """
+        self.specific_fields = list(fields)
+        return self
 
     def add_option(self, key, value):
         self.options[key] = value
