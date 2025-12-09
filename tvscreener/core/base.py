@@ -164,14 +164,31 @@ class Screener:
         self.specific_fields = list(fields)
         return self
 
+    def select_all(self) -> 'Screener':
+        """
+        Select all available fields for this screener type.
+
+        :return: self for method chaining
+
+        Example:
+            >>> ss = StockScreener()
+            >>> ss.select_all()
+            >>> df = ss.get()  # Returns all ~3000+ stock fields
+        """
+        if self._field_type is None:
+            raise ValueError("Cannot select all fields: screener has no field type defined")
+        self.specific_fields = list(self._field_type)
+        return self
+
     def add_option(self, key, value):
         self.options[key] = value
 
     def add_misc(self, key, value):
         self.misc[key] = value
 
-    def set_range(self, from_range: int = default_min_range, to_range: int = default_max_range) -> None:
+    def set_range(self, from_range: int = default_min_range, to_range: int = default_max_range) -> 'Screener':
         self.range = [from_range, to_range]
+        return self
 
     def sort_by(self, sort_by: Field, ascending=True):
         self.sort = {"sortBy": sort_by.field_name, "sortOrder": "asc" if ascending else "desc"}
