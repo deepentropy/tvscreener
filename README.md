@@ -10,6 +10,21 @@
 [![PyPI version](https://badge.fury.io/py/tvscreener.svg)](https://badge.fury.io/py/tvscreener)
 [![Downloads](https://pepy.tech/badge/tvscreener)](https://pepy.tech/project/tvscreener)
 [![Coverage](https://codecov.io/github/deepentropy/tvscreener/coverage.svg?branch=main)](https://codecov.io/gh/deepentropy/tvscreener)
+
+## 🚀 Try the Code Generator
+
+**Build screener queries visually and get Python code instantly!**
+
+[![Code Generator](https://img.shields.io/badge/Try%20it-Code%20Generator-2962ff?style=for-the-badge&logo=python&logoColor=white)](https://deepentropy.github.io/tvscreener/)
+
+The Code Generator lets you:
+- Select from 6 screener types (Stock, Crypto, Forex, Bond, Futures, Coin)
+- Build filters visually with 13,000+ fields
+- Generate ready-to-use Python code
+- Copy and run in your environment
+
+---
+
 ![tradingview-screener.png](https://raw.githubusercontent.com/deepentropy/tvscreener/main/.github/img/tradingview-screener.png)
 
 Get the results as a Pandas Dataframe
