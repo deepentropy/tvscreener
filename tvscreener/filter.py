@@ -27,6 +27,33 @@ class ExtraFilter(Enum):
         self.field_name = value
 
 
+class FieldCondition:
+    """
+    Represents a comparison condition on a field.
+
+    This class enables Pythonic comparison syntax like:
+        StockField.PRICE > 100
+        StockField.VOLUME.between(1e6, 10e6)
+        StockField.SECTOR == 'Technology'
+
+    Example:
+        >>> condition = StockField.PRICE > 100
+        >>> ss.where(condition)
+    """
+
+    def __init__(self, field, operation: FilterOperator, value):
+        self.field = field
+        self.operation = operation
+        self.value = value
+
+    def to_filter(self) -> 'Filter':
+        """Convert this condition to a Filter object."""
+        return Filter(self.field, self.operation, self.value)
+
+    def __repr__(self):
+        return f"FieldCondition({self.field.name}, {self.operation.name}, {self.value})"
+
+
 class Filter:
     def __init__(self, field: Field | ExtraFilter, operation: FilterOperator, values):
         self.field = field

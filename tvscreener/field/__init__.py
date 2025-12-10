@@ -153,6 +153,126 @@ class Field(Enum):
             raise ValueError(f"{self.name} does not support historical lookback")
         return FieldWithHistory(self, periods)
 
+    # Comparison operators for Pythonic filtering syntax
+    def __gt__(self, other) -> 'FieldCondition':
+        """
+        Greater than comparison.
+
+        Example:
+            >>> StockField.PRICE > 100
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE, other)
+
+    def __ge__(self, other) -> 'FieldCondition':
+        """
+        Greater than or equal comparison.
+
+        Example:
+            >>> StockField.PRICE >= 100
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE_OR_EQUAL, other)
+
+    def __lt__(self, other) -> 'FieldCondition':
+        """
+        Less than comparison.
+
+        Example:
+            >>> StockField.PRICE < 100
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW, other)
+
+    def __le__(self, other) -> 'FieldCondition':
+        """
+        Less than or equal comparison.
+
+        Example:
+            >>> StockField.PRICE <= 100
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
+
+    def __eq__(self, other) -> 'FieldCondition':
+        """
+        Equality comparison. Returns FieldCondition for value comparisons,
+        or standard enum equality for Field-to-Field comparisons.
+
+        Example:
+            >>> StockField.SECTOR == 'Technology'
+        """
+        # For enum-to-enum comparison, use standard Enum equality
+        if isinstance(other, Field):
+            return self.value == other.value
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.EQUAL, other)
+
+    def __ne__(self, other) -> 'FieldCondition':
+        """
+        Not equal comparison. Returns FieldCondition for value comparisons,
+        or standard enum inequality for Field-to-Field comparisons.
+
+        Example:
+            >>> StockField.SECTOR != 'Technology'
+        """
+        # For enum-to-enum comparison, use standard Enum inequality
+        if isinstance(other, Field):
+            return self.value != other.value
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
+
+    def __hash__(self):
+        """Required for Enum when __eq__ is overridden."""
+        return hash(self.value)
+
+    def between(self, min_val, max_val) -> 'FieldCondition':
+        """
+        Check if field value is within a range (inclusive).
+
+        Example:
+            >>> StockField.PRICE.between(50, 100)
+            >>> StockField.MARKET_CAPITALIZATION.between(1e9, 10e9)
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE, [min_val, max_val])
+
+    def not_between(self, min_val, max_val) -> 'FieldCondition':
+        """
+        Check if field value is outside a range.
+
+        Example:
+            >>> StockField.PRICE.not_between(50, 100)
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE, [min_val, max_val])
+
+    def isin(self, values: list) -> 'FieldCondition':
+        """
+        Check if field value is in a list of values.
+
+        Example:
+            >>> StockField.SECTOR.isin(['Technology', 'Healthcare'])
+            >>> StockField.EXCHANGE.isin([Exchange.NASDAQ, Exchange.NYSE])
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE, values)
+
+    def not_in(self, values: list) -> 'FieldCondition':
+        """
+        Check if field value is not in a list of values.
+
+        Example:
+            >>> StockField.SECTOR.not_in(['Finance', 'Utilities'])
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
+
+
+class FieldCondition:
+    """Forward declaration for type hints - actual implementation is in filter.py"""
+    pass
+
 
 class FieldWithInterval:
     """
@@ -175,9 +295,51 @@ class FieldWithInterval:
         self.format = field.format
         self.interval = True
         self.historical = field.historical
+        self.name = f"{field.name}_{interval}"  # For repr in FieldCondition
 
     def __repr__(self):
         return f"FieldWithInterval({self.field.name}, interval='{self._interval}')"
+
+    # Comparison operators
+    def __gt__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE, other)
+
+    def __ge__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE_OR_EQUAL, other)
+
+    def __lt__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW, other)
+
+    def __le__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
+
+    def __eq__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.EQUAL, other)
+
+    def __ne__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
+
+    def between(self, min_val, max_val):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE, [min_val, max_val])
+
+    def not_between(self, min_val, max_val):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE, [min_val, max_val])
+
+    def isin(self, values: list):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE, values)
+
+    def not_in(self, values: list):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
 
 
 class FieldWithHistory:
@@ -201,9 +363,51 @@ class FieldWithHistory:
         self.format = field.format
         self.interval = field.interval
         self.historical = True
+        self.name = f"{field.name}_history_{periods}"  # For repr in FieldCondition
 
     def __repr__(self):
         return f"FieldWithHistory({self.field.name}, periods={self.periods})"
+
+    # Comparison operators
+    def __gt__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE, other)
+
+    def __ge__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE_OR_EQUAL, other)
+
+    def __lt__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW, other)
+
+    def __le__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
+
+    def __eq__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.EQUAL, other)
+
+    def __ne__(self, other):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
+
+    def between(self, min_val, max_val):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE, [min_val, max_val])
+
+    def not_between(self, min_val, max_val):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE, [min_val, max_val])
+
+    def isin(self, values: list):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE, values)
+
+    def not_in(self, values: list):
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
 
 
 class Type(Enum):

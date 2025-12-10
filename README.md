@@ -34,12 +34,24 @@ Get the results as a Pandas Dataframe
 - Complete technical indicator coverage with all time intervals
 - Fields organized by category with search and discovery methods
 
-### New Fluent API
+### Pythonic Comparison Syntax
+```python
+from tvscreener import StockScreener, StockField
+
+ss = StockScreener()
+ss.where(StockField.PRICE > 50)
+ss.where(StockField.VOLUME >= 1_000_000)
+ss.where(StockField.MARKET_CAPITALIZATION.between(1e9, 50e9))
+ss.where(StockField.SECTOR.isin(['Technology', 'Healthcare']))
+df = ss.get()
+```
+
+### Fluent API
 ```python
 # Chain methods for cleaner code
 ss = StockScreener()
 ss.select(StockField.NAME, StockField.PRICE, StockField.CHANGE_PERCENT)
-ss.where(StockField.MARKET_CAPITALIZATION, FilterOperator.ABOVE, 1e9)
+ss.where(StockField.PRICE > 100)
 df = ss.get()
 ```
 
@@ -126,7 +138,7 @@ df = coins.get()
 Use `select()` and `where()` for cleaner, chainable code:
 
 ```python
-from tvscreener import StockScreener, StockField, FilterOperator
+from tvscreener import StockScreener, StockField
 
 ss = StockScreener()
 ss.select(
@@ -136,8 +148,8 @@ ss.select(
     StockField.VOLUME,
     StockField.MARKET_CAPITALIZATION
 )
-ss.where(StockField.MARKET_CAPITALIZATION, FilterOperator.ABOVE, 1e9)
-ss.where(StockField.CHANGE_PERCENT, FilterOperator.ABOVE, 5)
+ss.where(StockField.MARKET_CAPITALIZATION > 1e9)
+ss.where(StockField.CHANGE_PERCENT > 5)
 df = ss.get()
 ```
 
@@ -285,3 +297,11 @@ for df in ss.stream(interval=30, max_iterations=10):
 - `interval`: Refresh interval in seconds (minimum 1.0 to avoid rate limiting)
 - `max_iterations`: Maximum number of refreshes (None = infinite)
 - `on_update`: Optional callback function called with each DataFrame
+
+## Documentation
+
+- **[Quick Start Guide](docs/quickstart.md)** - Get up and running in 5 minutes
+- **[Filtering Guide](docs/filtering.md)** - Complete filtering reference with comparison operators
+- **[Stock Screening Examples](docs/examples/stock-screening.md)** - Value investing, momentum, dividend strategies
+- **[Technical Analysis Examples](docs/examples/technical-analysis.md)** - RSI, MACD, multi-timeframe analysis
+- **[Field Reference](docs/fields/README.md)** - All 13,000+ available fields

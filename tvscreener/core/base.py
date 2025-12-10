@@ -109,11 +109,23 @@ class Screener:
 
     def _validate_field_type(self, field: Field | ExtraFilter):
         """Validate that the field type matches the screener's expected field type."""
+        from tvscreener.field import FieldWithInterval, FieldWithHistory
+
         # Skip validation for ExtraFilter (search, etc.)
         if isinstance(field, ExtraFilter):
             return
         # Skip validation if no field type is set
         if self._field_type is None:
+            return
+        # Handle FieldWithInterval and FieldWithHistory - check their underlying field
+        if isinstance(field, (FieldWithInterval, FieldWithHistory)):
+            underlying_field = field.field
+            if not isinstance(underlying_field, self._field_type):
+                raise TypeError(
+                    f"Invalid field type: expected {self._field_type.__name__}, "
+                    f"got {type(underlying_field).__name__}. "
+                    f"Use {self._field_type.__name__} fields with {type(self).__name__}."
+                )
             return
         # Validate field type
         if not isinstance(field, self._field_type):
@@ -133,21 +145,40 @@ class Screener:
         else:
             self._add_new_filter(filter_)
 
-    def where(self, field: Field, operation: FilterOperator, value) -> 'Screener':
+    def where(self, condition_or_field, operation: FilterOperator = None, value=None) -> 'Screener':
         """
-        Add a filter condition (fluent alias for add_filter).
+        Add a filter condition (fluent method).
 
-        :param field: Field to filter on
-        :param operation: Filter operation (ABOVE, BELOW, EQUAL, etc.)
-        :param value: Value to compare against
+        Supports two syntaxes:
+
+        1. **New Pythonic syntax** (recommended):
+            >>> ss.where(StockField.PRICE > 100)
+            >>> ss.where(StockField.VOLUME >= 1_000_000)
+            >>> ss.where(StockField.MARKET_CAPITALIZATION.between(1e9, 10e9))
+
+        2. **Legacy syntax** (still supported):
+            >>> ss.where(StockField.PRICE, FilterOperator.ABOVE, 100)
+
+        :param condition_or_field: Either a FieldCondition (from comparison) or a Field
+        :param operation: Filter operation (only for legacy syntax)
+        :param value: Value to compare against (only for legacy syntax)
         :return: self for method chaining
 
         Example:
             >>> ss = StockScreener()
+            >>> # New syntax
+            >>> ss.where(StockField.PRICE > 100).where(StockField.VOLUME > 1e6)
+            >>> # Legacy syntax
             >>> ss.where(StockField.PRICE, FilterOperator.ABOVE, 100)
-            ...   .where(StockField.VOLUME, FilterOperator.ABOVE, 1000000)
         """
-        self.add_filter(field, operation, value)
+        from tvscreener.filter import FieldCondition
+
+        if isinstance(condition_or_field, FieldCondition):
+            # New Pythonic syntax: ss.where(StockField.PRICE > 100)
+            self.add_filter(condition_or_field.field, condition_or_field.operation, condition_or_field.value)
+        else:
+            # Legacy syntax: ss.where(field, operator, value)
+            self.add_filter(condition_or_field, operation, value)
         return self
 
     def select(self, *fields: Field) -> 'Screener':

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tvscreener Code Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1>tvscreener</h1>
+            <span class="subtitle">Code Generator</span>
+        </div>
+        <div class="header-right">
+            <a href="https://github.com/deepentropy/tvscreener" target="_blank" class="github-link">
+                <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                GitHub
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="config-panel">
+            <!-- Screener Type -->
+            <section class="config-section">
+                <h2>Screener</h2>
+                <select id="screener-type" class="select-full">
+                    <option value="stock" selected>Stock Screener</option>
+                    <option value="crypto">Crypto Screener</option>
+                    <option value="forex">Forex Screener</option>
+                </select>
+            </section>
+
+            <!-- Filters -->
+            <section class="config-section">
+                <h2>Filters</h2>
+                <div id="filters-container"></div>
+                <button id="add-filter-btn" class="btn btn-secondary">
+                    <span class="btn-icon">+</span> Add Filter
+                </button>
+            </section>
+
+            <!-- Fields to Retrieve -->
+            <section class="config-section">
+                <h2>Fields to Retrieve</h2>
+                <div class="field-controls">
+                    <input type="text" id="field-search" class="input-search" placeholder="Search fields...">
+                    <select id="field-category" class="select-category">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="field-presets">
+                    <button class="btn btn-small preset-btn" data-preset="basic">Basic</button>
+                    <button class="btn btn-small preset-btn" data-preset="valuation">Valuation</button>
+                    <button class="btn btn-small preset-btn" data-preset="technical">Technical</button>
+                    <button class="btn btn-small preset-btn" data-preset="performance">Performance</button>
+                    <button class="btn btn-small preset-btn" data-preset="clear">Clear All</button>
+                </div>
+                <div id="fields-container" class="fields-grid"></div>
+            </section>
+
+            <!-- Options -->
+            <section class="config-section">
+                <h2>Options</h2>
+                <div class="option-row">
+                    <label for="index-select">Index Filter</label>
+                    <select id="index-select" class="select-full">
+                        <option value="">None (All Stocks)</option>
+                    </select>
+                </div>
+                <div class="option-row">
+                    <label for="sort-field">Sort By</label>
+                    <div class="sort-controls">
+                        <select id="sort-field" class="select-sort">
+                            <option value="">None</option>
+                        </select>
+                        <select id="sort-order" class="select-order">
+                            <option value="desc">DESC</option>
+                            <option value="asc">ASC</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <label for="limit-input">Limit Results</label>
+                    <input type="number" id="limit-input" class="input-number" value="100" min="1" max="5000">
+                </div>
+            </section>
+        </div>
+
+        <div class="code-panel">
+            <div class="code-header">
+                <h2>Generated Code</h2>
+                <div class="code-actions">
+                    <button id="copy-btn" class="btn btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        Copy
+                    </button>
+                </div>
+            </div>
+            <div class="code-container">
+                <pre><code id="generated-code" class="language-python"></code></pre>
+            </div>
+            <div class="code-footer">
+                <p>Install: <code>pip install tvscreener</code></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Filter Row Template -->
+    <template id="filter-template">
+        <div class="filter-row">
+            <select class="filter-field select-field">
+                <option value="">Select field...</option>
+            </select>
+            <select class="filter-operator select-operator">
+                <option value=">">></option>
+                <option value=">=">>=</option>
+                <option value="<"><</option>
+                <option value="<="><=</option>
+                <option value="==">==</option>
+                <option value="!=">!=</option>
+                <option value="between">between</option>
+                <option value="isin">in list</option>
+            </select>
+            <input type="text" class="filter-value input-value" placeholder="Value">
+            <input type="text" class="filter-value2 input-value" placeholder="Max" style="display:none;">
+            <button class="btn btn-icon-only remove-filter" title="Remove filter">×</button>
+        </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="js/field-data.js"></script>
+    <script src="js/code-generator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
