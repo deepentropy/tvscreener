@@ -245,8 +245,7 @@ df = ss.get()
 
 ## Parameters
 
-For Options and Filters, please check the [notebooks](https://github.com/deepentropy/tvscreener/tree/main/notebooks) for
-examples.
+For detailed usage examples, see the documentation and notebooks below.
 
 ## Styled Output
 
@@ -315,8 +314,26 @@ for df in ss.stream(interval=30, max_iterations=10):
 
 ## Documentation
 
-- **[Quick Start Guide](docs/quickstart.md)** - Get up and running in 5 minutes
-- **[Filtering Guide](docs/filtering.md)** - Complete filtering reference with comparison operators
-- **[Stock Screening Examples](docs/examples/stock-screening.md)** - Value investing, momentum, dividend strategies
-- **[Technical Analysis Examples](docs/examples/technical-analysis.md)** - RSI, MACD, multi-timeframe analysis
-- **[Field Reference](docs/fields/README.md)** - All 13,000+ available fields
+📖 **[Full Documentation](https://deepentropy.github.io/tvscreener/docs/)** - Complete guides, API reference, and examples.
+
+### Quick Links
+
+| Guide | Description |
+|-------|-------------|
+| [Quick Start](https://deepentropy.github.io/tvscreener/docs/getting-started/quickstart/) | Get up and running in 5 minutes |
+| [Filtering](https://deepentropy.github.io/tvscreener/docs/guide/filtering/) | Complete filtering reference |
+| [Stock Screening](https://deepentropy.github.io/tvscreener/docs/examples/stock-screening/) | Value, momentum, dividend strategies |
+| [Technical Analysis](https://deepentropy.github.io/tvscreener/docs/examples/technical-analysis/) | RSI, MACD, multi-timeframe |
+| [API Reference](https://deepentropy.github.io/tvscreener/docs/api/screeners/) | Screeners, Fields, Enums |
+
+### Jupyter Notebooks
+
+Interactive examples organized by use case:
+
+| Notebook | Description |
+|----------|-------------|
+| [01-quickstart.ipynb](docs/notebooks/01-quickstart.ipynb) | Overview of all 6 screeners |
+| [02-stocks.ipynb](docs/notebooks/02-stocks.ipynb) | Stock screening strategies |
+| [03-crypto.ipynb](docs/notebooks/03-crypto.ipynb) | Crypto analysis |
+| [04-forex.ipynb](docs/notebooks/04-forex.ipynb) | Forex pairs screening |
+| [05-bonds-futures.ipynb](docs/notebooks/05-bonds-futures.ipynb) | Bonds and futures |
