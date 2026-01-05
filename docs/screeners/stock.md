@@ -140,7 +140,7 @@ StockField.OPERATING_MARGIN_TTM     # Operating Margin
 ```python
 StockField.RELATIVE_STRENGTH_INDEX_14    # RSI(14)
 StockField.MACD_LEVEL_12_26              # MACD
-StockField.MACD_SIGNAL_12_26_9           # MACD Signal
+StockField.MACD_SIGNAL_12_26             # MACD Signal
 StockField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
 StockField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
 StockField.EXPONENTIAL_MOVING_AVERAGE_20 # EMA 20
@@ -152,8 +152,8 @@ StockField.AVERAGE_DIRECTIONAL_INDEX_14  # ADX
 
 ```python
 StockField.CHANGE_PERCENT          # Today's change
-StockField.PERFORMANCE_1_WEEK      # 1 week
-StockField.PERFORMANCE_1_MONTH     # 1 month
+StockField.WEEKLY_PERFORMANCE      # 1 week
+StockField.MONTHLY_PERFORMANCE     # 1 month
 StockField.PERFORMANCE_3_MONTH     # 3 months
 StockField.PERFORMANCE_6_MONTH     # 6 months
 StockField.PERFORMANCE_YTD         # Year to date

@@ -36,15 +36,44 @@ class FieldCondition:
         StockField.VOLUME.between(1e6, 10e6)
         StockField.SECTOR == 'Technology'
 
+    Note: Field-to-field comparisons (e.g., StockField.PRICE > StockField.SMA50)
+    are NOT supported by the TradingView API. Use scalar values only.
+
     Example:
         >>> condition = StockField.PRICE > 100
         >>> ss.where(condition)
     """
 
     def __init__(self, field, operation: FilterOperator, value):
+        # Check for field-to-field comparison which is not supported by TradingView API
+        self._validate_value(value)
         self.field = field
         self.operation = operation
         self.value = value
+
+    @staticmethod
+    def _validate_value(value):
+        """Validate that value is not a Field (field-to-field comparisons not supported)."""
+        # Import here to avoid circular imports
+        from tvscreener.field import Field, FieldWithInterval, FieldWithHistory
+
+        # Check single values
+        if isinstance(value, (Field, FieldWithInterval, FieldWithHistory)):
+            raise TypeError(
+                f"Field-to-field comparisons are not supported by the TradingView API. "
+                f"Got: {type(value).__name__}. "
+                f"Retrieve the data first and filter using pandas DataFrame operations instead."
+            )
+
+        # Check list values (for between, isin, etc.)
+        if isinstance(value, list):
+            for v in value:
+                if isinstance(v, (Field, FieldWithInterval, FieldWithHistory)):
+                    raise TypeError(
+                        f"Field-to-field comparisons are not supported by the TradingView API. "
+                        f"Got: {type(v).__name__}. "
+                        f"Retrieve the data first and filter using pandas DataFrame operations instead."
+                    )
 
     def to_filter(self) -> 'Filter':
         """Convert this condition to a Filter object."""

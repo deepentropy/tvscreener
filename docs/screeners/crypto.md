@@ -49,14 +49,14 @@ CryptoField.MACD_LEVEL_12_26              # MACD
 CryptoField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
 CryptoField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
 CryptoField.AVERAGE_TRUE_RANGE_14         # ATR
-CryptoField.VOLATILITY_DAY                # Daily volatility
+CryptoField.VOLATILITY                    # Daily volatility
 ```
 
 ### Performance
 
 ```python
-CryptoField.PERFORMANCE_1_WEEK      # 7d change
-CryptoField.PERFORMANCE_1_MONTH     # 30d change
+CryptoField.WEEKLY_PERFORMANCE      # 7d change
+CryptoField.MONTHLY_PERFORMANCE     # 30d change
 CryptoField.PERFORMANCE_3_MONTH     # 90d change
 CryptoField.PERFORMANCE_YTD         # Year to date
 CryptoField.PERFORMANCE_1_YEAR      # 1 year
@@ -108,7 +108,7 @@ df = cs.get()
 ```python
 cs = CryptoScreener()
 cs.where(CryptoField.MARKET_CAPITALIZATION > 1e9)
-cs.where(CryptoField.VOLATILITY_DAY < 5)
+cs.where(CryptoField.VOLATILITY < 5)
 cs.sort_by(CryptoField.MARKET_CAPITALIZATION, ascending=False)
 
 df = cs.get()
@@ -118,9 +118,9 @@ df = cs.get()
 
 ```python
 cs = CryptoScreener()
-cs.where(CryptoField.PERFORMANCE_1_WEEK > 20)
+cs.where(CryptoField.WEEKLY_PERFORMANCE > 20)
 cs.where(CryptoField.VOLUME > 5_000_000)
-cs.sort_by(CryptoField.PERFORMANCE_1_WEEK, ascending=False)
+cs.sort_by(CryptoField.WEEKLY_PERFORMANCE, ascending=False)
 
 df = cs.get()
 ```

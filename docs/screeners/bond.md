@@ -45,10 +45,7 @@ BondField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
 ### Performance
 
 ```python
-BondField.PERFORMANCE_1_WEEK      # 1 week
-BondField.PERFORMANCE_1_MONTH     # 1 month
-BondField.PERFORMANCE_YTD         # Year to date
-BondField.PERFORMANCE_1_YEAR      # 1 year
+BondField.PERF_ALL                # All time performance
 ```
 
 ## Example Screens

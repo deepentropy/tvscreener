@@ -46,10 +46,10 @@ FuturesField.AVERAGE_TRUE_RANGE_14         # ATR
 ### Performance
 
 ```python
-FuturesField.PERFORMANCE_1_WEEK      # 1 week
-FuturesField.PERFORMANCE_1_MONTH     # 1 month
-FuturesField.PERFORMANCE_YTD         # Year to date
-FuturesField.PERFORMANCE_1_YEAR      # 1 year
+FuturesField.PERF_W                  # 1 week
+FuturesField.PERF_1M                 # 1 month
+FuturesField.PERF_YTD                # Year to date
+FuturesField.PERF_Y                  # 1 year
 ```
 
 ## Example Screens
@@ -110,7 +110,7 @@ fs.select(
     FuturesField.NAME,
     FuturesField.PRICE,
     FuturesField.AVERAGE_TRUE_RANGE_14,
-    FuturesField.VOLATILITY_DAY
+    FuturesField.VOLATILITY_D
 )
 fs.set_range(0, 20)
 

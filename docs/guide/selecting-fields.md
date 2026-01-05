@@ -139,8 +139,8 @@ ss.select(
 ```python
 ss.select(
     StockField.CHANGE_PERCENT,
-    StockField.PERFORMANCE_1_WEEK,
-    StockField.PERFORMANCE_1_MONTH,
+    StockField.WEEKLY_PERFORMANCE,
+    StockField.MONTHLY_PERFORMANCE,
     StockField.PERFORMANCE_3_MONTH,
     StockField.PERFORMANCE_6_MONTH,
     StockField.PERFORMANCE_YTD,
@@ -154,7 +154,7 @@ ss.select(
 ss.select(
     StockField.RELATIVE_STRENGTH_INDEX_14,
     StockField.MACD_LEVEL_12_26,
-    StockField.MACD_SIGNAL_12_26_9,
+    StockField.MACD_SIGNAL_12_26,
     StockField.SIMPLE_MOVING_AVERAGE_50,
     StockField.SIMPLE_MOVING_AVERAGE_200,
     StockField.EXPONENTIAL_MOVING_AVERAGE_20,

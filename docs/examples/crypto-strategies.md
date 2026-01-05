@@ -45,7 +45,7 @@ High risk, high potential:
 cs = CryptoScreener()
 cs.where(CryptoField.MARKET_CAPITALIZATION.between(10e6, 100e6))
 cs.where(CryptoField.VOLUME > 1_000_000)  # Liquidity filter
-cs.sort_by(CryptoField.PERFORMANCE_1_WEEK, ascending=False)
+cs.sort_by(CryptoField.WEEKLY_PERFORMANCE, ascending=False)
 
 df = cs.get()
 ```
@@ -68,9 +68,9 @@ df = cs.get()
 
 ```python
 cs = CryptoScreener()
-cs.where(CryptoField.PERFORMANCE_1_WEEK > 30)
+cs.where(CryptoField.WEEKLY_PERFORMANCE > 30)
 cs.where(CryptoField.MARKET_CAPITALIZATION > 100e6)
-cs.sort_by(CryptoField.PERFORMANCE_1_WEEK, ascending=False)
+cs.sort_by(CryptoField.WEEKLY_PERFORMANCE, ascending=False)
 
 df = cs.get()
 ```
@@ -79,9 +79,9 @@ df = cs.get()
 
 ```python
 cs = CryptoScreener()
-cs.where(CryptoField.PERFORMANCE_1_MONTH > 50)
+cs.where(CryptoField.MONTHLY_PERFORMANCE > 50)
 cs.where(CryptoField.VOLUME > 5_000_000)
-cs.sort_by(CryptoField.PERFORMANCE_1_MONTH, ascending=False)
+cs.sort_by(CryptoField.MONTHLY_PERFORMANCE, ascending=False)
 
 df = cs.get()
 ```
@@ -123,7 +123,6 @@ df = cs.get()
 ```python
 cs = CryptoScreener()
 cs.where(CryptoField.MACD_LEVEL_12_26 > 0)
-cs.where(CryptoField.MACD_LEVEL_12_26 > CryptoField.MACD_SIGNAL_12_26_9)
 cs.where(CryptoField.VOLUME > 5_000_000)
 
 df = cs.get()
@@ -131,11 +130,26 @@ df = cs.get()
 
 ### Above Moving Averages
 
+Note: Field-to-field comparisons are NOT supported by the TradingView API.
+Retrieve data and filter with pandas instead:
+
 ```python
 cs = CryptoScreener()
-cs.where(CryptoField.PRICE > CryptoField.SIMPLE_MOVING_AVERAGE_50)
-cs.where(CryptoField.SIMPLE_MOVING_AVERAGE_50 > CryptoField.SIMPLE_MOVING_AVERAGE_200)
 cs.where(CryptoField.MARKET_CAPITALIZATION > 1e9)
+cs.select(
+    CryptoField.NAME,
+    CryptoField.PRICE,
+    CryptoField.SIMPLE_MOVING_AVERAGE_50,
+    CryptoField.SIMPLE_MOVING_AVERAGE_200
+)
+
+df = cs.get()
+
+# Filter using pandas
+bullish = df[
+    (df['Price'] > df['SMA 50']) &
+    (df['SMA 50'] > df['SMA 200'])
+]
 
 df = cs.get()
 ```
@@ -219,9 +233,9 @@ For active traders:
 
 ```python
 cs = CryptoScreener()
-cs.where(CryptoField.VOLATILITY_DAY > 5)
+cs.where(CryptoField.VOLATILITY > 5)
 cs.where(CryptoField.VOLUME > 10_000_000)
-cs.sort_by(CryptoField.VOLATILITY_DAY, ascending=False)
+cs.sort_by(CryptoField.VOLATILITY, ascending=False)
 
 df = cs.get()
 ```
@@ -233,7 +247,7 @@ For conservative positions:
 ```python
 cs = CryptoScreener()
 cs.where(CryptoField.MARKET_CAPITALIZATION > 5e9)
-cs.where(CryptoField.VOLATILITY_DAY < 3)
+cs.where(CryptoField.VOLATILITY < 3)
 cs.sort_by(CryptoField.MARKET_CAPITALIZATION, ascending=False)
 
 df = cs.get()
@@ -245,7 +259,7 @@ df = cs.get()
 
 ```python
 cs = CryptoScreener()
-cs.where(CryptoField.PERFORMANCE_1_MONTH < -30)  # Down 30%+ monthly
+cs.where(CryptoField.MONTHLY_PERFORMANCE < -30)  # Down 30%+ monthly
 cs.where(CryptoField.CHANGE_PERCENT > 5)          # Up today
 cs.where(CryptoField.VOLUME > 5_000_000)
 cs.sort_by(CryptoField.CHANGE_PERCENT, ascending=False)

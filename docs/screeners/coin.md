@@ -51,10 +51,10 @@ CoinField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
 ### Performance
 
 ```python
-CoinField.PERFORMANCE_1_WEEK      # 7d change
-CoinField.PERFORMANCE_1_MONTH     # 30d change
-CoinField.PERFORMANCE_YTD         # Year to date
-CoinField.PERFORMANCE_1_YEAR      # 1 year
+CoinField.PERF_W                  # 7d change
+CoinField.PERF_1M                 # 30d change
+CoinField.PERF_YTD                # Year to date
+CoinField.PERF_Y                  # 1 year
 ```
 
 ## Example Screens
@@ -63,13 +63,13 @@ CoinField.PERFORMANCE_1_YEAR      # 1 year
 
 ```python
 cs = CoinScreener()
-cs.sort_by(CoinField.MARKET_CAPITALIZATION, ascending=False)
+cs.sort_by(CoinField.MARKET_CAP, ascending=False)
 cs.set_range(0, 100)
 cs.select(
     CoinField.NAME,
-    CoinField.PRICE,
-    CoinField.MARKET_CAPITALIZATION,
-    CoinField.CHANGE_PERCENT
+    CoinField.CLOSE,
+    CoinField.MARKET_CAP,
+    CoinField.CHANGE
 )
 
 df = cs.get()
@@ -79,9 +79,9 @@ df = cs.get()
 
 ```python
 cs = CoinScreener()
-cs.where(CoinField.CHANGE_PERCENT > 10)
-cs.where(CoinField.MARKET_CAPITALIZATION > 10_000_000)  # Min $10M cap
-cs.sort_by(CoinField.CHANGE_PERCENT, ascending=False)
+cs.where(CoinField.CHANGE > 10)
+cs.where(CoinField.MARKET_CAP > 10_000_000)  # Min $10M cap
+cs.sort_by(CoinField.CHANGE, ascending=False)
 cs.set_range(0, 50)
 
 df = cs.get()
@@ -91,12 +91,12 @@ df = cs.get()
 
 ```python
 cs = CoinScreener()
-cs.where(CoinField.MARKET_CAPITALIZATION > 1e9)  # $1B+ market cap
+cs.where(CoinField.MARKET_CAP > 1e9)  # $1B+ market cap
 cs.where(CoinField.RELATIVE_STRENGTH_INDEX_14 < 35)
 cs.select(
     CoinField.NAME,
-    CoinField.PRICE,
-    CoinField.MARKET_CAPITALIZATION,
+    CoinField.CLOSE,
+    CoinField.MARKET_CAP,
     CoinField.RELATIVE_STRENGTH_INDEX_14
 )
 
@@ -107,9 +107,9 @@ df = cs.get()
 
 ```python
 cs = CoinScreener()
-cs.where(CoinField.PERFORMANCE_1_WEEK > 20)
-cs.where(CoinField.MARKET_CAPITALIZATION > 100_000_000)
-cs.sort_by(CoinField.PERFORMANCE_1_WEEK, ascending=False)
+cs.where(CoinField.PERF_W > 20)
+cs.where(CoinField.MARKET_CAP > 100_000_000)
+cs.sort_by(CoinField.PERF_W, ascending=False)
 
 df = cs.get()
 ```

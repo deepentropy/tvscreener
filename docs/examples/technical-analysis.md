@@ -75,14 +75,14 @@ df = ss.get()
 ss = StockScreener()
 
 ss.where(StockField.MACD_LEVEL_12_26 > 0)              # MACD above zero
-ss.where(StockField.MACD_SIGNAL_12_26_9 > 0)           # Signal above zero
+ss.where(StockField.MACD_SIGNAL_12_26 > 0)             # Signal above zero
 ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
     StockField.MACD_LEVEL_12_26,
-    StockField.MACD_SIGNAL_12_26_9,
+    StockField.MACD_SIGNAL_12_26,
     StockField.CHANGE_PERCENT
 )
 
@@ -96,24 +96,35 @@ Strong momentum with expanding histogram:
 ```python
 ss = StockScreener()
 
-ss.where(StockField.MACD_LEVEL_12_26 > StockField.MACD_SIGNAL_12_26_9)  # MACD > Signal
+# Note: Field-to-field comparisons (e.g., MACD > Signal) are NOT supported by the TradingView API.
+# Retrieve data and filter with pandas instead:
+ss.where(StockField.MACD_LEVEL_12_26 > 0)
 ss.where(StockField.CHANGE_PERCENT > 2)
 ss.where(StockField.VOLUME >= 500_000)
 
+ss.select(
+    StockField.NAME,
+    StockField.PRICE,
+    StockField.MACD_LEVEL_12_26,
+    StockField.MACD_SIGNAL_12_26
+)
+
 df = ss.get()
+
+# Filter for MACD > Signal using pandas
+bullish_macd = df[df['MACD (12, 26)'] > df['MACD Signal (12, 26)']]
 ```
 
 ## Moving Average Strategies
 
 ### Golden Cross Setup
 
-Price above key moving averages:
+Note: Field-to-field comparisons are NOT supported by the TradingView API.
+Retrieve data and filter with pandas:
 
 ```python
 ss = StockScreener()
 
-ss.where(StockField.PRICE > StockField.SIMPLE_MOVING_AVERAGE_50)
-ss.where(StockField.SIMPLE_MOVING_AVERAGE_50 > StockField.SIMPLE_MOVING_AVERAGE_200)
 ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
@@ -453,14 +464,14 @@ df = ss.get()
 ss = StockScreener()
 
 ss.where(StockField.AVERAGE_TRUE_RANGE_14 > 5)
-ss.where(StockField.VOLATILITY_DAY > 3)
+ss.where(StockField.VOLATILITY > 3)
 ss.where(StockField.VOLUME >= 1_000_000)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
     StockField.AVERAGE_TRUE_RANGE_14,
-    StockField.VOLATILITY_DAY
+    StockField.VOLATILITY
 )
 
 df = ss.get()

@@ -142,10 +142,12 @@ ss = StockScreener()
 macd_4h = StockField.MACD_LEVEL_12_26.with_interval('240')
 ss.where(macd_4h > 0)
 
-# 1-hour MACD crossing up (entry)
+# 1-hour MACD positive (entry signal)
 macd_1h = StockField.MACD_LEVEL_12_26.with_interval('60')
-signal_1h = StockField.MACD_SIGNAL_12_26_9.with_interval('60')
-ss.where(macd_1h > signal_1h)
+ss.where(macd_1h > 0)
+
+# Note: Field-to-field comparisons (e.g., MACD > Signal) are NOT supported.
+# Retrieve data and filter with pandas instead.
 
 df = ss.get()
 ```

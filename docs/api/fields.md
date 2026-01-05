@@ -195,7 +195,7 @@ recommendations = StockField.recommendations()
 |-------|-------------|
 | `RELATIVE_STRENGTH_INDEX_14` | RSI (14) |
 | `MACD_LEVEL_12_26` | MACD Line |
-| `MACD_SIGNAL_12_26_9` | MACD Signal |
+| `MACD_SIGNAL_12_26` | MACD Signal |
 | `SIMPLE_MOVING_AVERAGE_50` | SMA 50 |
 | `SIMPLE_MOVING_AVERAGE_200` | SMA 200 |
 | `EXPONENTIAL_MOVING_AVERAGE_20` | EMA 20 |
@@ -211,8 +211,8 @@ recommendations = StockField.recommendations()
 | Field | Description |
 |-------|-------------|
 | `CHANGE_PERCENT` | Today's Change % |
-| `PERFORMANCE_1_WEEK` | 1 Week Change % |
-| `PERFORMANCE_1_MONTH` | 1 Month Change % |
+| `WEEKLY_PERFORMANCE` | 1 Week Change % |
+| `MONTHLY_PERFORMANCE` | 1 Month Change % |
 | `PERFORMANCE_3_MONTH` | 3 Month Change % |
 | `PERFORMANCE_6_MONTH` | 6 Month Change % |
 | `PERFORMANCE_YTD` | Year-to-Date % |

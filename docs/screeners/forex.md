@@ -37,7 +37,7 @@ ForexField.CHANGE_PERCENT  # Daily change
 ```python
 ForexField.RELATIVE_STRENGTH_INDEX_14    # RSI(14)
 ForexField.MACD_LEVEL_12_26              # MACD
-ForexField.MACD_SIGNAL_12_26_9           # MACD Signal
+ForexField.MACD_SIGNAL_12_26             # MACD Signal
 ForexField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
 ForexField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
 ForexField.EXPONENTIAL_MOVING_AVERAGE_20 # EMA 20
@@ -49,8 +49,8 @@ ForexField.STOCHASTIC_D_14_3_3           # Stochastic %D
 ### Performance
 
 ```python
-ForexField.PERFORMANCE_1_WEEK      # 1 week change
-ForexField.PERFORMANCE_1_MONTH     # 1 month change
+ForexField.WEEKLY_PERFORMANCE      # 1 week change
+ForexField.MONTHLY_PERFORMANCE     # 1 month change
 ForexField.PERFORMANCE_3_MONTH     # 3 month change
 ForexField.PERFORMANCE_YTD         # Year to date
 ForexField.PERFORMANCE_1_YEAR      # 1 year
@@ -112,8 +112,8 @@ Price above moving averages:
 
 ```python
 fs = ForexScreener()
-fs.where(ForexField.PRICE > ForexField.SIMPLE_MOVING_AVERAGE_50)
-fs.where(ForexField.SIMPLE_MOVING_AVERAGE_50 > ForexField.SIMPLE_MOVING_AVERAGE_200)
+# Note: Field-to-field comparisons are NOT supported by the TradingView API.
+# Retrieve data and filter with pandas instead:
 fs.select(
     ForexField.NAME,
     ForexField.PRICE,
@@ -122,6 +122,12 @@ fs.select(
 )
 
 df = fs.get()
+
+# Filter for golden cross using pandas
+golden_cross = df[
+    (df['Price'] > df['SMA 50']) &
+    (df['SMA 50'] > df['SMA 200'])
+]
 ```
 
 ### High ATR (Volatility)
@@ -134,7 +140,7 @@ fs.select(
     ForexField.NAME,
     ForexField.PRICE,
     ForexField.AVERAGE_TRUE_RANGE_14,
-    ForexField.VOLATILITY_DAY
+    ForexField.VOLATILITY
 )
 
 df = fs.get()
