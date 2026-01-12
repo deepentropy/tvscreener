@@ -2,6 +2,41 @@
 
 All notable changes to tvscreener.
 
+## [0.2.0] - 2025
+
+### Added
+
+- **MCP Server Integration** - Model Context Protocol server for AI assistants
+  - Enable AI assistants (Claude, etc.) to query market data directly
+  - `tvscreener.mcp` subpackage with full MCP support
+  - `tvscreener-mcp` CLI entry point
+
+- **MCP Tools**:
+  - `discover_fields` - Search 3500+ available fields by keyword
+  - `list_field_types` - Explore field categories
+  - `custom_query` - Flexible queries with any fields and filters
+  - `search_stocks` - Screen stocks by price, market cap, sector
+  - `search_crypto` - Screen crypto by volume, market cap
+  - `search_forex` - Screen forex pairs
+  - `get_top_movers` - Get top gainers/losers
+  - `list_sectors` - List available stock sectors
+  - `list_filter_operators` - List available filter operators
+
+### Installation
+
+```bash
+# Install with MCP support
+pip install tvscreener[mcp]
+
+# Run MCP server
+tvscreener-mcp
+
+# Register with Claude Code
+claude mcp add tvscreener -- tvscreener-mcp
+```
+
+---
+
 ## [0.1.0] - 2024
 
 ### Added

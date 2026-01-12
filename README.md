@@ -35,6 +35,31 @@ Get the results as a Pandas Dataframe
 
 **This is an unofficial, third-party library and is not affiliated with, endorsed by, or connected to TradingView™ in any way.** TradingView™ is a trademark of TradingView™, Inc. This independent project provides a Python interface to publicly available data from TradingView's screener. Use of this library is at your own risk and subject to TradingView's terms of service.
 
+# What's New in v0.2.0
+
+**MCP Server Integration** - This release adds Model Context Protocol (MCP) support, enabling AI assistants like Claude to query market data directly.
+
+### MCP Server for AI Assistants
+
+```bash
+# Install with MCP support
+pip install tvscreener[mcp]
+
+# Run MCP server
+tvscreener-mcp
+
+# Register with Claude Code
+claude mcp add tvscreener -- tvscreener-mcp
+```
+
+**MCP Tools:**
+- `discover_fields` - Search 3500+ available fields by keyword
+- `custom_query` - Flexible queries with any fields and filters
+- `search_stocks` / `search_crypto` / `search_forex` - Simplified screeners
+- `get_top_movers` - Get top gainers/losers
+
+---
+
 # What's New in v0.1.0
 
 **Major API Enhancement Release** - This release significantly expands the library with new screeners, 13,000+ fields, and a more intuitive API.

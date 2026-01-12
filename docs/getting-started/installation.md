@@ -47,6 +47,18 @@ tvscreener automatically installs these dependencies:
 
 ## Optional Dependencies
 
+For MCP server integration (AI assistants like Claude):
+
+```bash
+pip install tvscreener[mcp]
+
+# Run the MCP server
+tvscreener-mcp
+
+# Register with Claude Code
+claude mcp add tvscreener -- tvscreener-mcp
+```
+
 For styled output (colored tables):
 
 ```bash
