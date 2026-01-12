@@ -43,6 +43,13 @@ dev = [
     "build>=1.0.0",
     "twine>=4.0.0"
 ]
+mcp = [
+    "mcp[cli]>=1.0.0",
+    "tabulate>=0.9.0"
+]
+
+[project.scripts]
+tvscreener-mcp = "tvscreener.mcp:run"
 
 [tool.setuptools.packages.find]
 include = ["tvscreener*"]
