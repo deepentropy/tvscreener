@@ -3561,6 +3561,12 @@ class StockField(Field):
     AO_5 = 'Ao|5', 'AO|5', 'round', True, False
 
 
+# Aliases for commonly used documentation field names
+# These provide shorter, more intuitive names for fields
+StockField.PE_RATIO_TTM = StockField.PRICE_TO_EARNINGS_RATIO_TTM
+StockField.DIVIDEND_YIELD_FY = StockField.DIVIDEND_YIELD_FORWARD
+StockField.PAYOUT_RATIO_TTM = StockField.DIVIDEND_PAYOUT_RATIO_TTM
+
 
 # Default fields for StockScreener (424 commonly used fields)
 # Users can access all 3500+ fields by setting specific_fields explicitly

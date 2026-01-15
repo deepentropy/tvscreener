@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Python 3.8 or higher
+- Python 3.10 or higher
 - pandas
 - requests
 
@@ -75,7 +75,7 @@ pip install ipywidgets
 
 ### Import Error
 
-If you get an import error, ensure you're using Python 3.8+:
+If you get an import error, ensure you're using Python 3.10+:
 
 ```bash
 python --version

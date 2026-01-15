@@ -24,6 +24,14 @@ DEFAULT_SORT_FOREX = ForexField.NAME
 REQUEST_TIMEOUT = 30  # seconds
 MIN_STREAM_INTERVAL = 1.0  # minimum interval for streaming to avoid rate limiting
 
+# HTTP headers for TradingView API requests
+REQUEST_HEADERS = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Origin': 'https://www.tradingview.com',
+    'Referer': 'https://www.tradingview.com/',
+}
+
 # Backward compatibility aliases
 default_market = DEFAULT_MARKET
 default_min_range = DEFAULT_MIN_RANGE
@@ -290,7 +298,7 @@ class Screener:
                 self.url,
                 data=payload_json,
                 timeout=REQUEST_TIMEOUT,
-                headers={'Content-Type': 'application/json'}
+                headers=REQUEST_HEADERS
             )
 
             if is_status_code_ok(response):

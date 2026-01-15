@@ -205,6 +205,9 @@ class Field(Enum):
         # For enum-to-enum comparison, use standard Enum equality
         if isinstance(other, Field):
             return self.value == other.value
+        # For Field vs FieldWithInterval/FieldWithHistory, compare field_name
+        if hasattr(other, 'field_name'):
+            return self.field_name == other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.EQUAL, other)
 
@@ -219,6 +222,9 @@ class Field(Enum):
         # For enum-to-enum comparison, use standard Enum inequality
         if isinstance(other, Field):
             return self.value != other.value
+        # For Field vs FieldWithInterval/FieldWithHistory, compare field_name
+        if hasattr(other, 'field_name'):
+            return self.field_name != other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
 
@@ -318,12 +324,22 @@ class FieldWithInterval:
         return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
 
     def __eq__(self, other):
+        # For comparison with Field or FieldWithInterval, compare field_name
+        if isinstance(other, Field) or hasattr(other, 'field_name'):
+            return self.field_name == other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.EQUAL, other)
 
     def __ne__(self, other):
+        # For comparison with Field or FieldWithInterval, compare field_name
+        if isinstance(other, Field) or hasattr(other, 'field_name'):
+            return self.field_name != other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
+
+    def __hash__(self):
+        """Required when __eq__ is overridden."""
+        return hash(self.field_name)
 
     def between(self, min_val, max_val):
         from tvscreener.filter import FieldCondition, FilterOperator
@@ -386,12 +402,22 @@ class FieldWithHistory:
         return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
 
     def __eq__(self, other):
+        # For comparison with Field or FieldWithHistory, compare field_name
+        if isinstance(other, Field) or hasattr(other, 'field_name'):
+            return self.field_name == other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.EQUAL, other)
 
     def __ne__(self, other):
+        # For comparison with Field or FieldWithHistory, compare field_name
+        if isinstance(other, Field) or hasattr(other, 'field_name'):
+            return self.field_name != other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
+
+    def __hash__(self):
+        """Required when __eq__ is overridden."""
+        return hash(self.field_name)
 
     def between(self, min_val, max_val):
         from tvscreener.filter import FieldCondition, FilterOperator

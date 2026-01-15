@@ -140,28 +140,37 @@ df = ss.get()
 
 ### Death Cross Warning
 
-Bearish setup:
+Bearish setup (retrieve data and filter with pandas):
 
 ```python
 ss = StockScreener()
 
-ss.where(StockField.SIMPLE_MOVING_AVERAGE_50 < StockField.SIMPLE_MOVING_AVERAGE_200)
-ss.where(StockField.PRICE < StockField.SIMPLE_MOVING_AVERAGE_50)
 ss.where(StockField.VOLUME >= 500_000)
 
+ss.select(
+    StockField.NAME,
+    StockField.PRICE,
+    StockField.SIMPLE_MOVING_AVERAGE_50,
+    StockField.SIMPLE_MOVING_AVERAGE_200
+)
+
 df = ss.get()
+
+# Filter for death cross using pandas
+death_cross = df[
+    (df['SMA50'] < df['SMA200']) &
+    (df['Price'] < df['SMA50'])
+]
 ```
 
 ### EMA Trend Following
 
-Price above EMA stack:
+Price above EMA stack (retrieve data and filter with pandas):
 
 ```python
 ss = StockScreener()
 
-ss.where(StockField.PRICE > StockField.EXPONENTIAL_MOVING_AVERAGE_20)
-ss.where(StockField.EXPONENTIAL_MOVING_AVERAGE_20 > StockField.EXPONENTIAL_MOVING_AVERAGE_50)
-ss.where(StockField.EXPONENTIAL_MOVING_AVERAGE_50 > StockField.EXPONENTIAL_MOVING_AVERAGE_200)
+ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
     StockField.NAME,
@@ -172,6 +181,13 @@ ss.select(
 )
 
 df = ss.get()
+
+# Filter for EMA stack using pandas
+ema_stack = df[
+    (df['Price'] > df['EMA20']) &
+    (df['EMA20'] > df['EMA50']) &
+    (df['EMA50'] > df['EMA200'])
+]
 ```
 
 ## Bollinger Bands
@@ -222,16 +238,25 @@ df = ss.get()
 
 ### Stochastic Bullish Cross
 
-%K crossing above %D in oversold territory:
+%K crossing above %D in oversold territory (retrieve data and filter with pandas):
 
 ```python
 ss = StockScreener()
 
-ss.where(StockField.STOCHASTIC_K_14_3_3 > StockField.STOCHASTIC_D_14_3_3)
-ss.where(StockField.STOCHASTIC_K_14_3_3 < 30)  # Still in lower zone
+ss.where(StockField.STOCHASTIC_K_14_3_3 < 30)  # In oversold zone
 ss.where(StockField.VOLUME >= 500_000)
 
+ss.select(
+    StockField.NAME,
+    StockField.PRICE,
+    StockField.STOCHASTIC_K_14_3_3,
+    StockField.STOCHASTIC_D_14_3_3
+)
+
 df = ss.get()
+
+# Filter for %K > %D (bullish cross) using pandas
+bullish_stoch = df[df['Stoch %K'] > df['Stoch %D']]
 ```
 
 ## Multi-Timeframe Analysis
@@ -338,11 +363,7 @@ df = ss.get()
 ```python
 ss = StockScreener()
 
-# Trend confirmation
-ss.where(StockField.PRICE > StockField.SIMPLE_MOVING_AVERAGE_50)
-ss.where(StockField.SIMPLE_MOVING_AVERAGE_50 > StockField.SIMPLE_MOVING_AVERAGE_200)
-
-# Momentum confirmation
+# Momentum confirmation (API-supported filters)
 ss.where(StockField.RELATIVE_STRENGTH_INDEX_14.between(50, 70))
 ss.where(StockField.MACD_LEVEL_12_26 > 0)
 
@@ -353,12 +374,21 @@ ss.where(StockField.RELATIVE_VOLUME > 1)  # Above average volume
 ss.select(
     StockField.NAME,
     StockField.PRICE,
+    StockField.SIMPLE_MOVING_AVERAGE_50,
+    StockField.SIMPLE_MOVING_AVERAGE_200,
     StockField.RELATIVE_STRENGTH_INDEX_14,
     StockField.MACD_LEVEL_12_26,
     StockField.RELATIVE_VOLUME
 )
 
 df = ss.get()
+
+# Filter for trend confirmation using pandas
+# (Field-to-field comparisons must be done in pandas)
+trending = df[
+    (df['Price'] > df['SMA50']) &
+    (df['SMA50'] > df['SMA200'])
+]
 ```
 
 ### Oversold Bounce Setup
@@ -389,14 +419,10 @@ df = ss.get()
 
 ### Support Level Test
 
-Price near 200-day moving average:
+Price near 200-day moving average (retrieve data and filter with pandas):
 
 ```python
 ss = StockScreener()
-
-# Price within 3% of 200 SMA
-ss.where(StockField.PRICE > StockField.SIMPLE_MOVING_AVERAGE_200 * 0.97)
-ss.where(StockField.PRICE < StockField.SIMPLE_MOVING_AVERAGE_200 * 1.03)
 
 # RSI not oversold (has room to bounce)
 ss.where(StockField.RELATIVE_STRENGTH_INDEX_14.between(35, 50))
@@ -411,6 +437,13 @@ ss.select(
 )
 
 df = ss.get()
+
+# Filter for price within 3% of 200 SMA using pandas
+# (Field-to-field comparisons must be done in pandas)
+near_support = df[
+    (df['Price'] > df['SMA200'] * 0.97) &
+    (df['Price'] < df['SMA200'] * 1.03)
+]
 ```
 
 ## Candlestick Patterns
