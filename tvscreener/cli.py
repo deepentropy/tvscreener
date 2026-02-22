@@ -12,9 +12,32 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from tvscreener.screeners.forex_opportunity import ForexOpportunityScreener
 from tvscreener.screeners.forex_strategy import ForexStrategyScanner
 from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS, FOREX_MAJORS, FOREX_MINORS
+from tvscreener.config.universe import AssetUniverse, ConfigurationError
+from tvscreener.constants.stocks import STOCK_UNIVERSE
+from tvscreener.constants.commodity import COMMODITY_UNIVERSE
+from tvscreener.constants.crypto import CRYPTO_UNIVERSE
 
 console = Console()
 logger = logging.getLogger(__name__)
+
+UNIVERSE_MAP: dict[str, AssetUniverse] = {}
+
+from tvscreener.config.universe import FOREX_UNIVERSE
+
+UNIVERSE_MAP["forex"] = FOREX_UNIVERSE
+UNIVERSE_MAP["stocks"] = STOCK_UNIVERSE
+UNIVERSE_MAP["commodity"] = COMMODITY_UNIVERSE
+UNIVERSE_MAP["crypto"] = CRYPTO_UNIVERSE
+
+
+def get_universe(asset_type: str) -> AssetUniverse:
+    """Get universe config by asset type with validation."""
+    if asset_type not in UNIVERSE_MAP:
+        raise ConfigurationError(
+            f"Unknown asset type: {asset_type}. "
+            f"Valid options: {', '.join(UNIVERSE_MAP.keys())}"
+        )
+    return UNIVERSE_MAP[asset_type]
 
 
 def setup_logging(verbose: bool = False) -> None:
@@ -36,10 +59,11 @@ def get_pairs(universe: Optional[str], specific: Optional[list[str]]) -> list[st
 
 def run_opportunity_scan(args) -> int:
     """Run opportunity screener."""
-    pairs = get_pairs(args.universe, args.pairs)
-    timeframes = args.timeframes.split(",") if args.timeframes else ["15", "60", "240"]
+    universe = get_universe(args.asset_type)
+    pairs = args.pairs if args.pairs else universe.pairs
+    timeframes = args.timeframes.split(",") if args.timeframes else universe.timeframes
 
-    console.print(f"[cyan]Scanning {len(pairs)} pairs...[/cyan]")
+    console.print(f"[cyan]Scanning {len(pairs)} {args.asset_type} pairs...[/cyan]")
 
     try:
         screener = ForexOpportunityScreener(pairs=pairs, timeframes=timeframes)
@@ -71,11 +95,12 @@ def run_opportunity_scan(args) -> int:
 
 def run_strategy_scan(args) -> int:
     """Run strategy scanner."""
-    pairs = get_pairs(args.universe, args.pairs)
-    timeframes = args.timeframes.split(",") if args.timeframes else ["240", "60", "15"]
+    universe = get_universe(args.asset_type)
+    pairs = args.pairs if args.pairs else universe.pairs
+    timeframes = args.timeframes.split(",") if args.timeframes else universe.timeframes
 
     console.print(
-        f"[cyan]Scanning {len(pairs)} pairs for {args.strategy} signals...[/cyan]"
+        f"[cyan]Scanning {len(pairs)} {args.asset_type} pairs for {args.strategy} signals...[/cyan]"
     )
 
     try:
@@ -134,6 +159,11 @@ def main():
 
     parser.add_argument(
         "--scanner", "-s", choices=["opportunity", "strategy"], default="strategy"
+    )
+    parser.add_argument(
+        "--asset-type",
+        choices=["forex", "stocks", "commodity", "crypto"],
+        default="forex",
     )
     parser.add_argument(
         "--universe", "-u", choices=["majors", "minors", "all"], default="all"
