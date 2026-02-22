@@ -13,13 +13,11 @@ logger = logging.getLogger(__name__)
 
 StrategyType = Literal["trend_following", "mean_reversion", "breakout", "hybrid", "all"]
 Direction = Literal["long", "short", "all"]
-SignalStrength = Literal["strong", "medium", "weak"]
 
 
 @dataclass
 class StrategyConfig:
     min_confluence: int = 2
-    min_signal_strength: str = "weak"
     include_strategies: list[StrategyType] = field(default_factory=lambda: ["all"])
     direction: Direction = "all"
     trend_threshold: float = 0.0
@@ -39,29 +37,42 @@ class ForexStrategyScanner:
         )
 
     def scan(self) -> pd.DataFrame:
-        """Scan all strategies and return combined results."""
+        """Scan selected strategies and return combined results."""
         raw_data = self._screener.get_opportunities()
 
         if raw_data.empty:
             return pd.DataFrame()
 
+        strategies_to_run = self.config.include_strategies
+        if "all" in strategies_to_run:
+            strategies_to_run = [
+                "trend_following",
+                "mean_reversion",
+                "hybrid",
+                "breakout",
+            ]
+
         results = []
 
-        trend_results = self._detect_trend_following(raw_data)
-        if not trend_results.empty:
-            results.append(trend_results)
+        if "trend_following" in strategies_to_run:
+            trend_results = self._detect_trend_following(raw_data)
+            if not trend_results.empty:
+                results.append(trend_results)
 
-        mr_results = self._detect_mean_reversion(raw_data)
-        if not mr_results.empty:
-            results.append(mr_results)
+        if "mean_reversion" in strategies_to_run:
+            mr_results = self._detect_mean_reversion(raw_data)
+            if not mr_results.empty:
+                results.append(mr_results)
 
-        hybrid_results = self._detect_hybrid(raw_data)
-        if not hybrid_results.empty:
-            results.append(hybrid_results)
+        if "hybrid" in strategies_to_run:
+            hybrid_results = self._detect_hybrid(raw_data)
+            if not hybrid_results.empty:
+                results.append(hybrid_results)
 
-        breakout_results = self._detect_breakout(raw_data)
-        if not breakout_results.empty:
-            results.append(breakout_results)
+        if "breakout" in strategies_to_run:
+            breakout_results = self._detect_breakout(raw_data)
+            if not breakout_results.empty:
+                results.append(breakout_results)
 
         if not results:
             return pd.DataFrame()
