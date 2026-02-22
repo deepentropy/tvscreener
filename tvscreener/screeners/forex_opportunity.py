@@ -29,6 +29,33 @@ RatingType = Literal["all", "ma", "oscillator"]
 ContractType = Literal["spot", "cfd", "spreadbet", "all"]
 
 
+def _get_direction(series: pd.Series) -> pd.Series:
+    """Vectorized direction calculation."""
+    return pd.Series(
+        np.where(series > 0, "bullish", np.where(series < 0, "bearish", "neutral")),
+        index=series.index,
+    )
+
+
+def _count_bullish(series_list: list[pd.Series]) -> pd.Series:
+    """Count bullish signals across multiple series."""
+    return sum((s > 0).astype(int) for s in series_list)
+
+
+def _get_confluence_level(row: pd.Series, direction: str) -> str:
+    """Get confluence level based on direction."""
+    total = row.get(f"TF_CONFLUENCE_{direction.upper()}", 0)
+    if pd.isna(total):
+        return "none"
+    if total >= 3:
+        return "strong"
+    elif total == 2:
+        return "medium"
+    elif total == 1:
+        return "weak"
+    return "none"
+
+
 @dataclass
 class RatingFilter:
     rating_type: RatingType
@@ -349,6 +376,48 @@ class ForexOpportunityScreener:
 
         df["DIRECTION"] = df["ENSEMBLE_SCORE"].apply(
             lambda x: "long" if x > 0 else "short"
+        )
+
+        for tf in self.timeframes:
+            col = f"Recommend All|{tf}"
+            if col in df.columns:
+                df[f"TF_{tf}_DIR"] = _get_direction(df[col])
+
+        tf_cols = [
+            f"Recommend All|{tf}"
+            for tf in self.timeframes
+            if f"Recommend All|{tf}" in df.columns
+        ]
+        if tf_cols:
+            tf_values = df[tf_cols].fillna(0)
+            df["TF_CONFLUENCE_LONG"] = (tf_values > 0).sum(axis=1)
+            df["TF_CONFLUENCE_SHORT"] = (tf_values < 0).sum(axis=1)
+        else:
+            df["TF_CONFLUENCE_LONG"] = 0
+            df["TF_CONFLUENCE_SHORT"] = 0
+
+        for factor in ["TREND", "MA", "OSC", "ROC"]:
+            col = f"{factor}_SCORE"
+            if col in df.columns:
+                df[f"{factor}_DIR"] = _get_direction(df[col])
+
+        factor_dir_cols = [
+            f"{factor}_DIR"
+            for factor in ["TREND", "MA", "OSC", "ROC"]
+            if f"{factor}_DIR" in df.columns
+        ]
+        if factor_dir_cols:
+            df["FACTOR_BULLISH_COUNT"] = sum(
+                (df[c] == "bullish").astype(int) for c in factor_dir_cols
+            )
+        else:
+            df["FACTOR_BULLISH_COUNT"] = 0
+
+        df["CONFLUENCE_LEVEL"] = df.apply(
+            lambda r: _get_confluence_level(
+                r, "long" if r.get("DIRECTION") == "long" else "short"
+            ),
+            axis=1,
         )
 
         df["RATING_SCORE"] = df.get("ENSEMBLE_SCORE", 0.0)
