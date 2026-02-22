@@ -17,11 +17,11 @@ Direction = Literal["long", "short", "all"]
 
 @dataclass
 class StrategyConfig:
-    min_confluence: int = 2
+    min_confluence: int = 1
     include_strategies: list[StrategyType] = field(default_factory=lambda: ["all"])
     direction: Direction = "all"
     trend_threshold: float = 0.0
-    mr_threshold: float = 1.0
+    mr_threshold: float = 0.2
     min_roc: float | None = None
 
 
