@@ -187,33 +187,7 @@ class ForexOpportunityScreener:
         if df.empty:
             return df
 
-        VALID_PAIRS = [
-            "EURUSD",
-            "GBPUSD",
-            "USDJPY",
-            "USDCHF",
-            "USDCAD",
-            "AUDUSD",
-            "NZDUSD",
-            "EURGBP",
-            "EURJPY",
-            "GBPJPY",
-            "EURCHF",
-            "AUDJPY",
-            "EURCAD",
-            "CADJPY",
-            "CHFJPY",
-            "NZDJPY",
-            "GBPAUD",
-            "EURAUD",
-            "AUDNZD",
-            "EURNZD",
-            "GBPCAD",
-            "AUDCAD",
-            "GBPNZD",
-            "EURNOK",
-            "EURSEK",
-        ]
+        VALID_PAIRS = DEFAULT_FOREX_PAIRS
 
         def get_exchange(symbol: str) -> str:
             if ":" in symbol:

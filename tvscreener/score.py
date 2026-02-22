@@ -223,16 +223,3 @@ class ScoringEngine:
         df = df.sort_values(by=["ENSEMBLE_SCORE"], ascending=[False])
 
         return df
-
-    def _get_confluence_level(self, row: pd.Series, direction: str) -> str:
-        """Get confluence level based on direction."""
-        total = row.get(f"TF_CONFLUENCE_{direction.upper()}", 0)
-        if pd.isna(total):
-            return "none"
-        if total >= 3:
-            return "strong"
-        elif total == 2:
-            return "medium"
-        elif total == 1:
-            return "weak"
-        return "none"

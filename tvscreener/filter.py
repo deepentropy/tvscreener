@@ -157,9 +157,6 @@ class Filter:
         self.operation = operation
         self.values = values if isinstance(values, list) else [values]
 
-    #    def name(self):
-    #        return self.field.field_name if isinstance(self.field, Field) else self.field.value
-
     def to_dict(self):
         right = [
             filter_enum.value if isinstance(filter_enum, Enum) else filter_enum
