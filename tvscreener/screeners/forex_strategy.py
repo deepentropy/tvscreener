@@ -55,22 +55,22 @@ class ForexStrategyScanner:
         results = []
 
         if "trend_following" in strategies_to_run:
-            trend_results = self._detect_trend_following(raw_data)
+            trend_results = self.scan_trend_following(raw_data)
             if not trend_results.empty:
                 results.append(trend_results)
 
         if "mean_reversion" in strategies_to_run:
-            mr_results = self._detect_mean_reversion(raw_data)
+            mr_results = self.scan_mean_reversion(raw_data)
             if not mr_results.empty:
                 results.append(mr_results)
 
         if "hybrid" in strategies_to_run:
-            hybrid_results = self._detect_hybrid(raw_data)
+            hybrid_results = self.scan_hybrid(raw_data)
             if not hybrid_results.empty:
                 results.append(hybrid_results)
 
         if "breakout" in strategies_to_run:
-            breakout_results = self._detect_breakout(raw_data)
+            breakout_results = self.scan_breakout(raw_data)
             if not breakout_results.empty:
                 results.append(breakout_results)
 
@@ -83,30 +83,36 @@ class ForexStrategyScanner:
 
         return combined
 
-    def scan_trend_following(self) -> pd.DataFrame:
+    def scan_trend_following(
+        self, raw_data: pd.DataFrame | None = None
+    ) -> pd.DataFrame:
         """HTF + STF confluence - trend alignment across timeframes."""
-        raw_data = self._screener.get_opportunities()
+        if raw_data is None:
+            raw_data = self._screener.get_opportunities()
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_trend_following(raw_data)
 
-    def scan_mean_reversion(self) -> pd.DataFrame:
+    def scan_mean_reversion(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
         """LTF oscillator extremes - overbought/oversold."""
-        raw_data = self._screener.get_opportunities()
+        if raw_data is None:
+            raw_data = self._screener.get_opportunities()
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_mean_reversion(raw_data)
 
-    def scan_hybrid(self) -> pd.DataFrame:
+    def scan_hybrid(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
         """HTF trend + LTF mean reversion."""
-        raw_data = self._screener.get_opportunities()
+        if raw_data is None:
+            raw_data = self._screener.get_opportunities()
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_hybrid(raw_data)
 
-    def scan_breakout(self) -> pd.DataFrame:
+    def scan_breakout(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
         """Multi-TF momentum alignment."""
-        raw_data = self._screener.get_opportunities()
+        if raw_data is None:
+            raw_data = self._screener.get_opportunities()
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_breakout(raw_data)

@@ -19,6 +19,7 @@ from tvscreener.constants.forex import (
     TIMEFRAME_LABELS,
 )
 from tvscreener.score import ScoringConfig, ScoringEngine, DEFAULT_SCORING_CONFIG
+from tvscreener.filter import RatingFilter, RocFilter, VolumeFilter
 from ..exceptions import (
     FilterConfigurationError,
     InvalidPairError,
@@ -26,25 +27,7 @@ from ..exceptions import (
 
 logger = logging.getLogger(__name__)
 
-RatingType = Literal["all", "ma", "oscillator"]
 ContractType = Literal["spot", "cfd", "spreadbet", "all"]
-
-
-@dataclass
-class RatingFilter:
-    rating_type: RatingType
-    threshold: float
-
-
-@dataclass
-class RocFilter:
-    min_roc: float | None = None
-    max_roc: float | None = None
-
-
-@dataclass
-class VolumeFilter:
-    min_volume: float | None = None
 
 
 @dataclass

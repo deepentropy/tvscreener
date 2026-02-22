@@ -107,9 +107,7 @@ class ScoringEngine:
             + df["ROC_SCORE"].fillna(0) * cfg.roc_weight
         )
 
-        df["DIRECTION"] = df["ENSEMBLE_SCORE"].apply(
-            lambda x: "long" if x > 0 else "short"
-        )
+        df["DIRECTION"] = np.where(df["ENSEMBLE_SCORE"] > 0, "long", "short")
 
         return df
 
@@ -159,9 +157,26 @@ class ScoringEngine:
         else:
             df["FACTOR_BULLISH_COUNT"] = 0
 
-        df["CONFLUENCE_LEVEL"] = df.apply(
-            lambda r: self._get_confluence_level(r, r.get("DIRECTION", "neutral")),
-            axis=1,
+        df["CONFLUENCE_LEVEL"] = np.where(
+            df["DIRECTION"] == "long",
+            np.select(
+                [
+                    df["TF_CONFLUENCE_LONG"] >= 3,
+                    df["TF_CONFLUENCE_LONG"] == 2,
+                    df["TF_CONFLUENCE_LONG"] == 1,
+                ],
+                ["strong", "medium", "weak"],
+                default="none",
+            ),
+            np.select(
+                [
+                    df["TF_CONFLUENCE_SHORT"] >= 3,
+                    df["TF_CONFLUENCE_SHORT"] == 2,
+                    df["TF_CONFLUENCE_SHORT"] == 1,
+                ],
+                ["strong", "medium", "weak"],
+                default="none",
+            ),
         )
 
         return df
