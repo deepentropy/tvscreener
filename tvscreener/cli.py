@@ -59,9 +59,8 @@ def get_pairs(universe: Optional[str], specific: Optional[list[str]]) -> list[st
 
 def run_opportunity_scan(args) -> int:
     """Run opportunity screener."""
-    universe = get_universe(args.asset_type)
-    pairs = args.pairs if args.pairs else universe.pairs
-    timeframes = args.timeframes.split(",") if args.timeframes else universe.timeframes
+    pairs = get_pairs(args.universe, args.pairs)
+    timeframes = args.timeframes.split(",") if args.timeframes else ["15", "60", "240"]
 
     console.print(f"[cyan]Scanning {len(pairs)} {args.asset_type} pairs...[/cyan]")
 
@@ -95,9 +94,8 @@ def run_opportunity_scan(args) -> int:
 
 def run_strategy_scan(args) -> int:
     """Run strategy scanner."""
-    universe = get_universe(args.asset_type)
-    pairs = args.pairs if args.pairs else universe.pairs
-    timeframes = args.timeframes.split(",") if args.timeframes else universe.timeframes
+    pairs = get_pairs(args.universe, args.pairs)
+    timeframes = args.timeframes.split(",") if args.timeframes else ["15", "60", "240"]
 
     console.print(
         f"[cyan]Scanning {len(pairs)} {args.asset_type} pairs for {args.strategy} signals...[/cyan]"
