@@ -4,10 +4,11 @@ import logging
 from dataclasses import dataclass, field
 from typing import Literal
 
+import numpy as np
 import pandas as pd
 
-from tvscreener.screeners.forex_opportunity import ForexOpportunityScreener
 from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS
+from tvscreener.screeners.forex_opportunity import ForexOpportunityScreener
 
 logger = logging.getLogger(__name__)
 
@@ -15,10 +16,10 @@ StrategyType = Literal["trend_following", "mean_reversion", "breakout", "hybrid"
 Direction = Literal["long", "short", "all"]
 
 
-@dataclass
+@dataclass(frozen=True, slots=True)
 class StrategyConfig:
     min_confluence: int = 1
-    include_strategies: list[StrategyType] = field(default_factory=lambda: ["all"])
+    include_strategies: tuple[StrategyType, ...] = ("all",)
     direction: Direction = "all"
     trend_threshold: float = 0.0
     mr_threshold: float = 0.2
@@ -30,10 +31,13 @@ class ForexStrategyScanner:
     pairs: list[str] = field(default_factory=lambda: DEFAULT_FOREX_PAIRS)
     timeframes: list[str] = field(default_factory=lambda: ["240", "60", "15"])
     config: StrategyConfig = field(default_factory=StrategyConfig)
+    _screener: ForexOpportunityScreener | None = field(init=False, default=None)
 
     def __post_init__(self) -> None:
-        self._screener = ForexOpportunityScreener(
-            pairs=self.pairs, timeframes=self.timeframes
+        object.__setattr__(
+            self,
+            "_screener",
+            ForexOpportunityScreener(pairs=self.pairs, timeframes=self.timeframes),
         )
 
     def scan(self) -> pd.DataFrame:
@@ -83,52 +87,52 @@ class ForexStrategyScanner:
 
         return combined
 
-    def scan_trend_following(
-        self, raw_data: pd.DataFrame | None = None
-    ) -> pd.DataFrame:
-        """HTF + STF confluence - trend alignment across timeframes."""
+    def _get_data_or_fetch(self, raw_data: pd.DataFrame | None) -> pd.DataFrame:
+        """Fetch data if not provided, or return empty DataFrame if already empty."""
         if raw_data is None:
             raw_data = self._screener.get_opportunities()
+        if raw_data.empty:
+            return pd.DataFrame()
+        return raw_data
+
+    def scan_trend_following(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
+        """HTF + STF confluence - trend alignment across timeframes."""
+        raw_data = self._get_data_or_fetch(raw_data)
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_trend_following(raw_data)
 
     def scan_mean_reversion(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
         """LTF oscillator extremes - overbought/oversold."""
-        if raw_data is None:
-            raw_data = self._screener.get_opportunities()
+        raw_data = self._get_data_or_fetch(raw_data)
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_mean_reversion(raw_data)
 
     def scan_hybrid(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
         """HTF trend + LTF mean reversion."""
-        if raw_data is None:
-            raw_data = self._screener.get_opportunities()
+        raw_data = self._get_data_or_fetch(raw_data)
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_hybrid(raw_data)
 
     def scan_breakout(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
         """Multi-TF momentum alignment."""
-        if raw_data is None:
-            raw_data = self._screener.get_opportunities()
+        raw_data = self._get_data_or_fetch(raw_data)
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_breakout(raw_data)
 
     def _detect_trend_following(self, df: pd.DataFrame) -> pd.DataFrame:
         """Detect trend following setups: HTF + STF both bullish or both bearish."""
-        result = df.copy()
-
         htf_col = "Recommend All|240"
         stf_col = "Recommend All|60"
 
-        if htf_col not in result.columns or stf_col not in result.columns:
+        if htf_col not in df.columns or stf_col not in df.columns:
             return pd.DataFrame()
 
-        htf_trend = result[htf_col].fillna(0)
-        stf_trend = result[stf_col].fillna(0)
+        htf_trend = df[htf_col].fillna(0)
+        stf_trend = df[stf_col].fillna(0)
 
         long_mask = (htf_trend > self.config.trend_threshold) & (
             stf_trend > self.config.trend_threshold
@@ -137,14 +141,14 @@ class ForexStrategyScanner:
             stf_trend < -self.config.trend_threshold
         )
 
-        result = result[long_mask | short_mask].copy()
+        result = df.loc[long_mask | short_mask].copy()
 
         if result.empty:
             return pd.DataFrame()
 
         result["STRATEGY"] = "trend_following"
-        result["HTF_TREND"] = htf_trend
-        result["STF_TREND"] = stf_trend
+        result["HTF_TREND"] = htf_trend[long_mask | short_mask].values
+        result["STF_TREND"] = stf_trend[long_mask | short_mask].values
 
         result = self._add_confluence_and_direction(result)
 
@@ -152,45 +156,42 @@ class ForexStrategyScanner:
 
     def _detect_mean_reversion(self, df: pd.DataFrame) -> pd.DataFrame:
         """Detect mean reversion: LTF oscillator extremes."""
-        result = df.copy()
-
         ltf_col = "Recommend Other|15"
 
-        if ltf_col not in result.columns:
+        if ltf_col not in df.columns:
             return pd.DataFrame()
 
-        osc_value = result[ltf_col].fillna(0)
+        osc_value = df[ltf_col].fillna(0)
 
         long_mask = osc_value < -self.config.mr_threshold
         short_mask = osc_value > self.config.mr_threshold
 
-        result = result[long_mask | short_mask].copy()
+        result = df.loc[long_mask | short_mask].copy()
 
         if result.empty:
             return pd.DataFrame()
 
         result["STRATEGY"] = "mean_reversion"
-        result["LTF_MOMENTUM"] = osc_value
-
-        result["DIRECTION"] = result["LTF_MOMENTUM"].apply(
-            lambda x: "long" if x < -self.config.mr_threshold else "short"
+        result["LTF_MOMENTUM"] = osc_value[long_mask | short_mask].values
+        result["MR_STRENGTH"] = result["LTF_MOMENTUM"].abs()
+        result["DIRECTION"] = np.where(
+            result["LTF_MOMENTUM"] < -self.config.mr_threshold, "long", "short"
         )
         result["CONFLUENCE_SCORE"] = 1
+        result = result.sort_values("MR_STRENGTH", ascending=False)
 
         return result
 
     def _detect_hybrid(self, df: pd.DataFrame) -> pd.DataFrame:
         """Detect hybrid: HTF trend + LTF mean reversion."""
-        result = df.copy()
-
         htf_col = "Recommend All|240"
         ltf_col = "Recommend Other|15"
 
-        if htf_col not in result.columns or ltf_col not in result.columns:
+        if htf_col not in df.columns or ltf_col not in df.columns:
             return pd.DataFrame()
 
-        htf_trend = result[htf_col].fillna(0)
-        ltf_osc = result[ltf_col].fillna(0)
+        htf_trend = df[htf_col].fillna(0)
+        ltf_osc = df[ltf_col].fillna(0)
 
         long_mask = (htf_trend > self.config.trend_threshold) & (
             ltf_osc < -self.config.mr_threshold
@@ -199,33 +200,28 @@ class ForexStrategyScanner:
             ltf_osc > self.config.mr_threshold
         )
 
-        result = result[long_mask | short_mask].copy()
+        result = df.loc[long_mask | short_mask].copy()
 
         if result.empty:
             return pd.DataFrame()
 
         result["STRATEGY"] = "hybrid"
-        result["HTF_TREND"] = htf_trend
-        result["LTF_MOMENTUM"] = ltf_osc
-
-        result["DIRECTION"] = result["HTF_TREND"].apply(
-            lambda x: "long" if x > 0 else "short"
-        )
+        result["HTF_TREND"] = htf_trend[long_mask | short_mask].values
+        result["LTF_MOMENTUM"] = ltf_osc[long_mask | short_mask].values
+        result["DIRECTION"] = np.where(result["HTF_TREND"] > 0, "long", "short")
         result["CONFLUENCE_SCORE"] = 2
 
         return result
 
     def _detect_breakout(self, df: pd.DataFrame) -> pd.DataFrame:
         """Detect breakout: Multi-TF momentum alignment."""
-        result = df.copy()
-
         roc_cols = [f"Roc|{tf}" for tf in self.timeframes]
 
-        available_roc_cols = [c for c in roc_cols if c in result.columns]
+        available_roc_cols = [c for c in roc_cols if c in df.columns]
         if not available_roc_cols:
             return pd.DataFrame()
 
-        roc_values = result[available_roc_cols].fillna(0)
+        roc_values = df[available_roc_cols].fillna(0)
 
         if self.config.min_roc is not None:
             long_mask = (roc_values > self.config.min_roc).all(axis=1)
@@ -234,7 +230,7 @@ class ForexStrategyScanner:
             long_mask = (roc_values > 0).all(axis=1)
             short_mask = (roc_values < 0).all(axis=1)
 
-        result = result[long_mask | short_mask].copy()
+        result = df.loc[long_mask | short_mask].copy()
 
         if result.empty:
             return pd.DataFrame()
@@ -242,14 +238,10 @@ class ForexStrategyScanner:
         result["STRATEGY"] = "breakout"
 
         for col in available_roc_cols:
-            if col not in result.columns:
-                continue
             tf = col.split("|")[-1]
             result[f"ROC_{tf}"] = result[col]
 
-        result["DIRECTION"] = result[available_roc_cols[0]].apply(
-            lambda x: "long" if x > 0 else "short"
-        )
+        result["DIRECTION"] = np.where(result[available_roc_cols[0]] > 0, "long", "short")
         result["CONFLUENCE_SCORE"] = len(available_roc_cols)
 
         return result
@@ -265,7 +257,7 @@ class ForexStrategyScanner:
 
             aligned = ((htf > 0) & (stf > 0)) | ((htf < 0) & (stf < 0))
             df["CONFLUENCE_SCORE"] = aligned.astype(int) + 1
-            df["DIRECTION"] = htf.apply(lambda x: "long" if x > 0 else "short")
+            df["DIRECTION"] = np.where(htf > 0, "long", "short")
 
         return df
 
@@ -275,10 +267,10 @@ class ForexStrategyScanner:
             return df
 
         if self.config.direction != "all":
-            df = df[df["DIRECTION"] == self.config.direction]
+            df = df[df["DIRECTION"] == self.config.direction].copy()
 
         if self.config.min_confluence > 0:
-            df = df[df["CONFLUENCE_SCORE"] >= self.config.min_confluence]
+            df = df[df["CONFLUENCE_SCORE"] >= self.config.min_confluence].copy()
 
         return df
 

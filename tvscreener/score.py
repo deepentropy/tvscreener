@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Any
+from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
@@ -44,6 +43,7 @@ class ScoringEngine:
         df: pd.DataFrame,
         factor_name: str,
         col_pattern: str,
+        copy: bool = True,
     ) -> pd.DataFrame:
         """Calculate weighted factor scores across timeframes.
 
@@ -51,34 +51,40 @@ class ScoringEngine:
             df: DataFrame with timeframe columns matching col_pattern
             factor_name: Name for the output score column (e.g., "TREND")
             col_pattern: Column pattern to match (e.g., "Recommend All|")
+            copy: If True, copy DataFrame to avoid mutation (default True)
 
         Returns:
             DataFrame with added factor score column
         """
-        df = df.copy()
+        if copy:
+            df = df.copy()
 
         cols = [c for c in df.columns if col_pattern in c]
         if cols:
-            weights = np.array(
-                [self.tf_weights.get(c.split("|")[-1], 0.33) for c in cols]
-            )
-            values = df[cols].fillna(0).values
-            df[f"{factor_name}_SCORE"] = (values * weights).sum(axis=1) / weights.sum()
+            weights = np.array([self.tf_weights.get(c.split("|")[-1], 0.33) for c in cols])
+            weight_sum = weights.sum()
+            if weight_sum == 0:
+                df[f"{factor_name}_SCORE"] = 0.0
+            else:
+                values = df[cols].fillna(0).values
+                df[f"{factor_name}_SCORE"] = (values * weights).sum(axis=1) / weight_sum
         else:
             df[f"{factor_name}_SCORE"] = 0.0
 
         return df
 
-    def calculate_roc_score(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_roc_score(self, df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
         """Calculate momentum (ROC) score across timeframes.
 
         Args:
             df: DataFrame with ROC columns
+            copy: If True, copy DataFrame to avoid mutation
 
         Returns:
             DataFrame with added ROC_SCORE column
         """
-        df = df.copy()
+        if copy:
+            df = df.copy()
 
         roc_cols = [f"Roc|{tf}" for tf in self.timeframes if f"Roc|{tf}" in df.columns]
         if roc_cols:
@@ -88,16 +94,18 @@ class ScoringEngine:
 
         return df
 
-    def calculate_ensemble_score(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_ensemble_score(self, df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
         """Combine all factor scores into ensemble score using weights.
 
         Args:
             df: DataFrame with factor score columns
+            copy: If True, copy DataFrame to avoid mutation
 
         Returns:
             DataFrame with added ENSEMBLE_SCORE and DIRECTION columns
         """
-        df = df.copy()
+        if copy:
+            df = df.copy()
 
         cfg = self.config
         df["ENSEMBLE_SCORE"] = (
@@ -111,16 +119,18 @@ class ScoringEngine:
 
         return df
 
-    def calculate_confluence(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_confluence(self, df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
         """Calculate timeframe confluence levels.
 
         Args:
             df: DataFrame with Recommend All columns per timeframe
+            copy: If True, copy DataFrame to avoid mutation
 
         Returns:
             DataFrame with TF confluence columns and CONFLUENCE_LEVEL
         """
-        df = df.copy()
+        if copy:
+            df = df.copy()
 
         for tf in self.timeframes:
             col = f"Recommend All|{tf}"
@@ -128,9 +138,7 @@ class ScoringEngine:
                 df[f"TF_{tf}_DIR"] = self.calculate_direction(df[col])
 
         tf_cols = [
-            f"Recommend All|{tf}"
-            for tf in self.timeframes
-            if f"Recommend All|{tf}" in df.columns
+            f"Recommend All|{tf}" for tf in self.timeframes if f"Recommend All|{tf}" in df.columns
         ]
         if tf_cols:
             tf_values = df[tf_cols].fillna(0)
@@ -151,32 +159,29 @@ class ScoringEngine:
             if f"{factor}_DIR" in df.columns
         ]
         if factor_dir_cols:
-            df["FACTOR_BULLISH_COUNT"] = sum(
-                (df[c] == "bullish").astype(int) for c in factor_dir_cols
-            )
+            df["FACTOR_BULLISH_COUNT"] = (df[factor_dir_cols] == "bullish").sum(axis=1)
+            df["FACTOR_BEARISH_COUNT"] = (df[factor_dir_cols] == "bearish").sum(axis=1)
         else:
             df["FACTOR_BULLISH_COUNT"] = 0
+            df["FACTOR_BEARISH_COUNT"] = 0
 
-        df["CONFLUENCE_LEVEL"] = np.where(
+        if "DIRECTION" not in df.columns:
+            df["DIRECTION"] = np.where(df.get("ENSEMBLE_SCORE", 0) > 0, "long", "short")
+
+        df["TOTAL_CONFLUENCE"] = np.where(
             df["DIRECTION"] == "long",
-            np.select(
-                [
-                    df["TF_CONFLUENCE_LONG"] >= 3,
-                    df["TF_CONFLUENCE_LONG"] == 2,
-                    df["TF_CONFLUENCE_LONG"] == 1,
-                ],
-                ["strong", "medium", "weak"],
-                default="none",
-            ),
-            np.select(
-                [
-                    df["TF_CONFLUENCE_SHORT"] >= 3,
-                    df["TF_CONFLUENCE_SHORT"] == 2,
-                    df["TF_CONFLUENCE_SHORT"] == 1,
-                ],
-                ["strong", "medium", "weak"],
-                default="none",
-            ),
+            df["TF_CONFLUENCE_LONG"] + df["FACTOR_BULLISH_COUNT"],
+            df["TF_CONFLUENCE_SHORT"] + df["FACTOR_BEARISH_COUNT"],
+        )
+
+        df["CONFLUENCE_LEVEL"] = np.select(
+            [
+                df["TOTAL_CONFLUENCE"] >= 5,
+                df["TOTAL_CONFLUENCE"] >= 3,
+                df["TOTAL_CONFLUENCE"] >= 1,
+            ],
+            ["strong", "medium", "weak"],
+            default="none",
         )
 
         return df
@@ -207,15 +212,17 @@ class ScoringEngine:
         if df.empty:
             return df
 
-        df = self.calculate_factor_scores(df, "TREND", "Recommend All|")
-        df = self.calculate_factor_scores(df, "MA", "Recommend Ma|")
-        df = self.calculate_factor_scores(df, "OSC", "Recommend Other|")
+        df = df.copy()
 
-        df = self.calculate_roc_score(df)
+        df = self.calculate_factor_scores(df, "TREND", "Recommend All|", copy=False)
+        df = self.calculate_factor_scores(df, "MA", "Recommend Ma|", copy=False)
+        df = self.calculate_factor_scores(df, "OSC", "Recommend Other|", copy=False)
 
-        df = self.calculate_ensemble_score(df)
+        df = self.calculate_roc_score(df, copy=False)
 
-        df = self.calculate_confluence(df)
+        df = self.calculate_ensemble_score(df, copy=False)
+
+        df = self.calculate_confluence(df, copy=False)
 
         df["RATING_SCORE"] = df.get("ENSEMBLE_SCORE", 0.0)
         df["ROC_AVG"] = df.get("ROC_SCORE", 0.0)

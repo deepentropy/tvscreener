@@ -1,0 +1,16 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff (lint)
+        entry: uvx ruff check --fix
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: ruff-format
+        name: ruff (format)
+        entry: uvx ruff format
+        language: system
+        types: [python]
+        pass_filenames: false
