@@ -1,6 +1,6 @@
 """Tests for the new Pythonic comparison operator syntax on Fields."""
-import pytest
-from tvscreener import StockScreener, StockField, FilterOperator
+
+from tvscreener import FilterOperator, StockField, StockScreener
 from tvscreener.filter import FieldCondition
 
 
@@ -41,19 +41,19 @@ class TestFieldCondition:
 
     def test_equal(self):
         """Test == operator with value comparison."""
-        cond = StockField.SECTOR == 'Technology'
+        cond = StockField.SECTOR == "Technology"
         assert isinstance(cond, FieldCondition)
         assert cond.field == StockField.SECTOR
         assert cond.operation == FilterOperator.EQUAL
-        assert cond.value == 'Technology'
+        assert cond.value == "Technology"
 
     def test_not_equal(self):
         """Test != operator with value comparison."""
-        cond = StockField.SECTOR != 'Finance'
+        cond = StockField.SECTOR != "Finance"
         assert isinstance(cond, FieldCondition)
         assert cond.field == StockField.SECTOR
         assert cond.operation == FilterOperator.NOT_EQUAL
-        assert cond.value == 'Finance'
+        assert cond.value == "Finance"
 
     def test_between(self):
         """Test between() method."""
@@ -73,19 +73,19 @@ class TestFieldCondition:
 
     def test_isin(self):
         """Test isin() method."""
-        cond = StockField.SECTOR.isin(['Technology', 'Healthcare'])
+        cond = StockField.SECTOR.isin(["Technology", "Healthcare"])
         assert isinstance(cond, FieldCondition)
         assert cond.field == StockField.SECTOR
         assert cond.operation == FilterOperator.IN_RANGE
-        assert cond.value == ['Technology', 'Healthcare']
+        assert cond.value == ["Technology", "Healthcare"]
 
     def test_not_in(self):
         """Test not_in() method."""
-        cond = StockField.SECTOR.not_in(['Finance', 'Utilities'])
+        cond = StockField.SECTOR.not_in(["Finance", "Utilities"])
         assert isinstance(cond, FieldCondition)
         assert cond.field == StockField.SECTOR
         assert cond.operation == FilterOperator.NOT_IN_RANGE
-        assert cond.value == ['Finance', 'Utilities']
+        assert cond.value == ["Finance", "Utilities"]
 
     def test_enum_equality_preserved(self):
         """Test that enum-to-enum equality still works."""
@@ -103,9 +103,9 @@ class TestFieldCondition:
     def test_repr(self):
         """Test string representation."""
         cond = StockField.PRICE > 100
-        assert 'PRICE' in repr(cond)
-        assert 'ABOVE' in repr(cond)
-        assert '100' in repr(cond)
+        assert "PRICE" in repr(cond)
+        assert "ABOVE" in repr(cond)
+        assert "100" in repr(cond)
 
 
 class TestFieldWithIntervalConditions:
@@ -113,16 +113,16 @@ class TestFieldWithIntervalConditions:
 
     def test_greater_than(self):
         """Test > operator on FieldWithInterval."""
-        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval('60')
+        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval("60")
         cond = rsi_1h > 70
         assert isinstance(cond, FieldCondition)
         assert cond.operation == FilterOperator.ABOVE
         assert cond.value == 70
-        assert cond.field.field_name == 'RSI|60'
+        assert cond.field.field_name == "RSI|60"
 
     def test_between(self):
         """Test between() on FieldWithInterval."""
-        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval('60')
+        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval("60")
         cond = rsi_1h.between(30, 70)
         assert isinstance(cond, FieldCondition)
         assert cond.operation == FilterOperator.IN_RANGE
@@ -152,9 +152,9 @@ class TestScreenerWhereMethod:
 
         assert len(ss.filters) == 1
         filter_dict = ss.filters[0].to_dict()
-        assert filter_dict['left'] == 'close'
-        assert filter_dict['operation'] == 'greater'
-        assert filter_dict['right'] == 100
+        assert filter_dict["left"] == "close"
+        assert filter_dict["operation"] == "greater"
+        assert filter_dict["right"] == 100
 
     def test_where_with_legacy_syntax(self):
         """Test where() with legacy (field, operator, value) syntax."""
@@ -163,9 +163,9 @@ class TestScreenerWhereMethod:
 
         assert len(ss.filters) == 1
         filter_dict = ss.filters[0].to_dict()
-        assert filter_dict['left'] == 'close'
-        assert filter_dict['operation'] == 'greater'
-        assert filter_dict['right'] == 100
+        assert filter_dict["left"] == "close"
+        assert filter_dict["operation"] == "greater"
+        assert filter_dict["right"] == 100
 
     def test_where_chaining(self):
         """Test method chaining with where()."""
@@ -190,17 +190,17 @@ class TestScreenerWhereMethod:
 
         assert len(ss.filters) == 1
         filter_dict = ss.filters[0].to_dict()
-        assert filter_dict['operation'] == 'in_range'
-        assert filter_dict['right'] == [1e9, 10e9]
+        assert filter_dict["operation"] == "in_range"
+        assert filter_dict["right"] == [1e9, 10e9]
 
     def test_where_with_interval_field(self):
         """Test where() with FieldWithInterval."""
         ss = StockScreener()
-        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval('60')
+        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval("60")
         ss.where(rsi_1h > 70)
 
         assert len(ss.filters) == 1
         filter_dict = ss.filters[0].to_dict()
-        assert filter_dict['left'] == 'RSI|60'
-        assert filter_dict['operation'] == 'greater'
-        assert filter_dict['right'] == 70
+        assert filter_dict["left"] == "RSI|60"
+        assert filter_dict["operation"] == "greater"
+        assert filter_dict["right"] == 70

@@ -1,7 +1,14 @@
 import unittest
 
-from tvscreener import StockScreener, ExtraFilter, FilterOperator, ForexScreener, StockField, ForexField
-from tvscreener.field import Market, Country, Exchange, Rating, SymbolType, Type, SubMarket, Region
+from tvscreener import (
+    ExtraFilter,
+    FilterOperator,
+    ForexField,
+    ForexScreener,
+    StockField,
+    StockScreener,
+)
+from tvscreener.field import Country, Exchange, Market, Rating, Region, SubMarket, SymbolType, Type
 
 
 class TestStockFilters(unittest.TestCase):
@@ -18,7 +25,7 @@ class TestStockFilters(unittest.TestCase):
     def test_set_markets_all(self):
         ss = StockScreener()
         ss.set_markets(Market.ALL)
-        self.assertEqual([m for m in Market], ss.markets)
+        self.assertEqual(list(Market), ss.markets)
 
     def test_stock_additional_subtypes(self):
         ss = StockScreener()

@@ -4,14 +4,18 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from tvscreener import StockScreener, MalformedRequestException, \
-    ExtraFilter, FilterOperator, StockField
-from tvscreener.field import SymbolType, Market, SubMarket, Country, Exchange
+from tvscreener import (
+    ExtraFilter,
+    FilterOperator,
+    MalformedRequestException,
+    StockField,
+    StockScreener,
+)
+from tvscreener.field import Country, Exchange, Market, SubMarket, SymbolType
 
 
 class TestScreener(unittest.TestCase):
-
-    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    @patch("sys.stdout", new_callable=io.StringIO)
     def test_stdout(self, mock_stdout):
         ss = StockScreener()
         ss.get(print_request=True)
@@ -31,7 +35,7 @@ class TestScreener(unittest.TestCase):
     def test_search(self):
         ss = StockScreener()
         ss.set_symbol_types(SymbolType.COMMON_STOCK)
-        ss.search('AA')
+        ss.search("AA")
         df = ss.get()
         self.assertGreater(len(df), 80)
 

@@ -3,9 +3,10 @@ from .forex_opportunity import (
     ForexScreenerConfig,
     RatingFilter,
     RocFilter,
-    VolumeFilter,
     ScoringConfig,
+    VolumeFilter,
 )
+from .forex_strategy import ForexStrategyScanner, StrategyConfig
 
 __all__ = [
     "ForexOpportunityScreener",
@@ -14,4 +15,6 @@ __all__ = [
     "RocFilter",
     "VolumeFilter",
     "ScoringConfig",
+    "ForexStrategyScanner",
+    "StrategyConfig",
 ]

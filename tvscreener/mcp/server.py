@@ -7,24 +7,24 @@ Exposes market screener functionality via the Model Context Protocol.
 from __future__ import annotations
 
 import json
+
 from mcp.server.fastmcp import FastMCP
 
 from .tools import (
-    search_fields,
-    get_field_categories,
     custom_screen,
-    screen_stocks,
+    get_field_categories,
     screen_crypto,
     screen_forex,
+    screen_stocks,
+    search_fields,
 )
-
 
 mcp = FastMCP(
     "tvscreener",
     instructions=(
         "Query market screener for stocks, crypto, and forex via tvscreener library. "
         "Use discover_fields to find available fields, then use custom_query for flexible filtering."
-    )
+    ),
 )
 
 
@@ -32,12 +32,9 @@ mcp = FastMCP(
 # FIELD DISCOVERY TOOLS
 # =============================================================================
 
+
 @mcp.tool()
-def discover_fields(
-    search_term: str,
-    asset_type: str = "stock",
-    limit: int = 20
-) -> str:
+def discover_fields(search_term: str, asset_type: str = "stock", limit: int = 20) -> str:
     """
     Search for available fields/indicators by keyword.
 
@@ -99,6 +96,7 @@ def list_field_types(asset_type: str = "stock") -> str:
 # FLEXIBLE QUERY TOOL
 # =============================================================================
 
+
 @mcp.tool()
 def custom_query(
     asset_type: str = "stock",
@@ -106,7 +104,7 @@ def custom_query(
     filters: str | None = None,
     sort_by: str | None = None,
     ascending: bool = False,
-    limit: int = 25
+    limit: int = 25,
 ) -> str:
     """
     Flexible query with any fields and filters.
@@ -162,7 +160,7 @@ def custom_query(
             filters=filter_list,
             sort_by=sort_by,
             ascending=ascending,
-            limit=limit
+            limit=limit,
         )
 
         if df.empty:
@@ -177,6 +175,7 @@ def custom_query(
 # PRESET QUERY TOOLS
 # =============================================================================
 
+
 @mcp.tool()
 def search_stocks(
     min_price: float | None = None,
@@ -185,7 +184,7 @@ def search_stocks(
     max_market_cap_billions: float | None = None,
     sectors: str | None = None,
     sort_by: str = "market_cap",
-    limit: int = 25
+    limit: int = 25,
 ) -> str:
     """
     Screen stocks with common filters (simplified interface).
@@ -213,7 +212,7 @@ def search_stocks(
         max_market_cap=max_cap,
         sectors=sector_list,
         sort_by=sort_by,
-        limit=limit
+        limit=limit,
     )
 
     if df.empty:
@@ -226,7 +225,7 @@ def search_stocks(
 def search_crypto(
     min_volume_millions: float | None = None,
     min_market_cap_billions: float | None = None,
-    limit: int = 25
+    limit: int = 25,
 ) -> str:
     """
     Screen cryptocurrencies (simplified interface).
@@ -242,11 +241,7 @@ def search_crypto(
     min_cap = min_market_cap_billions * 1e9 if min_market_cap_billions else None
     limit = min(limit, 100)
 
-    df = screen_crypto(
-        min_volume_24h=min_vol,
-        min_market_cap=min_cap,
-        limit=limit
-    )
+    df = screen_crypto(min_volume_24h=min_vol, min_market_cap=min_cap, limit=limit)
 
     if df.empty:
         return "No cryptocurrencies found matching the criteria."
@@ -255,10 +250,7 @@ def search_crypto(
 
 
 @mcp.tool()
-def search_forex(
-    min_volume_millions: float | None = None,
-    limit: int = 25
-) -> str:
+def search_forex(min_volume_millions: float | None = None, limit: int = 25) -> str:
     """
     Screen forex currency pairs.
 
@@ -278,11 +270,7 @@ def search_forex(
 
 
 @mcp.tool()
-def get_top_movers(
-    asset_type: str = "stock",
-    direction: str = "gainers",
-    limit: int = 10
-) -> str:
+def get_top_movers(asset_type: str = "stock", direction: str = "gainers", limit: int = 10) -> str:
     """
     Get top gaining or losing assets.
 
@@ -311,10 +299,20 @@ def get_top_movers(
 def list_sectors() -> str:
     """List available stock sectors for filtering."""
     sectors = [
-        "Technology", "Healthcare", "Financial", "Consumer Cyclical",
-        "Communication Services", "Industrials", "Consumer Defensive",
-        "Energy", "Basic Materials", "Real Estate", "Utilities",
-        "Electronic Technology", "Technology Services", "Producer Manufacturing"
+        "Technology",
+        "Healthcare",
+        "Financial",
+        "Consumer Cyclical",
+        "Communication Services",
+        "Industrials",
+        "Consumer Defensive",
+        "Energy",
+        "Basic Materials",
+        "Real Estate",
+        "Utilities",
+        "Electronic Technology",
+        "Technology Services",
+        "Producer Manufacturing",
     ]
     return "Available sectors:\n" + "\n".join(f"  - {s}" for s in sectors)
 
@@ -342,11 +340,11 @@ def list_filter_operators() -> str:
         result += f"- **{op}**: {desc}\n"
 
     result += "\nExample filters JSON:\n"
-    result += '```json\n[\n'
+    result += "```json\n[\n"
     result += '  {"field": "PRICE", "op": ">=", "value": 100},\n'
     result += '  {"field": "RSI", "op": "in_range", "value": [30, 70]},\n'
     result += '  {"field": "SECTOR", "op": "match", "value": "Technology"}\n'
-    result += ']\n```'
+    result += "]\n```"
 
     return result
 

@@ -8,7 +8,8 @@ import numpy as np
 import pandas as pd
 
 from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS
-from tvscreener.screeners.forex_opportunity import ForexOpportunityScreener
+from tvscreener.lib.screeners.export_helpers import export_to_csv, export_to_json, print_summary
+from tvscreener.lib.screeners.forex_opportunity import ForexOpportunityScreener, ForexScreenerConfig
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,11 @@ class StrategyConfig:
     trend_threshold: float = 0.0
     mr_threshold: float = 0.2
     min_roc: float | None = None
+    min_volume: float | None = None
+    max_atr: float | None = None
+    min_ma_rating: float | None = None
+    mean_reversion_signals: tuple[str, ...] = ()
+    contract_type: Literal["spot", "cfd", "spreadbet", "all"] = "cfd"
 
 
 @dataclass
@@ -31,17 +37,28 @@ class ForexStrategyScanner:
     pairs: list[str] = field(default_factory=lambda: DEFAULT_FOREX_PAIRS)
     timeframes: list[str] = field(default_factory=lambda: ["240", "60", "15"])
     config: StrategyConfig = field(default_factory=StrategyConfig)
-    _screener: ForexOpportunityScreener | None = field(init=False, default=None)
+    _screener: ForexOpportunityScreener = field(init=False)
+    _cached_results: pd.DataFrame | None = field(init=False, default=None)
 
     def __post_init__(self) -> None:
-        object.__setattr__(
-            self,
-            "_screener",
-            ForexOpportunityScreener(pairs=self.pairs, timeframes=self.timeframes),
+        include_atr = self.config.max_atr is not None
+        include_rsi = bool(self.config.mean_reversion_signals)
+        self._screener = ForexOpportunityScreener(
+            pairs=self.pairs,
+            timeframes=self.timeframes,
+            config=ForexScreenerConfig(
+                contract_type=self.config.contract_type,
+                include_atr=include_atr,
+                include_rsi=include_rsi,
+            ),
         )
 
-    def scan(self) -> pd.DataFrame:
+    def scan(self, use_cache: bool = False) -> pd.DataFrame:
         """Scan selected strategies and return combined results."""
+        if use_cache and self._cached_results is not None:
+            logger.info("Returning cached scan results")
+            return self._cached_results
+
         raw_data = self._screener.get_opportunities()
 
         if raw_data.empty:
@@ -85,6 +102,18 @@ class ForexStrategyScanner:
 
         combined = self._apply_filters(combined)
 
+        if self.config.min_volume is not None:
+            combined = self._apply_volume_filter(combined, self.config.min_volume)
+        if self.config.max_atr is not None:
+            combined = self._apply_atr_filter(combined, self.config.max_atr)
+        if self.config.min_ma_rating is not None:
+            combined = self._apply_ma_rating_filter(combined, self.config.min_ma_rating)
+        if self.config.mean_reversion_signals:
+            combined = self._detect_mean_reversion_signals(
+                combined, self.config.mean_reversion_signals
+            )
+
+        self._cached_results = combined
         return combined
 
     def _get_data_or_fetch(self, raw_data: pd.DataFrame | None) -> pd.DataFrame:
@@ -274,30 +303,33 @@ class ForexStrategyScanner:
 
         return df
 
+    def _get_results(self) -> pd.DataFrame:
+        if self._cached_results is not None:
+            return self._cached_results
+        return self.scan(use_cache=True)
+
     def to_csv(self, path: str, include_index: bool = False) -> None:
-        df = self.scan()
-        df.to_csv(path, index=include_index)
-        logger.info(f"Saved {len(df)} signals to {path}")
+        export_to_csv(
+            self._get_results,
+            path,
+            include_index,
+            logger=logger,
+            label="signals",
+        )
 
     def to_json(self, path: str, orient: str = "records") -> None:
-        df = self.scan()
-        df.to_json(path, orient=orient, indent=2)
-        logger.info(f"Saved {len(df)} signals to {path}")
+        export_to_json(
+            self._get_results,
+            path,
+            orient,
+            logger=logger,
+            label="signals",
+        )
 
     def print_summary(self) -> None:
-        try:
-            from rich.console import Console
-            from rich.table import Table
-
-            console = Console()
-            results = self.scan()
-
-            if results.empty:
-                console.print("[yellow]No signals found[/yellow]")
-                return
-
-            for strategy in results["STRATEGY"].unique():
-                strategy_df = results[results["STRATEGY"] == strategy]
+        def _render(df: pd.DataFrame, console, Table) -> None:
+            for strategy in df["STRATEGY"].unique():
+                strategy_df = df[df["STRATEGY"] == strategy]
 
                 table = Table(title=f"Strategy: {strategy}")
                 table.add_column("Pair", style="cyan")
@@ -306,15 +338,76 @@ class ForexStrategyScanner:
 
                 for _, row in strategy_df.iterrows():
                     table.add_row(
-                        row.get("Name", row.get("PAIR", "N/A")),
+                        row.get("_base_pair", row.get("Name", row.get("PAIR", "N/A"))),
                         row["DIRECTION"],
                         str(row.get("CONFLUENCE_SCORE", "N/A")),
                     )
 
                 console.print(table)
 
-            console.print(f"\n[dim]Total signals: {len(results)}[/dim]")
+            console.print(f"\n[dim]Total signals: {len(df)}[/dim]")
 
-        except ImportError:
-            df = self.scan()
-            print(df.to_string())
+        print_summary(
+            self._get_results,
+            empty_rich_message="No signals found",
+            render_rich=_render,
+        )
+
+    def _apply_volume_filter(self, df: pd.DataFrame, min_volume: float) -> pd.DataFrame:
+        """Filter by minimum average volume."""
+        if min_volume is None or df.empty:
+            return df
+        vol_col = "Average Volume (10 day Calc)"
+        if vol_col in df.columns:
+            return df[df[vol_col] >= min_volume].copy()
+        return df
+
+    def _apply_atr_filter(self, df: pd.DataFrame, max_atr: float) -> pd.DataFrame:
+        """Filter by maximum ATR (volatility proxy)."""
+        if max_atr is None or df.empty:
+            return df
+        atr_cols = [c for c in df.columns if c.startswith("ATR|")]
+        if atr_cols:
+            df = df.copy()
+            df["_atr_avg"] = df[atr_cols].mean(axis=1)
+            result = df[df["_atr_avg"] <= max_atr].copy()
+            return result.drop(columns=["_atr_avg"], errors="ignore")
+        return df
+
+    def _apply_ma_rating_filter(self, df: pd.DataFrame, min_ma_rating: float) -> pd.DataFrame:
+        """Filter by minimum MA rating strength."""
+        if min_ma_rating is None or df.empty:
+            return df
+        ma_cols = [c for c in df.columns if c.startswith("Recommend Ma|")]
+        if ma_cols:
+            df = df.copy()
+            df["_ma_avg"] = df[ma_cols].mean(axis=1)
+            result = df[df["_ma_avg"] >= min_ma_rating].copy()
+            return result.drop(columns=["_ma_avg"], errors="ignore")
+        return df
+
+    def _detect_mean_reversion_signals(
+        self, df: pd.DataFrame, signals: tuple[str, ...]
+    ) -> pd.DataFrame:
+        """Add mean reversion signal columns.
+
+        RSI oversold (<30) = long signal
+        RSI overbought (>70) = short signal
+        """
+        if not signals or df.empty:
+            return df
+
+        rsi_cols = [c for c in df.columns if c.startswith("RSI")]
+        if not rsi_cols:
+            return df
+
+        df = df.copy()
+        rsi_data = df[rsi_cols].fillna(50)
+
+        if "rsi_oversold" in signals:
+            df["rsi_oversold"] = (rsi_data < 30).any(axis=1).astype(int)
+
+        if "rsi_overbought" in signals:
+            df["rsi_overbought"] = (rsi_data > 70).any(axis=1).astype(int)
+
+        return df

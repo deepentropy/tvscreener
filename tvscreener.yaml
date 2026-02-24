@@ -1,0 +1,16 @@
+# tvscreener.yaml - Default configuration
+# Copy to .env for environment-specific overrides
+
+# Global defaults
+default_universe: "majors"
+default_timeframes: "240,60,15"
+contract_type: "cfd"
+
+# Strategy settings
+min_confluence: 1
+trend_threshold: 0.0
+mr_threshold: 0.2
+min_volume: null
+max_atr: null
+min_ma_rating: null
+min_roc: null

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Literal
+from typing import Literal
 
 import pandas as pd
 
@@ -123,7 +123,7 @@ class FieldCondition:
     def _validate_value(value):
         """Validate that value is not a Field (field-to-field comparisons not supported)."""
         # Import here to avoid circular imports
-        from tvscreener.field import Field, FieldWithInterval, FieldWithHistory
+        from tvscreener.field import Field, FieldWithHistory, FieldWithInterval
 
         # Check single values
         if isinstance(value, (Field, FieldWithInterval, FieldWithHistory)):
@@ -143,7 +143,7 @@ class FieldCondition:
                         f"Retrieve the data first and filter using pandas DataFrame operations instead."
                     )
 
-    def to_filter(self) -> "Filter":
+    def to_filter(self) -> Filter:
         """Convert this condition to a Filter object."""
         return Filter(self.field, self.operation, self.value)
 

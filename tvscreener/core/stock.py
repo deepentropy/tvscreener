@@ -1,6 +1,6 @@
 from tvscreener.core.base import Screener, default_market, default_sort_stocks
-from tvscreener.field import Market, Type, SymbolType
-from tvscreener.field.stock import StockField, DEFAULT_STOCK_FIELDS
+from tvscreener.field import Market, SymbolType, Type
+from tvscreener.field.stock import DEFAULT_STOCK_FIELDS, StockField
 from tvscreener.filter import FilterOperator
 from tvscreener.util import get_url
 
@@ -27,7 +27,9 @@ class StockScreener(Screener):
         super().__init__()
         self.markets = [default_market]
         self.url = get_url("global")
-        self.specific_fields = DEFAULT_STOCK_FIELDS  # Use default 424 fields (set to StockField for all 3500+)
+        self.specific_fields = (
+            DEFAULT_STOCK_FIELDS  # Use default 424 fields (set to StockField for all 3500+)
+        )
         self.sort_by(default_sort_stocks, False)
 
     def _build_payload(self, requested_columns_):
@@ -37,10 +39,7 @@ class StockScreener(Screener):
         return payload
 
     def _add_types(self, *types: Type):
-        if len(types) > 1:
-            operator = FilterOperator.IN_RANGE
-        else:
-            operator = FilterOperator.EQUAL
+        operator = FilterOperator.IN_RANGE if len(types) > 1 else FilterOperator.EQUAL
 
         for type_ in types:
             self.add_filter(StockField.TYPE, operator, type_.value)
@@ -67,7 +66,10 @@ class StockScreener(Screener):
         # Special case: COMMON_STOCK automatically includes DEPOSITORY_RECEIPT
         # This maintains backward compatibility with existing behavior
         symbol_types_list = list(symbol_types)
-        if SymbolType.COMMON_STOCK in symbol_types and SymbolType.DEPOSITORY_RECEIPT not in symbol_types:
+        if (
+            SymbolType.COMMON_STOCK in symbol_types
+            and SymbolType.DEPOSITORY_RECEIPT not in symbol_types
+        ):
             symbol_types_list.append(SymbolType.DEPOSITORY_RECEIPT)
 
         # Add subtype filters
@@ -81,6 +83,6 @@ class StockScreener(Screener):
         :return: None
         """
         if Market.ALL in markets:
-            self.markets = [market for market in Market]
+            self.markets = list(Market)
         else:
-            self.markets = [market for market in markets]
+            self.markets = list(markets)

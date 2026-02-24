@@ -4,7 +4,6 @@ from tvscreener import StockField
 
 
 class TestFields(unittest.TestCase):
-
     def test_recommendation(self):
         self.assertTrue(StockField.BULL_BEAR_POWER.has_recommendation())
 
@@ -28,9 +27,13 @@ class TestFields(unittest.TestCase):
     def test_rec_label(self):
         self.assertEqual(None, StockField.AVERAGE_DIRECTIONAL_INDEX_14.get_rec_label())
         self.assertEqual("Reco. Bull Bear Power", StockField.BULL_BEAR_POWER.get_rec_label())
-        self.assertEqual("Reco. Hull Moving Average (9)", StockField.HULL_MOVING_AVERAGE_9.get_rec_label())
-        self.assertEqual("Reco. Ultimate Oscillator (7, 14, 28)",
-                         StockField.ULTIMATE_OSCILLATOR_7_14_28.get_rec_label())
+        self.assertEqual(
+            "Reco. Hull Moving Average (9)", StockField.HULL_MOVING_AVERAGE_9.get_rec_label()
+        )
+        self.assertEqual(
+            "Reco. Ultimate Oscillator (7, 14, 28)",
+            StockField.ULTIMATE_OSCILLATOR_7_14_28.get_rec_label(),
+        )
 
     def test_get_rec_field(self):
         self.assertEqual(None, StockField.AVERAGE_DIRECTIONAL_INDEX_14.get_rec_field())
@@ -39,4 +42,6 @@ class TestFields(unittest.TestCase):
         self.assertEqual("Rec.UO", StockField.ULTIMATE_OSCILLATOR_7_14_28.get_rec_field())
 
     def test_get_by_label(self):
-        self.assertEqual(StockField.VOLUME, StockField.get_by_label(StockField, StockField.VOLUME.label))
+        self.assertEqual(
+            StockField.VOLUME, StockField.get_by_label(StockField, StockField.VOLUME.label)
+        )

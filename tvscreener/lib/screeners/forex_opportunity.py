@@ -1,14 +1,12 @@
 from __future__ import annotations
 
 import logging
+import re
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from typing import Literal
 
-import numpy as np
 import pandas as pd
-
-from tvscreener.core.forex import ForexScreener
-from tvscreener.field.forex import ForexField
 
 from tvscreener.constants.forex import (
     DEFAULT_FOREX_PAIRS,
@@ -16,14 +14,13 @@ from tvscreener.constants.forex import (
     DEFAULT_TIMEFRAMES,
     EXCHANGE_PRIORITY,
     LIQUID_EXCHANGES,
-    TIMEFRAME_LABELS,
 )
-from tvscreener.score import ScoringConfig, ScoringEngine, DEFAULT_SCORING_CONFIG
+from tvscreener.core.forex import ForexScreener
+from tvscreener.exceptions import FilterConfigurationError, InvalidPairError
+from tvscreener.field.forex import ForexField
 from tvscreener.filter import RatingFilter, RocFilter, VolumeFilter
-from ..exceptions import (
-    FilterConfigurationError,
-    InvalidPairError,
-)
+from tvscreener.lib.screeners.export_helpers import export_to_csv, export_to_json, print_summary
+from tvscreener.score import DEFAULT_SCORING_CONFIG, ScoringConfig, ScoringEngine
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +34,8 @@ class ForexScreenerConfig:
     volume_filter: VolumeFilter | None = None
     preferred_exchanges: list[str] = field(default_factory=lambda: LIQUID_EXCHANGES)
     contract_type: ContractType = "cfd"
+    include_atr: bool = False
+    include_rsi: bool = False
     scoring_config: ScoringConfig | None = None
 
 
@@ -45,6 +44,7 @@ class ForexOpportunityScreener:
     pairs: list[str] = field(default_factory=lambda: DEFAULT_FOREX_PAIRS)
     timeframes: list[str] = field(default_factory=lambda: DEFAULT_TIMEFRAMES)
     config: ForexScreenerConfig = field(default_factory=ForexScreenerConfig)
+    _cached_data: pd.DataFrame | None = field(init=False, default=None)
 
     def __post_init__(self) -> None:
         self._validate_pairs()
@@ -79,16 +79,26 @@ class ForexOpportunityScreener:
             f"preferred_exchanges={len(self.config.preferred_exchanges)})"
         )
 
-    def get_opportunities(self) -> pd.DataFrame:
-        logger.info(
-            f"Scanning {len(self.pairs)} pairs across {len(self.timeframes)} timeframes"
-        )
+    def get_opportunities(self, use_cache: bool = False) -> pd.DataFrame:
+        if use_cache and self._cached_data is not None:
+            logger.info("Returning cached data")
+            return self._cached_data
+
+        logger.info(f"Scanning {len(self.pairs)} pairs across {len(self.timeframes)} timeframes")
 
         all_data = []
-        for pair in self.pairs:
-            pair_data = self._fetch_pair_data(pair)
-            if not pair_data.empty:
-                all_data.append(pair_data)
+
+        with ThreadPoolExecutor(max_workers=min(10, len(self.pairs))) as executor:
+            futures = {executor.submit(self._fetch_pair_data, pair): pair for pair in self.pairs}
+
+            for future in as_completed(futures):
+                pair = futures[future]
+                try:
+                    pair_data = future.result()
+                    if not pair_data.empty:
+                        all_data.append(pair_data)
+                except Exception as e:
+                    logger.error(f"Error fetching {pair}: {e}")
 
         if not all_data:
             logger.warning("No data returned from API")
@@ -103,6 +113,7 @@ class ForexOpportunityScreener:
         df = self._apply_rating_and_roc_filters(df)
         df = self._rank_opportunities(df)
 
+        self._cached_data = df
         logger.info(f"Found {len(df)} opportunities")
         return df
 
@@ -118,11 +129,15 @@ class ForexOpportunityScreener:
         ]
 
         for tf in self.timeframes:
-            tf_label = TIMEFRAME_LABELS.get(tf, tf)
             select_fields.append(getattr(ForexField, f"RECOMMEND_ALL_{tf}"))
             select_fields.append(getattr(ForexField, f"RECOMMEND_MA_{tf}"))
             select_fields.append(getattr(ForexField, f"RECOMMEND_OTHER_{tf}"))
             select_fields.append(getattr(ForexField, f"ROC_{tf}"))
+
+            if self.config.include_atr:
+                select_fields.append(getattr(ForexField, f"ATR_{tf}"))
+            if self.config.include_rsi:
+                select_fields.append(getattr(ForexField, f"RSI_{tf}"))
 
         fs.select(*select_fields)
 
@@ -167,7 +182,7 @@ class ForexOpportunityScreener:
             if contract_type == "cfd":
                 return df[df[subtype_col] == "cfd"].copy()
             elif contract_type == "spot":
-                return df[df[subtype_col] == ""].copy()
+                return df[df[subtype_col].isin(["", "spot"])].copy()
             elif contract_type == "spreadbet":
                 return df[df[subtype_col] == "spreadbet"].copy()
 
@@ -188,63 +203,75 @@ class ForexOpportunityScreener:
             return df
 
         VALID_PAIRS = DEFAULT_FOREX_PAIRS
-
-        def get_exchange(symbol: str) -> str:
-            if ":" in symbol:
-                return symbol.split(":")[0]
-            return ""
-
-        def is_canonical(name: str) -> bool:
-            name = name.upper()
-            return name in VALID_PAIRS
-
-        def get_base_pair(name: str) -> str:
-            if not name:
-                return ""
-            name = name.upper()
-            for pair in VALID_PAIRS:
-                if (
-                    name == pair
-                    or name.startswith(pair + ".")
-                    or name.startswith(pair + "_")
-                    or "_" + pair + "." in name
-                ):
-                    return pair
-            if len(name) >= 6:
-                return name[:6]
-            return name
-
-        def get_priority(row) -> tuple:
-            exchange = get_exchange(row["Symbol"])
-            name = row["Name"]
-
-            canonical_score = 0 if is_canonical(name) else 1
-            exchange_score = EXCHANGE_PRIORITY.get(exchange, 999)
-            volume = row.get("Average Volume (10 day Calc)", 0) or 0
-
-            return (canonical_score, exchange_score, -volume)
+        VALID_PAIRS_SET = set(VALID_PAIRS)
 
         df = df.copy()
-        df["_base_pair"] = df["Name"].apply(get_base_pair)
-        df["_priority"] = df.apply(get_priority, axis=1)
+
+        # Vectorized extraction (hot path): keep behavior consistent with prior get_base_pair/get_exchange.
+        names = (df["Name"] if "Name" in df.columns else pd.Series("", index=df.index)).fillna("")
+        names = names.astype(str).str.upper()
+
+        pairs_alt = "|".join(re.escape(p) for p in VALID_PAIRS)
+        base_pair_match = names.str.extract(
+            rf"^(?P<p1>{pairs_alt})(?=$|[._])|_(?P<p2>{pairs_alt})\.",
+            expand=True,
+        )
+        base_pair = base_pair_match["p1"].fillna(base_pair_match["p2"])
+        df["_base_pair"] = base_pair.fillna(names.where(names.str.len() < 6, names.str.slice(0, 6)))
+
+        symbols = (
+            df["Symbol"] if "Symbol" in df.columns else pd.Series("", index=df.index)
+        ).fillna("")
+        symbols = symbols.astype(str)
+        has_exchange = symbols.str.contains(":", regex=False)
+        df["_exchange"] = symbols.str.split(":", n=1).str[0].where(has_exchange, "")
+
+        df["_is_canonical"] = names.isin(VALID_PAIRS_SET).astype(int)
+
+        df["_exchange_score"] = df["_exchange"].map(EXCHANGE_PRIORITY).fillna(999).astype(int)
+
+        df["_volume"] = df.get("Average Volume (10 day Calc)", pd.Series([0] * len(df))).fillna(0)
+
+        df["_priority"] = list(
+            zip(df["_is_canonical"], df["_exchange_score"], -df["_volume"], strict=False)
+        )
+
         df = df.sort_values(by="_priority")
         df = df.drop_duplicates(subset=["_base_pair"], keep="first")
 
-        df = df.drop(columns=["_base_pair", "_priority"], errors="ignore")
+        df = df.drop(
+            columns=[
+                "_priority",
+                "_exchange",
+                "_is_canonical",
+                "_exchange_score",
+                "_volume",
+            ],
+            errors="ignore",
+        )
 
         return df
 
     def _apply_rating_filter(self, df: pd.DataFrame, rf: RatingFilter) -> pd.DataFrame:
-        rating_cols = {
-            "all": f"Recommend All|{rf.threshold}",
-            "ma": f"Recommend Ma|{rf.threshold}",
-            "oscillator": f"Recommend Other|{rf.threshold}",
+        if df.empty:
+            return df
+
+        rating_type_col = {
+            "all": "Recommend All",
+            "ma": "Recommend Ma",
+            "oscillator": "Recommend Other",
         }
 
-        col = rating_cols[rf.rating_type]
-        if col in df.columns:
-            return df[df[col] >= rf.threshold].copy()
-        return df
+        col_prefix = rating_type_col.get(rf.rating_type)
+        if not col_prefix:
+            return df
+
+        rating_cols = [c for c in df.columns if c.startswith(col_prefix + "|")]
+        if not rating_cols:
+            return df
+
+        mask = df[rating_cols].fillna(-999) >= rf.threshold
+        return df[mask.any(axis=1)].copy()
 
     def _apply_roc_filter(self, df: pd.DataFrame, roc: RocFilter) -> pd.DataFrame:
         if df.empty:
@@ -268,37 +295,39 @@ class ForexOpportunityScreener:
 
         return df
 
+    def _get_data(self) -> pd.DataFrame:
+        if self._cached_data is not None:
+            return self._cached_data
+        return self.get_opportunities()
+
     def to_csv(self, path: str, include_index: bool = False) -> None:
-        df = self.get_opportunities()
-        df.to_csv(path, index=include_index)
-        logger.info(f"Saved {len(df)} opportunities to {path}")
+        export_to_csv(
+            self._get_data,
+            path,
+            include_index,
+            logger=logger,
+            label="opportunities",
+        )
 
     def to_json(self, path: str, orient: str = "records") -> None:
-        df = self.get_opportunities()
-        df.to_json(path, orient=orient, indent=2)
-        logger.info(f"Saved {len(df)} opportunities to {path}")
+        export_to_json(
+            self._get_data,
+            path,
+            orient,
+            logger=logger,
+            label="opportunities",
+        )
 
     def print_summary(self) -> None:
-        try:
-            from rich.console import Console
-            from rich.table import Table
-
-            console = Console()
-            df = self.get_opportunities()
-
-            if df.empty:
-                console.print("[yellow]No opportunities found[/yellow]")
-                return
-
+        def _render(df: pd.DataFrame, console, Table) -> None:
             table = Table(title="Forex Opportunities")
-
             table.add_column("Pair", style="cyan", no_wrap=True)
             table.add_column("Price", style="white", justify="right")
             table.add_column("Rating", style="green", justify="right")
             table.add_column("ROC %", style="yellow", justify="right")
 
             for _, row in df.head(20).iterrows():
-                name = row.get("Name", "N/A")
+                name = row.get("_base_pair", row.get("Name", "N/A"))
                 price = row.get("Price", 0)
                 rating = row.get("RATING_SCORE", 0)
                 roc = row.get("ROC_AVG", 0)
@@ -313,6 +342,8 @@ class ForexOpportunityScreener:
             console.print(table)
             console.print(f"\n[dim]Showing top 20 of {len(df)} opportunities[/dim]")
 
-        except ImportError:
-            df = self.get_opportunities()
-            print(df.to_string())
+        print_summary(
+            self._get_data,
+            empty_rich_message="No opportunities found",
+            render_rich=_render,
+        )

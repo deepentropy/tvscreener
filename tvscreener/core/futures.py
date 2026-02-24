@@ -1,5 +1,5 @@
 from tvscreener.core.base import Screener
-from tvscreener.field.futures import FuturesField, DEFAULT_FUTURES_FIELDS
+from tvscreener.field.futures import DEFAULT_FUTURES_FIELDS, FuturesField
 from tvscreener.util import get_url
 
 

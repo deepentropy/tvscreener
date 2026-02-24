@@ -1,5 +1,5 @@
 from tvscreener.core.base import Screener
-from tvscreener.field.bond import BondField, DEFAULT_BOND_FIELDS
+from tvscreener.field.bond import DEFAULT_BOND_FIELDS, BondField
 from tvscreener.util import get_url
 
 

@@ -11,13 +11,11 @@ Key visual elements:
 - Missing values displayed as "--"
 """
 
-from typing import Type
-
 import pandas as pd
 
-from tvscreener.field import Field, Rating
-from tvscreener.util import millify, _is_nan
 import tvscreener.ta as ta
+from tvscreener.field import Field, Rating
+from tvscreener.util import _is_nan, millify
 
 # Visual indicators for ratings
 BUY_CHAR = "↑ B"
@@ -32,7 +30,7 @@ COLOR_RED_SELL = "color:rgb(255, 74, 104);"
 COLOR_GRAY_NEUTRAL = "color:rgb(157, 178, 189);"
 
 
-def beautify(df, specific_fields: Type[Field]):
+def beautify(df, specific_fields: type[Field]):
     """
     Apply TradingView-style formatting to a screener DataFrame.
 
@@ -98,7 +96,7 @@ class Beautify:
     on their field definitions.
     """
 
-    def __init__(self, df, specific_fields: Type[Field]):
+    def __init__(self, df, specific_fields: type[Field]):
         """
         Initialize the beautifier with a DataFrame and field definitions.
 
@@ -106,7 +104,7 @@ class Beautify:
         :param specific_fields: Field enum class (StockField, ForexField, CryptoField)
         """
         # Create a copy and set technical column names
-        if hasattr(df, 'set_technical_columns'):
+        if hasattr(df, "set_technical_columns"):
             df.set_technical_columns(only=True)
         self.df = df.copy()
         self.styled_df = self.df.style
@@ -118,38 +116,39 @@ class Beautify:
     def _format_column(self, field: Field):
         """Apply appropriate formatting based on field format type."""
         fmt = field.format
-        if fmt == 'bool':
+        if fmt == "bool":
             self._to_bool(field)
-        elif fmt == 'rating':
+        elif fmt == "rating":
             self._rating(field)
-        elif fmt == 'round':
+        elif fmt == "round":
             self._round(field)
-        elif fmt == 'percent':
+        elif fmt == "percent":
             self._percent(field)
         elif field.has_recommendation():
             self._recommendation(field)
-        elif fmt == 'computed_recommendation':
+        elif fmt == "computed_recommendation":
             self._computed_recommendation(field)
-        elif fmt == 'currency':
+        elif fmt == "currency":
             self._round(field)
             self._number_group(field)
-        elif fmt == 'number_group':
+        elif fmt == "number_group":
             self._replace_nan(field)
             self._number_group(field)
 
     def _rating(self, field: Field):
         """Format rating column with label text."""
-        self.df[field.field_name] = self.df[field.field_name].apply(
-            lambda x: Rating.find(x).label
-        )
+        self.df[field.field_name] = self.df[field.field_name].apply(lambda x: Rating.find(x).label)
 
     def _recommendation(self, field: Field):
         """Format recommendation column with value and colored rating indicator."""
         rec_field = field.get_rec_field()
         self.df[field.field_name] = self.df.apply(
-            lambda x: f"{x[field.field_name]} {_rating_letter(_get_recommendation(x[rec_field]))}"
-            if not _is_nan(x[field.field_name]) else "--",
-            axis=1
+            lambda x: (
+                f"{x[field.field_name]} {_rating_letter(_get_recommendation(x[rec_field]))}"
+                if not _is_nan(x[field.field_name])
+                else "--"
+            ),
+            axis=1,
         )
         # Use map instead of deprecated applymap
         self.styled_df = self.styled_df.map(
@@ -184,9 +183,9 @@ class Beautify:
 
     def _to_bool(self, field: Field):
         """Convert string boolean to Python boolean."""
-        self.df[field.field_name] = self.df[field.field_name].apply(
-            lambda x: x == 'true'
-        ).astype(bool)
+        self.df[field.field_name] = (
+            self.df[field.field_name].apply(lambda x: x == "true").astype(bool)
+        )
 
     def _computed_recommendation(self, field: Field):
         """Format computed recommendation columns (ADX, AO, Bollinger Bands)."""
@@ -203,12 +202,16 @@ class Beautify:
 
     def _format_adx(self, field: Field):
         """Format ADX column with recommendation."""
-        required_cols = ['ADX', 'ADX-DI', 'ADX+DI', 'ADX-DI[1]', 'ADX+DI[1]']
+        required_cols = ["ADX", "ADX-DI", "ADX+DI", "ADX-DI[1]", "ADX+DI[1]"]
         self.df[field.field_name] = self.df.apply(
-            lambda x: f"{x[field.field_name]} {_rating_letter(ta.adx(x['ADX'], x['ADX-DI'], x['ADX+DI'], x['ADX-DI[1]'], x['ADX+DI[1]']))}"
-            if all(col in x.index for col in required_cols) and not _is_nan(x[field.field_name])
-            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
-            axis=1
+            lambda x: (
+                f"{x[field.field_name]} {_rating_letter(ta.adx(x['ADX'], x['ADX-DI'], x['ADX+DI'], x['ADX-DI[1]'], x['ADX+DI[1]']))}"
+                if all(col in x.index for col in required_cols) and not _is_nan(x[field.field_name])
+                else str(x[field.field_name])
+                if not _is_nan(x[field.field_name])
+                else "--"
+            ),
+            axis=1,
         )
         self.styled_df = self.styled_df.map(
             _rating_colors, subset=pd.IndexSlice[:, [field.field_name]]
@@ -216,12 +219,16 @@ class Beautify:
 
     def _format_ao(self, field: Field):
         """Format Awesome Oscillator column with recommendation."""
-        required_cols = ['AO', 'AO[1]', 'AO[2]']
+        required_cols = ["AO", "AO[1]", "AO[2]"]
         self.df[field.field_name] = self.df.apply(
-            lambda x: f"{x[field.field_name]} {_rating_letter(ta.ao(x['AO'], x['AO[1]'], x['AO[2]']))}"
-            if all(col in x.index for col in required_cols) and not _is_nan(x[field.field_name])
-            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
-            axis=1
+            lambda x: (
+                f"{x[field.field_name]} {_rating_letter(ta.ao(x['AO'], x['AO[1]'], x['AO[2]']))}"
+                if all(col in x.index for col in required_cols) and not _is_nan(x[field.field_name])
+                else str(x[field.field_name])
+                if not _is_nan(x[field.field_name])
+                else "--"
+            ),
+            axis=1,
         )
         self.styled_df = self.styled_df.map(
             _rating_colors, subset=pd.IndexSlice[:, [field.field_name]]
@@ -230,10 +237,16 @@ class Beautify:
     def _format_bb_lower(self, field: Field):
         """Format Bollinger Bands lower band column with recommendation."""
         self.df[field.field_name] = self.df.apply(
-            lambda x: f"{x[field.field_name]} {_rating_letter(ta.bb_lower(x[field.field_name], x['close']))}"
-            if 'close' in x.index and not _is_nan(x[field.field_name]) and not _is_nan(x['close'])
-            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
-            axis=1
+            lambda x: (
+                f"{x[field.field_name]} {_rating_letter(ta.bb_lower(x[field.field_name], x['close']))}"
+                if "close" in x.index
+                and not _is_nan(x[field.field_name])
+                and not _is_nan(x["close"])
+                else str(x[field.field_name])
+                if not _is_nan(x[field.field_name])
+                else "--"
+            ),
+            axis=1,
         )
         self.styled_df = self.styled_df.map(
             _rating_colors, subset=pd.IndexSlice[:, [field.field_name]]
@@ -242,12 +255,17 @@ class Beautify:
     def _format_bb_upper(self, field: Field):
         """Format Bollinger Bands upper band column with recommendation."""
         self.df[field.field_name] = self.df.apply(
-            lambda x: f"{x[field.field_name]} {_rating_letter(ta.bb_upper(x[field.field_name], x['close']))}"
-            if 'close' in x.index and not _is_nan(x[field.field_name]) and not _is_nan(x['close'])
-            else str(x[field.field_name]) if not _is_nan(x[field.field_name]) else "--",
-            axis=1
+            lambda x: (
+                f"{x[field.field_name]} {_rating_letter(ta.bb_upper(x[field.field_name], x['close']))}"
+                if "close" in x.index
+                and not _is_nan(x[field.field_name])
+                and not _is_nan(x["close"])
+                else str(x[field.field_name])
+                if not _is_nan(x[field.field_name])
+                else "--"
+            ),
+            axis=1,
         )
         self.styled_df = self.styled_df.map(
             _rating_colors, subset=pd.IndexSlice[:, [field.field_name]]
         )
-

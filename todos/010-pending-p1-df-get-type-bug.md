@@ -1,5 +1,5 @@
 ---
-status: pending
+status: complete
 priority: p1
 issue_id: "010"
 tags: [type-safety, score, edge-case]
@@ -46,7 +46,7 @@ df["DIRECTION"] = np.where(
 
 ## Recommended Action
 
-<!-- To be filled during triage -->
+Infer `DIRECTION` from bullish/bearish confluence counts when `ENSEMBLE_SCORE` is unavailable.
 
 ## Acceptance Criteria
 
@@ -64,3 +64,9 @@ df["DIRECTION"] = np.where(
 
 **Learnings:**
 - df.get() behavior differs between Series and scalar defaults
+
+### 2026-02-24 - Fix
+
+**Actions:**
+- Updated `calculate_confluence()` to derive `DIRECTION` from TF/factor confluence counts when `ENSEMBLE_SCORE` is missing
+- Added a unit test to cover standalone `calculate_confluence()` behavior

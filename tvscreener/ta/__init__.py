@@ -90,11 +90,13 @@ def ao(ao_value, ao_old_1, ao_old_2):
     :param ao_old_2: Previous AO value (2 periods back)
     :return: Rating enum (BUY, SELL, or NEUTRAL)
     """
-    if _is_ao_bullish_saucer(ao_value, ao_old_1, ao_old_2) or \
-       _is_ao_bullish_cross(ao_value, ao_old_1, ao_old_2):
+    if _is_ao_bullish_saucer(ao_value, ao_old_1, ao_old_2) or _is_ao_bullish_cross(
+        ao_value, ao_old_1, ao_old_2
+    ):
         return Rating.BUY
-    elif _is_ao_bearish_saucer(ao_value, ao_old_1, ao_old_2) or \
-         _is_ao_bearish_cross(ao_value, ao_old_1, ao_old_2):
+    elif _is_ao_bearish_saucer(ao_value, ao_old_1, ao_old_2) or _is_ao_bearish_cross(
+        ao_value, ao_old_1, ao_old_2
+    ):
         return Rating.SELL
     return Rating.NEUTRAL
 

@@ -23,7 +23,6 @@ def add_rec_to_label(label):
 
 
 class Field(Enum):
-
     def __init__(self, label, field_name, format_=None, interval=False, historical=False):
         self.label = label
         self.field_name = field_name
@@ -32,7 +31,7 @@ class Field(Enum):
         self.historical = historical
 
     def has_recommendation(self):
-        return self.format == 'recommendation'
+        return self.format == "recommendation"
 
     def get_rec_label(self):
         if self.has_recommendation():
@@ -94,14 +93,14 @@ class Field(Enum):
         return [f for f in cls if f.interval]
 
     @classmethod
-    def with_history(cls) -> list:
+    def historical_fields(cls) -> list:
         """
         Get all fields that support historical lookback.
 
         :return: List of fields with historical=True
 
         Example:
-            >>> StockField.with_history()
+            >>> StockField.historical_fields()
             [<StockField.RSI: ...>, <StockField.VOLUME: ...>, ...]
         """
         return [f for f in cls if f.historical]
@@ -117,9 +116,9 @@ class Field(Enum):
             >>> StockField.recommendations()
             [<StockField.RSI: ...>, <StockField.STOCH_K: ...>, ...]
         """
-        return [f for f in cls if f.format == 'recommendation']
+        return [f for f in cls if f.format == "recommendation"]
 
-    def with_interval(self, interval: str) -> 'FieldWithInterval':
+    def with_interval(self, interval: str) -> "FieldWithInterval":
         """
         Return a field wrapper with time interval modifier.
 
@@ -137,7 +136,7 @@ class Field(Enum):
             raise ValueError(f"{self.name} does not support time intervals")
         return FieldWithInterval(self, interval)
 
-    def with_history(self, periods: int = 1) -> 'FieldWithHistory':
+    def with_history(self, periods: int = 1) -> "FieldWithHistory":
         """
         Return a field wrapper with historical lookback.
 
@@ -154,7 +153,7 @@ class Field(Enum):
         return FieldWithHistory(self, periods)
 
     # Comparison operators for Pythonic filtering syntax
-    def __gt__(self, other) -> 'FieldCondition':
+    def __gt__(self, other) -> "FieldCondition":
         """
         Greater than comparison.
 
@@ -162,9 +161,10 @@ class Field(Enum):
             >>> StockField.PRICE > 100
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.ABOVE, other)
 
-    def __ge__(self, other) -> 'FieldCondition':
+    def __ge__(self, other) -> "FieldCondition":
         """
         Greater than or equal comparison.
 
@@ -172,9 +172,10 @@ class Field(Enum):
             >>> StockField.PRICE >= 100
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.ABOVE_OR_EQUAL, other)
 
-    def __lt__(self, other) -> 'FieldCondition':
+    def __lt__(self, other) -> "FieldCondition":
         """
         Less than comparison.
 
@@ -182,9 +183,10 @@ class Field(Enum):
             >>> StockField.PRICE < 100
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.BELOW, other)
 
-    def __le__(self, other) -> 'FieldCondition':
+    def __le__(self, other) -> "FieldCondition":
         """
         Less than or equal comparison.
 
@@ -192,9 +194,10 @@ class Field(Enum):
             >>> StockField.PRICE <= 100
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
 
-    def __eq__(self, other) -> 'FieldCondition':
+    def __eq__(self, other) -> "FieldCondition":
         """
         Equality comparison. Returns FieldCondition for value comparisons,
         or standard enum equality for Field-to-Field comparisons.
@@ -206,12 +209,13 @@ class Field(Enum):
         if isinstance(other, Field):
             return self.value == other.value
         # For Field vs FieldWithInterval/FieldWithHistory, compare field_name
-        if hasattr(other, 'field_name'):
+        if hasattr(other, "field_name"):
             return self.field_name == other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.EQUAL, other)
 
-    def __ne__(self, other) -> 'FieldCondition':
+    def __ne__(self, other) -> "FieldCondition":
         """
         Not equal comparison. Returns FieldCondition for value comparisons,
         or standard enum inequality for Field-to-Field comparisons.
@@ -223,16 +227,17 @@ class Field(Enum):
         if isinstance(other, Field):
             return self.value != other.value
         # For Field vs FieldWithInterval/FieldWithHistory, compare field_name
-        if hasattr(other, 'field_name'):
+        if hasattr(other, "field_name"):
             return self.field_name != other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
 
     def __hash__(self):
         """Required for Enum when __eq__ is overridden."""
         return hash(self.value)
 
-    def between(self, min_val, max_val) -> 'FieldCondition':
+    def between(self, min_val, max_val) -> "FieldCondition":
         """
         Check if field value is within a range (inclusive).
 
@@ -241,9 +246,10 @@ class Field(Enum):
             >>> StockField.MARKET_CAPITALIZATION.between(1e9, 10e9)
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.IN_RANGE, [min_val, max_val])
 
-    def not_between(self, min_val, max_val) -> 'FieldCondition':
+    def not_between(self, min_val, max_val) -> "FieldCondition":
         """
         Check if field value is outside a range.
 
@@ -251,9 +257,10 @@ class Field(Enum):
             >>> StockField.PRICE.not_between(50, 100)
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, [min_val, max_val])
 
-    def isin(self, values: list) -> 'FieldCondition':
+    def isin(self, values: list) -> "FieldCondition":
         """
         Check if field value is in a list of values.
 
@@ -262,9 +269,10 @@ class Field(Enum):
             >>> StockField.EXCHANGE.isin([Exchange.NASDAQ, Exchange.NYSE])
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.IN_RANGE, values)
 
-    def not_in(self, values: list) -> 'FieldCondition':
+    def not_in(self, values: list) -> "FieldCondition":
         """
         Check if field value is not in a list of values.
 
@@ -272,11 +280,13 @@ class Field(Enum):
             >>> StockField.SECTOR.not_in(['Finance', 'Utilities'])
         """
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
 
 
 class FieldCondition:
     """Forward declaration for type hints - actual implementation is in filter.py"""
+
     pass
 
 
@@ -309,32 +319,38 @@ class FieldWithInterval:
     # Comparison operators
     def __gt__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.ABOVE, other)
 
     def __ge__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.ABOVE_OR_EQUAL, other)
 
     def __lt__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.BELOW, other)
 
     def __le__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
 
     def __eq__(self, other):
         # For comparison with Field or FieldWithInterval, compare field_name
-        if isinstance(other, Field) or hasattr(other, 'field_name'):
+        if isinstance(other, Field) or hasattr(other, "field_name"):
             return self.field_name == other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.EQUAL, other)
 
     def __ne__(self, other):
         # For comparison with Field or FieldWithInterval, compare field_name
-        if isinstance(other, Field) or hasattr(other, 'field_name'):
+        if isinstance(other, Field) or hasattr(other, "field_name"):
             return self.field_name != other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
 
     def __hash__(self):
@@ -343,18 +359,22 @@ class FieldWithInterval:
 
     def between(self, min_val, max_val):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.IN_RANGE, [min_val, max_val])
 
     def not_between(self, min_val, max_val):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, [min_val, max_val])
 
     def isin(self, values: list):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.IN_RANGE, values)
 
     def not_in(self, values: list):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
 
 
@@ -387,32 +407,38 @@ class FieldWithHistory:
     # Comparison operators
     def __gt__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.ABOVE, other)
 
     def __ge__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.ABOVE_OR_EQUAL, other)
 
     def __lt__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.BELOW, other)
 
     def __le__(self, other):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.BELOW_OR_EQUAL, other)
 
     def __eq__(self, other):
         # For comparison with Field or FieldWithHistory, compare field_name
-        if isinstance(other, Field) or hasattr(other, 'field_name'):
+        if isinstance(other, Field) or hasattr(other, "field_name"):
             return self.field_name == other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.EQUAL, other)
 
     def __ne__(self, other):
         # For comparison with Field or FieldWithHistory, compare field_name
-        if isinstance(other, Field) or hasattr(other, 'field_name'):
+        if isinstance(other, Field) or hasattr(other, "field_name"):
             return self.field_name != other.field_name
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_EQUAL, other)
 
     def __hash__(self):
@@ -421,18 +447,22 @@ class FieldWithHistory:
 
     def between(self, min_val, max_val):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.IN_RANGE, [min_val, max_val])
 
     def not_between(self, min_val, max_val):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, [min_val, max_val])
 
     def isin(self, values: list):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.IN_RANGE, values)
 
     def not_in(self, values: list):
         from tvscreener.filter import FieldCondition, FilterOperator
+
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
 
 
@@ -472,92 +502,92 @@ class Rating(Enum):
 
     @classmethod
     def names(cls):
-        return list(map(lambda c: c.name, cls))
+        return [c.name for c in cls]
 
     @classmethod
     def values(cls):
-        return list(map(lambda c: c.value, cls))
+        return [c.value for c in cls]
 
 
 class Country(Enum):
-    ALBANIA = 'Albania'
-    ARGENTINA = 'Argentina'
-    AUSTRALIA = 'Australia'
-    AUSTRIA = 'Austria'
-    AZERBAIJAN = 'Azerbaijan'
-    BAHAMAS = 'Bahamas'
-    BARBADOS = 'Barbados'
-    BELGIUM = 'Belgium'
-    BERMUDA = 'Bermuda'
-    BRAZIL = 'Brazil'
-    BRITISH_VIRGIN_ISLANDS = 'British Virgin Islands'
-    CAMBODIA = 'Cambodia'
-    CANADA = 'Canada'
-    CAYMAN_ISLANDS = 'Cayman Islands'
-    CHILE = 'Chile'
-    CHINA = 'China'
-    COLOMBIA = 'Colombia'
-    COSTA_RICA = 'Costa Rica'
-    CYPRUS = 'Cyprus'
-    CZECH_REPUBLIC = 'Czech Republic'
-    DENMARK = 'Denmark'
-    DOMINICAN_REPUBLIC = 'Dominican Republic'
-    EGYPT = 'Egypt'
-    FAROE_ISLANDS = 'Faroe Islands'
-    FINLAND = 'Finland'
-    FRANCE = 'France'
-    GERMANY = 'Germany'
-    GIBRALTAR = 'Gibraltar'
-    GREECE = 'Greece'
-    HONG_KONG = 'Hong Kong'
-    HUNGARY = 'Hungary'
-    ICELAND = 'Iceland'
-    INDIA = 'India'
-    INDONESIA = 'Indonesia'
-    IRELAND = 'Ireland'
-    ISRAEL = 'Israel'
-    ITALY = 'Italy'
-    JAMAICA = 'Jamaica'
-    JAPAN = 'Japan'
-    JORDAN = 'Jordan'
-    KAZAKHSTAN = 'Kazakhstan'
-    LUXEMBOURG = 'Luxembourg'
-    MACAU = 'Macau'
-    MACEDONIA = 'Macedonia'
-    MALAYSIA = 'Malaysia'
-    MALTA = 'Malta'
-    MAURITIUS = 'Mauritius'
-    MEXICO = 'Mexico'
-    MONACO = 'Monaco'
-    MONGOLIA = 'Mongolia'
-    MONTENEGRO = 'Montenegro'
-    NETHERLANDS = 'Netherlands'
-    NEW_ZEALAND = 'New Zealand'
-    NORWAY = 'Norway'
-    PANAMA = 'Panama'
-    PERU = 'Peru'
-    PHILIPPINES = 'Philippines'
-    POLAND = 'Poland'
-    PORTUGAL = 'Portugal'
-    PUERTO_RICO = 'Puerto Rico'
-    ROMANIA = 'Romania'
-    RUSSIAN_FEDERATION = 'Russian Federation'
-    SINGAPORE = 'Singapore'
-    SOUTH_AFRICA = 'South Africa'
-    SOUTH_KOREA = 'South Korea'
-    SPAIN = 'Spain'
-    SWEDEN = 'Sweden'
-    SWITZERLAND = 'Switzerland'
-    TAIWAN = 'Taiwan'
-    TANZANIA = 'Tanzania'
-    THAILAND = 'Thailand'
-    TURKEY = 'Turkey'
-    U_S__VIRGIN_ISLANDS = 'U.S. Virgin Islands'
-    UNITED_ARAB_EMIRATES = 'United Arab Emirates'
-    UNITED_KINGDOM = 'United Kingdom'
-    UNITED_STATES = 'United States'
-    URUGUAY = 'Uruguay'
-    VIETNAM = 'Vietnam'
+    ALBANIA = "Albania"
+    ARGENTINA = "Argentina"
+    AUSTRALIA = "Australia"
+    AUSTRIA = "Austria"
+    AZERBAIJAN = "Azerbaijan"
+    BAHAMAS = "Bahamas"
+    BARBADOS = "Barbados"
+    BELGIUM = "Belgium"
+    BERMUDA = "Bermuda"
+    BRAZIL = "Brazil"
+    BRITISH_VIRGIN_ISLANDS = "British Virgin Islands"
+    CAMBODIA = "Cambodia"
+    CANADA = "Canada"
+    CAYMAN_ISLANDS = "Cayman Islands"
+    CHILE = "Chile"
+    CHINA = "China"
+    COLOMBIA = "Colombia"
+    COSTA_RICA = "Costa Rica"
+    CYPRUS = "Cyprus"
+    CZECH_REPUBLIC = "Czech Republic"
+    DENMARK = "Denmark"
+    DOMINICAN_REPUBLIC = "Dominican Republic"
+    EGYPT = "Egypt"
+    FAROE_ISLANDS = "Faroe Islands"
+    FINLAND = "Finland"
+    FRANCE = "France"
+    GERMANY = "Germany"
+    GIBRALTAR = "Gibraltar"
+    GREECE = "Greece"
+    HONG_KONG = "Hong Kong"
+    HUNGARY = "Hungary"
+    ICELAND = "Iceland"
+    INDIA = "India"
+    INDONESIA = "Indonesia"
+    IRELAND = "Ireland"
+    ISRAEL = "Israel"
+    ITALY = "Italy"
+    JAMAICA = "Jamaica"
+    JAPAN = "Japan"
+    JORDAN = "Jordan"
+    KAZAKHSTAN = "Kazakhstan"
+    LUXEMBOURG = "Luxembourg"
+    MACAU = "Macau"
+    MACEDONIA = "Macedonia"
+    MALAYSIA = "Malaysia"
+    MALTA = "Malta"
+    MAURITIUS = "Mauritius"
+    MEXICO = "Mexico"
+    MONACO = "Monaco"
+    MONGOLIA = "Mongolia"
+    MONTENEGRO = "Montenegro"
+    NETHERLANDS = "Netherlands"
+    NEW_ZEALAND = "New Zealand"
+    NORWAY = "Norway"
+    PANAMA = "Panama"
+    PERU = "Peru"
+    PHILIPPINES = "Philippines"
+    POLAND = "Poland"
+    PORTUGAL = "Portugal"
+    PUERTO_RICO = "Puerto Rico"
+    ROMANIA = "Romania"
+    RUSSIAN_FEDERATION = "Russian Federation"
+    SINGAPORE = "Singapore"
+    SOUTH_AFRICA = "South Africa"
+    SOUTH_KOREA = "South Korea"
+    SPAIN = "Spain"
+    SWEDEN = "Sweden"
+    SWITZERLAND = "Switzerland"
+    TAIWAN = "Taiwan"
+    TANZANIA = "Tanzania"
+    THAILAND = "Thailand"
+    TURKEY = "Turkey"
+    U_S__VIRGIN_ISLANDS = "U.S. Virgin Islands"
+    UNITED_ARAB_EMIRATES = "United Arab Emirates"
+    UNITED_KINGDOM = "United Kingdom"
+    UNITED_STATES = "United States"
+    URUGUAY = "Uruguay"
+    VIETNAM = "Vietnam"
 
 
 class Exchange(Enum):
@@ -568,182 +598,182 @@ class Exchange(Enum):
 
 
 class Index(Enum):
-    DOW_JONES_COMPOSITE_AVERAGE = 'Dow Jones Composite Average'
-    DOW_JONES_INDUSTRIAL_AVERAGE = 'Dow Jones Industrial Average'
-    DOW_JONES_TRANSPORTATION_AVERAGE = 'Dow Jones Transportation Average'
-    DOW_JONES_UTILITY_AVERAGE = 'Dow Jones Utility Average'
-    KBW_NASDAQ_BANK_INDEX = 'KBW NASDAQ BANK INDEX'
-    MINI_RUSSELL_2000_INDEX = 'MINI RUSSELL 2000 INDEX'
-    NASDAQ_100 = 'NASDAQ 100'
-    NASDAQ_100_TECHNOLOGY_SECTOR = 'NASDAQ 100 TECHNOLOGY SECTOR'
-    NASDAQ_BANK = 'NASDAQ BANK'
-    NASDAQ_BIOTECHNOLOGY = 'NASDAQ BIOTECHNOLOGY'
-    NASDAQ_COMPOSITE = 'NASDAQ COMPOSITE'
-    NASDAQ_COMPUTER = 'NASDAQ COMPUTER'
-    NASDAQ_GOLDEN_DRAGON_CHINA_INDEX = 'NASDAQ GOLDEN DRAGON CHINA INDEX'
-    NASDAQ_INDUSTRIAL = 'NASDAQ INDUSTRIAL'
-    NASDAQ_INSURANCE = 'NASDAQ INSURANCE'
-    NASDAQ_OTHER_FINANCE = 'NASDAQ OTHER FINANCE'
-    NASDAQ_TELECOMMUNICATIONS = 'NASDAQ TELECOMMUNICATIONS'
-    NASDAQ_TRANSPORTATION = 'NASDAQ TRANSPORTATION'
-    NASDAQ_US_BENCHMARK_FOOD_PRODUCERS_INDEX = 'NASDAQ US BENCHMARK FOOD PRODUCERS INDEX'
-    NYSE_ARCA_MAJOR_MARKET = 'NYSE ARCA MAJOR MARKET'
-    PHLX_GOLD_AND_SILVER_SECTOR_INDEX = 'PHLX GOLD AND SILVER SECTOR INDEX'
-    PHLX_HOUSING_SECTOR = 'PHLX HOUSING SECTOR'
-    PHLX_OIL_SERVICE_SECTOR = 'PHLX OIL SERVICE SECTOR'
-    PHLX_SEMICONDUCTOR = 'PHLX SEMICONDUCTOR'
-    PHLX_UTILITY_SECTOR = 'PHLX UTILITY SECTOR'
-    RUSSELL_1000 = 'RUSSELL 1000'
-    RUSSELL_2000 = 'RUSSELL 2000'
-    RUSSELL_3000 = 'RUSSELL 3000'
-    SANDP_100 = 'S&P 100'
-    SANDP_400 = 'S&P 400'
-    SANDP_500 = 'S&P 500'
-    SANDP_500_COMMUNICATION_SERVICES = 'S&P 500 Communication Services'
-    SANDP_500_CONSUMER_DISCRETIONARY = 'S&P 500 Consumer Discretionary'
-    SANDP_500_CONSUMER_STAPLES = 'S&P 500 Consumer Staples'
-    SANDP_500_ESG_INDEX = 'S&P 500 ESG INDEX'
-    SANDP_500_ENERGY = 'S&P 500 Energy'
-    SANDP_500_FINANCIALS = 'S&P 500 Financials'
-    SANDP_500_HEALTH_CARE = 'S&P 500 Health Care'
-    SANDP_500_INDUSTRIALS = 'S&P 500 Industrials'
-    SANDP_500_INFORMATION_TECHNOLOGY = 'S&P 500 Information Technology'
-    SANDP_500_MATERIALS = 'S&P 500 Materials'
-    SANDP_500_REAL_ESTATE = 'S&P 500 Real Estate'
-    SANDP_500_UTILITIES = 'S&P 500 Utilities'
+    DOW_JONES_COMPOSITE_AVERAGE = "Dow Jones Composite Average"
+    DOW_JONES_INDUSTRIAL_AVERAGE = "Dow Jones Industrial Average"
+    DOW_JONES_TRANSPORTATION_AVERAGE = "Dow Jones Transportation Average"
+    DOW_JONES_UTILITY_AVERAGE = "Dow Jones Utility Average"
+    KBW_NASDAQ_BANK_INDEX = "KBW NASDAQ BANK INDEX"
+    MINI_RUSSELL_2000_INDEX = "MINI RUSSELL 2000 INDEX"
+    NASDAQ_100 = "NASDAQ 100"
+    NASDAQ_100_TECHNOLOGY_SECTOR = "NASDAQ 100 TECHNOLOGY SECTOR"
+    NASDAQ_BANK = "NASDAQ BANK"
+    NASDAQ_BIOTECHNOLOGY = "NASDAQ BIOTECHNOLOGY"
+    NASDAQ_COMPOSITE = "NASDAQ COMPOSITE"
+    NASDAQ_COMPUTER = "NASDAQ COMPUTER"
+    NASDAQ_GOLDEN_DRAGON_CHINA_INDEX = "NASDAQ GOLDEN DRAGON CHINA INDEX"
+    NASDAQ_INDUSTRIAL = "NASDAQ INDUSTRIAL"
+    NASDAQ_INSURANCE = "NASDAQ INSURANCE"
+    NASDAQ_OTHER_FINANCE = "NASDAQ OTHER FINANCE"
+    NASDAQ_TELECOMMUNICATIONS = "NASDAQ TELECOMMUNICATIONS"
+    NASDAQ_TRANSPORTATION = "NASDAQ TRANSPORTATION"
+    NASDAQ_US_BENCHMARK_FOOD_PRODUCERS_INDEX = "NASDAQ US BENCHMARK FOOD PRODUCERS INDEX"
+    NYSE_ARCA_MAJOR_MARKET = "NYSE ARCA MAJOR MARKET"
+    PHLX_GOLD_AND_SILVER_SECTOR_INDEX = "PHLX GOLD AND SILVER SECTOR INDEX"
+    PHLX_HOUSING_SECTOR = "PHLX HOUSING SECTOR"
+    PHLX_OIL_SERVICE_SECTOR = "PHLX OIL SERVICE SECTOR"
+    PHLX_SEMICONDUCTOR = "PHLX SEMICONDUCTOR"
+    PHLX_UTILITY_SECTOR = "PHLX UTILITY SECTOR"
+    RUSSELL_1000 = "RUSSELL 1000"
+    RUSSELL_2000 = "RUSSELL 2000"
+    RUSSELL_3000 = "RUSSELL 3000"
+    SANDP_100 = "S&P 100"
+    SANDP_400 = "S&P 400"
+    SANDP_500 = "S&P 500"
+    SANDP_500_COMMUNICATION_SERVICES = "S&P 500 Communication Services"
+    SANDP_500_CONSUMER_DISCRETIONARY = "S&P 500 Consumer Discretionary"
+    SANDP_500_CONSUMER_STAPLES = "S&P 500 Consumer Staples"
+    SANDP_500_ESG_INDEX = "S&P 500 ESG INDEX"
+    SANDP_500_ENERGY = "S&P 500 Energy"
+    SANDP_500_FINANCIALS = "S&P 500 Financials"
+    SANDP_500_HEALTH_CARE = "S&P 500 Health Care"
+    SANDP_500_INDUSTRIALS = "S&P 500 Industrials"
+    SANDP_500_INFORMATION_TECHNOLOGY = "S&P 500 Information Technology"
+    SANDP_500_MATERIALS = "S&P 500 Materials"
+    SANDP_500_REAL_ESTATE = "S&P 500 Real Estate"
+    SANDP_500_UTILITIES = "S&P 500 Utilities"
 
 
 class Industry(Enum):
-    ADVERTISINGMARKETING_SERVICES = 'Advertising/Marketing Services'
-    AEROSPACE_AND_DEFENSE = 'Aerospace & Defense'
-    AGRICULTURAL_COMMODITIESMILLING = 'Agricultural Commodities/Milling'
-    AIR_FREIGHTCOURIERS = 'Air Freight/Couriers'
-    AIRLINES = 'Airlines'
-    ALTERNATIVE_POWER_GENERATION = 'Alternative Power Generation'
-    ALUMINUM = 'Aluminum'
-    APPARELFOOTWEAR = 'Apparel/Footwear'
-    APPARELFOOTWEAR_RETAIL = 'Apparel/Footwear Retail'
-    AUTO_PARTS_OEM = 'Auto Parts: OEM'
-    AUTOMOTIVE_AFTERMARKET = 'Automotive Aftermarket'
-    BEVERAGES_ALCOHOLIC = 'Beverages: Alcoholic'
-    BEVERAGES_NONALCOHOLIC = 'Beverages: Non-Alcoholic'
-    BIOTECHNOLOGY = 'Biotechnology'
-    BROADCASTING = 'Broadcasting'
-    BUILDING_PRODUCTS = 'Building Products'
-    CABLESATELLITE_TV = 'Cable/Satellite TV'
-    CASINOSGAMING = 'Casinos/Gaming'
-    CATALOGSPECIALTY_DISTRIBUTION = 'Catalog/Specialty Distribution'
-    CHEMICALS_AGRICULTURAL = 'Chemicals: Agricultural'
-    CHEMICALS_MAJOR_DIVERSIFIED = 'Chemicals: Major Diversified'
-    CHEMICALS_SPECIALTY = 'Chemicals: Specialty'
-    COAL = 'Coal'
-    COMMERCIAL_PRINTINGFORMS = 'Commercial Printing/Forms'
-    COMPUTER_COMMUNICATIONS = 'Computer Communications'
-    COMPUTER_PERIPHERALS = 'Computer Peripherals'
-    COMPUTER_PROCESSING_HARDWARE = 'Computer Processing Hardware'
-    CONSTRUCTION_MATERIALS = 'Construction Materials'
-    CONSUMER_SUNDRIES = 'Consumer Sundries'
-    CONTAINERSPACKAGING = 'Containers/Packaging'
-    CONTRACT_DRILLING = 'Contract Drilling'
-    DATA_PROCESSING_SERVICES = 'Data Processing Services'
-    DEPARTMENT_STORES = 'Department Stores'
-    DISCOUNT_STORES = 'Discount Stores'
-    DRUGSTORE_CHAINS = 'Drugstore Chains'
-    ELECTRIC_UTILITIES = 'Electric Utilities'
-    ELECTRICAL_PRODUCTS = 'Electrical Products'
-    ELECTRONIC_COMPONENTS = 'Electronic Components'
-    ELECTRONIC_EQUIPMENTINSTRUMENTS = 'Electronic Equipment/Instruments'
-    ELECTRONIC_PRODUCTION_EQUIPMENT = 'Electronic Production Equipment'
-    ELECTRONICS_DISTRIBUTORS = 'Electronics Distributors'
-    ELECTRONICSAPPLIANCE_STORES = 'Electronics/Appliance Stores'
-    ELECTRONICSAPPLIANCES = 'Electronics/Appliances'
-    ENGINEERING_AND_CONSTRUCTION = 'Engineering & Construction'
-    ENVIRONMENTAL_SERVICES = 'Environmental Services'
-    FINANCERENTALLEASING = 'Finance/Rental/Leasing'
-    FINANCIAL_CONGLOMERATES = 'Financial Conglomerates'
-    FINANCIAL_PUBLISHINGSERVICES = 'Financial Publishing/Services'
-    FOOD_DISTRIBUTORS = 'Food Distributors'
-    FOOD_RETAIL = 'Food Retail'
-    FOOD_MAJOR_DIVERSIFIED = 'Food: Major Diversified'
-    FOOD_MEATFISHDAIRY = 'Food: Meat/Fish/Dairy'
-    FOOD_SPECIALTYCANDY = 'Food: Specialty/Candy'
-    FOREST_PRODUCTS = 'Forest Products'
-    GAS_DISTRIBUTORS = 'Gas Distributors'
-    GENERAL_GOVERNMENT = 'General Government'
-    HOME_FURNISHINGS = 'Home Furnishings'
-    HOME_IMPROVEMENT_CHAINS = 'Home Improvement Chains'
-    HOMEBUILDING = 'Homebuilding'
-    HOSPITALNURSING_MANAGEMENT = 'Hospital/Nursing Management'
-    HOTELSRESORTSCRUISE_LINES = 'Hotels/Resorts/Cruise lines'
-    HOUSEHOLDPERSONAL_CARE = 'Household/Personal Care'
-    INDUSTRIAL_CONGLOMERATES = 'Industrial Conglomerates'
-    INDUSTRIAL_MACHINERY = 'Industrial Machinery'
-    INDUSTRIAL_SPECIALTIES = 'Industrial Specialties'
-    INFORMATION_TECHNOLOGY_SERVICES = 'Information Technology Services'
-    INSURANCE_BROKERSSERVICES = 'Insurance Brokers/Services'
-    INTEGRATED_OIL = 'Integrated Oil'
-    INTERNET_RETAIL = 'Internet Retail'
-    INTERNET_SOFTWARESERVICES = 'Internet Software/Services'
-    INVESTMENT_BANKSBROKERS = 'Investment Banks/Brokers'
-    INVESTMENT_MANAGERS = 'Investment Managers'
-    INVESTMENT_TRUSTSMUTUAL_FUNDS = 'Investment Trusts/Mutual Funds'
-    LIFEHEALTH_INSURANCE = 'Life/Health Insurance'
-    MAJOR_BANKS = 'Major Banks'
-    MAJOR_TELECOMMUNICATIONS = 'Major Telecommunications'
-    MANAGED_HEALTH_CARE = 'Managed Health Care'
-    MARINE_SHIPPING = 'Marine Shipping'
-    MEDIA_CONGLOMERATES = 'Media Conglomerates'
-    MEDICAL_DISTRIBUTORS = 'Medical Distributors'
-    MEDICAL_SPECIALTIES = 'Medical Specialties'
-    MEDICALNURSING_SERVICES = 'Medical/Nursing Services'
-    METAL_FABRICATION = 'Metal Fabrication'
-    MISCELLANEOUS = 'Miscellaneous'
-    MISCELLANEOUS_COMMERCIAL_SERVICES = 'Miscellaneous Commercial Services'
-    MISCELLANEOUS_MANUFACTURING = 'Miscellaneous Manufacturing'
-    MOTOR_VEHICLES = 'Motor Vehicles'
-    MOVIESENTERTAINMENT = 'Movies/Entertainment'
-    MULTILINE_INSURANCE = 'Multi-Line Insurance'
-    OFFICE_EQUIPMENTSUPPLIES = 'Office Equipment/Supplies'
-    OIL_AND_GAS_PIPELINES = 'Oil & Gas Pipelines'
-    OIL_AND_GAS_PRODUCTION = 'Oil & Gas Production'
-    OIL_REFININGMARKETING = 'Oil Refining/Marketing'
-    OILFIELD_SERVICESEQUIPMENT = 'Oilfield Services/Equipment'
-    OTHER_CONSUMER_SERVICES = 'Other Consumer Services'
-    OTHER_CONSUMER_SPECIALTIES = 'Other Consumer Specialties'
-    OTHER_METALSMINERALS = 'Other Metals/Minerals'
-    OTHER_TRANSPORTATION = 'Other Transportation'
-    PACKAGED_SOFTWARE = 'Packaged Software'
-    PERSONNEL_SERVICES = 'Personnel Services'
-    PHARMACEUTICALS_GENERIC = 'Pharmaceuticals: Generic'
-    PHARMACEUTICALS_MAJOR = 'Pharmaceuticals: Major'
-    PHARMACEUTICALS_OTHER = 'Pharmaceuticals: Other'
-    PRECIOUS_METALS = 'Precious Metals'
-    PROPERTYCASUALTY_INSURANCE = 'Property/Casualty Insurance'
-    PUBLISHING_BOOKSMAGAZINES = 'Publishing: Books/Magazines'
-    PUBLISHING_NEWSPAPERS = 'Publishing: Newspapers'
-    PULP_AND_PAPER = 'Pulp & Paper'
-    RAILROADS = 'Railroads'
-    REAL_ESTATE_DEVELOPMENT = 'Real Estate Development'
-    REAL_ESTATE_INVESTMENT_TRUSTS = 'Real Estate Investment Trusts'
-    RECREATIONAL_PRODUCTS = 'Recreational Products'
-    REGIONAL_BANKS = 'Regional Banks'
-    RESTAURANTS = 'Restaurants'
-    SAVINGS_BANKS = 'Savings Banks'
-    SEMICONDUCTORS = 'Semiconductors'
-    SERVICES_TO_THE_HEALTH_INDUSTRY = 'Services to the Health Industry'
-    SPECIALTY_INSURANCE = 'Specialty Insurance'
-    SPECIALTY_STORES = 'Specialty Stores'
-    SPECIALTY_TELECOMMUNICATIONS = 'Specialty Telecommunications'
-    STEEL = 'Steel'
-    TELECOMMUNICATIONS_EQUIPMENT = 'Telecommunications Equipment'
-    TEXTILES = 'Textiles'
-    TOBACCO = 'Tobacco'
-    TOOLS_AND_HARDWARE = 'Tools & Hardware'
-    TRUCKING = 'Trucking'
-    TRUCKSCONSTRUCTIONFARM_MACHINERY = 'Trucks/Construction/Farm Machinery'
-    WATER_UTILITIES = 'Water Utilities'
-    WHOLESALE_DISTRIBUTORS = 'Wholesale Distributors'
-    WIRELESS_TELECOMMUNICATIONS = 'Wireless Telecommunications'
+    ADVERTISINGMARKETING_SERVICES = "Advertising/Marketing Services"
+    AEROSPACE_AND_DEFENSE = "Aerospace & Defense"
+    AGRICULTURAL_COMMODITIESMILLING = "Agricultural Commodities/Milling"
+    AIR_FREIGHTCOURIERS = "Air Freight/Couriers"
+    AIRLINES = "Airlines"
+    ALTERNATIVE_POWER_GENERATION = "Alternative Power Generation"
+    ALUMINUM = "Aluminum"
+    APPARELFOOTWEAR = "Apparel/Footwear"
+    APPARELFOOTWEAR_RETAIL = "Apparel/Footwear Retail"
+    AUTO_PARTS_OEM = "Auto Parts: OEM"
+    AUTOMOTIVE_AFTERMARKET = "Automotive Aftermarket"
+    BEVERAGES_ALCOHOLIC = "Beverages: Alcoholic"
+    BEVERAGES_NONALCOHOLIC = "Beverages: Non-Alcoholic"
+    BIOTECHNOLOGY = "Biotechnology"
+    BROADCASTING = "Broadcasting"
+    BUILDING_PRODUCTS = "Building Products"
+    CABLESATELLITE_TV = "Cable/Satellite TV"
+    CASINOSGAMING = "Casinos/Gaming"
+    CATALOGSPECIALTY_DISTRIBUTION = "Catalog/Specialty Distribution"
+    CHEMICALS_AGRICULTURAL = "Chemicals: Agricultural"
+    CHEMICALS_MAJOR_DIVERSIFIED = "Chemicals: Major Diversified"
+    CHEMICALS_SPECIALTY = "Chemicals: Specialty"
+    COAL = "Coal"
+    COMMERCIAL_PRINTINGFORMS = "Commercial Printing/Forms"
+    COMPUTER_COMMUNICATIONS = "Computer Communications"
+    COMPUTER_PERIPHERALS = "Computer Peripherals"
+    COMPUTER_PROCESSING_HARDWARE = "Computer Processing Hardware"
+    CONSTRUCTION_MATERIALS = "Construction Materials"
+    CONSUMER_SUNDRIES = "Consumer Sundries"
+    CONTAINERSPACKAGING = "Containers/Packaging"
+    CONTRACT_DRILLING = "Contract Drilling"
+    DATA_PROCESSING_SERVICES = "Data Processing Services"
+    DEPARTMENT_STORES = "Department Stores"
+    DISCOUNT_STORES = "Discount Stores"
+    DRUGSTORE_CHAINS = "Drugstore Chains"
+    ELECTRIC_UTILITIES = "Electric Utilities"
+    ELECTRICAL_PRODUCTS = "Electrical Products"
+    ELECTRONIC_COMPONENTS = "Electronic Components"
+    ELECTRONIC_EQUIPMENTINSTRUMENTS = "Electronic Equipment/Instruments"
+    ELECTRONIC_PRODUCTION_EQUIPMENT = "Electronic Production Equipment"
+    ELECTRONICS_DISTRIBUTORS = "Electronics Distributors"
+    ELECTRONICSAPPLIANCE_STORES = "Electronics/Appliance Stores"
+    ELECTRONICSAPPLIANCES = "Electronics/Appliances"
+    ENGINEERING_AND_CONSTRUCTION = "Engineering & Construction"
+    ENVIRONMENTAL_SERVICES = "Environmental Services"
+    FINANCERENTALLEASING = "Finance/Rental/Leasing"
+    FINANCIAL_CONGLOMERATES = "Financial Conglomerates"
+    FINANCIAL_PUBLISHINGSERVICES = "Financial Publishing/Services"
+    FOOD_DISTRIBUTORS = "Food Distributors"
+    FOOD_RETAIL = "Food Retail"
+    FOOD_MAJOR_DIVERSIFIED = "Food: Major Diversified"
+    FOOD_MEATFISHDAIRY = "Food: Meat/Fish/Dairy"
+    FOOD_SPECIALTYCANDY = "Food: Specialty/Candy"
+    FOREST_PRODUCTS = "Forest Products"
+    GAS_DISTRIBUTORS = "Gas Distributors"
+    GENERAL_GOVERNMENT = "General Government"
+    HOME_FURNISHINGS = "Home Furnishings"
+    HOME_IMPROVEMENT_CHAINS = "Home Improvement Chains"
+    HOMEBUILDING = "Homebuilding"
+    HOSPITALNURSING_MANAGEMENT = "Hospital/Nursing Management"
+    HOTELSRESORTSCRUISE_LINES = "Hotels/Resorts/Cruise lines"
+    HOUSEHOLDPERSONAL_CARE = "Household/Personal Care"
+    INDUSTRIAL_CONGLOMERATES = "Industrial Conglomerates"
+    INDUSTRIAL_MACHINERY = "Industrial Machinery"
+    INDUSTRIAL_SPECIALTIES = "Industrial Specialties"
+    INFORMATION_TECHNOLOGY_SERVICES = "Information Technology Services"
+    INSURANCE_BROKERSSERVICES = "Insurance Brokers/Services"
+    INTEGRATED_OIL = "Integrated Oil"
+    INTERNET_RETAIL = "Internet Retail"
+    INTERNET_SOFTWARESERVICES = "Internet Software/Services"
+    INVESTMENT_BANKSBROKERS = "Investment Banks/Brokers"
+    INVESTMENT_MANAGERS = "Investment Managers"
+    INVESTMENT_TRUSTSMUTUAL_FUNDS = "Investment Trusts/Mutual Funds"
+    LIFEHEALTH_INSURANCE = "Life/Health Insurance"
+    MAJOR_BANKS = "Major Banks"
+    MAJOR_TELECOMMUNICATIONS = "Major Telecommunications"
+    MANAGED_HEALTH_CARE = "Managed Health Care"
+    MARINE_SHIPPING = "Marine Shipping"
+    MEDIA_CONGLOMERATES = "Media Conglomerates"
+    MEDICAL_DISTRIBUTORS = "Medical Distributors"
+    MEDICAL_SPECIALTIES = "Medical Specialties"
+    MEDICALNURSING_SERVICES = "Medical/Nursing Services"
+    METAL_FABRICATION = "Metal Fabrication"
+    MISCELLANEOUS = "Miscellaneous"
+    MISCELLANEOUS_COMMERCIAL_SERVICES = "Miscellaneous Commercial Services"
+    MISCELLANEOUS_MANUFACTURING = "Miscellaneous Manufacturing"
+    MOTOR_VEHICLES = "Motor Vehicles"
+    MOVIESENTERTAINMENT = "Movies/Entertainment"
+    MULTILINE_INSURANCE = "Multi-Line Insurance"
+    OFFICE_EQUIPMENTSUPPLIES = "Office Equipment/Supplies"
+    OIL_AND_GAS_PIPELINES = "Oil & Gas Pipelines"
+    OIL_AND_GAS_PRODUCTION = "Oil & Gas Production"
+    OIL_REFININGMARKETING = "Oil Refining/Marketing"
+    OILFIELD_SERVICESEQUIPMENT = "Oilfield Services/Equipment"
+    OTHER_CONSUMER_SERVICES = "Other Consumer Services"
+    OTHER_CONSUMER_SPECIALTIES = "Other Consumer Specialties"
+    OTHER_METALSMINERALS = "Other Metals/Minerals"
+    OTHER_TRANSPORTATION = "Other Transportation"
+    PACKAGED_SOFTWARE = "Packaged Software"
+    PERSONNEL_SERVICES = "Personnel Services"
+    PHARMACEUTICALS_GENERIC = "Pharmaceuticals: Generic"
+    PHARMACEUTICALS_MAJOR = "Pharmaceuticals: Major"
+    PHARMACEUTICALS_OTHER = "Pharmaceuticals: Other"
+    PRECIOUS_METALS = "Precious Metals"
+    PROPERTYCASUALTY_INSURANCE = "Property/Casualty Insurance"
+    PUBLISHING_BOOKSMAGAZINES = "Publishing: Books/Magazines"
+    PUBLISHING_NEWSPAPERS = "Publishing: Newspapers"
+    PULP_AND_PAPER = "Pulp & Paper"
+    RAILROADS = "Railroads"
+    REAL_ESTATE_DEVELOPMENT = "Real Estate Development"
+    REAL_ESTATE_INVESTMENT_TRUSTS = "Real Estate Investment Trusts"
+    RECREATIONAL_PRODUCTS = "Recreational Products"
+    REGIONAL_BANKS = "Regional Banks"
+    RESTAURANTS = "Restaurants"
+    SAVINGS_BANKS = "Savings Banks"
+    SEMICONDUCTORS = "Semiconductors"
+    SERVICES_TO_THE_HEALTH_INDUSTRY = "Services to the Health Industry"
+    SPECIALTY_INSURANCE = "Specialty Insurance"
+    SPECIALTY_STORES = "Specialty Stores"
+    SPECIALTY_TELECOMMUNICATIONS = "Specialty Telecommunications"
+    STEEL = "Steel"
+    TELECOMMUNICATIONS_EQUIPMENT = "Telecommunications Equipment"
+    TEXTILES = "Textiles"
+    TOBACCO = "Tobacco"
+    TOOLS_AND_HARDWARE = "Tools & Hardware"
+    TRUCKING = "Trucking"
+    TRUCKSCONSTRUCTIONFARM_MACHINERY = "Trucks/Construction/Farm Machinery"
+    WATER_UTILITIES = "Water Utilities"
+    WHOLESALE_DISTRIBUTORS = "Wholesale Distributors"
+    WIRELESS_TELECOMMUNICATIONS = "Wireless Telecommunications"
 
 
 class Sector(Enum):
@@ -841,11 +871,11 @@ class Market(Enum):
 
     @classmethod
     def names(cls):
-        return list(map(lambda c: c.name, cls))
+        return [c.name for c in cls]
 
     @classmethod
     def values(cls):
-        return list(map(lambda c: c.value, cls))
+        return [c.value for c in cls]
 
 
 class Region(Enum):
@@ -888,6 +918,7 @@ class IndexSymbol(Enum):
         >>> ss.set_index(IndexSymbol.SP500)
         >>> df = ss.get()  # Returns only S&P 500 constituents
     """
+
     # Major US Indices
     SP500 = ("SP;SPX", "S&P 500")
     NASDAQ_100 = ("NASDAQ;NDX", "NASDAQ 100")
@@ -930,7 +961,10 @@ class IndexSymbol(Enum):
     NASDAQ_GOLDEN_DRAGON_CHINA = ("NASDAQ;HXC", "NASDAQ Golden Dragon China")
     NASDAQ_100_TECHNOLOGY = ("NASDAQ;NDXT", "NASDAQ-100 Technology Sector")
     NASDAQ_INNOVATORS_COMPLETION = ("NASDAQ;NCX", "Nasdaq Innovators Completion Cap")
-    NASDAQ_REAL_ESTATE_FINANCIAL = ("NASDAQ;OFIN", "NASDAQ Real Estate and Other Financial Services")
+    NASDAQ_REAL_ESTATE_FINANCIAL = (
+        "NASDAQ;OFIN",
+        "NASDAQ Real Estate and Other Financial Services",
+    )
     NASDAQ_FOOD_PRODUCERS = ("NASDAQ;NQUSB451020", "NASDAQ US Benchmark Food Producers")
     NASDAQ_CLEAN_EDGE_GREEN_ENERGY = ("NASDAQ;CELS", "NASDAQ Clean Edge Green Energy")
     NASDAQ_METAVERSE = ("NASDAQ;NYMETA", "NASDAQ CB Insights Metaverse US Index")

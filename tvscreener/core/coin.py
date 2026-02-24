@@ -1,5 +1,5 @@
 from tvscreener.core.base import Screener
-from tvscreener.field.coin import CoinField, DEFAULT_COIN_FIELDS
+from tvscreener.field.coin import DEFAULT_COIN_FIELDS, CoinField
 from tvscreener.util import get_url
 
 

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Literal
+from dataclasses import dataclass
 
 from tvscreener.constants.forex import (
     DEFAULT_FOREX_PAIRS,
@@ -51,9 +50,7 @@ class AssetUniverse:
             raise ConfigurationError("timeframes cannot be empty")
         total_weight = sum(self.default_tf_weights.values())
         if not 0.99 <= total_weight <= 1.01:
-            raise ConfigurationError(
-                f"timeframe weights must sum to 1.0, got {total_weight}"
-            )
+            raise ConfigurationError(f"timeframe weights must sum to 1.0, got {total_weight}")
 
 
 FOREX_UNIVERSE = AssetUniverse(

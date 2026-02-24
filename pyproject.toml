@@ -17,6 +17,9 @@ dependencies = [
     "numpy>=2.2.6",
     "pandas>=1.3.0",
     "requests>=2.27.1",
+    "pydantic-settings>=2.0.0",
+    "pyyaml>=6.0.0",
+    "python-dotenv>=1.0.0",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -96,3 +99,8 @@ known-first-party = ["tvscreener"]
 quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: long-running functional tests",
+]

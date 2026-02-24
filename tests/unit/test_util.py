@@ -1,12 +1,11 @@
-import unittest
 import math
+import unittest
 
 from tvscreener import StockField, get_columns_to_request, get_recommendation, millify
 from tvscreener.util import _is_nan
 
 
 class TestUtil(unittest.TestCase):
-
     def test_get_columns_type(self):
         columns = get_columns_to_request(StockField)
         self.assertIsInstance(columns, dict)
@@ -23,26 +22,26 @@ class TestUtil(unittest.TestCase):
         self.assertEqual("B", get_recommendation(1))
 
     def test_millify(self):
-        self.assertEqual("1.000M", millify(10 ** 6))
-        self.assertEqual("10.000M", millify(10 ** 7))
-        self.assertEqual("1.000B", millify(10 ** 9))
+        self.assertEqual("1.000M", millify(10**6))
+        self.assertEqual("10.000M", millify(10**7))
+        self.assertEqual("1.000B", millify(10**9))
 
     def test_millify_thousands(self):
-        self.assertEqual("1.000K", millify(10 ** 3))
-        self.assertEqual("10.000K", millify(10 ** 4))
-        self.assertEqual("100.000K", millify(10 ** 5))
+        self.assertEqual("1.000K", millify(10**3))
+        self.assertEqual("10.000K", millify(10**4))
+        self.assertEqual("100.000K", millify(10**5))
 
     def test_millify_negative(self):
-        self.assertEqual("-1.000M", millify(-10 ** 6))
-        self.assertEqual("-1.000K", millify(-10 ** 3))
-        self.assertEqual("-1.000B", millify(-10 ** 9))
+        self.assertEqual("-1.000M", millify(-(10**6)))
+        self.assertEqual("-1.000K", millify(-(10**3)))
+        self.assertEqual("-1.000B", millify(-(10**9)))
 
     def test_millify_small(self):
         self.assertEqual("100.000", millify(100))
         self.assertEqual("1.000", millify(1))
 
     def test_is_nan_with_nan(self):
-        self.assertTrue(_is_nan(float('nan')))
+        self.assertTrue(_is_nan(float("nan")))
         self.assertTrue(_is_nan(math.nan))
 
     def test_is_nan_with_number(self):

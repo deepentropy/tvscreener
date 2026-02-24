@@ -1,8 +1,12 @@
 import math
-from typing import Type
 
-from tvscreener.field import Field, add_historical, add_rec, add_rec_to_label, \
-    add_historical_to_label
+from tvscreener.field import (
+    Field,
+    add_historical,
+    add_historical_to_label,
+    add_rec,
+    add_rec_to_label,
+)
 
 
 def format_historical_field(field_, historical=1):
@@ -21,7 +25,7 @@ def format_historical_field(field_, historical=1):
     return formatted_technical_field
 
 
-def get_columns_to_request(fields_: Type[Field]):
+def get_columns_to_request(fields_: type[Field]):
     """
     Assemble the technical columns for the request
     :param fields_: type of fields to be requested (StockField, ForexField, CryptoField)
@@ -41,12 +45,18 @@ def get_columns_to_request(fields_: Type[Field]):
     columns = {_format_timed_fields(k): v for k, v in columns.items()}
 
     # Add the recommendation columns
-    rec_columns = {add_rec(field.field_name): add_rec_to_label(field.field_name)
-                   for field in fields_ if field.has_recommendation()}
+    rec_columns = {
+        add_rec(field.field_name): add_rec_to_label(field.field_name)
+        for field in fields_
+        if field.has_recommendation()
+    }
 
     # Add the historical columns
-    hist_columns = {format_historical_field(field): add_historical_to_label(field.label)
-                    for field in fields_ if field.historical}
+    hist_columns = {
+        format_historical_field(field): add_historical_to_label(field.label)
+        for field in fields_
+        if field.historical
+    }
 
     # Merge the dicts
     columns = {**columns, **rec_columns, **hist_columns}
@@ -58,13 +68,13 @@ def _format_timed_fields(field_):
     """Format fields that embed the time interval in the name
     e.g. 'change.1W' -> 'change|1W'"""
     # Split the field by '.'
-    if (field_.startswith("change") or field_.startswith("relative_volume_intraday")) and '.' in field_:
-        num = field_.split('.')[1]
+    if (
+        field_.startswith("change") or field_.startswith("relative_volume_intraday")
+    ) and "." in field_:
+        num = field_.split(".")[1]
         # is num a number?
-        if num.isdigit():
-            return field_.replace('.', '|')
-        elif num in ['1W', '1M']:
-            return field_.replace('.', '|')
+        if num.isdigit() or num in ["1W", "1M"]:
+            return field_.replace(".", "|")
     return field_
 
 
@@ -78,7 +88,7 @@ def get_url(subtype):
 
 
 # Use proper abbreviations including K for thousands
-millnames = ['', 'K', 'M', 'B', 'T']
+millnames = ["", "K", "M", "B", "T"]
 
 
 def millify(n):
@@ -93,11 +103,10 @@ def millify(n):
     is_negative = n < 0
     n = abs(n)
 
-    millidx = max(0, min(len(millnames) - 1,
-                         int(math.floor(0 if n == 0 else math.log10(n) / 3))))
+    millidx = max(0, min(len(millnames) - 1, int(math.floor(0 if n == 0 else math.log10(n) / 3))))
 
-    result = '{:.3f}{}'.format(n / 10 ** (3 * millidx), millnames[millidx])
-    return '-' + result if is_negative else result
+    result = f"{n / 10 ** (3 * millidx):.3f}{millnames[millidx]}"
+    return "-" + result if is_negative else result
 
 
 def _is_nan(value):
@@ -123,8 +132,8 @@ def get_recommendation(rating):
     """
     try:
         rating = float(rating)
-    except (TypeError, ValueError):
-        raise ValueError(f"Invalid rating: {rating}. Rating should be a number.")
+    except (TypeError, ValueError) as e:
+        raise ValueError(f"Invalid rating: {rating}. Rating should be a number.") from e
 
     if rating < 0:
         return "S"  # Sell

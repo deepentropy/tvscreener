@@ -2,6 +2,7 @@
 Export tvscreener field and enum data to JavaScript for the code generator app.
 Run this script to regenerate field-data.js when fields change.
 """
+
 import json
 import sys
 from pathlib import Path
@@ -9,14 +10,13 @@ from pathlib import Path
 # Add parent to path to import tvscreener
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from tvscreener.field.stock import StockField
+from tvscreener.field import IndexSymbol
+from tvscreener.field.bond import BondField
+from tvscreener.field.coin import CoinField
 from tvscreener.field.crypto import CryptoField
 from tvscreener.field.forex import ForexField
-from tvscreener.field.bond import BondField
 from tvscreener.field.futures import FuturesField
-from tvscreener.field.coin import CoinField
-from tvscreener.field import IndexSymbol
-from tvscreener.filter import FilterOperator
+from tvscreener.field.stock import StockField
 
 # Screener configurations
 SCREENERS = {
@@ -73,94 +73,163 @@ SCREENERS = {
 # Field categories based on common use patterns
 FIELD_CATEGORIES = {
     "Metadata": [
-        "NAME", "DESCRIPTION", "SYMBOL", "EXCHANGE", "SECTOR", "INDUSTRY",
-        "COUNTRY", "TYPE", "SUBTYPE", "CURRENCY"
+        "NAME",
+        "DESCRIPTION",
+        "SYMBOL",
+        "EXCHANGE",
+        "SECTOR",
+        "INDUSTRY",
+        "COUNTRY",
+        "TYPE",
+        "SUBTYPE",
+        "CURRENCY",
     ],
     "Price": [
-        "PRICE", "OPEN", "HIGH", "LOW", "CLOSE", "PREMARKET_PRICE",
-        "POSTMARKET_PRICE", "PREMARKET_CHANGE_PERCENT", "POSTMARKET_CHANGE_PERCENT",
-        "PRICE_52_WEEK_HIGH", "PRICE_52_WEEK_LOW", "GAP_PERCENT", "BID", "ASK"
+        "PRICE",
+        "OPEN",
+        "HIGH",
+        "LOW",
+        "CLOSE",
+        "PREMARKET_PRICE",
+        "POSTMARKET_PRICE",
+        "PREMARKET_CHANGE_PERCENT",
+        "POSTMARKET_CHANGE_PERCENT",
+        "PRICE_52_WEEK_HIGH",
+        "PRICE_52_WEEK_LOW",
+        "GAP_PERCENT",
+        "BID",
+        "ASK",
     ],
     "Change": [
-        "CHANGE", "CHANGE_PERCENT", "CHANGE_FROM_OPEN", "CHANGE_FROM_OPEN_PERCENT",
-        "CHANGE_1_HOUR", "CHANGE_4_HOUR", "CHANGE_24_HOUR"
+        "CHANGE",
+        "CHANGE_PERCENT",
+        "CHANGE_FROM_OPEN",
+        "CHANGE_FROM_OPEN_PERCENT",
+        "CHANGE_1_HOUR",
+        "CHANGE_4_HOUR",
+        "CHANGE_24_HOUR",
     ],
     "Volume": [
-        "VOLUME", "AVERAGE_VOLUME_10_DAY", "AVERAGE_VOLUME_30_DAY",
-        "AVERAGE_VOLUME_60_DAY", "AVERAGE_VOLUME_90_DAY", "RELATIVE_VOLUME",
-        "VOLUME_24H", "TOTAL_VALUE_TRADED"
+        "VOLUME",
+        "AVERAGE_VOLUME_10_DAY",
+        "AVERAGE_VOLUME_30_DAY",
+        "AVERAGE_VOLUME_60_DAY",
+        "AVERAGE_VOLUME_90_DAY",
+        "RELATIVE_VOLUME",
+        "VOLUME_24H",
+        "TOTAL_VALUE_TRADED",
     ],
     "Performance": [
-        "PERFORMANCE_1_WEEK", "PERFORMANCE_1_MONTH", "PERFORMANCE_3_MONTH",
-        "PERFORMANCE_6_MONTH", "PERFORMANCE_YEAR_TO_DATE", "PERFORMANCE_1_YEAR",
-        "PERFORMANCE_5_YEAR", "PERFORMANCE_ALL_TIME",
-        "HIGH_52_WEEK_PERFORMANCE", "LOW_52_WEEK_PERFORMANCE"
+        "PERFORMANCE_1_WEEK",
+        "PERFORMANCE_1_MONTH",
+        "PERFORMANCE_3_MONTH",
+        "PERFORMANCE_6_MONTH",
+        "PERFORMANCE_YEAR_TO_DATE",
+        "PERFORMANCE_1_YEAR",
+        "PERFORMANCE_5_YEAR",
+        "PERFORMANCE_ALL_TIME",
+        "HIGH_52_WEEK_PERFORMANCE",
+        "LOW_52_WEEK_PERFORMANCE",
     ],
     "Valuation": [
-        "MARKET_CAPITALIZATION", "ENTERPRISE_VALUE_FQ", "PE_RATIO_TTM",
-        "PRICE_TO_BOOK_FY", "PRICE_TO_SALES_FY", "PRICE_TO_CASH_FLOW_TTM",
-        "PRICE_EARNINGS_TO_GROWTH_TTM", "EV_TO_EBITDA_TTM", "EV_TO_REVENUE_TTM"
+        "MARKET_CAPITALIZATION",
+        "ENTERPRISE_VALUE_FQ",
+        "PE_RATIO_TTM",
+        "PRICE_TO_BOOK_FY",
+        "PRICE_TO_SALES_FY",
+        "PRICE_TO_CASH_FLOW_TTM",
+        "PRICE_EARNINGS_TO_GROWTH_TTM",
+        "EV_TO_EBITDA_TTM",
+        "EV_TO_REVENUE_TTM",
     ],
     "Dividends": [
-        "DIVIDEND_YIELD_FY", "DIVIDENDS_PER_SHARE_FY", "PAYOUT_RATIO_TTM",
-        "DIVIDEND_YIELD_RECENT", "DIVIDENDS_PAID_FY",
-        "DPS_COMMON_STOCK_PRIMARY_ISSUE_GROWTH_FY", "COUPON"
+        "DIVIDEND_YIELD_FY",
+        "DIVIDENDS_PER_SHARE_FY",
+        "PAYOUT_RATIO_TTM",
+        "DIVIDEND_YIELD_RECENT",
+        "DIVIDENDS_PAID_FY",
+        "DPS_COMMON_STOCK_PRIMARY_ISSUE_GROWTH_FY",
+        "COUPON",
     ],
     "Profitability": [
-        "GROSS_MARGIN_TTM", "OPERATING_MARGIN_TTM", "NET_MARGIN_TTM",
-        "RETURN_ON_EQUITY_TTM", "RETURN_ON_ASSETS_TTM", "RETURN_ON_INVESTED_CAPITAL_TTM",
-        "FREE_CASH_FLOW_MARGIN_TTM"
+        "GROSS_MARGIN_TTM",
+        "OPERATING_MARGIN_TTM",
+        "NET_MARGIN_TTM",
+        "RETURN_ON_EQUITY_TTM",
+        "RETURN_ON_ASSETS_TTM",
+        "RETURN_ON_INVESTED_CAPITAL_TTM",
+        "FREE_CASH_FLOW_MARGIN_TTM",
     ],
     "Growth": [
-        "REVENUE_GROWTH_TTM", "EARNINGS_PER_SHARE_DILUTED_GROWTH_TTM",
-        "EARNINGS_PER_SHARE_GROWTH_FY", "REVENUE_GROWTH_FY"
+        "REVENUE_GROWTH_TTM",
+        "EARNINGS_PER_SHARE_DILUTED_GROWTH_TTM",
+        "EARNINGS_PER_SHARE_GROWTH_FY",
+        "REVENUE_GROWTH_FY",
     ],
     "Balance Sheet": [
-        "TOTAL_DEBT_FY", "TOTAL_DEBT_TO_EQUITY_FY", "CURRENT_RATIO_FY",
-        "QUICK_RATIO_FY", "DEBT_TO_ASSET_FY", "TOTAL_ASSETS_FY"
+        "TOTAL_DEBT_FY",
+        "TOTAL_DEBT_TO_EQUITY_FY",
+        "CURRENT_RATIO_FY",
+        "QUICK_RATIO_FY",
+        "DEBT_TO_ASSET_FY",
+        "TOTAL_ASSETS_FY",
     ],
     "Earnings": [
-        "EARNINGS_PER_SHARE_BASIC_TTM", "EARNINGS_PER_SHARE_DILUTED_TTM",
-        "NET_INCOME_FY", "GROSS_PROFIT_FY", "OPERATING_INCOME_FY",
-        "FREE_CASH_FLOW_TTM", "EARNINGS_RELEASE_DATE"
+        "EARNINGS_PER_SHARE_BASIC_TTM",
+        "EARNINGS_PER_SHARE_DILUTED_TTM",
+        "NET_INCOME_FY",
+        "GROSS_PROFIT_FY",
+        "OPERATING_INCOME_FY",
+        "FREE_CASH_FLOW_TTM",
+        "EARNINGS_RELEASE_DATE",
     ],
-    "RSI": [
-        "RELATIVE_STRENGTH_INDEX_7", "RELATIVE_STRENGTH_INDEX_14"
-    ],
-    "MACD": [
-        "MACD_LEVEL_12_26", "MACD_SIGNAL_12_26_9", "MACD_HISTOGRAM_12_26_9"
-    ],
+    "RSI": ["RELATIVE_STRENGTH_INDEX_7", "RELATIVE_STRENGTH_INDEX_14"],
+    "MACD": ["MACD_LEVEL_12_26", "MACD_SIGNAL_12_26_9", "MACD_HISTOGRAM_12_26_9"],
     "Stochastic": [
-        "STOCHASTIC_K_14_3_3", "STOCHASTIC_D_14_3_3",
-        "STOCHASTIC_K_SLOW_14_3_3", "STOCHASTIC_D_SLOW_14_3_3"
+        "STOCHASTIC_K_14_3_3",
+        "STOCHASTIC_D_14_3_3",
+        "STOCHASTIC_K_SLOW_14_3_3",
+        "STOCHASTIC_D_SLOW_14_3_3",
     ],
     "Moving Averages": [
-        "SIMPLE_MOVING_AVERAGE_5", "SIMPLE_MOVING_AVERAGE_10",
-        "SIMPLE_MOVING_AVERAGE_20", "SIMPLE_MOVING_AVERAGE_50",
-        "SIMPLE_MOVING_AVERAGE_100", "SIMPLE_MOVING_AVERAGE_200",
-        "EXPONENTIAL_MOVING_AVERAGE_5", "EXPONENTIAL_MOVING_AVERAGE_10",
-        "EXPONENTIAL_MOVING_AVERAGE_20", "EXPONENTIAL_MOVING_AVERAGE_50",
-        "EXPONENTIAL_MOVING_AVERAGE_100", "EXPONENTIAL_MOVING_AVERAGE_200"
+        "SIMPLE_MOVING_AVERAGE_5",
+        "SIMPLE_MOVING_AVERAGE_10",
+        "SIMPLE_MOVING_AVERAGE_20",
+        "SIMPLE_MOVING_AVERAGE_50",
+        "SIMPLE_MOVING_AVERAGE_100",
+        "SIMPLE_MOVING_AVERAGE_200",
+        "EXPONENTIAL_MOVING_AVERAGE_5",
+        "EXPONENTIAL_MOVING_AVERAGE_10",
+        "EXPONENTIAL_MOVING_AVERAGE_20",
+        "EXPONENTIAL_MOVING_AVERAGE_50",
+        "EXPONENTIAL_MOVING_AVERAGE_100",
+        "EXPONENTIAL_MOVING_AVERAGE_200",
     ],
     "Other Oscillators": [
-        "COMMODITY_CHANNEL_INDEX_20", "AVERAGE_DIRECTIONAL_INDEX_14",
-        "AWESOME_OSCILLATOR", "MOMENTUM_10", "WILLIAMS_PERCENT_RANGE_14",
-        "ULTIMATE_OSCILLATOR_7_14_28", "BULLS_BEARS_POWER"
+        "COMMODITY_CHANNEL_INDEX_20",
+        "AVERAGE_DIRECTIONAL_INDEX_14",
+        "AWESOME_OSCILLATOR",
+        "MOMENTUM_10",
+        "WILLIAMS_PERCENT_RANGE_14",
+        "ULTIMATE_OSCILLATOR_7_14_28",
+        "BULLS_BEARS_POWER",
     ],
     "Volatility": [
-        "AVERAGE_TRUE_RANGE_14", "VOLATILITY_DAY", "VOLATILITY_WEEK",
-        "VOLATILITY_MONTH", "BOLLINGER_UPPER_BAND_20", "BOLLINGER_LOWER_BAND_20"
+        "AVERAGE_TRUE_RANGE_14",
+        "VOLATILITY_DAY",
+        "VOLATILITY_WEEK",
+        "VOLATILITY_MONTH",
+        "BOLLINGER_UPPER_BAND_20",
+        "BOLLINGER_LOWER_BAND_20",
     ],
     "Recommendations": [
-        "RECOMMENDATION_MARK", "RECOMMENDATION_ALL", "RECOMMENDATION_MA",
-        "RECOMMENDATION_OTHER"
+        "RECOMMENDATION_MARK",
+        "RECOMMENDATION_ALL",
+        "RECOMMENDATION_MA",
+        "RECOMMENDATION_OTHER",
     ],
-    "Bond Specific": [
-        "YIELD", "COUPON", "MATURITY_DATE", "RATING", "DURATION", "FACE_VALUE"
-    ],
-    "Crypto Specific": [
-        "CIRCULATING_SUPPLY", "TOTAL_SUPPLY", "MAX_SUPPLY"
-    ]
+    "Bond Specific": ["YIELD", "COUPON", "MATURITY_DATE", "RATING", "DURATION", "FACE_VALUE"],
+    "Crypto Specific": ["CIRCULATING_SUPPLY", "TOTAL_SUPPLY", "MAX_SUPPLY"],
 }
 
 
@@ -195,7 +264,12 @@ def get_field_category(field_name: str) -> str:
         return "Growth"
     if "PERFORMANCE" in name_upper:
         return "Performance"
-    if "PE_" in name_upper or "PRICE_TO" in name_upper or "MARKET_CAP" in name_upper or "EV_" in name_upper:
+    if (
+        "PE_" in name_upper
+        or "PRICE_TO" in name_upper
+        or "MARKET_CAP" in name_upper
+        or "EV_" in name_upper
+    ):
         return "Valuation"
     if "BOLLINGER" in name_upper or "ATR" in name_upper or "VOLATILITY" in name_upper:
         return "Volatility"
@@ -213,15 +287,17 @@ def export_fields(field_enum) -> list:
     fields = []
     for field in field_enum:
         try:
-            fields.append({
-                "name": field.name,
-                "label": field.label,
-                "fieldName": field.field_name,
-                "format": field.format,
-                "interval": getattr(field, 'interval', False),
-                "historical": getattr(field, 'historical', False),
-                "category": get_field_category(field.name)
-            })
+            fields.append(
+                {
+                    "name": field.name,
+                    "label": field.label,
+                    "fieldName": field.field_name,
+                    "format": field.format,
+                    "interval": getattr(field, "interval", False),
+                    "historical": getattr(field, "historical", False),
+                    "category": get_field_category(field.name),
+                }
+            )
         except Exception as e:
             print(f"Warning: Could not export {field.name}: {e}")
     return fields
@@ -246,11 +322,7 @@ def export_index_symbols() -> list:
     """Export IndexSymbol enum values."""
     indices = []
     for idx in IndexSymbol:
-        indices.append({
-            "name": idx.name,
-            "label": idx.label,
-            "symbol": idx.symbol
-        })
+        indices.append({"name": idx.name, "label": idx.label, "symbol": idx.symbol})
     return indices
 
 
@@ -343,7 +415,7 @@ def main():
             "hasIndex": config["hasIndex"],
             "hasMarket": config["hasMarket"],
             "fields": fields,
-            "fieldCount": len(fields)
+            "fieldCount": len(fields),
         }
         print(f"  - {config['name']}: {len(fields)} fields")
 
@@ -356,7 +428,7 @@ def main():
         "symbolTypes": export_symbol_types(),
         "sectors": export_sectors(),
         "timeIntervals": export_time_intervals(),
-        "categories": list(FIELD_CATEGORIES.keys()) + ["Other"]
+        "categories": list(FIELD_CATEGORIES.keys()) + ["Other"],
     }
 
     print(f"  - Exported {len(data['indices'])} indices")
@@ -375,7 +447,7 @@ if (typeof module !== 'undefined' && module.exports) {{
 }}
 """
 
-    output_path.write_text(js_content, encoding='utf-8')
+    output_path.write_text(js_content, encoding="utf-8")
     print(f"  - Written to {output_path}")
     print("Done!")
 

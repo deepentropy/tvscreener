@@ -18,6 +18,8 @@ eggs/
 .eggs/
 lib/
 lib64/
+!/tvscreener/lib/
+!/tvscreener/lib/**
 parts/
 sdist/
 var/
@@ -144,6 +146,9 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# ruff
+.ruff_cache/
 
 # Pyre type checker
 .pyre/

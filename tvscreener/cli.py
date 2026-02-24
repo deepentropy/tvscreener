@@ -4,25 +4,23 @@
 import argparse
 import logging
 import sys
-from typing import Optional
 
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-from tvscreener.screeners.forex_opportunity import ForexOpportunityScreener
-from tvscreener.screeners.forex_strategy import ForexStrategyScanner
-from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS, FOREX_MAJORS, FOREX_MINORS
-from tvscreener.config.universe import AssetUniverse, ConfigurationError
-from tvscreener.constants.stocks import STOCK_UNIVERSE
+from tvscreener.config.loader import load_settings
+from tvscreener.config.universe import FOREX_UNIVERSE, AssetUniverse, ConfigurationError
 from tvscreener.constants.commodity import COMMODITY_UNIVERSE
 from tvscreener.constants.crypto import CRYPTO_UNIVERSE
+from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS, FOREX_MAJORS, FOREX_MINORS
+from tvscreener.constants.stocks import STOCK_UNIVERSE
+from tvscreener.lib.screeners.forex_opportunity import ForexOpportunityScreener, ForexScreenerConfig
+from tvscreener.lib.screeners.forex_strategy import ForexStrategyScanner, StrategyConfig
 
 console = Console()
 logger = logging.getLogger(__name__)
 
 UNIVERSE_MAP: dict[str, AssetUniverse] = {}
-
-from tvscreener.config.universe import FOREX_UNIVERSE
 
 UNIVERSE_MAP["forex"] = FOREX_UNIVERSE
 UNIVERSE_MAP["stocks"] = STOCK_UNIVERSE
@@ -34,20 +32,17 @@ def get_universe(asset_type: str) -> AssetUniverse:
     """Get universe config by asset type with validation."""
     if asset_type not in UNIVERSE_MAP:
         raise ConfigurationError(
-            f"Unknown asset type: {asset_type}. "
-            f"Valid options: {', '.join(UNIVERSE_MAP.keys())}"
+            f"Unknown asset type: {asset_type}. Valid options: {', '.join(UNIVERSE_MAP.keys())}"
         )
     return UNIVERSE_MAP[asset_type]
 
 
 def setup_logging(verbose: bool = False) -> None:
     level = logging.DEBUG if verbose else logging.INFO
-    logging.basicConfig(
-        level=level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
+    logging.basicConfig(level=level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
-def get_pairs(universe: Optional[str], specific: Optional[list[str]]) -> list[str]:
+def get_pairs(universe: str | None, specific: list[str] | None) -> list[str]:
     if specific:
         return specific
     if universe == "majors":
@@ -65,7 +60,8 @@ def run_opportunity_scan(args) -> int:
     console.print(f"[cyan]Scanning {len(pairs)} {args.asset_type} pairs...[/cyan]")
 
     try:
-        screener = ForexOpportunityScreener(pairs=pairs, timeframes=timeframes)
+        config = ForexScreenerConfig(contract_type=args.contract_type)
+        screener = ForexOpportunityScreener(pairs=pairs, timeframes=timeframes, config=config)
 
         with Progress(
             SpinnerColumn(),
@@ -89,7 +85,7 @@ def run_opportunity_scan(args) -> int:
     except Exception as e:
         logger.error(f"Error running scanner: {e}")
         console.print(f"[red]Error: {e}[/red]")
-        return 1
+        return -1
 
 
 def run_strategy_scan(args) -> int:
@@ -102,7 +98,31 @@ def run_strategy_scan(args) -> int:
     )
 
     try:
-        scanner = ForexStrategyScanner(pairs=pairs, timeframes=timeframes)
+        strategy_map = {
+            "trend": "trend_following",
+            "mean_reversion": "mean_reversion",
+            "hybrid": "hybrid",
+            "breakout": "breakout",
+            "all": "all",
+        }
+        strategy_name = strategy_map[args.strategy]
+        strategy_tuple = (strategy_name,) if strategy_name != "all" else ("all",)
+        mr_signals = tuple(args.mr_signal) if args.mr_signal else ()
+
+        config = StrategyConfig(
+            include_strategies=strategy_tuple,
+            direction=args.filter or "all",
+            min_confluence=args.min_confluence,
+            trend_threshold=args.trend_threshold,
+            mr_threshold=args.mr_threshold,
+            min_roc=args.min_roc,
+            min_volume=args.min_volume,
+            max_atr=args.max_atr,
+            min_ma_rating=args.min_ma_rating,
+            mean_reversion_signals=mr_signals,
+            contract_type=args.contract_type,
+        )
+        scanner = ForexStrategyScanner(pairs=pairs, timeframes=timeframes, config=config)
 
         with Progress(
             SpinnerColumn(),
@@ -110,27 +130,7 @@ def run_strategy_scan(args) -> int:
             console=console,
         ) as progress:
             progress.add_task("Fetching data...", total=None)
-
-            if args.strategy == "all":
-                results = scanner.scan()
-            elif args.strategy == "trend":
-                results = scanner.scan_trend_following()
-            elif args.strategy == "mean_reversion":
-                results = scanner.scan_mean_reversion()
-            elif args.strategy == "hybrid":
-                results = scanner.scan_hybrid()
-            elif args.strategy == "breakout":
-                results = scanner.scan_breakout()
-            else:
-                results = scanner.scan()
-
-        # Filter by direction
-        if args.filter:
-            results = (
-                results[results["DIRECTION"] == args.filter]
-                if not results.empty
-                else results
-            )
+            results = scanner.scan()
 
         scanner.print_summary()
 
@@ -146,7 +146,7 @@ def run_strategy_scan(args) -> int:
     except Exception as e:
         logger.error(f"Error running scanner: {e}")
         console.print(f"[red]Error: {e}[/red]")
-        return 1
+        return -1
 
 
 def main():
@@ -156,19 +156,25 @@ def main():
     )
 
     parser.add_argument(
-        "--scanner", "-s", choices=["opportunity", "strategy"], default="strategy"
+        "--config",
+        default=None,
+        help="Path to YAML config (default: tvscreener.yaml)",
     )
+
+    parser.add_argument("--scanner", "-s", choices=["opportunity", "strategy"], default="strategy")
     parser.add_argument(
         "--asset-type",
         choices=["forex", "stocks", "commodity", "crypto"],
         default="forex",
     )
-    parser.add_argument(
-        "--universe", "-u", choices=["majors", "minors", "all"], default="all"
-    )
+    parser.add_argument("--universe", "-u", choices=["majors", "minors", "all"], default=None)
     parser.add_argument("--pairs", nargs="+", help="Specific pairs to scan")
+    parser.add_argument("--timeframes", "-t", default=None, help="Comma-separated timeframes")
     parser.add_argument(
-        "--timeframes", "-t", default="240,60,15", help="Comma-separated timeframes"
+        "--contract-type",
+        choices=["spot", "cfd", "spreadbet", "all"],
+        default=None,
+        help="Contract type to filter (default: cfd)",
     )
     parser.add_argument("--output", "-o", help="Output file (csv/json)")
     parser.add_argument(
@@ -176,18 +182,47 @@ def main():
         choices=["all", "trend", "mean_reversion", "hybrid", "breakout"],
         default="all",
     )
+    parser.add_argument("--filter", choices=["long", "short"], help="Filter by direction")
+    parser.add_argument("--min-volume", type=float, help="Minimum average volume")
+    parser.add_argument("--max-atr", type=float, help="Maximum ATR (volatility proxy)")
+    parser.add_argument("--min-ma-rating", type=float, help="Minimum MA rating (-2 to 2)")
     parser.add_argument(
-        "--filter", choices=["long", "short"], help="Filter by direction"
+        "--mr-signal",
+        choices=["rsi_oversold", "rsi_overbought"],
+        action="append",
+        help="Mean reversion signal (can be specified multiple times)",
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 
     args = parser.parse_args()
     setup_logging(args.verbose)
 
-    if args.scanner == "opportunity":
-        count = run_opportunity_scan(args)
-    else:
-        count = run_strategy_scan(args)
+    settings = load_settings(args.config)
+
+    if args.universe is None:
+        args.universe = settings.default_universe
+    if args.timeframes is None:
+        args.timeframes = settings.default_timeframes
+    if args.contract_type is None:
+        args.contract_type = settings.contract_type
+
+    if args.min_volume is None:
+        args.min_volume = settings.min_volume
+    if args.max_atr is None:
+        args.max_atr = settings.max_atr
+    if args.min_ma_rating is None:
+        args.min_ma_rating = settings.min_ma_rating
+
+    args.min_confluence = settings.min_confluence
+    args.trend_threshold = settings.trend_threshold
+    args.mr_threshold = settings.mr_threshold
+    args.min_roc = settings.min_roc
+
+    count = run_opportunity_scan(args) if args.scanner == "opportunity" else run_strategy_scan(args)
+
+    if count < 0:
+        console.print("\n[bold red]Scan failed[/bold red]")
+        return 2
 
     console.print(f"\n[bold]Total: {count} results[/bold]")
     return 0 if count > 0 else 1

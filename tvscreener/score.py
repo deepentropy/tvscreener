@@ -166,7 +166,15 @@ class ScoringEngine:
             df["FACTOR_BEARISH_COUNT"] = 0
 
         if "DIRECTION" not in df.columns:
-            df["DIRECTION"] = np.where(df.get("ENSEMBLE_SCORE", 0) > 0, "long", "short")
+            if "ENSEMBLE_SCORE" in df.columns:
+                ensemble = df["ENSEMBLE_SCORE"].fillna(0)
+                df["DIRECTION"] = np.where(ensemble > 0, "long", "short")
+            else:
+                # Standalone confluence call: infer direction from bullish/bearish counts.
+                net = (df["TF_CONFLUENCE_LONG"] + df["FACTOR_BULLISH_COUNT"]) - (
+                    df["TF_CONFLUENCE_SHORT"] + df["FACTOR_BEARISH_COUNT"]
+                )
+                df["DIRECTION"] = np.where(net > 0, "long", "short")
 
         df["TOTAL_CONFLUENCE"] = np.where(
             df["DIRECTION"] == "long",

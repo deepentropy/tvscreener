@@ -6,13 +6,20 @@ These functions provide a clean interface between MCP tools and the tvscreener l
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
+import pandas as pd
+
 import tvscreener as tvs
 from tvscreener import (
-    StockField, CryptoField, ForexField, BondField, FuturesField, CoinField,
-    FilterOperator
+    BondField,
+    CoinField,
+    CryptoField,
+    FilterOperator,
+    ForexField,
+    FuturesField,
+    StockField,
 )
-import pandas as pd
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing import Any
@@ -72,11 +79,7 @@ def get_field_enum(field_name: str, asset_type: str = "stock"):
     return None
 
 
-def search_fields(
-    query: str,
-    asset_type: str = "stock",
-    limit: int = 20
-) -> list[dict[str, Any]]:
+def search_fields(query: str, asset_type: str = "stock", limit: int = 20) -> list[dict[str, Any]]:
     """
     Search for available fields by keyword.
 
@@ -97,11 +100,13 @@ def search_fields(
     for f in results:
         # Field value tuple: (display_name, api_field, format, is_technical, is_recommendation)
         value = f.value
-        fields.append({
-            "name": f.name,
-            "display_name": value[0] if len(value) > 0 else f.name,
-            "is_technical": value[3] if len(value) > 3 else False,
-        })
+        fields.append(
+            {
+                "name": f.name,
+                "display_name": value[0] if len(value) > 0 else f.name,
+                "is_technical": value[3] if len(value) > 3 else False,
+            }
+        )
 
     return fields
 
@@ -120,9 +125,17 @@ def get_field_categories(asset_type: str = "stock") -> dict[str, list[str]]:
     field_class = config["field_class"]
 
     category_keywords = [
-        "price", "volume", "moving_average", "rsi", "macd",
-        "bollinger", "earnings", "dividend", "market_cap",
-        "sector", "recommend"
+        "price",
+        "volume",
+        "moving_average",
+        "rsi",
+        "macd",
+        "bollinger",
+        "earnings",
+        "dividend",
+        "market_cap",
+        "sector",
+        "recommend",
     ]
 
     categories = {}
@@ -140,7 +153,7 @@ def custom_screen(
     filters: list[dict[str, Any]] | None = None,
     sort_by: str | None = None,
     ascending: bool = False,
-    limit: int = 25
+    limit: int = 25,
 ) -> pd.DataFrame:
     """
     Flexible screener with custom fields and filters.
@@ -204,7 +217,7 @@ def screen_stocks(
     sectors: list[str] | None = None,
     sort_by: str = "market_cap",
     ascending: bool = False,
-    limit: int = 25
+    limit: int = 25,
 ) -> pd.DataFrame:
     """
     Screen stocks with common filters.
@@ -231,7 +244,7 @@ def screen_stocks(
         StockField.VOLUME,
         StockField.MARKET_CAPITALIZATION,
         StockField.PRICE_TO_EARNINGS_RATIO_TTM,
-        StockField.SECTOR
+        StockField.SECTOR,
     )
 
     if min_price is not None:
@@ -263,7 +276,7 @@ def screen_crypto(
     min_market_cap: float | None = None,
     sort_by: str = "market_cap",
     ascending: bool = False,
-    limit: int = 25
+    limit: int = 25,
 ) -> pd.DataFrame:
     """
     Screen cryptocurrencies with common filters.
@@ -285,7 +298,7 @@ def screen_crypto(
         CryptoField.PRICE,
         CryptoField.CHANGE_PERCENT,
         CryptoField.VOLUME_24H_IN_USD,
-        CryptoField.MARKET_CAPITALIZATION
+        CryptoField.MARKET_CAPITALIZATION,
     )
 
     if min_volume_24h is not None:
@@ -304,10 +317,7 @@ def screen_crypto(
     return cs.get().head(limit)
 
 
-def screen_forex(
-    min_volume: float | None = None,
-    limit: int = 25
-) -> pd.DataFrame:
+def screen_forex(min_volume: float | None = None, limit: int = 25) -> pd.DataFrame:
     """
     Screen forex currency pairs.
 
@@ -320,12 +330,7 @@ def screen_forex(
     """
     fs = tvs.ForexScreener()
 
-    fs.select(
-        ForexField.NAME,
-        ForexField.PRICE,
-        ForexField.CHANGE_PERCENT,
-        ForexField.VOLUME
-    )
+    fs.select(ForexField.NAME, ForexField.PRICE, ForexField.CHANGE_PERCENT, ForexField.VOLUME)
 
     if min_volume is not None:
         fs.where(ForexField.VOLUME, FilterOperator.ABOVE_OR_EQUAL, min_volume)

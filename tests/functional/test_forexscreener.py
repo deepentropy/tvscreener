@@ -1,11 +1,10 @@
 import unittest
 
-from tvscreener import ForexScreener, ForexField, FilterOperator
+from tvscreener import FilterOperator, ForexField, ForexScreener
 from tvscreener.field import Region
 
 
 class TestForexScreener(unittest.TestCase):
-
     def test_len(self):
         fs = ForexScreener()
         df = fs.get()

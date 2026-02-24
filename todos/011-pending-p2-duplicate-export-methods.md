@@ -1,5 +1,5 @@
 ---
-status: pending
+status: complete
 priority: p2
 issue_id: "011"
 tags: [architecture, dry, forex-strategy]
@@ -73,3 +73,9 @@ def export_to_csv(df: pd.DataFrame, path: str, label: str) -> None:
 
 **Learnings:**
 - Both classes evolved separately with similar export needs
+
+### 2026-02-24 - DRY Export Helpers
+
+**Actions:**
+- Extracted shared `to_csv()`, `to_json()`, and Rich/print fallback logic into `tvscreener/lib/screeners/export_helpers.py`
+- Updated both `tvscreener/lib/screeners/forex_opportunity.py` and `tvscreener/lib/screeners/forex_strategy.py` to call the shared helpers while keeping their public APIs and caching behavior intact

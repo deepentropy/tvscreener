@@ -4,13 +4,12 @@ Field presets for common use cases.
 These presets provide curated lists of fields for specific analysis needs.
 """
 
-from tvscreener.field.stock import StockField
+from tvscreener.field.bond import BondField
+from tvscreener.field.coin import CoinField
 from tvscreener.field.crypto import CryptoField
 from tvscreener.field.forex import ForexField
-from tvscreener.field.bond import BondField
 from tvscreener.field.futures import FuturesField
-from tvscreener.field.coin import CoinField
-
+from tvscreener.field.stock import StockField
 
 # =============================================================================
 # STOCK FIELD PRESETS
@@ -270,34 +269,34 @@ COIN_MARKET_FIELDS = [
 
 ALL_PRESETS = {
     # Stock
-    'stock_price': STOCK_PRICE_FIELDS,
-    'stock_volume': STOCK_VOLUME_FIELDS,
-    'stock_valuation': STOCK_VALUATION_FIELDS,
-    'stock_dividend': STOCK_DIVIDEND_FIELDS,
-    'stock_profitability': STOCK_PROFITABILITY_FIELDS,
-    'stock_performance': STOCK_PERFORMANCE_FIELDS,
-    'stock_oscillators': STOCK_OSCILLATOR_FIELDS,
-    'stock_moving_averages': STOCK_MOVING_AVERAGE_FIELDS,
-    'stock_earnings': STOCK_EARNINGS_FIELDS,
+    "stock_price": STOCK_PRICE_FIELDS,
+    "stock_volume": STOCK_VOLUME_FIELDS,
+    "stock_valuation": STOCK_VALUATION_FIELDS,
+    "stock_dividend": STOCK_DIVIDEND_FIELDS,
+    "stock_profitability": STOCK_PROFITABILITY_FIELDS,
+    "stock_performance": STOCK_PERFORMANCE_FIELDS,
+    "stock_oscillators": STOCK_OSCILLATOR_FIELDS,
+    "stock_moving_averages": STOCK_MOVING_AVERAGE_FIELDS,
+    "stock_earnings": STOCK_EARNINGS_FIELDS,
     # Crypto
-    'crypto_price': CRYPTO_PRICE_FIELDS,
-    'crypto_volume': CRYPTO_VOLUME_FIELDS,
-    'crypto_performance': CRYPTO_PERFORMANCE_FIELDS,
-    'crypto_technical': CRYPTO_TECHNICAL_FIELDS,
+    "crypto_price": CRYPTO_PRICE_FIELDS,
+    "crypto_volume": CRYPTO_VOLUME_FIELDS,
+    "crypto_performance": CRYPTO_PERFORMANCE_FIELDS,
+    "crypto_technical": CRYPTO_TECHNICAL_FIELDS,
     # Forex
-    'forex_price': FOREX_PRICE_FIELDS,
-    'forex_performance': FOREX_PERFORMANCE_FIELDS,
-    'forex_technical': FOREX_TECHNICAL_FIELDS,
+    "forex_price": FOREX_PRICE_FIELDS,
+    "forex_performance": FOREX_PERFORMANCE_FIELDS,
+    "forex_technical": FOREX_TECHNICAL_FIELDS,
     # Bond
-    'bond_basic': BOND_BASIC_FIELDS,
-    'bond_yield': BOND_YIELD_FIELDS,
-    'bond_maturity': BOND_MATURITY_FIELDS,
+    "bond_basic": BOND_BASIC_FIELDS,
+    "bond_yield": BOND_YIELD_FIELDS,
+    "bond_maturity": BOND_MATURITY_FIELDS,
     # Futures
-    'futures_price': FUTURES_PRICE_FIELDS,
-    'futures_technical': FUTURES_TECHNICAL_FIELDS,
+    "futures_price": FUTURES_PRICE_FIELDS,
+    "futures_technical": FUTURES_TECHNICAL_FIELDS,
     # Coin
-    'coin_price': COIN_PRICE_FIELDS,
-    'coin_market': COIN_MARKET_FIELDS,
+    "coin_price": COIN_PRICE_FIELDS,
+    "coin_market": COIN_MARKET_FIELDS,
 }
 
 
@@ -314,7 +313,7 @@ def get_preset(name: str) -> list:
         >>> fields = get_preset('stock_valuation')
     """
     if name not in ALL_PRESETS:
-        available = ', '.join(sorted(ALL_PRESETS.keys()))
+        available = ", ".join(sorted(ALL_PRESETS.keys()))
         raise KeyError(f"Unknown preset: '{name}'. Available presets: {available}")
     return ALL_PRESETS[name]
 

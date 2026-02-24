@@ -1,17 +1,17 @@
 import json
 import time
-from typing import Iterator, Callable, Optional, Union, List
+from collections.abc import Callable, Iterator
+from enum import Enum
 
 import pandas as pd
 import requests
-from enum import Enum
 
 from tvscreener.exceptions import MalformedRequestException
-from tvscreener.field import Field, Market, IndexSymbol
+from tvscreener.field import Field, IndexSymbol, Market
 from tvscreener.field.crypto import CryptoField
 from tvscreener.field.forex import ForexField
 from tvscreener.field.stock import StockField
-from tvscreener.filter import FilterOperator, Filter, ExtraFilter
+from tvscreener.filter import ExtraFilter, Filter, FilterOperator
 from tvscreener.util import get_columns_to_request, is_status_code_ok
 
 # Configuration constants
@@ -26,10 +26,10 @@ MIN_STREAM_INTERVAL = 1.0  # minimum interval for streaming to avoid rate limiti
 
 # HTTP headers for TradingView API requests
 REQUEST_HEADERS = {
-    'Content-Type': 'application/json',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Origin': 'https://www.tradingview.com',
-    'Referer': 'https://www.tradingview.com/',
+    "Content-Type": "application/json",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Origin": "https://www.tradingview.com",
+    "Referer": "https://www.tradingview.com/",
 }
 
 # Backward compatibility aliases
@@ -45,20 +45,20 @@ class ScreenerDataFrame(pd.DataFrame):
     def __init__(self, data, columns: dict, *args, **kwargs):
         # Add the extra received columns
         columns = {"symbol": "Symbol", **columns}
-        super().__init__(data, columns=list(columns.values()), *args, **kwargs)
+        super().__init__(data, *args, columns=list(columns.values()), **kwargs)
 
         # Reorder columns - only include first_columns that exist in the request
-        first_columns = ['symbol', 'name', 'description']
+        first_columns = ["symbol", "name", "description"]
         ordered_columns = {k: columns.get(k) for k in first_columns if k in columns}
         ordered_columns.update({k: v for k, v in columns.items() if k not in first_columns})
-        self.attrs['original_columns'] = ordered_columns
+        self.attrs["original_columns"] = ordered_columns
         self._update_inplace(self[ordered_columns.values()])
 
     def set_technical_columns(self, only: bool = False):
         if only:
-            self.columns = pd.Index(self.attrs['original_columns'].keys())
+            self.columns = pd.Index(self.attrs["original_columns"].keys())
         else:
-            self.columns = pd.MultiIndex.from_tuples(self.attrs['original_columns'].items())
+            self.columns = pd.MultiIndex.from_tuples(self.attrs["original_columns"].items())
 
 
 class Screener:
@@ -117,7 +117,7 @@ class Screener:
 
     def _validate_field_type(self, field: Field | ExtraFilter):
         """Validate that the field type matches the screener's expected field type."""
-        from tvscreener.field import FieldWithInterval, FieldWithHistory
+        from tvscreener.field import FieldWithHistory, FieldWithInterval
 
         # Skip validation for ExtraFilter (search, etc.)
         if isinstance(field, ExtraFilter):
@@ -143,7 +143,9 @@ class Screener:
                 f"Use {self._field_type.__name__} fields with {type(self).__name__}."
             )
 
-    def add_filter(self, filter_type: Field | ExtraFilter, operation: FilterOperator, values: Enum or str):
+    def add_filter(
+        self, filter_type: Field | ExtraFilter, operation: FilterOperator, values: Enum or str
+    ):
         self._validate_field_type(filter_type)
         filter_ = Filter(filter_type, operation, values)
         # Case where the filter already exists, and we want to add more values
@@ -153,7 +155,7 @@ class Screener:
         else:
             self._add_new_filter(filter_)
 
-    def where(self, condition_or_field, operation: FilterOperator = None, value=None) -> 'Screener':
+    def where(self, condition_or_field, operation: FilterOperator = None, value=None) -> "Screener":
         """
         Add a filter condition (fluent method).
 
@@ -183,13 +185,15 @@ class Screener:
 
         if isinstance(condition_or_field, FieldCondition):
             # New Pythonic syntax: ss.where(StockField.PRICE > 100)
-            self.add_filter(condition_or_field.field, condition_or_field.operation, condition_or_field.value)
+            self.add_filter(
+                condition_or_field.field, condition_or_field.operation, condition_or_field.value
+            )
         else:
             # Legacy syntax: ss.where(field, operator, value)
             self.add_filter(condition_or_field, operation, value)
         return self
 
-    def select(self, *fields: Field) -> 'Screener':
+    def select(self, *fields: Field) -> "Screener":
         """
         Set fields to retrieve (fluent method).
 
@@ -203,7 +207,7 @@ class Screener:
         self.specific_fields = list(fields)
         return self
 
-    def select_all(self) -> 'Screener':
+    def select_all(self) -> "Screener":
         """
         Select all available fields for this screener type.
 
@@ -225,14 +229,16 @@ class Screener:
     def add_misc(self, key, value):
         self.misc[key] = value
 
-    def set_range(self, from_range: int = default_min_range, to_range: int = default_max_range) -> 'Screener':
+    def set_range(
+        self, from_range: int = default_min_range, to_range: int = default_max_range
+    ) -> "Screener":
         self.range = [from_range, to_range]
         return self
 
     def sort_by(self, sort_by: Field, ascending=True):
         self.sort = {"sortBy": sort_by.field_name, "sortOrder": "asc" if ascending else "desc"}
 
-    def set_index(self, *indices: IndexSymbol) -> 'Screener':
+    def set_index(self, *indices: IndexSymbol) -> "Screener":
         """
         Filter screener results to only include constituents of the specified index(es).
 
@@ -268,7 +274,7 @@ class Screener:
             "sort": self.sort,
             "range": self.range,
             "columns": requested_columns_,
-            **self.misc
+            **self.misc,
         }
         return payload
 
@@ -295,44 +301,38 @@ class Screener:
         try:
             # Fixed: Add timeout to prevent hanging indefinitely
             response = requests.post(
-                self.url,
-                data=payload_json,
-                timeout=REQUEST_TIMEOUT,
-                headers=REQUEST_HEADERS
+                self.url, data=payload_json, timeout=REQUEST_TIMEOUT, headers=REQUEST_HEADERS
             )
 
             if is_status_code_ok(response):
-                data = [[d["s"]] + d["d"] for d in response.json()['data']]
+                data = [[d["s"]] + d["d"] for d in response.json()["data"]]
                 return ScreenerDataFrame(data, columns)
             else:
                 raise MalformedRequestException(
-                    response.status_code,
-                    response.text,
-                    self.url,
-                    payload_json
+                    response.status_code, response.text, self.url, payload_json
                 )
 
-        except requests.Timeout:
+        except requests.Timeout as e:
             raise MalformedRequestException(
                 408,  # Request Timeout
                 f"Request timed out after {REQUEST_TIMEOUT} seconds",
                 self.url,
-                payload_json
-            )
+                payload_json,
+            ) from e
         except requests.RequestException as e:
             raise MalformedRequestException(
                 0,  # Unknown status code
                 str(e),
                 self.url,
-                payload_json
-            )
+                payload_json,
+            ) from e
 
     def stream(
         self,
         interval: float = 5.0,
-        max_iterations: Optional[int] = None,
-        on_update: Optional[Callable[['ScreenerDataFrame'], None]] = None
-    ) -> Iterator['ScreenerDataFrame']:
+        max_iterations: int | None = None,
+        on_update: Callable[["ScreenerDataFrame"], None] | None = None,
+    ) -> Iterator["ScreenerDataFrame"]:
         """
         Stream screener data at regular intervals.
 

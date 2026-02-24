@@ -1,11 +1,10 @@
 import unittest
 
-from tvscreener.field import Rating
 import tvscreener.ta as ta
+from tvscreener.field import Rating
 
 
 class TestTechnicalAnalysis(unittest.TestCase):
-
     def test_adx_buy(self):
         # +DI crosses above -DI with ADX > 20
         result = ta.adx(adx_value=25, dminus=10, dplus=15, dminus_old=12, dplus_old=8)
@@ -72,5 +71,5 @@ class TestTechnicalAnalysis(unittest.TestCase):
         self.assertEqual(Rating.NEUTRAL, result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
