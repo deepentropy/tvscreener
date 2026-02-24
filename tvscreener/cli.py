@@ -4,6 +4,7 @@
 import argparse
 import logging
 import sys
+from typing import cast
 
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
@@ -15,7 +16,11 @@ from tvscreener.constants.crypto import CRYPTO_UNIVERSE
 from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS, FOREX_MAJORS, FOREX_MINORS
 from tvscreener.constants.stocks import STOCK_UNIVERSE
 from tvscreener.lib.screeners.forex_opportunity import ForexOpportunityScreener, ForexScreenerConfig
-from tvscreener.lib.screeners.forex_strategy import ForexStrategyScanner, StrategyConfig
+from tvscreener.lib.screeners.forex_strategy import (
+    ForexStrategyScanner,
+    StrategyConfig,
+    StrategyType,
+)
 
 console = Console()
 logger = logging.getLogger(__name__)
@@ -106,7 +111,10 @@ def run_strategy_scan(args) -> int:
             "all": "all",
         }
         strategy_name = strategy_map[args.strategy]
-        strategy_tuple = (strategy_name,) if strategy_name != "all" else ("all",)
+        if strategy_name == "all":
+            strategy_tuple = cast(tuple[StrategyType, ...], ("all",))
+        else:
+            strategy_tuple = (cast(StrategyType, strategy_name),)
         mr_signals = tuple(args.mr_signal) if args.mr_signal else ()
 
         config = StrategyConfig(
@@ -121,6 +129,8 @@ def run_strategy_scan(args) -> int:
             min_ma_rating=args.min_ma_rating,
             mean_reversion_signals=mr_signals,
             contract_type=args.contract_type,
+            include_atr_fields=args.include_atr or args.max_atr is not None,
+            include_rsi_fields=args.include_rsi or bool(args.mr_signal),
         )
         scanner = ForexStrategyScanner(pairs=pairs, timeframes=timeframes, config=config)
 
@@ -187,6 +197,36 @@ def main():
     parser.add_argument("--max-atr", type=float, help="Maximum ATR (volatility proxy)")
     parser.add_argument("--min-ma-rating", type=float, help="Minimum MA rating (-2 to 2)")
     parser.add_argument(
+        "--min-confluence",
+        type=int,
+        help="Minimum confluence score (strategy scanner)",
+    )
+    parser.add_argument(
+        "--trend-threshold",
+        type=float,
+        help="Trend score threshold (strategy scanner)",
+    )
+    parser.add_argument(
+        "--mr-threshold",
+        type=float,
+        help="Mean-reversion score threshold (strategy scanner)",
+    )
+    parser.add_argument(
+        "--min-roc",
+        type=float,
+        help="Minimum ROC value for breakout filter",
+    )
+    parser.add_argument(
+        "--include-atr",
+        action="store_true",
+        help="Request ATR fields when running strategy scan",
+    )
+    parser.add_argument(
+        "--include-rsi",
+        action="store_true",
+        help="Request RSI fields when running strategy scan",
+    )
+    parser.add_argument(
         "--mr-signal",
         choices=["rsi_oversold", "rsi_overbought"],
         action="append",
@@ -213,10 +253,14 @@ def main():
     if args.min_ma_rating is None:
         args.min_ma_rating = settings.min_ma_rating
 
-    args.min_confluence = settings.min_confluence
-    args.trend_threshold = settings.trend_threshold
-    args.mr_threshold = settings.mr_threshold
-    args.min_roc = settings.min_roc
+    if args.min_confluence is None:
+        args.min_confluence = settings.min_confluence
+    if args.trend_threshold is None:
+        args.trend_threshold = settings.trend_threshold
+    if args.mr_threshold is None:
+        args.mr_threshold = settings.mr_threshold
+    if args.min_roc is None:
+        args.min_roc = settings.min_roc
 
     count = run_opportunity_scan(args) if args.scanner == "opportunity" else run_strategy_scan(args)
 

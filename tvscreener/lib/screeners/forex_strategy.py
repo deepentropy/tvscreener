@@ -9,6 +9,12 @@ import pandas as pd
 
 from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS
 from tvscreener.lib.screeners.export_helpers import export_to_csv, export_to_json, print_summary
+from tvscreener.lib.screeners.filter_utils import (
+    apply_atr_filter,
+    apply_ma_rating_filter,
+    apply_volume_filter,
+    detect_mean_reversion_signals,
+)
 from tvscreener.lib.screeners.forex_opportunity import ForexOpportunityScreener, ForexScreenerConfig
 
 logger = logging.getLogger(__name__)
@@ -30,6 +36,8 @@ class StrategyConfig:
     min_ma_rating: float | None = None
     mean_reversion_signals: tuple[str, ...] = ()
     contract_type: Literal["spot", "cfd", "spreadbet", "all"] = "cfd"
+    include_atr_fields: bool = False
+    include_rsi_fields: bool = False
 
 
 @dataclass
@@ -41,8 +49,8 @@ class ForexStrategyScanner:
     _cached_results: pd.DataFrame | None = field(init=False, default=None)
 
     def __post_init__(self) -> None:
-        include_atr = self.config.max_atr is not None
-        include_rsi = bool(self.config.mean_reversion_signals)
+        include_atr = self.config.include_atr_fields or self.config.max_atr is not None
+        include_rsi = self.config.include_rsi_fields or bool(self.config.mean_reversion_signals)
         self._screener = ForexOpportunityScreener(
             pairs=self.pairs,
             timeframes=self.timeframes,
@@ -101,17 +109,10 @@ class ForexStrategyScanner:
         combined = pd.concat(results, ignore_index=True)
 
         combined = self._apply_filters(combined)
-
-        if self.config.min_volume is not None:
-            combined = self._apply_volume_filter(combined, self.config.min_volume)
-        if self.config.max_atr is not None:
-            combined = self._apply_atr_filter(combined, self.config.max_atr)
-        if self.config.min_ma_rating is not None:
-            combined = self._apply_ma_rating_filter(combined, self.config.min_ma_rating)
-        if self.config.mean_reversion_signals:
-            combined = self._detect_mean_reversion_signals(
-                combined, self.config.mean_reversion_signals
-            )
+        combined = apply_volume_filter(combined, self.config.min_volume)
+        combined = apply_atr_filter(combined, self.config.max_atr)
+        combined = apply_ma_rating_filter(combined, self.config.min_ma_rating)
+        combined = detect_mean_reversion_signals(combined, self.config.mean_reversion_signals)
 
         self._cached_results = combined
         return combined
@@ -352,62 +353,3 @@ class ForexStrategyScanner:
             empty_rich_message="No signals found",
             render_rich=_render,
         )
-
-    def _apply_volume_filter(self, df: pd.DataFrame, min_volume: float) -> pd.DataFrame:
-        """Filter by minimum average volume."""
-        if min_volume is None or df.empty:
-            return df
-        vol_col = "Average Volume (10 day Calc)"
-        if vol_col in df.columns:
-            return df[df[vol_col] >= min_volume].copy()
-        return df
-
-    def _apply_atr_filter(self, df: pd.DataFrame, max_atr: float) -> pd.DataFrame:
-        """Filter by maximum ATR (volatility proxy)."""
-        if max_atr is None or df.empty:
-            return df
-        atr_cols = [c for c in df.columns if c.startswith("ATR|")]
-        if atr_cols:
-            df = df.copy()
-            df["_atr_avg"] = df[atr_cols].mean(axis=1)
-            result = df[df["_atr_avg"] <= max_atr].copy()
-            return result.drop(columns=["_atr_avg"], errors="ignore")
-        return df
-
-    def _apply_ma_rating_filter(self, df: pd.DataFrame, min_ma_rating: float) -> pd.DataFrame:
-        """Filter by minimum MA rating strength."""
-        if min_ma_rating is None or df.empty:
-            return df
-        ma_cols = [c for c in df.columns if c.startswith("Recommend Ma|")]
-        if ma_cols:
-            df = df.copy()
-            df["_ma_avg"] = df[ma_cols].mean(axis=1)
-            result = df[df["_ma_avg"] >= min_ma_rating].copy()
-            return result.drop(columns=["_ma_avg"], errors="ignore")
-        return df
-
-    def _detect_mean_reversion_signals(
-        self, df: pd.DataFrame, signals: tuple[str, ...]
-    ) -> pd.DataFrame:
-        """Add mean reversion signal columns.
-
-        RSI oversold (<30) = long signal
-        RSI overbought (>70) = short signal
-        """
-        if not signals or df.empty:
-            return df
-
-        rsi_cols = [c for c in df.columns if c.startswith("RSI")]
-        if not rsi_cols:
-            return df
-
-        df = df.copy()
-        rsi_data = df[rsi_cols].fillna(50)
-
-        if "rsi_oversold" in signals:
-            df["rsi_oversold"] = (rsi_data < 30).any(axis=1).astype(int)
-
-        if "rsi_overbought" in signals:
-            df["rsi_overbought"] = (rsi_data > 70).any(axis=1).astype(int)
-
-        return df

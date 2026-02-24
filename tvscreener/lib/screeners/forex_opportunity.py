@@ -27,12 +27,12 @@ logger = logging.getLogger(__name__)
 ContractType = Literal["spot", "cfd", "spreadbet", "all"]
 
 
-@dataclass
+@dataclass(frozen=True, slots=True)
 class ForexScreenerConfig:
-    rating_filters: list[RatingFilter] = field(default_factory=list)
+    rating_filters: tuple[RatingFilter, ...] = field(default_factory=tuple)
     roc_filter: RocFilter | None = None
     volume_filter: VolumeFilter | None = None
-    preferred_exchanges: list[str] = field(default_factory=lambda: LIQUID_EXCHANGES)
+    preferred_exchanges: tuple[str, ...] = field(default_factory=lambda: tuple(LIQUID_EXCHANGES))
     contract_type: ContractType = "cfd"
     include_atr: bool = False
     include_rsi: bool = False
