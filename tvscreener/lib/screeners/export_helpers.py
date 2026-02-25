@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import logging
 from collections.abc import Callable
 from typing import Any
@@ -14,10 +15,17 @@ def export_to_csv(
     *,
     logger: logging.Logger,
     label: str,
+    metadata: dict[str, Any] | None = None,
 ) -> None:
     df = df_getter()
-    df.to_csv(path, index=include_index)
+    with open(path, "w", newline="") as fh:
+        if metadata:
+            for key, value in metadata.items():
+                fh.write(f"# {key}: {value}\n")
+        df.to_csv(fh, index=include_index)
     logger.info(f"Saved {len(df)} {label} to {path}")
+    if metadata:
+        _write_metadata_file(path, metadata, logger, label)
 
 
 def export_to_json(
@@ -27,9 +35,14 @@ def export_to_json(
     *,
     logger: logging.Logger,
     label: str,
+    metadata: dict[str, Any] | None = None,
 ) -> None:
     df = df_getter()
-    df.to_json(path, orient=orient, indent=2)
+    payload: dict[str, Any] = {"data": df.to_dict(orient=orient)}
+    if metadata:
+        payload["metadata"] = metadata
+    with open(path, "w") as fh:
+        json.dump(payload, fh, indent=2)
     logger.info(f"Saved {len(df)} {label} to {path}")
 
 
@@ -55,3 +68,50 @@ def print_summary(
         return
 
     render_rich(df, console, Table)
+
+
+def export_to_parquet(
+    df_getter: Callable[[], pd.DataFrame],
+    path: str,
+    include_index: bool,
+    *,
+    logger: logging.Logger,
+    label: str,
+    metadata: dict[str, Any] | None = None,
+) -> None:
+    df = df_getter()
+    df.to_parquet(path, index=include_index)
+    logger.info(f"Saved {len(df)} {label} to {path}")
+    if metadata:
+        _write_metadata_file(path, metadata, logger, label)
+
+
+def export_to_xml(
+    df_getter: Callable[[], pd.DataFrame],
+    path: str,
+    include_index: bool,
+    *,
+    logger: logging.Logger,
+    label: str,
+    metadata: dict[str, Any] | None = None,
+) -> None:
+    df = df_getter()
+    with open(path, "w") as fh:
+        if metadata:
+            fh.write("<metadata>\n")
+            for key, value in metadata.items():
+                fh.write(f"  <{key}>{value}</{key}>\n")
+            fh.write("</metadata>\n")
+        df.to_xml(fh, index=include_index)
+    logger.info(f"Saved {len(df)} {label} to {path}")
+    if metadata:
+        _write_metadata_file(path, metadata, logger, label)
+
+
+def _write_metadata_file(
+    path: str, metadata: dict[str, Any], logger: logging.Logger, label: str
+) -> None:
+    meta_path = f"{path}.meta.json"
+    with open(meta_path, "w") as fh:
+        json.dump({"metadata": metadata}, fh, indent=2)
+    logger.info(f"Saved metadata for {label} to {meta_path}")

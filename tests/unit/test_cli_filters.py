@@ -14,6 +14,11 @@ class DummySettings:
     trend_threshold = 0.0
     mr_threshold = 0.2
     min_roc = None
+    opportunity_trend_weight = 0.4
+    opportunity_ma_weight = 0.3
+    opportunity_osc_weight = 0.2
+    opportunity_roc_weight = 0.1
+    opportunity_timeframe_weights = "240:0.2,60:0.3,15:0.5"
 
 
 def test_cli_filter_args_take_precedence(monkeypatch):

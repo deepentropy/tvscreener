@@ -14,3 +14,11 @@ min_volume: null
 max_atr: null
 min_ma_rating: null
 min_roc: null
+opportunity_min_volume: null
+opportunity_max_atr: null
+opportunity_min_ma_rating: null
+opportunity_trend_weight: 0.4
+opportunity_ma_weight: 0.3
+opportunity_osc_weight: 0.2
+opportunity_roc_weight: 0.1
+opportunity_timeframe_weights: "240:0.2,60:0.3,15:0.5"
