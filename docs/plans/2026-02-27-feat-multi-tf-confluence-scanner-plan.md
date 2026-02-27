@@ -151,18 +151,18 @@ class StrategyConfig:
 
 ## Acceptance Criteria
 
-- [ ] New `--strategy confluence` option in CLI
-- [ ] Add `confluence` to strategy map in cli.py
-- [ ] Detects Trend Continuation (all trending)
-- [ ] Detects MR Entry (HTF trend + LTF/STF at extremes)
-- [ ] Detects Pullback (trend + LTF reversal)
-- [ ] Detects Deep Pullback (trend + STF + LTF MR)
-- [ ] Uses STF oscillator (Recommend Other|60) - **NEW**
-- [ ] Unified CONFLUENCE_SCORE (1-5 scale)
-- [ ] Ranks all pairs by score
-- [ ] Single-pass unified detection (performance)
-- [ ] Backward compatible with existing strategies
-- [ ] Tests pass
+- [x] New `--strategy confluence` option in CLI
+- [x] Add `confluence` to strategy map in cli.py
+- [x] Detects Trend Continuation (all trending)
+- [x] Detects MR Entry (HTF trend + LTF/STF at extremes)
+- [x] Detects Pullback (trend + LTF reversal)
+- [x] Detects Deep Pullback (trend + STF + LTF MR)
+- [x] Uses STF oscillator (Recommend Other|60) - **NEW**
+- [x] Unified CONFLUENCE_SCORE (1-5 scale)
+- [x] Ranks all pairs by score
+- [x] Single-pass unified detection (performance)
+- [x] Backward compatible with existing strategies
+- [x] Tests pass
 
 ## Data Flow
 
