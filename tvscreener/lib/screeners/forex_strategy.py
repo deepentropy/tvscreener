@@ -154,15 +154,18 @@ class ForexStrategyScanner:
         return self._detect_breakout(raw_data)
 
     def _detect_trend_following(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Detect trend following setups: HTF + STF both bullish or both bearish."""
+        """Detect trend following setups: HTF + STF + LTF aligned."""
         htf_col = "Recommend All|240"
         stf_col = "Recommend All|60"
+        ltf_col = "Recommend All|15"
 
         if htf_col not in df.columns or stf_col not in df.columns:
             return pd.DataFrame()
 
         htf_trend = df[htf_col].fillna(0)
         stf_trend = df[stf_col].fillna(0)
+        has_ltf = ltf_col in df.columns
+        ltf_trend = df[ltf_col].fillna(0) if has_ltf else pd.Series(0, index=df.index)
 
         long_mask = (htf_trend > self.config.trend_threshold) & (
             stf_trend > self.config.trend_threshold
@@ -170,6 +173,10 @@ class ForexStrategyScanner:
         short_mask = (htf_trend < -self.config.trend_threshold) & (
             stf_trend < -self.config.trend_threshold
         )
+
+        if has_ltf:
+            long_mask = long_mask & (ltf_trend > self.config.trend_threshold)
+            short_mask = short_mask & (ltf_trend < -self.config.trend_threshold)
 
         result = df.loc[long_mask | short_mask].copy()
 
@@ -180,21 +187,30 @@ class ForexStrategyScanner:
         result["HTF_TREND"] = htf_trend[long_mask | short_mask].values
         result["STF_TREND"] = stf_trend[long_mask | short_mask].values
 
-        result = self._add_confluence_and_direction(result)
+        aligned_count = 2 + int(has_ltf)
+        result["CONFLUENCE_SCORE"] = aligned_count
+
+        result = self._add_direction(result)
 
         return result
 
     def _detect_mean_reversion(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Detect mean reversion: LTF oscillator extremes."""
+        """Detect mean reversion: LTF oscillator extremes aligned with HTF trend."""
+        htf_col = "Recommend All|240"
         ltf_col = "Recommend Other|15"
 
-        if ltf_col not in df.columns:
+        if htf_col not in df.columns or ltf_col not in df.columns:
             return pd.DataFrame()
 
+        htf_trend = df[htf_col].fillna(0)
         osc_value = df[ltf_col].fillna(0)
 
-        long_mask = osc_value < -self.config.mr_threshold
-        short_mask = osc_value > self.config.mr_threshold
+        long_mask = (htf_trend > self.config.trend_threshold) & (
+            osc_value < -self.config.mr_threshold
+        )
+        short_mask = (htf_trend < -self.config.trend_threshold) & (
+            osc_value > self.config.mr_threshold
+        )
 
         result = df.loc[long_mask | short_mask].copy()
 
@@ -288,6 +304,16 @@ class ForexStrategyScanner:
             aligned = ((htf > 0) & (stf > 0)) | ((htf < 0) & (stf < 0))
             df["CONFLUENCE_SCORE"] = aligned.astype(int) + 1
             df["DIRECTION"] = np.where(htf > 0, "long", "short")
+
+        return df
+
+    def _add_direction(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Add direction based on HTF_TREND."""
+        if df.empty:
+            return df
+
+        if "HTF_TREND" in df.columns:
+            df["DIRECTION"] = np.where(df["HTF_TREND"] > 0, "long", "short")
 
         return df
 

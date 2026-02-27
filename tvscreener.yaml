@@ -8,7 +8,7 @@ contract_type: "cfd"
 
 # Strategy settings
 min_confluence: 1
-trend_threshold: 0.0
+trend_threshold: 0.2
 mr_threshold: 0.2
 min_volume: null
 max_atr: null

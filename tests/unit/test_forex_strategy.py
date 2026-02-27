@@ -68,18 +68,123 @@ class TestTrendFollowingDetection:
 
         assert len(result) == 0
 
+    def test_trend_following_3tf_all_aligned_long(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.0),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.8],
+                "Recommend All|60": [0.6],
+                "Recommend All|15": [0.4],
+            }
+        )
+
+        result = scanner._detect_trend_following(mock_df)
+
+        assert len(result) == 1
+        assert result.iloc[0]["CONFLUENCE_SCORE"] == 3
+        assert result.iloc[0]["DIRECTION"] == "long"
+
+    def test_trend_following_3tf_all_aligned_short(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.0),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [-0.8],
+                "Recommend All|60": [-0.6],
+                "Recommend All|15": [-0.4],
+            }
+        )
+
+        result = scanner._detect_trend_following(mock_df)
+
+        assert len(result) == 1
+        assert result.iloc[0]["CONFLUENCE_SCORE"] == 3
+        assert result.iloc[0]["DIRECTION"] == "short"
+
+    def test_trend_following_3tf_ltf_diverges_filtered(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.0),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.8],
+                "Recommend All|60": [0.6],
+                "Recommend All|15": [-0.4],
+            }
+        )
+
+        result = scanner._detect_trend_following(mock_df)
+
+        assert len(result) == 0
+
+    def test_trend_following_threshold_filters_weak_signals(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.3),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.2],
+                "Recommend All|60": [0.1],
+                "Recommend All|15": [0.1],
+            }
+        )
+
+        result = scanner._detect_trend_following(mock_df)
+
+        assert len(result) == 0
+
+    def test_trend_following_missing_15m_fallback(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.0),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.8],
+                "Recommend All|60": [0.6],
+            }
+        )
+
+        result = scanner._detect_trend_following(mock_df)
+
+        assert len(result) == 1
+        assert result.iloc[0]["CONFLUENCE_SCORE"] == 2
+
 
 class TestMeanReversionDetection:
     def test_mean_reversion_oversold(self):
         scanner = ForexStrategyScanner(
             pairs=["EURUSD"],
-            timeframes=["15"],
+            timeframes=["240", "60", "15"],
             config=StrategyConfig(mr_threshold=0.2),
         )
 
         mock_df = pd.DataFrame(
             {
                 "Name": ["EURUSD"],
+                "Recommend All|240": [0.5],
                 "Recommend Other|15": [-0.5],
             }
         )
@@ -93,13 +198,14 @@ class TestMeanReversionDetection:
     def test_mean_reversion_overbought(self):
         scanner = ForexStrategyScanner(
             pairs=["EURUSD"],
-            timeframes=["15"],
+            timeframes=["240", "60", "15"],
             config=StrategyConfig(mr_threshold=0.2),
         )
 
         mock_df = pd.DataFrame(
             {
                 "Name": ["EURUSD"],
+                "Recommend All|240": [-0.5],
                 "Recommend Other|15": [0.5],
             }
         )
@@ -109,16 +215,36 @@ class TestMeanReversionDetection:
         assert len(result) == 1
         assert result.iloc[0]["DIRECTION"] == "short"
 
+    def test_mean_reversion_conflicting_returns_empty(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(mr_threshold=0.2),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.5],
+                "Recommend Other|15": [0.5],
+            }
+        )
+
+        result = scanner._detect_mean_reversion(mock_df)
+
+        assert len(result) == 0
+
     def test_mean_reversion_below_threshold_returns_empty(self):
         scanner = ForexStrategyScanner(
             pairs=["EURUSD"],
-            timeframes=["15"],
+            timeframes=["240", "60", "15"],
             config=StrategyConfig(mr_threshold=0.5),
         )
 
         mock_df = pd.DataFrame(
             {
                 "Name": ["EURUSD"],
+                "Recommend All|240": [0.5],
                 "Recommend Other|15": [0.2],
             }
         )

@@ -15,7 +15,7 @@ class ScreenerSettings(BaseSettings):
     max_atr: float | None = Field(default=None, ge=0)
     min_ma_rating: float | None = Field(default=None, ge=-2, le=2)
     min_confluence: int = Field(default=1, ge=1)
-    trend_threshold: float = Field(default=0.0, ge=-1, le=1)
+    trend_threshold: float = Field(default=0.2, ge=-1, le=1)
     mr_threshold: float = Field(default=0.2, ge=0, le=1)
     min_roc: float | None = Field(default=None, ge=0)
 
