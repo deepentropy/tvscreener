@@ -2,19 +2,13 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Literal
 
 import numpy as np
 import pandas as pd
 
 from tvscreener.constants.forex import DEFAULT_FOREX_PAIRS
-from tvscreener.lib.screeners.export_helpers import (
-    export_to_csv,
-    export_to_json,
-    export_to_parquet,
-    export_to_xml,
-    print_summary,
-)
+from tvscreener.lib.screeners.export_helpers import get_export_function, print_summary
 from tvscreener.lib.screeners.filter_utils import (
     apply_atr_filter,
     apply_ma_rating_filter,
@@ -315,68 +309,13 @@ class ForexStrategyScanner:
             return self._cached_results
         return self.scan(use_cache=True)
 
-    def to_csv(
-        self,
-        path: str,
-        include_index: bool = False,
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_csv(
+    def export(self, path: str, format_name: str, **kwargs) -> None:
+        get_export_function(format_name)(
             self._get_results,
             path,
-            include_index,
+            **kwargs,
             logger=logger,
             label="signals",
-            metadata=metadata,
-        )
-
-    def to_json(
-        self,
-        path: str,
-        orient: str = "records",
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_json(
-            self._get_results,
-            path,
-            orient,
-            logger=logger,
-            label="signals",
-            metadata=metadata,
-        )
-
-    def to_parquet(
-        self,
-        path: str,
-        include_index: bool = False,
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_parquet(
-            self._get_results,
-            path,
-            include_index,
-            logger=logger,
-            label="signals",
-            metadata=metadata,
-        )
-
-    def to_xml(
-        self,
-        path: str,
-        include_index: bool = False,
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_xml(
-            self._get_results,
-            path,
-            include_index,
-            logger=logger,
-            label="signals",
-            metadata=metadata,
         )
 
     def print_summary(self) -> None:

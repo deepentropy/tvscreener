@@ -257,15 +257,16 @@ def run_opportunity_scan(args) -> int:
             output_path = args.output
             output_lower = output_path.lower()
             if output_lower.endswith(".csv"):
-                screener.to_csv(output_path, metadata=metadata)
+                screener.export(output_path, "csv", include_index=False, metadata=metadata)
             elif output_lower.endswith(".json"):
-                screener.to_json(output_path, metadata=metadata)
+                screener.export(output_path, "json", orient="records", metadata=metadata)
             elif output_lower.endswith(".parquet"):
-                screener.to_parquet(output_path, metadata=metadata)
+                screener.export(output_path, "parquet", include_index=False, metadata=metadata)
             elif output_lower.endswith(".xml"):
-                screener.to_xml(output_path, metadata=metadata)
+                screener.export(output_path, "xml", include_index=False, metadata=metadata)
             else:
                 console.print(f"[yellow]Unknown output format: {args.output}[/yellow]")
+                return -1
             console.print(f"[green]Saved to {args.output}[/green]")
 
         if args.save_config:
@@ -336,15 +337,16 @@ def run_strategy_scan(args) -> int:
             output_path = args.output
             output_lower = output_path.lower()
             if output_lower.endswith(".csv"):
-                scanner.to_csv(output_path, metadata=metadata)
+                scanner.export(output_path, "csv", include_index=False, metadata=metadata)
             elif output_lower.endswith(".json"):
-                scanner.to_json(output_path, metadata=metadata)
+                scanner.export(output_path, "json", orient="records", metadata=metadata)
             elif output_lower.endswith(".parquet"):
-                scanner.to_parquet(output_path, metadata=metadata)
+                scanner.export(output_path, "parquet", include_index=False, metadata=metadata)
             elif output_lower.endswith(".xml"):
-                scanner.to_xml(output_path, metadata=metadata)
+                scanner.export(output_path, "xml", include_index=False, metadata=metadata)
             else:
                 console.print(f"[yellow]Unknown output format: {args.output}[/yellow]")
+                return -1
             console.print(f"[green]Saved to {args.output}[/green]")
 
         return len(results)

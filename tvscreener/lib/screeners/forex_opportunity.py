@@ -4,7 +4,7 @@ import logging
 import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
-from typing import Any, Literal
+from typing import Literal
 
 import pandas as pd
 
@@ -19,13 +19,7 @@ from tvscreener.core.forex import ForexScreener
 from tvscreener.exceptions import FilterConfigurationError, InvalidPairError
 from tvscreener.field.forex import ForexField
 from tvscreener.filter import RatingFilter, RocFilter, VolumeFilter
-from tvscreener.lib.screeners.export_helpers import (
-    export_to_csv,
-    export_to_json,
-    export_to_parquet,
-    export_to_xml,
-    print_summary,
-)
+from tvscreener.lib.screeners.export_helpers import get_export_function, print_summary
 from tvscreener.score import DEFAULT_SCORING_CONFIG, ScoringConfig, ScoringEngine
 
 logger = logging.getLogger(__name__)
@@ -197,8 +191,11 @@ class ForexOpportunityScreener:
 
         return df
 
-    def _apply_volume_filter(self, df: pd.DataFrame, vf: VolumeFilter) -> pd.DataFrame:
+    def _apply_volume_filter(self, df: pd.DataFrame, vf: VolumeFilter | None) -> pd.DataFrame:
         if df.empty:
+            return df
+
+        if vf is None:
             return df
 
         volume_col = "Average Volume (10 day Calc)"
@@ -309,68 +306,13 @@ class ForexOpportunityScreener:
             return self._cached_data
         return self.get_opportunities()
 
-    def to_csv(
-        self,
-        path: str,
-        include_index: bool = False,
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_csv(
+    def export(self, path: str, format_name: str, **kwargs) -> None:
+        get_export_function(format_name)(
             self._get_data,
             path,
-            include_index,
+            **kwargs,
             logger=logger,
             label="opportunities",
-            metadata=metadata,
-        )
-
-    def to_json(
-        self,
-        path: str,
-        orient: str = "records",
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_json(
-            self._get_data,
-            path,
-            orient,
-            logger=logger,
-            label="opportunities",
-            metadata=metadata,
-        )
-
-    def to_parquet(
-        self,
-        path: str,
-        include_index: bool = False,
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_parquet(
-            self._get_data,
-            path,
-            include_index,
-            logger=logger,
-            label="opportunities",
-            metadata=metadata,
-        )
-
-    def to_xml(
-        self,
-        path: str,
-        include_index: bool = False,
-        *,
-        metadata: dict[str, Any] | None = None,
-    ) -> None:
-        export_to_xml(
-            self._get_data,
-            path,
-            include_index,
-            logger=logger,
-            label="opportunities",
-            metadata=metadata,
         )
 
     def print_summary(self) -> None:

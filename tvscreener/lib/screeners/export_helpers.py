@@ -108,6 +108,23 @@ def export_to_xml(
         _write_metadata_file(path, metadata, logger, label)
 
 
+EXPORT_FUNCTIONS: dict[str, Callable[..., None]] = {
+    "csv": export_to_csv,
+    "json": export_to_json,
+    "parquet": export_to_parquet,
+    "xml": export_to_xml,
+}
+
+
+def get_export_function(format_name: str) -> Callable[..., None]:
+    exporter = EXPORT_FUNCTIONS.get(format_name.lower())
+    if exporter is None:
+        raise ValueError(
+            f"Unknown export format '{format_name}'. Supported formats: csv, json, parquet, xml."
+        )
+    return exporter
+
+
 def _write_metadata_file(
     path: str, metadata: dict[str, Any], logger: logging.Logger, label: str
 ) -> None:
