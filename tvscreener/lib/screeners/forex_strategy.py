@@ -19,7 +19,14 @@ from tvscreener.lib.screeners.forex_opportunity import ForexOpportunityScreener,
 
 logger = logging.getLogger(__name__)
 
-StrategyType = Literal["trend_following", "mean_reversion", "breakout", "hybrid", "all"]
+StrategyType = Literal[
+    "trend_following",
+    "mean_reversion",
+    "breakout",
+    "hybrid",
+    "confluence",
+    "all",
+]
 Direction = Literal["long", "short", "all"]
 
 
@@ -103,6 +110,11 @@ class ForexStrategyScanner:
             if not breakout_results.empty:
                 results.append(breakout_results)
 
+        if "confluence" in strategies_to_run:
+            confluence_results = self.scan_confluence(raw_data)
+            if not confluence_results.empty:
+                results.append(confluence_results)
+
         if not results:
             return pd.DataFrame()
 
@@ -152,6 +164,13 @@ class ForexStrategyScanner:
         if raw_data.empty:
             return pd.DataFrame()
         return self._detect_breakout(raw_data)
+
+    def scan_confluence(self, raw_data: pd.DataFrame | None = None) -> pd.DataFrame:
+        """Multi-TF confluence patterns with unified ranking."""
+        raw_data = self._get_data_or_fetch(raw_data)
+        if raw_data.empty:
+            return pd.DataFrame()
+        return self._detect_confluence(raw_data)
 
     def _detect_trend_following(self, df: pd.DataFrame) -> pd.DataFrame:
         """Detect trend following setups: HTF + STF + LTF aligned."""
@@ -292,6 +311,107 @@ class ForexStrategyScanner:
 
         return result
 
+    def _detect_confluence(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Detect multi-TF confluence patterns and rank results.
+
+        Produces one confluence pattern per pair (best matching pattern by priority).
+        """
+
+        if df.empty:
+            return pd.DataFrame()
+
+        trend_thr = self.config.trend_threshold
+        mr_thr = self.config.mr_threshold
+
+        def _col(name: str) -> pd.Series:
+            if name in df.columns:
+                return df[name].fillna(0)
+            return pd.Series(0, index=df.index)
+
+        htf = _col("Recommend All|240")
+        stf = _col("Recommend All|60")
+        ltf = _col("Recommend All|15")
+        osc_htf = _col("Recommend Other|240")
+        osc_stf = _col("Recommend Other|60")
+        osc_ltf = _col("Recommend Other|15")
+
+        htf_long = htf > trend_thr
+        htf_short = htf < -trend_thr
+
+        stf_long_trend = stf > trend_thr
+        stf_short_trend = stf < -trend_thr
+        ltf_long_trend = ltf > trend_thr
+        ltf_short_trend = ltf < -trend_thr
+
+        stf_long_mr = osc_stf < -mr_thr
+        stf_short_mr = osc_stf > mr_thr
+        ltf_long_mr = osc_ltf < -mr_thr
+        ltf_short_mr = osc_ltf > mr_thr
+
+        trend_cont_long = htf_long & stf_long_trend & ltf_long_trend
+        trend_cont_short = htf_short & stf_short_trend & ltf_short_trend
+
+        trend_pullback_long = htf_long & stf_long_trend & ltf_long_mr
+        trend_pullback_short = htf_short & stf_short_trend & ltf_short_mr
+
+        mr_entry_long = htf_long & stf_long_mr & ltf_long_mr
+        mr_entry_short = htf_short & stf_short_mr & ltf_short_mr
+
+        mr_rev_long = (osc_htf < -mr_thr) & (osc_stf < -mr_thr) & (osc_ltf < -mr_thr)
+        mr_rev_short = (osc_htf > mr_thr) & (osc_stf > mr_thr) & (osc_ltf > mr_thr)
+
+        conds = [
+            mr_entry_long | mr_entry_short,
+            trend_cont_long | trend_cont_short,
+            trend_pullback_long | trend_pullback_short,
+            mr_rev_long | mr_rev_short,
+        ]
+        patterns = [
+            "trend_mr_entry",
+            "trend_continuation",
+            "trend_pullback",
+            "mr_reversal",
+        ]
+        base_scores = [4, 3, 3, 3]
+
+        pattern = np.select(conds, patterns, default="")
+        base_score = np.select(conds, base_scores, default=0).astype(int)
+
+        is_long = mr_entry_long | trend_cont_long | trend_pullback_long | mr_rev_long
+        direction = np.where(is_long, "long", "short")
+
+        mr_extremity = pd.concat([osc_htf.abs(), osc_stf.abs(), osc_ltf.abs()], axis=1).max(axis=1)
+
+        # Optional momentum confirmation: add +1 when ROC aligns across available TFs.
+        roc_cols = [c for c in ["Roc|240", "Roc|60", "Roc|15"] if c in df.columns]
+        roc_bonus = pd.Series(0, index=df.index)
+        if roc_cols:
+            roc_values = df[roc_cols].fillna(0)
+            if self.config.min_roc is not None:
+                long_ok = (roc_values > self.config.min_roc).all(axis=1)
+                short_ok = (roc_values < -self.config.min_roc).all(axis=1)
+            else:
+                long_ok = (roc_values > 0).all(axis=1)
+                short_ok = (roc_values < 0).all(axis=1)
+            roc_bonus = ((is_long & long_ok) | (~is_long & short_ok)).astype(int)
+
+        score = (base_score + roc_bonus).clip(upper=5).astype(int)
+
+        mask = base_score > 0
+        if not mask.any():
+            return pd.DataFrame()
+
+        result = df.loc[mask].copy()
+        result["STRATEGY"] = "confluence"
+        result["CONFLUENCE_PATTERN"] = pattern[mask]
+        result["CONFLUENCE_SCORE"] = score[mask]
+        result["DIRECTION"] = direction[mask]
+        result["MR_EXTREMITY"] = mr_extremity[mask]
+
+        result = result.sort_values(["CONFLUENCE_SCORE", "MR_EXTREMITY"], ascending=[False, False])
+
+        return result
+
     def _add_confluence_and_direction(self, df: pd.DataFrame) -> pd.DataFrame:
         """Add confluence score and direction to results."""
         if df.empty:
@@ -352,14 +472,29 @@ class ForexStrategyScanner:
                 table = Table(title=f"Strategy: {strategy}")
                 table.add_column("Pair", style="cyan")
                 table.add_column("Direction", style="green")
-                table.add_column("Confluence", justify="right")
+                if strategy == "confluence":
+                    table.add_column("Pattern", style="magenta")
+                    table.add_column("Score", justify="right")
+                    table.add_column("MR", justify="right")
+                else:
+                    table.add_column("Confluence", justify="right")
 
                 for _, row in strategy_df.iterrows():
-                    table.add_row(
-                        row.get("_base_pair", row.get("Name", row.get("PAIR", "N/A"))),
-                        row["DIRECTION"],
-                        str(row.get("CONFLUENCE_SCORE", "N/A")),
-                    )
+                    pair = row.get("_base_pair", row.get("Name", row.get("PAIR", "N/A")))
+                    if strategy == "confluence":
+                        table.add_row(
+                            pair,
+                            row["DIRECTION"],
+                            str(row.get("CONFLUENCE_PATTERN", "")),
+                            str(row.get("CONFLUENCE_SCORE", "N/A")),
+                            str(round(float(row.get("MR_EXTREMITY", 0)), 2)),
+                        )
+                    else:
+                        table.add_row(
+                            pair,
+                            row["DIRECTION"],
+                            str(row.get("CONFLUENCE_SCORE", "N/A")),
+                        )
 
                 console.print(table)
 

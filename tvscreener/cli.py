@@ -295,6 +295,7 @@ def run_strategy_scan(args) -> int:
             "mean_reversion": "mean_reversion",
             "hybrid": "hybrid",
             "breakout": "breakout",
+            "confluence": "confluence",
             "all": "all",
         }
         strategy_name = strategy_map[args.strategy]
@@ -389,7 +390,7 @@ def main():
     parser.add_argument("--load-config", help="Load opportunity config from YAML")
     parser.add_argument(
         "--strategy",
-        choices=["all", "trend", "mean_reversion", "hybrid", "breakout"],
+        choices=["all", "trend", "mean_reversion", "hybrid", "breakout", "confluence"],
         default="all",
     )
     parser.add_argument("--filter", choices=["long", "short"], help="Filter by direction")

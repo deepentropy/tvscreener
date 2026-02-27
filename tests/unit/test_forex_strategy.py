@@ -315,6 +315,102 @@ class TestBreakoutDetection:
         assert len(result) == 0
 
 
+class TestConfluenceDetection:
+    def test_confluence_trend_continuation_long(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.2, mr_threshold=0.2),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.6],
+                "Recommend All|60": [0.5],
+                "Recommend All|15": [0.3],
+            }
+        )
+
+        result = scanner._detect_confluence(mock_df)
+
+        assert len(result) == 1
+        assert result.iloc[0]["STRATEGY"] == "confluence"
+        assert result.iloc[0]["CONFLUENCE_PATTERN"] == "trend_continuation"
+        assert result.iloc[0]["CONFLUENCE_SCORE"] == 3
+        assert result.iloc[0]["DIRECTION"] == "long"
+
+    def test_confluence_trend_mr_entry_long_with_roc_bonus(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.2, mr_threshold=0.2, min_roc=None),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.6],
+                "Recommend All|60": [0.1],
+                "Recommend All|15": [0.05],
+                "Recommend Other|60": [-0.6],
+                "Recommend Other|15": [-0.5],
+                "Roc|240": [0.2],
+                "Roc|60": [0.1],
+                "Roc|15": [0.05],
+            }
+        )
+
+        result = scanner._detect_confluence(mock_df)
+
+        assert len(result) == 1
+        assert result.iloc[0]["CONFLUENCE_PATTERN"] == "trend_mr_entry"
+        assert result.iloc[0]["CONFLUENCE_SCORE"] == 5
+        assert result.iloc[0]["DIRECTION"] == "long"
+
+    def test_confluence_ranking_prefers_higher_mr_extremity(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD", "GBPUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.2, mr_threshold=0.2, min_roc=None),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD", "GBPUSD"],
+                "Recommend All|240": [0.6, 0.6],
+                "Recommend Other|60": [-0.3, -0.9],
+                "Recommend Other|15": [-0.3, -0.3],
+            }
+        )
+
+        result = scanner._detect_confluence(mock_df)
+
+        assert len(result) == 2
+        assert result.iloc[0]["Name"] == "GBPUSD"
+        assert result.iloc[0]["CONFLUENCE_PATTERN"] == "trend_mr_entry"
+
+    def test_confluence_conflicting_signals_return_empty(self):
+        scanner = ForexStrategyScanner(
+            pairs=["EURUSD"],
+            timeframes=["240", "60", "15"],
+            config=StrategyConfig(trend_threshold=0.2, mr_threshold=0.2),
+        )
+
+        mock_df = pd.DataFrame(
+            {
+                "Name": ["EURUSD"],
+                "Recommend All|240": [0.6],
+                "Recommend Other|60": [0.6],
+                "Recommend Other|15": [0.6],
+            }
+        )
+
+        result = scanner._detect_confluence(mock_df)
+
+        assert len(result) == 0
+
+
 class TestHybridDetection:
     def test_hybrid_bullish_trend_with_oversold_oscillator(self):
         scanner = ForexStrategyScanner(
