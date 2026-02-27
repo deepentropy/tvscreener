@@ -55,5 +55,26 @@ The new approach treats all signals as "confluence patterns" and scores them by:
 - How to weight MR vs Trend signals in the same direction?
 - Minimum threshold for "extremity" in LTF/STF?
 
+## Learnings from First Run (2026-02-28)
+
+**Threshold Tuning Required:**
+- With `mr_threshold=0.2` and `trend_threshold=0.2`, NO "trend_mr_entry" patterns fired in test run
+- Current market conditions don't have pairs with STF/LTF oscillator extremes below -0.2 while HTF trends
+- This reveals thresholds may be too strict for "pullback entry" detection
+
+**User Concept Validated:**
+- "Good position in market structure" = HTF trend + LTF/STF mean reversion in SAME direction as HTF
+- Example: HTF long (240 bullish) + STF/LTF oversold = potential bounce entry
+- Implementation correctly filters conflicting signals but may filter too aggressively
+
+**Test Results:**
+- EURJPY: scored 4 (trend_continuation + ROC bonus) - best clean trend
+- AUDJPY: scored 3 (trend_continuation) - valid but stretched
+- EURCHF: scored 3 (trend_pullback) - matches pullback entry concept
+
+**Next:**
+- Add CLI support for `--mr-threshold` override
+- Consider lowering default mr_threshold to 0.15 for more MR Entry signals
+
 ## Next Steps
 → `/workflows:plan` for implementation details

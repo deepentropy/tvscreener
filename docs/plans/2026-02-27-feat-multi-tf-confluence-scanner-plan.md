@@ -210,3 +210,37 @@ strategy_map = {
 - Existing: `forex_strategy.py:197` - `_detect_mean_reversion`
 - Existing: `forex_strategy.py:262` - `_detect_breakout`
 - Existing: `score.py` - `ScoringEngine` - consider extending vs new module
+
+## Validation Results (2026-02-28)
+
+### Test Run 1: Default Thresholds (mr_threshold=0.2, trend_threshold=0.2)
+
+| Universe | Signals | Patterns Found |
+|----------|---------|----------------|
+| Majors | 2 | trend_continuation (score 3) |
+| Minors | 3 | trend_continuation, trend_pullback |
+
+**Finding:** No "trend_mr_entry" (score 4) patterns fired - thresholds too strict.
+
+### Test Run 2: Tuned Thresholds (mr_threshold=0.15, trend_threshold=0.2)
+
+| Universe | Signals | Patterns Found |
+|----------|---------|----------------|
+| Majors | 3 | trend_continuation, trend_pullback |
+| Minors | 6 | trend_mr_entry (x2), trend_continuation, trend_pullback (x2) |
+
+**New signals revealed:**
+- GBPCAD short: trend_mr_entry, score 4 (HTF bearish + STF/LTF overbought)
+- EURGBP long: trend_mr_entry, score 4 (HTF bullish + STF/LTF oversold)
+
+### Conclusion
+
+- Lowering `mr_threshold` from 0.2 to 0.15 reveals more "pullback entry" candidates
+- Score 4 signals (trend_mr_entry) now appear with aligned HTF trend + LTF/STF extremes
+- CLI `--mr-threshold` override works correctly
+- Implementation validated: pattern/direction/score all match expected logic (0 mismatches)
+
+### Recommendation
+
+- Default mr_threshold of 0.2 is conservative; consider 0.15 for more MR Entry signals
+- Or keep 0.2 and let users tune via CLI
