@@ -474,28 +474,14 @@ class ForexStrategyScanner:
             label="signals",
         )
 
-    def _get_strength_sign(self, score: float, is_confluence: bool = False) -> str:
-        """Get strength sign for strategy signals.
+    def _get_strength_sign(self, score: float, direction: str = "long") -> str:
+        """Get strength sign for strategy signals based on CONFLUENCE_SCORE (1-3)."""
+        is_long = direction.lower() == "long"
 
-        If is_confluence=True, score is treated as an integer (1, 2, 3).
-        Otherwise, score is treated as a float (-1.0 to 1.0).
-        """
-        if is_confluence:
-            if score >= 3:
-                return "[bold]++[/bold]"
-            if score >= 2:
-                return "+"
-            return "[dim]=[/dim]"
-
-        # Float score mapping
-        if score >= 0.5:
-            return "[bold]++[/bold]"
-        if score >= 0.1:
-            return "+"
-        if score <= -0.5:
-            return "[bold]--[/bold]"
-        if score <= -0.1:
-            return "-"
+        if score >= 3:
+            return "[bold]++[/bold]" if is_long else "[bold]--[/bold]"
+        if score >= 1:
+            return "+" if is_long else "-"
         return "[dim]=[/dim]"
 
     def print_summary(self) -> None:
@@ -518,13 +504,9 @@ class ForexStrategyScanner:
                     direction = row["DIRECTION"]
                     direction_style = "bold green" if direction == "long" else "bold red"
 
-                    # Get strength sign
-                    if strategy == "confluence":
-                        strength_sign = self._get_strength_sign(
-                            float(row.get("CONFLUENCE_SCORE", 0)), is_confluence=True
-                        )
-                    else:
-                        strength_sign = self._get_strength_sign(float(row.get("HTF_TREND", 0)))
+                    # Get strength sign based on confluence score
+                    confluence_score = float(row.get("CONFLUENCE_SCORE", 0))
+                    strength_sign = self._get_strength_sign(confluence_score, direction)
 
                     direction_display = f"[{direction_style}]{direction.upper()} {strength_sign}[/{direction_style}]"
 

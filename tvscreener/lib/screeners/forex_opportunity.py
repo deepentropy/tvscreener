@@ -343,7 +343,7 @@ class ForexOpportunityScreener:
 
                 direction_str = "LONG" if direction == "long" else "SHORT"
                 direction_style = "green" if direction == "long" else "red"
-                strength_sign = self._get_strength_sign(ensemble)
+                strength_sign = self._get_strength_sign(ensemble, pad=False)
 
                 table.add_row(
                     str(idx),
@@ -449,11 +449,11 @@ class ForexOpportunityScreener:
                 osc_val = row.get(osc_col, 0) or 0
                 roc_val = row.get(roc_col, 0) or 0
 
-                trend_dirs.append(self._get_strength_emoji(trend_val))
-                ma_dirs.append(self._get_strength_emoji(ma_val))
-                osc_dirs.append(self._get_strength_emoji(osc_val))
+                trend_dirs.append(self._get_strength_sign(trend_val))
+                ma_dirs.append(self._get_strength_sign(ma_val))
+                osc_dirs.append(self._get_strength_sign(osc_val))
                 roc_dirs.append(
-                    self._get_strength_emoji(roc_val, is_roc=True) if roc_val != 0 else "-"
+                    self._get_strength_sign(roc_val, is_roc=True) if roc_val != 0 else "- "
                 )
 
             trend_str = "|".join(trend_dirs)
@@ -472,10 +472,10 @@ class ForexOpportunityScreener:
             )
 
         console.print(table)
-        console.print("\n[dim]Legend: 🟢🟢/🔴🔴=Strong  🟢/🔴=Normal  ⚪=Neutral[/dim]")
+        console.print("\n[dim]Legend: ++/--=Strong  +/-=Normal  ==Neutral[/dim]")
         console.print(f"[dim]Showing top 15 of {len(df)} opportunities[/dim]")
 
-    def _get_strength_sign(self, value: float, is_roc: bool = False) -> str:
+    def _get_strength_sign(self, value: float, is_roc: bool = False, pad: bool = True) -> str:
         """Get multi-sign direction and strength indicator (+, ++, =, -, --)."""
         strong_threshold = 0.15 if is_roc else 0.5
         normal_threshold = 0.1
@@ -483,24 +483,9 @@ class ForexOpportunityScreener:
         if value >= strong_threshold:
             return "[bold green]++[/bold green]"
         if value >= normal_threshold:
-            return "[green]+[/green]"
+            return "[green]+ [/green]" if pad else "[green]+[/green]"
         if value <= -strong_threshold:
             return "[bold red]--[/bold red]"
         if value <= -normal_threshold:
-            return "[red]-[/red]"
-        return "[dim white]=[/dim white]"
-
-    def _get_strength_emoji(self, value: float, is_roc: bool = False) -> str:
-        """Get multi-emoji direction and strength indicator (🟢🟢, 🟢, ⚪, 🔴, 🔴🔴)."""
-        strong_threshold = 0.15 if is_roc else 0.5
-        normal_threshold = 0.1
-
-        if value >= strong_threshold:
-            return "🟢🟢"
-        if value >= normal_threshold:
-            return "🟢"
-        if value <= -strong_threshold:
-            return "🔴🔴"
-        if value <= -normal_threshold:
-            return "🔴"
-        return "⚪"
+            return "[red]- [/red]" if pad else "[red]-[/red]"
+        return "[dim white]= [/dim white]" if pad else "[dim white]=[/dim white]"
