@@ -241,15 +241,21 @@ def calculate_trailing_stop(current_price: float, atr: float, direction: str, mu
 
 ### Layered Configuration System
 
-The risk management features support three configuration sources with proper precedence:
+**Using pydantic-settings with dotenv** - The project already uses `pydantic-settings` for configuration. We'll extend the existing `ScreenerSettings` class instead of creating custom layers.
+
+**Reference:** `tvscreener/config/settings.py` already implements:
+- `.env` file support via `env_file=".env"`
+- Environment variable prefix via `env_prefix="TVSCREENER_"`
+- YAML config loading (via existing pattern)
 
 | Layer | Priority | Source | Example |
 |-------|----------|--------|---------|
 | 1 (highest) | CLI args | `--min-confluence 3` | Command line overrides |
 | 2 | Environment | `TVSCREENER_MIN_CONFLUENCE=3` | Shell environment |
-| 3 | Config file | `tvscreener.yaml` | Default values |
+| 3 | Config file | `tvscreener.yaml` | YAML values |
+| 4 | Defaults | pydantic Field | Built-in defaults |
 
-**Configuration Precedence:** CLI args > Environment > Config file > Defaults
+**Configuration Precedence:** CLI args → Environment → YAML config → Defaults
 
 ### Environment Variables
 
@@ -274,135 +280,120 @@ export TVSCREENER_PIP_VALUE=10
 ### Config File (tvscreener.yaml)
 
 ```yaml
-# Risk Management Settings
+# Risk Management Settings (extends existing ScreenerSettings)
 risk:
   # Signal quality filters
   min_confluence: 3           # Minimum confluence score (1-5)
   min_tf_alignment: 2         # Minimum aligned timeframes
-  require_momentum: true      # ROC must align with direction
-  min_rvol: 1.2             # Minimum relative volume
+  require_momentum: true       # ROC must align with direction
+  min_rvol: 1.2               # Minimum relative volume
   
   # Risk parameters
-  risk_per_trade: 1.0        # 1% per trade
-  max_daily_loss: 3.0       # 3% daily loss limit
-  min_risk_reward: 2.0       # Minimum R:R ratio
-  atr_multiplier: 2.0       # ATR multiplier for stops
+  risk_per_trade: 1.0         # 1% per trade
+  max_daily_loss: 3.0         # 3% daily loss limit
+  min_risk_reward: 2.0        # Minimum R:R ratio
+  atr_multiplier: 2.0          # ATR multiplier for stops
   
   # Account settings
   account_balance: 10000
   pip_value: 10
 ```
 
-### Implementation Pattern
+### .env file
+
+```bash
+# Signal quality
+TVSCREENER_MIN_CONFLUENCE=3
+TVSCREENER_MIN_TF_ALIGNMENT=2
+TVSCREENER_REQUIRE_MOMENTUM=true
+TVSCREENER_MIN_RVOL=1.2
+
+# Risk management
+TVSCREENER_RISK_PER_TRADE=1.0
+TVSCREENER_MAX_DAILY_LOSS=3.0
+TVSCREENER_MIN_RISK_REWARD=2.0
+TVSCREENER_ATR_MULTIPLIER=2.0
+
+# Account
+TVSCREENER_ACCOUNT_BALANCE=10000
+TVSCREENER_PIP_VALUE=10
+```
+
+### Implementation: Extend ScreenerSettings
+
+The project already has `ScreenerSettings(BaseSettings)` in `tvscreener/config/settings.py`. We'll extend it:
 
 ```python
-from dataclasses import dataclass, field
-from typing import Optional
-import os
+# tvscreener/config/settings.py - Add to existing ScreenerSettings
 
-@dataclass
-class RiskConfig:
-    """Layered configuration with precedence: CLI > ENV > Config > Defaults"""
+from pydantic import Field, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+class RiskSettings(BaseSettings):
+    """Risk management settings - extends ScreenerSettings pattern."""
     
-    # Signal quality
-    min_confluence: int = 2
-    min_tf_alignment: int = 2
-    require_momentum: bool = False
-    min_rvol: float = 1.0
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        env_prefix="TVSCREENER_",
+        extra="ignore"
+    )
     
-    # Risk management
-    risk_per_trade: float = 1.0
-    max_daily_loss: float = 3.0
-    min_risk_reward: float = 1.5
-    atr_multiplier: float = 2.0
+    # Signal quality filters
+    min_confluence: int = Field(default=2, ge=1, le=5)
+    min_tf_alignment: int = Field(default=2, ge=1, le=3)
+    require_momentum: bool = Field(default=False)
+    min_rvol: float = Field(default=1.0, ge=0.0)
+    require_volume_spike: bool = Field(default=False)
+    volume_spike_threshold: float = Field(default=1.5, ge=1.0)
     
-    # Account
-    account_balance: float = 10000.0
-    pip_value: float = 10.0
+    # Risk management parameters
+    risk_per_trade: float = Field(default=1.0, ge=0.1, le=10.0)  # percentage
+    max_daily_loss: float = Field(default=3.0, ge=0.1, le=20.0)  # percentage
+    max_drawdown: float = Field(default=6.0, ge=0.1, le=30.0)  # percentage
+    min_risk_reward: float = Field(default=1.5, ge=0.5, le=5.0)
+    atr_multiplier: float = Field(default=2.0, ge=0.5, le=5.0)
     
+    # Account settings
+    account_balance: float = Field(default=10000.0, ge=100)
+    pip_value: float = Field(default=10.0, ge=0.01)
+    
+    @field_validator("require_momentum", "require_volume_spike", mode="before")
     @classmethod
-    def from_config(cls, config: dict) -> "RiskConfig":
-        """Create from config dict (loaded from YAML)."""
-        risk_config = config.get("risk", {})
-        return cls(
-            min_confluence=risk_config.get("min_confluence", 2),
-            min_tf_alignment=risk_config.get("min_tf_alignment", 2),
-            require_momentum=risk_config.get("require_momentum", False),
-            min_rvol=risk_config.get("min_rvol", 1.0),
-            risk_per_trade=risk_config.get("risk_per_trade", 1.0),
-            max_daily_loss=risk_config.get("max_daily_loss", 3.0),
-            min_risk_reward=risk_config.get("min_risk_reward", 1.5),
-            atr_multiplier=risk_config.get("atr_multiplier", 2.0),
-            account_balance=risk_config.get("account_balance", 10000.0),
-            pip_value=risk_config.get("pip_value", 10.0),
-        )
-    
-    @classmethod
-    def from_env(cls) -> "RiskConfig":
-        """Create from environment variables (overrides config)."""
-        return cls(
-            min_confluence=int(os.getenv("TVSCREENER_MIN_CONFLUENCE", 2)),
-            min_tf_alignment=int(os.getenv("TVSCREENER_MIN_TF_ALIGNMENT", 2)),
-            require_momentum=os.getenv("TVSCREENER_REQUIRE_MOMENTUM", "").lower() == "true",
-            min_rvol=float(os.getenv("TVSCREENER_MIN_RVOL", 1.0)),
-            risk_per_trade=float(os.getenv("TVSCREENER_RISK_PER_TRADE", 1.0)),
-            max_daily_loss=float(os.getenv("TVSCREENER_MAX_DAILY_LOSS", 3.0)),
-            min_risk_reward=float(os.getenv("TVSCREENER_MIN_RISK_REWARD", 1.5)),
-            atr_multiplier=float(os.getenv("TVSCREENER_ATR_MULTIPLIER", 2.0)),
-            account_balance=float(os.getenv("TVSCREENER_ACCOUNT_BALANCE", 10000.0)),
-            pip_value=float(os.getenv("TVSCREENER_PIP_VALUE", 10.0)),
-        )
-    
-    @classmethod
-    def from_args(cls, args) -> "RiskConfig":
-        """Create from CLI args (highest priority)."""
-        return cls(
-            min_confluence=args.min_confluence if hasattr(args, "min_confluence") else 2,
-            min_tf_alignment=args.min_tf_alignment if hasattr(args, "min_tf_alignment") else 2,
-            require_momentum=args.require_momentum if hasattr(args, "require_momentum") else False,
-            min_rvol=args.min_rvol if hasattr(args, "min_rvol") else 1.0,
-            risk_per_trade=args.risk_per_trade if hasattr(args, "risk_per_trade") else 1.0,
-            max_daily_loss=args.max_daily_loss if hasattr(args, "max_daily_loss") else 3.0,
-            min_risk_reward=args.min_risk_reward if hasattr(args, "min_risk_reward") else 1.5,
-            atr_multiplier=args.atr_multiplier if hasattr(args, "atr_multiplier") else 2.0,
-            account_balance=args.account_balance if hasattr(args, "account_balance") else 10000.0,
-            pip_value=args.pip_value if hasattr(args, "pip_value") else 10.0,
-        )
-    
-    @classmethod
-    def load(cls, args=None, config_path: str = "tvscreener.yaml") -> "RiskConfig":
-        """Load config with layered precedence."""
-        # Start with defaults
-        config = cls()
-        
-        # Layer 3: Load from config file if exists
-        if os.path.exists(config_path):
-            import yaml
-            with open(config_path) as f:
-                file_config = yaml.safe_load(f)
-            if file_config and "risk" in file_config:
-                file_risk = cls.from_config(file_config)
-                config = file_risk
-        
-        # Layer 2: Override with environment variables
-        env_config = cls.from_env()
-        for field in cls.__dataclass_fields__:
-            env_value = getattr(env_config, field)
-            default_value = getattr(cls(), field)
-            if env_value != default_value:
-                setattr(config, field, env_value)
-        
-        # Layer 1: Override with CLI args (highest priority)
-        if args:
-            arg_config = cls.from_args(args)
-            for field in cls.__dataclass_fields__:
-                arg_value = getattr(arg_config, field)
-                default_value = getattr(cls(), field)
-                if arg_value != default_value:
-                    setattr(config, field, arg_value)
-        
-        return config
+    def parse_bool(cls, v):
+        if isinstance(v, bool):
+            return v
+        if isinstance(v, str):
+            return v.lower() in ("true", "1", "yes")
+        return bool(v)
 ```
+
+### CLI Integration Pattern
+
+Existing CLI in `tvscreener/cli.py` already handles settings. Add new arguments that override:
+
+```python
+# Add to cli.py - these override settings when provided
+parser.add_argument(
+    "--min-confluence",
+    type=int,
+    default=None,  # None means use settings value
+    choices=[1, 2, 3, 4, 5],
+    help="Minimum confluence score (overrides TVSCREENER_MIN_CONFLUENCE)"
+)
+
+# In main function, merge CLI args with settings:
+settings = ScreenerSettings()
+risk_settings = RiskSettings()
+
+# CLI args override if provided
+if args.min_confluence is not None:
+    risk_settings.min_confluence = args.min_confluence
+```
+
+### Config File Loading
+
+Existing YAML loading in settings.py already handles config files. Risk settings will auto-load from YAML if present:
 
 ### CLI Best Practices Implementation
 

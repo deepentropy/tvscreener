@@ -18,13 +18,14 @@ Implement signal quality filters and risk management rules to convert scanner si
 
 ## Implementation Tasks
 
-### Phase 0: Configuration System
+### Phase 0: Configuration System (pydantic-settings)
 
-- [ ] Add RiskConfig dataclass with layered loading
-- [ ] Support config file (YAML)
-- [ ] Support environment variables
-- [ ] Support CLI args (highest priority)
-- [ ] Implement config precedence: CLI > ENV > Config > Defaults
+- [ ] Extend existing `ScreenerSettings` in `settings.py`
+- [ ] Use `pydantic_settings.BaseSettings` (already in project)
+- [ ] Support `.env` file via `env_file=".env"`
+- [ ] Use `env_prefix="TVSCREENER_"` (already configured)
+- [ ] Add YAML config loading (extend existing pattern)
+- [ ] CLI args override settings when provided
 
 ### Phase 1: Signal Quality Filters
 
