@@ -1,0 +1,76 @@
+---
+status: pending
+priority: p2
+issue_id: "038"
+tags: [feature, risk-management, cli]
+dependencies: []
+---
+
+# Implement Prop Trading Risk Management Features
+
+## Plan Reference
+
+`docs/plans/2026-02-28-prop-trading-risk-management-plan.md`
+
+## Overview
+
+Implement signal quality filters and risk management rules to convert scanner signals into actionable trade executions.
+
+## Implementation Tasks
+
+### Phase 1: Signal Quality Filters
+
+- [ ] Add `--min-confluence` CLI option
+- [ ] Add `--min-tf-alignment` filter
+- [ ] Add `--require-momentum` flag
+- [ ] Filter output to clean signals only
+
+### Phase 2: Risk Calculations
+
+- [ ] Create `tvscreener/lib/screeners/risk_utils.py` module
+- [ ] Implement ATR-based stop loss calculation
+- [ ] Implement risk/reward ratio calculation
+- [ ] Implement position size calculator
+- [ ] Output clean entry/stop/target levels
+
+### Phase 3: Trade Management
+
+- [ ] Daily loss tracking
+- [ ] Drawdown monitoring
+- [ ] Max positions enforcement
+- [ ] Session-based filtering
+
+## Technical Details
+
+### Files to Modify
+
+1. `tvscreener/cli.py` - Add new CLI arguments
+2. `tvscreener/config/settings.py` - Add risk config
+3. `tvscreener/lib/screeners/forex_strategy.py` - Add risk calculations
+4. `tvscreener/lib/screeners/risk_utils.py` - New module
+
+### Key Formulas
+
+**Position Sizing:**
+```
+Position Size = (Account Risk Amount) ÷ (ATR × Multiplier × Pip Value)
+```
+
+**ATR Stop Loss:**
+```
+SL = Entry ± (ATR × Multiplier)
+```
+
+## Acceptance Criteria
+
+- [ ] `--min-confluence` filter works
+- [ ] `--min-tf-alignment` filter works
+- [ ] `--require-momentum` blocks conflicting ROC
+- [ ] ATR-based stop loss calculated
+- [ ] Risk/reward ratio shown
+- [ ] Position size calculated
+- [ ] Tests pass
+
+## Work Log
+
+- 2026-02-28: Plan created and deepened with research
