@@ -1,14 +1,13 @@
 """Tests for risk management utilities."""
 
-import pytest
 from tvscreener.lib.screeners.risk_utils import (
-    calculate_stop_loss,
-    calculate_take_profit,
     calculate_position_size,
     calculate_risk_reward_ratio,
+    calculate_stop_loss,
+    calculate_take_profit,
     calculate_volume_roc,
-    check_volume_spike,
     check_signal_quality,
+    check_volume_spike,
 )
 
 

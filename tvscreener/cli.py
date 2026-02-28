@@ -230,6 +230,27 @@ def _maybe_save_opportunity_config(path: str, args) -> None:
     _save_config_file(path, payload)
 
 
+def _filter_by_confluence(
+    df,
+    grade: str | None = None,
+    min_confluence: int | None = None,
+):
+    """Filter DataFrame by confluence grade or minimum score."""
+
+    if df.empty:
+        return df
+
+    if grade:
+        grade_order = {"A+": 6, "A": 5, "B": 4, "C": 3, "D": 2, "F": 1}
+        min_grade_value = grade_order.get(grade, 0)
+        df = df[df["GRADE"].map(grade_order).fillna(0) >= min_grade_value]
+
+    if min_confluence is not None:
+        df = df[df["TOTAL_CONFLUENCE"] >= min_confluence]
+
+    return df
+
+
 def run_opportunity_scan(args) -> int:
     """Run opportunity screener."""
     pairs = get_pairs(args.universe, args.pairs)
@@ -249,7 +270,14 @@ def run_opportunity_scan(args) -> int:
             progress.add_task("Fetching data...", total=None)
             results = screener.get_opportunities()
 
-        screener.print_summary()
+        if args.confluence_grade or args.min_opportunity_confluence:
+            results = _filter_by_confluence(
+                results,
+                grade=args.confluence_grade,
+                min_confluence=args.min_opportunity_confluence,
+            )
+
+        screener.print_summary(detailed=args.detailed, matrix=args.matrix)
 
         metadata = _build_opportunity_metadata(args)
 
@@ -507,6 +535,27 @@ def main():
         "--account-balance",
         type=float,
         help="Account balance for position sizing",
+    )
+    # Output format options
+    parser.add_argument(
+        "--detailed",
+        action="store_true",
+        help="Show detailed per-pair breakdown with TF analysis",
+    )
+    parser.add_argument(
+        "--matrix",
+        action="store_true",
+        help="Show confluence matrix view for all pairs",
+    )
+    parser.add_argument(
+        "--confluence-grade",
+        choices=["A+", "A", "B", "C", "D", "F"],
+        help="Filter by confluence grade",
+    )
+    parser.add_argument(
+        "--min-opportunity-confluence",
+        type=int,
+        help="Minimum total confluence score for opportunity scanner",
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 

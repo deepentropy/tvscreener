@@ -315,25 +315,43 @@ class ForexOpportunityScreener:
             label="opportunities",
         )
 
-    def print_summary(self) -> None:
+    def print_summary(self, detailed: bool = False, matrix: bool = False) -> None:
         def _render(df: pd.DataFrame, console, Table) -> None:
-            table = Table(title="Forex Opportunities")
-            table.add_column("Pair", style="cyan", no_wrap=True)
-            table.add_column("Price", style="white", justify="right")
-            table.add_column("Rating", style="green", justify="right")
-            table.add_column("ROC %", style="yellow", justify="right")
+            if detailed:
+                self._render_detailed(df, console, Table)
+                return
+            if matrix:
+                self._render_matrix(df, console, Table)
+                return
 
-            for _, row in df.head(20).iterrows():
-                name = row.get("_base_pair", row.get("Name", "N/A"))
-                price = row.get("Price", 0)
-                rating = row.get("RATING_SCORE", 0)
-                roc = row.get("ROC_AVG", 0)
+            table = Table(title="Forex Opportunities")
+            table.add_column("Rank", style="dim", justify="right", no_wrap=True)
+            table.add_column("Pair", style="cyan", no_wrap=True)
+            table.add_column("Direction", style="white", justify="center")
+            table.add_column("Ensemble", style="green", justify="right")
+            table.add_column("TF Conf", style="yellow", justify="center")
+            table.add_column("Factor Conf", style="yellow", justify="center")
+            table.add_column("Grade", style="magenta", justify="center")
+
+            for idx, row in enumerate(df.head(20).itertuples(), 1):
+                name = getattr(row, "_base_pair", getattr(row, "Name", "N/A"))
+                ensemble = getattr(row, "ENSEMBLE_SCORE", 0) or 0
+                direction = getattr(row, "DIRECTION", "long")
+                tf_conf = getattr(row, "TF_CONFLUENCE", "0/3")
+                factor_conf = getattr(row, "FACTOR_CONFLUENCE", "0/4")
+                grade = getattr(row, "GRADE", "F")
+
+                direction_str = "LONG" if direction == "long" else "SHORT"
+                direction_style = "green" if direction == "long" else "red"
 
                 table.add_row(
+                    str(idx),
                     name,
-                    f"{price:.5f}" if price else "N/A",
-                    f"{rating:.2f}",
-                    f"{roc:.2f}%" if roc else "N/A",
+                    f"[{direction_style}]{direction_str}[/{direction_style}]",
+                    f"{ensemble:+.2f}",
+                    tf_conf,
+                    factor_conf,
+                    f"[bold]{grade}[/bold]",
                 )
 
             console.print(table)
@@ -344,3 +362,118 @@ class ForexOpportunityScreener:
             empty_rich_message="No opportunities found",
             render_rich=_render,
         )
+
+    def _render_detailed(self, df: pd.DataFrame, console, Table) -> None:
+        from rich.table import Table as RichTable
+
+        for idx, row in enumerate(df.head(10).itertuples(), 1):
+            name = getattr(
+                row, "_base_pair", getattr(row, "Name", getattr(row, "_base_pair", "N/A"))
+            )
+            ensemble = getattr(row, "ENSEMBLE_SCORE", 0) or 0
+            direction = getattr(row, "DIRECTION", "long")
+            grade = getattr(row, "GRADE", "F")
+            tf_conf = getattr(row, "TF_CONFLUENCE_LONG", 0) or 0
+            total_conf = getattr(row, "TOTAL_CONFLUENCE", 0) or 0
+
+            direction_str = "LONG" if direction == "long" else "SHORT"
+
+            table = RichTable(title=f"#{idx} {name} - {direction_str} (Grade: {grade})")
+            table.add_column("Timeframe", style="cyan")
+            table.add_column("TREND", justify="center")
+            table.add_column("MA", justify="center")
+            table.add_column("OSC", justify="center")
+            table.add_column("ROC", justify="center")
+
+            for tf in self.timeframes:
+                trend_val = getattr(row, f"TREND_SCORE_{tf}", 0) or 0
+                ma_val = getattr(row, f"MA_SCORE_{tf}", 0) or 0
+                osc_val = getattr(row, f"OSC_SCORE_{tf}", 0) or 0
+                roc_val = getattr(row, f"ROC_SCORE_{tf}", 0) or 0
+
+                trend_dir = self._get_direction_indicator(trend_val)
+                ma_dir = self._get_direction_indicator(ma_val)
+                osc_dir = self._get_direction_indicator(osc_val)
+                roc_dir = self._get_direction_indicator(roc_val)
+
+                table.add_row(
+                    tf,
+                    f"{trend_val:+.2f} {trend_dir}",
+                    f"{ma_val:+.2f} {ma_dir}",
+                    f"{osc_val:+.2f} {osc_dir}",
+                    f"{roc_val:+.2f} {roc_dir}" if roc_val != 0 else "-",
+                )
+
+            console.print(table)
+            console.print(
+                f"  Ensemble: {ensemble:+.3f} | TF Confluence: {tf_conf}/3 | Total: {total_conf}/7\n"
+            )
+
+    def _render_matrix(self, df: pd.DataFrame, console, Table) -> None:
+        from rich.table import Table as RichTable
+
+        table = RichTable(title="Confluence Matrix")
+        table.add_column("Pair", style="cyan", no_wrap=True)
+        table.add_column("Dir", justify="center")
+        table.add_column("TREND", justify="center")
+        table.add_column("MA", justify="center")
+        table.add_column("OSC", justify="center")
+        table.add_column("ROC", justify="center")
+        table.add_column("Grade", style="magenta", justify="center")
+
+        for row in df.head(15).itertuples():
+            name = getattr(row, "_base_pair", getattr(row, "Name", "N/A"))
+            direction = getattr(row, "DIRECTION", "long")
+            grade = getattr(row, "GRADE", "F")
+
+            direction_str = "L" if direction == "long" else "S"
+            direction_style = "green" if direction == "long" else "red"
+
+            trend_dirs = []
+            ma_dirs = []
+            osc_dirs = []
+            roc_dirs = []
+
+            for tf in self.timeframes:
+                trend_val = getattr(row, f"TREND_SCORE_{tf}", 0) or 0
+                ma_val = getattr(row, f"MA_SCORE_{tf}", 0) or 0
+                osc_val = getattr(row, f"OSC_SCORE_{tf}", 0) or 0
+                roc_val = getattr(row, f"ROC_SCORE_{tf}", 0) or 0
+
+                trend_dirs.append(self._get_direction_letter(trend_val))
+                ma_dirs.append(self._get_direction_letter(ma_val))
+                osc_dirs.append(self._get_direction_letter(osc_val))
+                roc_dirs.append(self._get_direction_letter(roc_val) if roc_val != 0 else "-")
+
+            trend_str = "|".join(trend_dirs)
+            ma_str = "|".join(ma_dirs)
+            osc_str = "|".join(osc_dirs)
+            roc_str = "|".join(roc_dirs)
+
+            table.add_row(
+                name,
+                f"[{direction_style}]{direction_str}[/{direction_style}]",
+                trend_str,
+                ma_str,
+                osc_str,
+                roc_str,
+                f"[bold]{grade}[/bold]",
+            )
+
+        console.print(table)
+        console.print("\n[dim]Legend: L=Bullish  N=Neutral  S=Bearish[/dim]")
+        console.print(f"[dim]Showing top 15 of {len(df)} opportunities[/dim]")
+
+    def _get_direction_indicator(self, value: float) -> str:
+        if value > 0.1:
+            return "[green]🟢[/green]"
+        elif value < -0.1:
+            return "[red]🔴[/red]"
+        return "[yellow]⚪[/yellow]"
+
+    def _get_direction_letter(self, value: float) -> str:
+        if value > 0.1:
+            return "[green]L[/green]"
+        elif value < -0.1:
+            return "[red]S[/red]"
+        return "[dim]N[/dim]"

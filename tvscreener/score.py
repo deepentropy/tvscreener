@@ -237,4 +237,56 @@ class ScoringEngine:
 
         df = df.sort_values(by=["ENSEMBLE_SCORE"], ascending=[False])
 
+        df = calculate_grades(df, copy=False)
+
         return df
+
+
+def calculate_grades(df: pd.DataFrame, copy: bool = True) -> pd.DataFrame:
+    """Calculate confluence grade (A+ to F) based on TF and factor confluence.
+
+    Args:
+        df: DataFrame with confluence columns
+        copy: If True, copy DataFrame to avoid mutation
+
+    Returns:
+        DataFrame with added GRADE column
+    """
+    if copy:
+        df = df.copy()
+
+    tf_count = df.get("TF_CONFLUENCE_LONG", pd.Series(0, index=df.index))
+    tf_count = tf_count.fillna(0).astype(int)
+
+    factor_count = df.get("FACTOR_BULLISH_COUNT", pd.Series(0, index=df.index))
+    factor_count = factor_count.fillna(0).astype(int)
+
+    direction = df.get("DIRECTION", pd.Series("long", index=df.index))
+    bearish_count = df.get("FACTOR_BEARISH_COUNT", pd.Series(0, index=df.index))
+
+    total = np.where(
+        direction == "long", tf_count + factor_count, tf_count + bearish_count.fillna(0).astype(int)
+    )
+
+    tf_max = 3
+    factor_max = 4
+
+    score = (tf_count / tf_max * 0.5) + (factor_count / factor_max * 0.5)
+    score = score * 100
+
+    df["GRADE"] = np.select(
+        [
+            (score >= 90) & (total >= 6),
+            (score >= 75) & (total >= 5),
+            (score >= 60) & (total >= 4),
+            (score >= 40) & (total >= 3),
+            (score >= 20) & (total >= 2),
+        ],
+        ["A+", "A", "B", "C", "D"],
+        default="F",
+    )
+
+    df["TF_CONFLUENCE"] = tf_count.astype(str) + "/3"
+    df["FACTOR_CONFLUENCE"] = factor_count.astype(str) + "/4"
+
+    return df
