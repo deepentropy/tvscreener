@@ -13,9 +13,10 @@ Build a comprehensive Forex Opportunity + Strategy screener CLI with multi-timef
 
 ## Current Status
 
-- **Tests:** 205 passing ✅
+- **Tests:** 222 passing ✅
 - **Lint:** Clean ✅  
 - **Feature:** Multi-TF confluence scanner implemented ✅
+- **Feature:** Risk management config & CLI implemented ✅
 
 ---
 
@@ -80,6 +81,23 @@ Build a comprehensive Forex Opportunity + Strategy screener CLI with multi-timef
 | 3 | EURJPY | +0.384 | long |
 | 4 | EURUSD | +0.376 | long |
 | 5 | USDJPY | +0.332 | long |
+
+### Risk Management Implementation (2026-02-28)
+
+**Implemented Features:**
+- pydantic-settings integration (existing pattern)
+- Layered config: CLI > ENV > YAML > Defaults
+- New CLI args: `--min-tf-alignment`, `--require-momentum`, `--min-rvol`, `--require-volume-spike`, `--risk-per-trade`, `--atr-multiplier`, `--min-risk-reward`, `--account-balance`
+
+**risk_utils.py Functions:**
+- `calculate_stop_loss(entry, direction, atr, multiplier)`
+- `calculate_take_profit(entry, stop_loss, direction, min_rr)`
+- `calculate_position_size(account_balance, risk_pct, stop_distance, pip_value)`
+- `calculate_risk_reward_ratio(entry, stop_loss, take_profit)`
+- `calculate_volume_roc(current_volume, average_volume)`
+- `check_signal_quality(...)`
+
+**Tests Added:** 17 new tests for risk_utils
 
 **Weakest Pairs:**
 | Rank | Pair | Ensemble | Direction |
