@@ -343,11 +343,12 @@ class ForexOpportunityScreener:
 
                 direction_str = "LONG" if direction == "long" else "SHORT"
                 direction_style = "green" if direction == "long" else "red"
+                strength_sign = self._get_strength_sign(ensemble)
 
                 table.add_row(
                     str(idx),
                     name,
-                    f"[{direction_style}]{direction_str}[/{direction_style}]",
+                    f"[{direction_style}]{direction_str} {strength_sign}[/{direction_style}]",
                     f"{ensemble:+.2f}",
                     tf_conf,
                     factor_conf,
@@ -366,15 +367,13 @@ class ForexOpportunityScreener:
     def _render_detailed(self, df: pd.DataFrame, console, Table) -> None:
         from rich.table import Table as RichTable
 
-        for idx, row in enumerate(df.head(10).itertuples(), 1):
-            name = getattr(
-                row, "_base_pair", getattr(row, "Name", getattr(row, "_base_pair", "N/A"))
-            )
-            ensemble = getattr(row, "ENSEMBLE_SCORE", 0) or 0
-            direction = getattr(row, "DIRECTION", "long")
-            grade = getattr(row, "GRADE", "F")
-            tf_conf = getattr(row, "TF_CONFLUENCE_LONG", 0) or 0
-            total_conf = getattr(row, "TOTAL_CONFLUENCE", 0) or 0
+        for idx, (_, row) in enumerate(df.head(10).iterrows(), 1):
+            name = row.get("_base_pair", row.get("Name", "N/A"))
+            ensemble = row.get("ENSEMBLE_SCORE", 0) or 0
+            direction = row.get("DIRECTION", "long")
+            grade = row.get("GRADE", "F")
+            tf_conf = row.get("TF_CONFLUENCE_LONG", 0) or 0
+            total_conf = row.get("TOTAL_CONFLUENCE", 0) or 0
 
             direction_str = "LONG" if direction == "long" else "SHORT"
 
@@ -386,22 +385,27 @@ class ForexOpportunityScreener:
             table.add_column("ROC", justify="center")
 
             for tf in self.timeframes:
-                trend_val = getattr(row, f"TREND_SCORE_{tf}", 0) or 0
-                ma_val = getattr(row, f"MA_SCORE_{tf}", 0) or 0
-                osc_val = getattr(row, f"OSC_SCORE_{tf}", 0) or 0
-                roc_val = getattr(row, f"ROC_SCORE_{tf}", 0) or 0
+                trend_col = f"Recommend All|{tf}"
+                ma_col = f"Recommend Ma|{tf}"
+                osc_col = f"Recommend Other|{tf}"
+                roc_col = f"Roc|{tf}"
 
-                trend_dir = self._get_direction_indicator(trend_val)
-                ma_dir = self._get_direction_indicator(ma_val)
-                osc_dir = self._get_direction_indicator(osc_val)
-                roc_dir = self._get_direction_indicator(roc_val)
+                trend_val = row.get(trend_col, 0) or 0
+                ma_val = row.get(ma_col, 0) or 0
+                osc_val = row.get(osc_col, 0) or 0
+                roc_val = row.get(roc_col, 0) or 0
+
+                trend_sign = self._get_strength_sign(trend_val)
+                ma_sign = self._get_strength_sign(ma_val)
+                osc_sign = self._get_strength_sign(osc_val)
+                roc_sign = self._get_strength_sign(roc_val, is_roc=True)
 
                 table.add_row(
                     tf,
-                    f"{trend_val:+.2f} {trend_dir}",
-                    f"{ma_val:+.2f} {ma_dir}",
-                    f"{osc_val:+.2f} {osc_dir}",
-                    f"{roc_val:+.2f} {roc_dir}" if roc_val != 0 else "-",
+                    f"{trend_val:+.2f} {trend_sign}",
+                    f"{ma_val:+.2f} {ma_sign}",
+                    f"{osc_val:+.2f} {osc_sign}",
+                    f"{roc_val:+.2f} {roc_sign}" if roc_val != 0 else "-",
                 )
 
             console.print(table)
@@ -421,10 +425,10 @@ class ForexOpportunityScreener:
         table.add_column("ROC", justify="center")
         table.add_column("Grade", style="magenta", justify="center")
 
-        for row in df.head(15).itertuples():
-            name = getattr(row, "_base_pair", getattr(row, "Name", "N/A"))
-            direction = getattr(row, "DIRECTION", "long")
-            grade = getattr(row, "GRADE", "F")
+        for _, row in df.head(15).iterrows():
+            name = row.get("_base_pair", row.get("Name", "N/A"))
+            direction = row.get("DIRECTION", "long")
+            grade = row.get("GRADE", "F")
 
             direction_str = "L" if direction == "long" else "S"
             direction_style = "green" if direction == "long" else "red"
@@ -435,15 +439,22 @@ class ForexOpportunityScreener:
             roc_dirs = []
 
             for tf in self.timeframes:
-                trend_val = getattr(row, f"TREND_SCORE_{tf}", 0) or 0
-                ma_val = getattr(row, f"MA_SCORE_{tf}", 0) or 0
-                osc_val = getattr(row, f"OSC_SCORE_{tf}", 0) or 0
-                roc_val = getattr(row, f"ROC_SCORE_{tf}", 0) or 0
+                trend_col = f"Recommend All|{tf}"
+                ma_col = f"Recommend Ma|{tf}"
+                osc_col = f"Recommend Other|{tf}"
+                roc_col = f"Roc|{tf}"
 
-                trend_dirs.append(self._get_direction_letter(trend_val))
-                ma_dirs.append(self._get_direction_letter(ma_val))
-                osc_dirs.append(self._get_direction_letter(osc_val))
-                roc_dirs.append(self._get_direction_letter(roc_val) if roc_val != 0 else "-")
+                trend_val = row.get(trend_col, 0) or 0
+                ma_val = row.get(ma_col, 0) or 0
+                osc_val = row.get(osc_col, 0) or 0
+                roc_val = row.get(roc_col, 0) or 0
+
+                trend_dirs.append(self._get_strength_emoji(trend_val))
+                ma_dirs.append(self._get_strength_emoji(ma_val))
+                osc_dirs.append(self._get_strength_emoji(osc_val))
+                roc_dirs.append(
+                    self._get_strength_emoji(roc_val, is_roc=True) if roc_val != 0 else "-"
+                )
 
             trend_str = "|".join(trend_dirs)
             ma_str = "|".join(ma_dirs)
@@ -461,19 +472,35 @@ class ForexOpportunityScreener:
             )
 
         console.print(table)
-        console.print("\n[dim]Legend: L=Bullish  N=Neutral  S=Bearish[/dim]")
+        console.print("\n[dim]Legend: 🟢🟢/🔴🔴=Strong  🟢/🔴=Normal  ⚪=Neutral[/dim]")
         console.print(f"[dim]Showing top 15 of {len(df)} opportunities[/dim]")
 
-    def _get_direction_indicator(self, value: float) -> str:
-        if value > 0.1:
-            return "[green]🟢[/green]"
-        elif value < -0.1:
-            return "[red]🔴[/red]"
-        return "[yellow]⚪[/yellow]"
+    def _get_strength_sign(self, value: float, is_roc: bool = False) -> str:
+        """Get multi-sign direction and strength indicator (+, ++, =, -, --)."""
+        strong_threshold = 0.15 if is_roc else 0.5
+        normal_threshold = 0.1
 
-    def _get_direction_letter(self, value: float) -> str:
-        if value > 0.1:
-            return "[green]L[/green]"
-        elif value < -0.1:
-            return "[red]S[/red]"
-        return "[dim]N[/dim]"
+        if value >= strong_threshold:
+            return "[bold green]++[/bold green]"
+        if value >= normal_threshold:
+            return "[green]+[/green]"
+        if value <= -strong_threshold:
+            return "[bold red]--[/bold red]"
+        if value <= -normal_threshold:
+            return "[red]-[/red]"
+        return "[dim white]=[/dim white]"
+
+    def _get_strength_emoji(self, value: float, is_roc: bool = False) -> str:
+        """Get multi-emoji direction and strength indicator (🟢🟢, 🟢, ⚪, 🔴, 🔴🔴)."""
+        strong_threshold = 0.15 if is_roc else 0.5
+        normal_threshold = 0.1
+
+        if value >= strong_threshold:
+            return "🟢🟢"
+        if value >= normal_threshold:
+            return "🟢"
+        if value <= -strong_threshold:
+            return "🔴🔴"
+        if value <= -normal_threshold:
+            return "🔴"
+        return "⚪"

@@ -474,6 +474,30 @@ class ForexStrategyScanner:
             label="signals",
         )
 
+    def _get_strength_sign(self, score: float, is_confluence: bool = False) -> str:
+        """Get strength sign for strategy signals.
+
+        If is_confluence=True, score is treated as an integer (1, 2, 3).
+        Otherwise, score is treated as a float (-1.0 to 1.0).
+        """
+        if is_confluence:
+            if score >= 3:
+                return "[bold]++[/bold]"
+            if score >= 2:
+                return "+"
+            return "[dim]=[/dim]"
+
+        # Float score mapping
+        if score >= 0.5:
+            return "[bold]++[/bold]"
+        if score >= 0.1:
+            return "+"
+        if score <= -0.5:
+            return "[bold]--[/bold]"
+        if score <= -0.1:
+            return "-"
+        return "[dim]=[/dim]"
+
     def print_summary(self) -> None:
         def _render(df: pd.DataFrame, console, Table) -> None:
             for strategy in df["STRATEGY"].unique():
@@ -491,10 +515,23 @@ class ForexStrategyScanner:
 
                 for _, row in strategy_df.iterrows():
                     pair = row.get("_base_pair", row.get("Name", row.get("PAIR", "N/A")))
+                    direction = row["DIRECTION"]
+                    direction_style = "bold green" if direction == "long" else "bold red"
+
+                    # Get strength sign
+                    if strategy == "confluence":
+                        strength_sign = self._get_strength_sign(
+                            float(row.get("CONFLUENCE_SCORE", 0)), is_confluence=True
+                        )
+                    else:
+                        strength_sign = self._get_strength_sign(float(row.get("HTF_TREND", 0)))
+
+                    direction_display = f"[{direction_style}]{direction.upper()} {strength_sign}[/{direction_style}]"
+
                     if strategy == "confluence":
                         table.add_row(
                             pair,
-                            row["DIRECTION"],
+                            direction_display,
                             str(row.get("CONFLUENCE_PATTERN", "")),
                             str(row.get("CONFLUENCE_SCORE", "N/A")),
                             str(round(float(row.get("MR_EXTREMITY", 0)), 2)),
@@ -502,7 +539,7 @@ class ForexStrategyScanner:
                     else:
                         table.add_row(
                             pair,
-                            row["DIRECTION"],
+                            direction_display,
                             str(row.get("CONFLUENCE_SCORE", "N/A")),
                         )
 
