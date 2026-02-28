@@ -76,3 +76,28 @@ class ScreenerSettings(BaseSettings):
         if isinstance(v, list):
             return ",".join(str(x) for x in v)
         return v
+
+    # Risk Management Settings
+    min_tf_alignment: int = Field(default=2, ge=1, le=3)
+    require_momentum: bool = Field(default=False)
+    min_rvol: float = Field(default=1.0, ge=0.0)
+    require_volume_spike: bool = Field(default=False)
+    volume_spike_threshold: float = Field(default=1.5, ge=1.0)
+
+    risk_per_trade: float = Field(default=1.0, ge=0.1, le=10.0)
+    max_daily_loss: float = Field(default=3.0, ge=0.1, le=20.0)
+    max_drawdown: float = Field(default=6.0, ge=0.1, le=30.0)
+    min_risk_reward: float = Field(default=1.5, ge=0.5, le=5.0)
+    atr_multiplier: float = Field(default=2.0, ge=0.5, le=5.0)
+
+    account_balance: float = Field(default=10000.0, ge=100)
+    pip_value: float = Field(default=10.0, ge=0.01)
+
+    @field_validator("require_momentum", "require_volume_spike", mode="before")
+    @classmethod
+    def parse_bool(cls, v):
+        if isinstance(v, bool):
+            return v
+        if isinstance(v, str):
+            return v.lower() in ("true", "1", "yes")
+        return bool(v)

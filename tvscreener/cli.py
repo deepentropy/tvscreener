@@ -319,6 +319,14 @@ def run_strategy_scan(args) -> int:
             contract_type=args.contract_type,
             include_atr_fields=args.include_atr or args.max_atr is not None,
             include_rsi_fields=args.include_rsi or bool(args.mr_signal),
+            min_tf_alignment=args.min_tf_alignment,
+            require_momentum=args.require_momentum,
+            min_rvol=args.min_rvol,
+            require_volume_spike=args.require_volume_spike,
+            risk_per_trade=args.risk_per_trade,
+            atr_multiplier=args.atr_multiplier,
+            min_risk_reward=args.min_risk_reward,
+            account_balance=args.account_balance,
         )
         scanner = ForexStrategyScanner(pairs=pairs, timeframes=timeframes, config=config)
 
@@ -457,6 +465,49 @@ def main():
         action="append",
         help="Mean reversion signal (can be specified multiple times)",
     )
+    # Risk management signal quality filters
+    parser.add_argument(
+        "--min-tf-alignment",
+        type=int,
+        choices=[1, 2, 3],
+        help="Minimum aligned timeframes for signal quality",
+    )
+    parser.add_argument(
+        "--require-momentum",
+        action="store_true",
+        help="Require ROC to align with direction",
+    )
+    parser.add_argument(
+        "--min-rvol",
+        type=float,
+        help="Minimum relative volume (1.0 = average)",
+    )
+    parser.add_argument(
+        "--require-volume-spike",
+        action="store_true",
+        help="Require volume > 1.5x average",
+    )
+    # Risk management parameters
+    parser.add_argument(
+        "--risk-per-trade",
+        type=float,
+        help="Risk per trade as percentage (default from settings)",
+    )
+    parser.add_argument(
+        "--atr-multiplier",
+        type=float,
+        help="ATR multiplier for stop loss calculation",
+    )
+    parser.add_argument(
+        "--min-risk-reward",
+        type=float,
+        help="Minimum risk:reward ratio",
+    )
+    parser.add_argument(
+        "--account-balance",
+        type=float,
+        help="Account balance for position sizing",
+    )
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 
     args = parser.parse_args()
@@ -495,6 +546,20 @@ def main():
         args.opportunity_roc_weight = settings.opportunity_roc_weight
     if args.opportunity_timeframe_weights is None:
         args.opportunity_timeframe_weights = settings.opportunity_timeframe_weights
+
+    # Risk management defaults from settings
+    if args.min_tf_alignment is None:
+        args.min_tf_alignment = settings.min_tf_alignment
+    if args.min_rvol is None:
+        args.min_rvol = settings.min_rvol
+    if args.risk_per_trade is None:
+        args.risk_per_trade = settings.risk_per_trade
+    if args.atr_multiplier is None:
+        args.atr_multiplier = settings.atr_multiplier
+    if args.min_risk_reward is None:
+        args.min_risk_reward = settings.min_risk_reward
+    if args.account_balance is None:
+        args.account_balance = settings.account_balance
 
     count = run_opportunity_scan(args) if args.scanner == "opportunity" else run_strategy_scan(args)
 

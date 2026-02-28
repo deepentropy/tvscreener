@@ -19,6 +19,15 @@ class DummySettings:
     opportunity_osc_weight = 0.2
     opportunity_roc_weight = 0.1
     opportunity_timeframe_weights = "240:0.2,60:0.3,15:0.5"
+    # Risk management defaults
+    min_tf_alignment = 2
+    require_momentum = False
+    min_rvol = 1.0
+    require_volume_spike = False
+    risk_per_trade = 1.0
+    atr_multiplier = 2.0
+    min_risk_reward = 1.5
+    account_balance = 10000.0
 
 
 def test_cli_filter_args_take_precedence(monkeypatch):

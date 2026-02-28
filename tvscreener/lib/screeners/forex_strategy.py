@@ -45,6 +45,16 @@ class StrategyConfig:
     contract_type: Literal["spot", "cfd", "spreadbet", "all"] = "cfd"
     include_atr_fields: bool = False
     include_rsi_fields: bool = False
+    # Signal quality filters
+    min_tf_alignment: int = 1
+    require_momentum: bool = False
+    min_rvol: float = 1.0
+    require_volume_spike: bool = False
+    # Risk management parameters
+    risk_per_trade: float = 1.0
+    atr_multiplier: float = 2.0
+    min_risk_reward: float = 1.5
+    account_balance: float = 10000.0
 
 
 @dataclass
