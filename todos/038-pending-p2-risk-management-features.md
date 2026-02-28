@@ -23,6 +23,9 @@ Implement signal quality filters and risk management rules to convert scanner si
 - [ ] Add `--min-confluence` CLI option
 - [ ] Add `--min-tf-alignment` filter
 - [ ] Add `--require-momentum` flag
+- [ ] Add `--min-rvol` filter (relative volume threshold)
+- [ ] Add `--require-volume-spike` flag (volume > 1.5x average)
+- [ ] Calculate Volume ROC for each pair
 - [ ] Filter output to clean signals only
 
 ### Phase 2: Risk Calculations
@@ -66,6 +69,9 @@ SL = Entry ± (ATR × Multiplier)
 - [ ] `--min-confluence` filter works
 - [ ] `--min-tf-alignment` filter works
 - [ ] `--require-momentum` blocks conflicting ROC
+- [ ] `--min-rvol` filter works
+- [ ] `--require-volume-spike` filter works
+- [ ] Volume ROC calculated and displayed
 - [ ] ATR-based stop loss calculated
 - [ ] Risk/reward ratio shown
 - [ ] Position size calculated
@@ -73,4 +79,5 @@ SL = Entry ± (ATR × Multiplier)
 
 ## Work Log
 
-- 2026-02-28: Plan created and deepened with research
+- 2026-02-28: Plan created with relative volume filters
+- 2026-02-28: Research added on Volume ROC and relative volume

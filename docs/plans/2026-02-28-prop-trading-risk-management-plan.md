@@ -77,7 +77,41 @@ Research from leading prop firms (FTMO, TopStep, Apex, E8) reveals updated param
    - Not too low (no movement)
    - Not too high (explosive/volatile)
 
-### Research Insights: Multi-Indicator Confluence
+5. **Relative Volume (RVOL) Filter**
+   - Volume ROC > 0 (increasing volume)
+   - Minimum RVOL threshold: 1.2x average
+   - Confirms trend conviction
+
+### Research Insights: Relative Volume
+
+**Volume Rate of Change (VROC):**
+- Measures: `(Current Volume - Volume N periods ago) / Volume N periods ago × 100`
+- Positive VROC: Volume higher than past period = increasing participation
+- Negative VROC: Volume lower than past period = decreasing interest
+
+**Relative Volume (RVOL) Thresholds:**
+| Condition | RVOL Value | Signal Strength |
+|----------|------------|-----------------|
+| Low activity | < 0.8 | Weak - avoid |
+| Normal | 0.8 - 1.2 | Neutral |
+| Above average | 1.2 - 1.5 | Good |
+| High | 1.5 - 2.0 | Strong |
+| Spike | > 2.0 | Very strong - confirm with price |
+
+**Key Applications:**
+- **Breakout confirmation**: Volume spike confirms breakout validity
+- **Trend conviction**: Rising prices + rising volume = strong trend
+- **Divergence warning**: Price makes new high but volume declining = weakening trend
+- **Volume precedes price**: Changes in volume often lead price movements
+
+**Implementation Formula:**
+```
+Volume ROC = ((Today's Volume - Volume X days ago) / Volume X days ago) × 100
+
+# Default: X = 20 periods (adjustable)
+# Positive = increasing volume
+# Negative = decreasing volume
+```
 
 From research on indicator confluence systems:
 
@@ -175,6 +209,10 @@ def calculate_trailing_stop(current_price: float, atr: float, direction: str, mu
 --min-confluence SCORE      # Minimum confluence score (default: 2)
 --min-tf-alignment COUNT   # Minimum aligned TFs (default: 2)
 --require-momentum          # ROC must align with direction
+
+# Volume filters
+--min-rvol THRESHOLD        # Minimum relative volume (default: 1.0)
+--require-volume-spike      # Require volume > 1.5x average
 
 # Risk management
 --risk-per-trade PERCENT   # Risk per trade (default: 1%)
@@ -439,6 +477,9 @@ def validate_signal_quality(
 - [ ] `--min-confluence` filter works
 - [ ] `--min-tf-alignment` filter works
 - [ ] `--require-momentum` blocks conflicting ROC
+- [ ] `--min-rvol` filter works (relative volume threshold)
+- [ ] `--require-volume-spike` filter works (volume > 1.5x average)
+- [ ] Volume ROC calculated and displayed
 - [ ] ATR-based stop loss calculated correctly
 - [ ] Risk/reward ratio displayed
 - [ ] Position size calculated in lots
@@ -454,6 +495,8 @@ def validate_signal_quality(
 - Prop Firm Rules 2026: https://dealpropfirm.com/blog/risk-management-prop-traders-guide
 - ATR Trading Strategy: https://www.quantifiedstrategies.com/average-true-range-trading-strategy-in-python/
 - Trailing Stops with ATR: https://pyquantlab.medium.com/dynamic-trailing-stops-using-atr-2d3c4e95ddc0
+- Volume ROC: https://www.quantifiedstrategies.com/volume-rate-of-change/
+- Relative Volume Trading: https://trendspider.com/learning-center/relative-volume-rvol-trading-strategies/
 
 ---
 
