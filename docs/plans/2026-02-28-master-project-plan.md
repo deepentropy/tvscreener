@@ -55,6 +55,43 @@ Build a comprehensive Forex Opportunity + Strategy screener CLI with multi-timef
 
 ---
 
+## New Learnings (2026-02-28)
+
+### Opportunity Scanner Validation
+
+**Scoring Pipeline Verified:**
+- Factor scores: TREND, MA, OSC weighted per timeframe → averaged
+- ROC score: Average across TFs
+- ENSEMBLE_SCORE: Weighted sum (T:0.4, M:0.3, O:0.2, R:0.1)
+- Confluence: Count of aligned TFs + factors
+- Results sorted by ENSEMBLE_SCORE descending
+
+### Cross Minors Analysis
+
+**Pair Categories:**
+- **Majors** (7): Include USD - EURUSD, GBPUSD, USDJPY, USDCHF, USDCAD, AUDUSD, NZDUSD
+- **Cross Minors** (16): Non-USD - EURGBP, EURJPY, GBPJPY, EURCHF, AUDJPY, EURCAD, CADJPY, CHFJPY, NZDJPY, GBPAUD, EURAUD, AUDNZD, EURNZD, GBPCAD, AUDCAD, GBPNZD
+
+**Top Opportunities:**
+| Rank | Pair | Ensemble | Direction |
+|------|------|----------|-----------|
+| 1 | AUDJPY | +0.458 | long |
+| 2 | GBPJPY | +0.390 | long |
+| 3 | EURJPY | +0.384 | long |
+| 4 | EURUSD | +0.376 | long |
+| 5 | USDJPY | +0.332 | long |
+
+**Weakest Pairs:**
+| Rank | Pair | Ensemble | Direction |
+|------|------|----------|-----------|
+| 23 | USDCAD | -0.232 | short |
+| 22 | EURNZD | -0.221 | short |
+| 21 | USDCHF | -0.158 | short |
+
+**Key Insight:** JPY crosses dominate top rankings due to strong 3-TF alignment.
+
+---
+
 ## Pending Tasks (10 items)
 
 ### P1 - Security & Critical (4)
@@ -120,9 +157,39 @@ Build a comprehensive Forex Opportunity + Strategy screener CLI with multi-timef
 
 ---
 
+## Scanner Execution Plan
+
+### Daily/Weekly Run Commands
+
+```bash
+# Opportunity Scanner - All pairs ranked
+uv run python -m tvscreener.cli --scanner opportunity --universe all
+
+# Strategy Scanner - Trend following
+uv run python -m tvscreener.cli --scanner strategy --strategy trend --universe all
+
+# Strategy Scanner - Confluence (with MR detection)
+uv run python -m tvscreener.cli --scanner strategy --strategy confluence --universe all --mr-threshold 0.15
+
+# Strategy Scanner - Mean Reversion
+uv run python -m tvscreener.cli --scanner strategy --strategy mean_reversion --universe all
+```
+
+### Validation Checklist
+
+- [ ] Tests pass (205 tests)
+- [ ] Lint clean
+- [ ] CLI --help works
+- [ ] Opportunity scanner outputs ranked results
+- [ ] Strategy scanner detects patterns correctly
+- [ ] Confluence scoring matches expected logic
+- [ ] Cross minors analyzed and documented
+
+---
+
 ## Next Steps
 
-1. Execute Phase 1 quick wins
+1. Execute Phase 1 quick wins (033, 034, 036)
 2. Run scanners to validate
 3. Commit changes
 4. Continue to Phase 2
