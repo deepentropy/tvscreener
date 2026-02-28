@@ -232,6 +232,176 @@ def calculate_trailing_stop(current_price: float, atr: float, direction: str, mu
 # Account settings
 --account-balance AMOUNT   # For position sizing (default: 10000)
 --pip-value VALUE          # Pip value for pair (default: 10)
+
+# Config management
+--config CONFIG            # Config file path (default: tvscreener.yaml)
+--load-config PATH         # Load from specific config file
+--save-config PATH         # Save current config to file
+```
+
+### Layered Configuration System
+
+The risk management features support three configuration sources with proper precedence:
+
+| Layer | Priority | Source | Example |
+|-------|----------|--------|---------|
+| 1 (highest) | CLI args | `--min-confluence 3` | Command line overrides |
+| 2 | Environment | `TVSCREENER_MIN_CONFLUENCE=3` | Shell environment |
+| 3 | Config file | `tvscreener.yaml` | Default values |
+
+**Configuration Precedence:** CLI args > Environment > Config file > Defaults
+
+### Environment Variables
+
+```bash
+# Signal quality
+export TVSCREENER_MIN_CONFLUENCE=3
+export TVSCREENER_MIN_TF_ALIGNMENT=2
+export TVSCREENER_REQUIRE_MOMENTUM=true
+export TVSCREENER_MIN_RVOL=1.2
+
+# Risk management
+export TVSCREENER_RISK_PER_TRADE=1.0
+export TVSCREENER_MAX_DAILY_LOSS=3.0
+export TVSCREENER_MIN_RISK_REWARD=2.0
+export TVSCREENER_ATR_MULTIPLIER=2.0
+
+# Account settings
+export TVSCREENER_ACCOUNT_BALANCE=10000
+export TVSCREENER_PIP_VALUE=10
+```
+
+### Config File (tvscreener.yaml)
+
+```yaml
+# Risk Management Settings
+risk:
+  # Signal quality filters
+  min_confluence: 3           # Minimum confluence score (1-5)
+  min_tf_alignment: 2         # Minimum aligned timeframes
+  require_momentum: true      # ROC must align with direction
+  min_rvol: 1.2             # Minimum relative volume
+  
+  # Risk parameters
+  risk_per_trade: 1.0        # 1% per trade
+  max_daily_loss: 3.0       # 3% daily loss limit
+  min_risk_reward: 2.0       # Minimum R:R ratio
+  atr_multiplier: 2.0       # ATR multiplier for stops
+  
+  # Account settings
+  account_balance: 10000
+  pip_value: 10
+```
+
+### Implementation Pattern
+
+```python
+from dataclasses import dataclass, field
+from typing import Optional
+import os
+
+@dataclass
+class RiskConfig:
+    """Layered configuration with precedence: CLI > ENV > Config > Defaults"""
+    
+    # Signal quality
+    min_confluence: int = 2
+    min_tf_alignment: int = 2
+    require_momentum: bool = False
+    min_rvol: float = 1.0
+    
+    # Risk management
+    risk_per_trade: float = 1.0
+    max_daily_loss: float = 3.0
+    min_risk_reward: float = 1.5
+    atr_multiplier: float = 2.0
+    
+    # Account
+    account_balance: float = 10000.0
+    pip_value: float = 10.0
+    
+    @classmethod
+    def from_config(cls, config: dict) -> "RiskConfig":
+        """Create from config dict (loaded from YAML)."""
+        risk_config = config.get("risk", {})
+        return cls(
+            min_confluence=risk_config.get("min_confluence", 2),
+            min_tf_alignment=risk_config.get("min_tf_alignment", 2),
+            require_momentum=risk_config.get("require_momentum", False),
+            min_rvol=risk_config.get("min_rvol", 1.0),
+            risk_per_trade=risk_config.get("risk_per_trade", 1.0),
+            max_daily_loss=risk_config.get("max_daily_loss", 3.0),
+            min_risk_reward=risk_config.get("min_risk_reward", 1.5),
+            atr_multiplier=risk_config.get("atr_multiplier", 2.0),
+            account_balance=risk_config.get("account_balance", 10000.0),
+            pip_value=risk_config.get("pip_value", 10.0),
+        )
+    
+    @classmethod
+    def from_env(cls) -> "RiskConfig":
+        """Create from environment variables (overrides config)."""
+        return cls(
+            min_confluence=int(os.getenv("TVSCREENER_MIN_CONFLUENCE", 2)),
+            min_tf_alignment=int(os.getenv("TVSCREENER_MIN_TF_ALIGNMENT", 2)),
+            require_momentum=os.getenv("TVSCREENER_REQUIRE_MOMENTUM", "").lower() == "true",
+            min_rvol=float(os.getenv("TVSCREENER_MIN_RVOL", 1.0)),
+            risk_per_trade=float(os.getenv("TVSCREENER_RISK_PER_TRADE", 1.0)),
+            max_daily_loss=float(os.getenv("TVSCREENER_MAX_DAILY_LOSS", 3.0)),
+            min_risk_reward=float(os.getenv("TVSCREENER_MIN_RISK_REWARD", 1.5)),
+            atr_multiplier=float(os.getenv("TVSCREENER_ATR_MULTIPLIER", 2.0)),
+            account_balance=float(os.getenv("TVSCREENER_ACCOUNT_BALANCE", 10000.0)),
+            pip_value=float(os.getenv("TVSCREENER_PIP_VALUE", 10.0)),
+        )
+    
+    @classmethod
+    def from_args(cls, args) -> "RiskConfig":
+        """Create from CLI args (highest priority)."""
+        return cls(
+            min_confluence=args.min_confluence if hasattr(args, "min_confluence") else 2,
+            min_tf_alignment=args.min_tf_alignment if hasattr(args, "min_tf_alignment") else 2,
+            require_momentum=args.require_momentum if hasattr(args, "require_momentum") else False,
+            min_rvol=args.min_rvol if hasattr(args, "min_rvol") else 1.0,
+            risk_per_trade=args.risk_per_trade if hasattr(args, "risk_per_trade") else 1.0,
+            max_daily_loss=args.max_daily_loss if hasattr(args, "max_daily_loss") else 3.0,
+            min_risk_reward=args.min_risk_reward if hasattr(args, "min_risk_reward") else 1.5,
+            atr_multiplier=args.atr_multiplier if hasattr(args, "atr_multiplier") else 2.0,
+            account_balance=args.account_balance if hasattr(args, "account_balance") else 10000.0,
+            pip_value=args.pip_value if hasattr(args, "pip_value") else 10.0,
+        )
+    
+    @classmethod
+    def load(cls, args=None, config_path: str = "tvscreener.yaml") -> "RiskConfig":
+        """Load config with layered precedence."""
+        # Start with defaults
+        config = cls()
+        
+        # Layer 3: Load from config file if exists
+        if os.path.exists(config_path):
+            import yaml
+            with open(config_path) as f:
+                file_config = yaml.safe_load(f)
+            if file_config and "risk" in file_config:
+                file_risk = cls.from_config(file_config)
+                config = file_risk
+        
+        # Layer 2: Override with environment variables
+        env_config = cls.from_env()
+        for field in cls.__dataclass_fields__:
+            env_value = getattr(env_config, field)
+            default_value = getattr(cls(), field)
+            if env_value != default_value:
+                setattr(config, field, env_value)
+        
+        # Layer 1: Override with CLI args (highest priority)
+        if args:
+            arg_config = cls.from_args(args)
+            for field in cls.__dataclass_fields__:
+                arg_value = getattr(arg_config, field)
+                default_value = getattr(cls(), field)
+                if arg_value != default_value:
+                    setattr(config, field, arg_value)
+        
+        return config
 ```
 
 ### CLI Best Practices Implementation
@@ -474,6 +644,9 @@ def validate_signal_quality(
 
 ## Acceptance Criteria
 
+- [ ] CLI arguments override config file
+- [ ] Environment variables override config file
+- [ ] Config file loads from tvscreener.yaml
 - [ ] `--min-confluence` filter works
 - [ ] `--min-tf-alignment` filter works
 - [ ] `--require-momentum` blocks conflicting ROC

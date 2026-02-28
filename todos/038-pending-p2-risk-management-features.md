@@ -18,6 +18,14 @@ Implement signal quality filters and risk management rules to convert scanner si
 
 ## Implementation Tasks
 
+### Phase 0: Configuration System
+
+- [ ] Add RiskConfig dataclass with layered loading
+- [ ] Support config file (YAML)
+- [ ] Support environment variables
+- [ ] Support CLI args (highest priority)
+- [ ] Implement config precedence: CLI > ENV > Config > Defaults
+
 ### Phase 1: Signal Quality Filters
 
 - [ ] Add `--min-confluence` CLI option
@@ -66,6 +74,9 @@ SL = Entry ± (ATR × Multiplier)
 
 ## Acceptance Criteria
 
+- [ ] CLI args override config file
+- [ ] ENV variables override config file
+- [ ] Config file loads from tvscreener.yaml
 - [ ] `--min-confluence` filter works
 - [ ] `--min-tf-alignment` filter works
 - [ ] `--require-momentum` blocks conflicting ROC
