@@ -103,7 +103,7 @@ def list_field_types(asset_type: str = "stock") -> str:
 def custom_query(
     asset_type: str = "stock",
     fields: str | None = None,
-    filters: str | None = None,
+    filters: str | list | dict | None = None,
     sort_by: str | None = None,
     ascending: bool = False,
     limit: int = 25
@@ -146,12 +146,31 @@ def custom_query(
         select_fields = [f.strip() for f in fields.split(",")]
 
     # Parse filters
+    #
+    # The tool schema advertises `filters` as a string, but MCP clients that
+    # JSON-parse tool arguments (e.g. Claude Code) deserialize a JSON array
+    # into a real list before it reaches the server. Accept both encodings and
+    # normalize to a list of dicts.
     filter_list = None
     if filters:
-        try:
-            filter_list = json.loads(filters)
-        except json.JSONDecodeError as e:
-            return f"Error parsing filters JSON: {e}"
+        if isinstance(filters, str):
+            try:
+                filter_list = json.loads(filters)
+            except json.JSONDecodeError as e:
+                return f"Error parsing filters JSON: {e}"
+        else:
+            filter_list = filters
+
+        # A double-encoded JSON string decodes to another string.
+        if isinstance(filter_list, str):
+            try:
+                filter_list = json.loads(filter_list)
+            except json.JSONDecodeError as e:
+                return f"Error parsing filters JSON: {e}"
+
+        # A single filter passed as an object becomes a one-element list.
+        if isinstance(filter_list, dict):
+            filter_list = [filter_list]
 
     limit = min(limit, 100)
 
