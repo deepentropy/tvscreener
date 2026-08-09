@@ -17,6 +17,18 @@ class TestUtil(unittest.TestCase):
         columns = get_columns_to_request(StockField)
         self.assertIsInstance(columns, dict)
 
+    def test_get_columns_with_interval_field(self):
+        rsi_1h = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval('60')
+        columns = get_columns_to_request([StockField.NAME, rsi_1h])
+        self.assertIsInstance(columns, dict)
+        self.assertIn("RSI|60", columns)
+
+    def test_get_columns_with_history_field(self):
+        rsi_hist = StockField.RELATIVE_STRENGTH_INDEX_14.with_history(3)
+        columns = get_columns_to_request([StockField.NAME, rsi_hist])
+        self.assertIsInstance(columns, dict)
+        self.assertIn("RSI[3]", columns)
+
     def test_get_recommendation(self):
         self.assertEqual("S", get_recommendation(-1))
         self.assertEqual("N", get_recommendation(0))
