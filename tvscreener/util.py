@@ -1,7 +1,7 @@
 import math
 from typing import Type
 
-from tvscreener.field import Field, add_historical, add_rec, add_rec_to_label, \
+from tvscreener.field import Field, FieldWithHistory, add_historical, add_rec, add_rec_to_label, \
     add_historical_to_label
 
 
@@ -44,9 +44,12 @@ def get_columns_to_request(fields_: Type[Field]):
     rec_columns = {add_rec(field.field_name): add_rec_to_label(field.field_name)
                    for field in fields_ if field.has_recommendation()}
 
-    # Add the historical columns
+    # Add the historical columns.
+    # Fields already wrapped with an explicit offset are skipped: the caller
+    # asked for a specific lookback, so no extra offset is stacked on top.
     hist_columns = {format_historical_field(field): add_historical_to_label(field.label)
-                    for field in fields_ if field.historical}
+                    for field in fields_
+                    if field.historical and not isinstance(field, FieldWithHistory)}
 
     # Merge the dicts
     columns = {**columns, **rec_columns, **hist_columns}

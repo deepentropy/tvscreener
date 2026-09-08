@@ -7,6 +7,20 @@ def add_time_interval(field_name, update_mode):
 
 
 def add_historical(field_name, historical=1):
+    """
+    Add a historical lookback offset to a field name.
+
+    TradingView expects the offset bracket on the base field, before the time
+    interval suffix: 'RSI[1]|1W' returns data while 'RSI|1W[1]' returns null.
+    Offsets stack, so 'ADX+DI[1]|1' becomes 'ADX+DI[1][1]|1'.
+
+    :param field_name: Field name, with or without a '|interval' suffix
+    :param historical: Historical offset (default 1)
+    :return: Field name with the offset placed before the interval suffix
+    """
+    if '|' in field_name:
+        base, interval = field_name.split('|', 1)
+        return f"{base}[{historical}]|{interval}"
     return f"{field_name}[{historical}]"
 
 
@@ -377,7 +391,7 @@ class FieldWithHistory:
         """
         self.field = field
         self.periods = periods
-        self.field_name = f"{field.field_name}[{periods}]"
+        self.field_name = add_historical(field.field_name, periods)
         self.label = f"Prev. {field.label}" if periods == 1 else f"{field.label} [{periods}]"
         self.format = field.format
         self.interval = field.interval

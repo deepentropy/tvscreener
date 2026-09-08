@@ -29,6 +29,21 @@ class TestUtil(unittest.TestCase):
         self.assertIsInstance(columns, dict)
         self.assertIn("RSI[3]", columns)
 
+    def test_get_columns_with_history_no_stacked_offset(self):
+        """An explicit offset must not get a second offset stacked on it."""
+        rsi_hist = StockField.RELATIVE_STRENGTH_INDEX_14.with_history(1)
+        columns = get_columns_to_request([StockField.NAME, rsi_hist])
+        self.assertIn("RSI[1]", columns)
+        self.assertNotIn("RSI[1][1]", columns)
+
+    def test_get_columns_interval_offset_before_interval(self):
+        """TradingView needs RSI[1]|1W, not RSI|1W[1], for the Prev. column."""
+        rsi_1w = StockField.RELATIVE_STRENGTH_INDEX_14.with_interval('1W')
+        columns = get_columns_to_request([StockField.NAME, rsi_1w])
+        self.assertIn("RSI|1W", columns)
+        self.assertIn("RSI[1]|1W", columns)
+        self.assertNotIn("RSI|1W[1]", columns)
+
     def test_get_recommendation(self):
         self.assertEqual("S", get_recommendation(-1))
         self.assertEqual("N", get_recommendation(0))
