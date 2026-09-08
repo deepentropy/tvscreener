@@ -2,6 +2,39 @@
 
 All notable changes to tvscreener.
 
+## [0.4.1] - 2026
+
+### Fixed
+
+- **`with_interval()` and `with_history()` no longer crash `get()`** (#56, #57)
+  - `FieldWithInterval` and `FieldWithHistory` were missing `has_recommendation()`,
+    which `get_columns_to_request()` calls on every selected field
+  - Any `select()` using an interval or history wrapper raised `AttributeError`
+
+- **Historical offset now placed before the interval suffix**
+  - The auto-added 'Prev.' column built `RSI|1W[1]`, which TradingView
+    answers with `null`; the valid form is `RSI[1]|1W`
+  - Pre-baked interval fields (e.g. `ForexField.ADX_PLUS_DI_1_1`) are handled too
+  - `with_history()` no longer stacks a second offset, which previously
+    produced a duplicate `RSI[1][1]` column
+
+- **`select_all()` works on every screener**
+  - Forex, Crypto, Bond, Futures and Coin raised
+    `ValueError: N columns passed, passed data had N+1 columns`
+  - Two name collisions dropped a header entry: those enums define a field
+    named `symbol` that clashed with the injected ticker column, and some
+    distinct fields share one label (`High.All` and `all_time_high` are both
+    'All Time High')
+  - Duplicate names now get a `.1`, `.2` suffix, matching `pandas.read_csv`
+
+### Changed
+
+- `test_current_trading_day` no longer asserts a fixed row count. The
+  `active_symbol` filter returns 0 rows outside market hours, so the test
+  failed whenever it ran off-session.
+
+---
+
 ## [0.2.1] - 2026
 
 ### Fixed
