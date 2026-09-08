@@ -303,6 +303,9 @@ class FieldWithInterval:
         self.historical = field.historical
         self.name = f"{field.name}_{interval}"  # For repr in FieldCondition
 
+    def has_recommendation(self):
+        return self.field.has_recommendation()
+
     def __repr__(self):
         return f"FieldWithInterval({self.field.name}, interval='{self._interval}')"
 
@@ -380,6 +383,9 @@ class FieldWithHistory:
         self.interval = field.interval
         self.historical = True
         self.name = f"{field.name}_history_{periods}"  # For repr in FieldCondition
+
+    def has_recommendation(self):
+        return self.field.has_recommendation()
 
     def __repr__(self):
         return f"FieldWithHistory({self.field.name}, periods={self.periods})"
