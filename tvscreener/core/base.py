@@ -41,18 +41,51 @@ default_sort_crypto = DEFAULT_SORT_CRYPTO
 default_sort_forex = DEFAULT_SORT_FOREX
 
 
+def _uniquify(names: list) -> list:
+    """
+    Make a list of column names unique, preserving order and first occurrence.
+
+    Needed because a single response can carry two columns wanting the same
+    name: TradingView has distinct fields sharing one label (e.g. 'High.All'
+    and 'all_time_high' are both labelled 'All Time High'), and the injected
+    ticker column clashes with a requested field named 'symbol' (Forex,
+    Crypto, Bond, Futures and Coin all define one). Pandas returns several
+    columns for one duplicated name, so repeats get a '.1', '.2', ... suffix,
+    the convention pandas.read_csv uses.
+
+    :param names: Column names in response order
+    :return: Same length list with every name unique
+    """
+    seen = set()
+    unique = []
+    for name in names:
+        candidate = name
+        suffix = 0
+        while candidate in seen:
+            suffix += 1
+            candidate = f"{name}.{suffix}"
+        seen.add(candidate)
+        unique.append(candidate)
+    return unique
+
+
 class ScreenerDataFrame(pd.DataFrame):
     def __init__(self, data, columns: dict, *args, **kwargs):
-        # Add the extra received columns
-        columns = {"symbol": "Symbol", **columns}
-        super().__init__(data, columns=list(columns.values()), *args, **kwargs)
+        # Every row starts with the exchange-prefixed ticker, which the API
+        # returns outside of the requested columns. One name per returned
+        # value is required, otherwise the data and the header get out of
+        # step and pandas raises a column count mismatch.
+        keys = _uniquify(["symbol"] + list(columns.keys()))
+        labels = _uniquify(["Symbol"] + list(columns.values()))
+        columns = dict(zip(keys, labels))
+        super().__init__(data, columns=labels, *args, **kwargs)
 
         # Reorder columns - only include first_columns that exist in the request
         first_columns = ['symbol', 'name', 'description']
-        ordered_columns = {k: columns.get(k) for k in first_columns if k in columns}
+        ordered_columns = {k: columns[k] for k in first_columns if k in columns}
         ordered_columns.update({k: v for k, v in columns.items() if k not in first_columns})
         self.attrs['original_columns'] = ordered_columns
-        self._update_inplace(self[ordered_columns.values()])
+        self._update_inplace(self[list(ordered_columns.values())])
 
     def set_technical_columns(self, only: bool = False):
         if only:
