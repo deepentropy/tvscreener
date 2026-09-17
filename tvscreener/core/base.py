@@ -23,6 +23,7 @@ DEFAULT_SORT_CRYPTO = CryptoField.VOLUME_24H_IN_USD
 DEFAULT_SORT_FOREX = ForexField.NAME
 REQUEST_TIMEOUT = 30  # seconds
 MIN_STREAM_INTERVAL = 1.0  # minimum interval for streaming to avoid rate limiting
+MIN_REQUEST_INTERVAL = 1.0  # minimum interval between get() calls to avoid rate limiting
 
 # HTTP headers for TradingView API requests
 REQUEST_HEADERS = {
@@ -99,6 +100,9 @@ class Screener:
 
     # Subclasses should override this to enable field type validation
     _field_type: type = None
+
+    # Shared across all instances/subclasses to throttle outgoing requests
+    _last_request_time: float = 0.0
 
     def __init__(self):
         self.sort = None
@@ -325,6 +329,12 @@ class Screener:
             print(f"Request: {self.url}")
             print("Payload:")
             print(payload_json)
+
+        # Enforce a minimum interval between requests to avoid rate limiting
+        elapsed = time.monotonic() - Screener._last_request_time
+        if elapsed < MIN_REQUEST_INTERVAL:
+            time.sleep(MIN_REQUEST_INTERVAL - elapsed)
+        Screener._last_request_time = time.monotonic()
 
         try:
             # Fixed: Add timeout to prevent hanging indefinitely
