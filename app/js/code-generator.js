@@ -10,67 +10,86 @@ const CodeGenerator = {
      * @returns {string} Generated Python code
      */
     generate(config) {
-        const lines = [];
-        const imports = this.generateImports(config);
+        return this.generateLines(config).map(l => l.text).join('\n');
+    },
 
-        lines.push(...imports);
-        lines.push('');
-        lines.push(this.generateScreenerCreation(config));
+    /**
+     * Generate code lines tagged with the UI section that produced them
+     * @param {Object} config - Configuration object
+     * @returns {Array<{text: string, section: string|null}>}
+     */
+    generateLines(config) {
+        const lines = [];
+        const add = (section, text) => {
+            for (const t of text.split('\n')) lines.push({ text: t, section });
+        };
+        const blank = () => lines.push({ text: '', section: null });
+
+        for (const imp of this.generateImports(config)) add('screener', imp);
+        blank();
+        add('screener', this.generateScreenerCreation(config));
 
         // Filters
         if (config.filters && config.filters.length > 0) {
-            lines.push('');
-            lines.push('# Filters');
+            blank();
+            add('filters', '# Filters');
             for (const filter of config.filters) {
                 const filterLine = this.generateFilter(filter, config);
                 if (filterLine) {
-                    lines.push(filterLine);
+                    add('filters', filterLine);
                 }
             }
         }
 
         // Fields
         if (config.selectAll) {
-            lines.push('');
-            lines.push('# Select all available fields');
-            lines.push('ss.select_all()');
+            blank();
+            add('fields', '# Select all available fields');
+            add('fields', 'ss.select_all()');
         } else if (config.fields && config.fields.length > 0) {
-            lines.push('');
-            lines.push('# Fields to retrieve');
-            lines.push(this.generateSelect(config.fields, config));
+            blank();
+            add('fields', '# Fields to retrieve');
+            add('fields', this.generateSelect(config.fields, config));
+        }
+
+        // Markets (only for stock screener)
+        if (this.hasMarkets(config)) {
+            blank();
+            add('options', '# Markets');
+            add('options', this.generateMarkets(config));
         }
 
         // Index (only for stock screener)
         if (config.index && config.screenerConfig?.hasIndex) {
-            lines.push('');
-            lines.push('# Filter by index');
-            lines.push(`ss.set_index(IndexSymbol.${config.index})`);
+            blank();
+            add('options', '# Filter by index');
+            add('options', `ss.set_index(IndexSymbol.${config.index})`);
         }
 
         // Sort
         if (config.sortField) {
-            lines.push('');
-            lines.push('# Sorting');
+            blank();
+            add('options', '# Sorting');
             const ascending = config.sortOrder === 'asc' ? 'True' : 'False';
-            const fieldClass = config.screenerConfig?.fieldClass || 'StockField';
-            lines.push(`ss.sort_by(${fieldClass}.${config.sortField}, ascending=${ascending})`);
+            const sortRef = this.fieldRef(config.sortField, config.sortInterval, config);
+            add('options', `ss.sort_by(${sortRef}, ascending=${ascending})`);
         }
 
         // Limit
         if (config.limit && config.limit !== 150) {
-            lines.push('');
-            lines.push('# Result limit');
-            lines.push(`ss.set_range(0, ${config.limit})`);
+            blank();
+            add('options', '# Result limit');
+            add('options', `ss.set_range(0, ${config.limit})`);
         }
 
         // Get data
-        lines.push('');
-        lines.push('# Execute query');
-        lines.push('df = ss.get()');
-        lines.push('print(f"Found {len(df)} results")');
-        lines.push('df.head(20)');
+        blank();
+        add('run', '# Execute query');
+        add('run', 'df = ss.get()');
+        add('run', 'print(f"Found {len(df)} results")');
+        add('run', 'df.head(20)');
 
-        return lines.join('\n');
+        return lines;
     },
 
     /**
@@ -100,7 +119,41 @@ const CodeGenerator = {
             items.push('IndexSymbol');
         }
 
+        // Market if used
+        if (this.hasMarkets(config)) {
+            items.push('Market');
+        }
+
         return [`from tvscreener import ${items.join(', ')}`];
+    },
+
+    /**
+     * Python reference to a field, with its time interval when one is set
+     * and the field supports it
+     */
+    fieldRef(name, interval, config) {
+        const fieldClass = config.screenerConfig?.fieldClass || 'StockField';
+        const ref = `${fieldClass}.${name}`;
+        return interval && this.supportsInterval(name, config)
+            ? `${ref}.with_interval('${interval}')`
+            : ref;
+    },
+
+    supportsInterval(name, config) {
+        const fields = config.screenerConfig?.fields || [];
+        return !!fields.find(f => f.name === name)?.interval;
+    },
+
+    hasMarkets(config) {
+        return !!(config.markets && config.markets.length > 0 && config.screenerConfig?.hasMarket);
+    },
+
+    /**
+     * Generate set_markets line; Market.ALL replaces any other market
+     */
+    generateMarkets(config) {
+        const names = config.markets.includes('ALL') ? ['ALL'] : config.markets;
+        return `ss.set_markets(${names.map(n => `Market.${n}`).join(', ')})`;
     },
 
     /**
@@ -119,8 +172,7 @@ const CodeGenerator = {
             return null;
         }
 
-        const fieldClass = config.screenerConfig?.fieldClass || 'StockField';
-        const fieldRef = `${fieldClass}.${filter.field}`;
+        const fieldRef = this.fieldRef(filter.field, filter.interval, config);
 
         switch (filter.operator) {
             case '>':
@@ -138,8 +190,10 @@ const CodeGenerator = {
             case 'between':
                 return `ss.where(${fieldRef}.between(${this.formatValue(filter.value, filter.format)}, ${this.formatValue(filter.value2, filter.format)}))`;
             case 'isin':
+            case 'not_in': {
                 const values = filter.value.split(',').map(v => this.formatValue(v.trim(), filter.format));
-                return `ss.where(${fieldRef}.isin([${values.join(', ')}]))`;
+                return `ss.where(${fieldRef}.${filter.operator}([${values.join(', ')}]))`;
+            }
             default:
                 return null;
         }
@@ -197,18 +251,17 @@ const CodeGenerator = {
             return '# Using default fields';
         }
 
-        const fieldClass = config.screenerConfig?.fieldClass || 'StockField';
+        const refs = fields.map(f => this.fieldRef(f, config.fieldsInterval, config));
 
-        if (fields.length <= 3) {
-            const fieldRefs = fields.map(f => `${fieldClass}.${f}`).join(', ');
-            return `ss.select(${fieldRefs})`;
+        if (refs.length <= 3) {
+            return `ss.select(${refs.join(', ')})`;
         }
 
         // Multi-line for many fields
         const lines = ['ss.select('];
-        for (let i = 0; i < fields.length; i++) {
-            const comma = i < fields.length - 1 ? ',' : '';
-            lines.push(`    ${fieldClass}.${fields[i]}${comma}`);
+        for (let i = 0; i < refs.length; i++) {
+            const comma = i < refs.length - 1 ? ',' : '';
+            lines.push(`    ${refs[i]}${comma}`);
         }
         lines.push(')');
         return lines.join('\n');

@@ -133,6 +133,17 @@ class Field(Enum):
         """
         return [f for f in cls if f.format == 'recommendation']
 
+    def accepts_interval(self) -> bool:
+        """
+        Whether with_interval() can be applied to this field.
+
+        Fields whose field name already carries a time interval (e.g. 'EMA12|5')
+        are timeframe variants and cannot take another one.
+
+        :return: True if the field supports intervals and has none yet
+        """
+        return bool(self.interval) and '|' not in self.field_name
+
     def with_interval(self, interval: str) -> 'FieldWithInterval':
         """
         Return a field wrapper with time interval modifier.
@@ -141,7 +152,7 @@ class Field(Enum):
 
         :param interval: Time interval string
         :return: FieldWithInterval wrapper
-        :raises ValueError: If field does not support intervals
+        :raises ValueError: If field does not support intervals or already has one
 
         Example:
             >>> StockField.RSI.with_interval('1H')
@@ -149,6 +160,8 @@ class Field(Enum):
         """
         if not self.interval:
             raise ValueError(f"{self.name} does not support time intervals")
+        if not self.accepts_interval():
+            raise ValueError(f"{self.name} already has a time interval ({self.field_name})")
         return FieldWithInterval(self, interval)
 
     def with_history(self, periods: int = 1) -> 'FieldWithHistory':

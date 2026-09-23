@@ -2,6 +2,27 @@
 
 All notable changes to tvscreener.
 
+## [Unreleased]
+
+### Fixed
+
+- **`with_interval()` rejects fields that already have a time interval**
+  - Fields such as `StockField.EMA12_5` (`EMA12|5`) produced an invalid column like `EMA12|5|60`
+  - They now raise `ValueError`
+  - New `Field.accepts_interval()` tells if `with_interval()` can be applied
+
+### Changed
+
+- **Code Generator redesign**
+  - New layout and styling
+  - Searchable field picker for filters and sort; every field is reachable
+  - Search matches initials (`rsi`, `sma50`)
+  - Timeframe (`with_interval()`) for filters, columns and sort
+  - `not in list` operator (`not_in()`)
+  - Market selection for stocks (`set_markets()`); the market list now matches the `Market` enum
+
+---
+
 ## [0.5.1] - 23/09/2026
 
 ### Fixed

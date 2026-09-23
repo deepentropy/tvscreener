@@ -189,6 +189,13 @@ Fundamental fields do NOT support intervals:
 - Revenue, Earnings, Margins
 - Dividend data
 
+Some fields already include a timeframe in their name, for example `StockField.EMA12_5` (`EMA12|5`, EMA 12 on 5 minutes). They cannot take another interval: `with_interval()` raises `ValueError`. Use `accepts_interval()` to check a field:
+
+```python
+StockField.RELATIVE_STRENGTH_INDEX_14.accepts_interval()  # True
+StockField.EMA12_5.accepts_interval()                     # False
+```
+
 ## Best Practices
 
 !!! tip "Start with Higher Timeframes"

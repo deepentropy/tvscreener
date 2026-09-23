@@ -4,210 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tvscreener Code Generator</title>
+    <meta name="description" content="Build a TradingView screener query visually and copy the Python code for tvscreener.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232b50e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='2 17 8 11 12 15 22 5'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Martian+Mono:wdth,wght@87.5,400;87.5,600;100,700&display=swap">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-left">
-            <div class="logo">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
-            </div>
-            <div class="header-title">
-                <h1>tvscreener</h1>
-                <span class="badge">Code Generator</span>
-            </div>
-        </div>
-        <div class="header-right">
-            <a href="https://pypi.org/project/tvscreener/" target="_blank" class="header-link">
-                <span class="pip-badge">pip install tvscreener</span>
+    <header class="topbar">
+        <a class="wordmark" href="https://github.com/deepentropy/tvscreener" target="_blank" rel="noopener">
+            <svg class="wordmark-mark" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="2 17 8 11 12 15 22 5"></polyline>
+            </svg>
+            <span class="wordmark-name">tvscreener</span>
+            <span class="wordmark-sub">code generator</span>
+        </a>
+        <div class="topbar-links">
+            <a class="pip" href="https://pypi.org/project/tvscreener/" target="_blank" rel="noopener">
+                <span class="pip-prompt" aria-hidden="true">$</span>
+                <span class="pip-cmd">pip install tvscreener</span>
             </a>
-            <a href="https://github.com/deepentropy/tvscreener" target="_blank" class="header-link github">
-                <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+            <a class="topbar-link" href="https://github.com/deepentropy/tvscreener" target="_blank" rel="noopener" aria-label="GitHub repository">
+                <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
                 </svg>
             </a>
         </div>
     </header>
 
-    <main class="main-layout">
-        <!-- Left Panel: Configuration -->
-        <aside class="config-panel">
-            <!-- Screener Type Selector -->
-            <section class="panel-section screener-section">
-                <div class="screener-grid">
-                    <button class="screener-btn active" data-screener="stock">
-                        <span class="screener-icon">📈</span>
-                        <span class="screener-label">Stock</span>
-                        <span class="screener-count">3,526 fields</span>
+    <main class="workspace">
+        <!-- Left: query builder -->
+        <div class="builder">
+            <nav class="screener-tabs" id="screener-tabs" role="tablist" aria-label="Screener"></nav>
+
+            <section class="block" data-section="filters" aria-labelledby="filters-title">
+                <header class="block-head">
+                    <h2 id="filters-title">Filters</h2>
+                    <button class="btn btn-ghost" id="add-filter-btn" type="button">
+                        <span aria-hidden="true">+</span> Add filter
                     </button>
-                    <button class="screener-btn" data-screener="crypto">
-                        <span class="screener-icon">₿</span>
-                        <span class="screener-label">Crypto</span>
-                        <span class="screener-count">3,108 fields</span>
-                    </button>
-                    <button class="screener-btn" data-screener="forex">
-                        <span class="screener-icon">💱</span>
-                        <span class="screener-label">Forex</span>
-                        <span class="screener-count">2,965 fields</span>
-                    </button>
-                    <button class="screener-btn" data-screener="bond">
-                        <span class="screener-icon">🏛️</span>
-                        <span class="screener-label">Bond</span>
-                        <span class="screener-count">201 fields</span>
-                    </button>
-                    <button class="screener-btn" data-screener="futures">
-                        <span class="screener-icon">📊</span>
-                        <span class="screener-label">Futures</span>
-                        <span class="screener-count">393 fields</span>
-                    </button>
-                    <button class="screener-btn" data-screener="coin">
-                        <span class="screener-icon">🪙</span>
-                        <span class="screener-label">Coin (DEX)</span>
-                        <span class="screener-count">3,026 fields</span>
-                    </button>
-                </div>
+                </header>
+                <div id="filters-container" class="filters"></div>
+                <p id="no-filters" class="empty">No filters. The screener returns every symbol.</p>
             </section>
 
-            <!-- Filters Section -->
-            <section class="panel-section">
-                <div class="section-header">
-                    <h2>Filters</h2>
-                    <button id="add-filter-btn" class="btn-add">+ Add Filter</button>
-                </div>
-                <div id="filters-container" class="filters-list"></div>
-                <p id="no-filters" class="hint-text">No filters. Click "Add Filter" to start.</p>
-            </section>
-
-            <!-- Fields Section -->
-            <section class="panel-section fields-section">
-                <div class="section-header">
-                    <h2>Fields to Retrieve</h2>
-                    <span class="field-counter" id="field-counter">0 selected</span>
-                </div>
-
-                <div class="field-toolbar">
-                    <button class="btn-tool" id="select-all-btn" title="Select all fields">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="9 11 12 14 22 4"></polyline>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                        </svg>
-                        All
-                    </button>
-                    <button class="btn-tool" id="clear-all-btn" title="Clear selection">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        </svg>
-                        Clear
-                    </button>
-                    <div class="dropdown">
-                        <button class="btn-tool dropdown-toggle" id="presets-btn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                            Presets
-                        </button>
-                        <div class="dropdown-menu" id="presets-menu">
-                            <button class="dropdown-item" data-preset="basic">📋 Basic Info</button>
-                            <button class="dropdown-item" data-preset="valuation">💰 Valuation</button>
-                            <button class="dropdown-item" data-preset="technical">📊 Technical</button>
-                            <button class="dropdown-item" data-preset="performance">📈 Performance</button>
-                            <button class="dropdown-item" data-preset="dividends">💵 Dividends</button>
-                        </div>
+            <section class="block" data-section="fields" aria-labelledby="fields-title">
+                <header class="block-head">
+                    <h2 id="fields-title">Columns</h2>
+                    <div class="block-head-right">
+                        <span class="count" id="field-counter">Default</span>
+                        <button class="btn btn-link" id="select-all-btn" type="button">Select all</button>
+                        <button class="btn btn-link" id="clear-all-btn" type="button">Clear</button>
                     </div>
+                </header>
+
+                <div class="presets">
+                    <span class="presets-label">Presets</span>
+                    <div class="presets-list" id="presets"></div>
                 </div>
 
-                <div class="field-search-row">
-                    <input type="text" id="field-search" class="search-input" placeholder="Search fields...">
-                    <select id="field-category" class="category-select">
-                        <option value="">All Categories</option>
+                <div id="selected-chips" class="chips"></div>
+
+                <label class="timeframe" id="fields-interval-group" hidden>
+                    <span class="timeframe-label">Timeframe</span>
+                    <select id="fields-interval" class="input select interval-select" aria-label="Timeframe of indicator columns"></select>
+                    <span class="timeframe-hint" id="fields-interval-hint"></span>
+                </label>
+
+                <div class="field-search">
+                    <input type="search" id="field-search" class="input" placeholder="Search fields" autocomplete="off" aria-label="Search fields">
+                    <select id="field-category" class="input select" aria-label="Category">
+                        <option value="">All categories</option>
                     </select>
                 </div>
 
-                <div id="fields-container" class="fields-grid"></div>
+                <div id="fields-container" class="field-list" role="group" aria-label="Fields"></div>
             </section>
 
-            <!-- Options Section -->
-            <section class="panel-section options-section" id="options-section">
-                <div class="section-header collapsible" id="options-toggle">
-                    <h2>Options</h2>
-                    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </div>
-                <div class="options-content" id="options-content">
-                    <div class="option-row" id="index-group">
-                        <label>Index Filter</label>
-                        <select id="index-select">
-                            <option value="">All Stocks</option>
-                        </select>
-                    </div>
-                    <div class="option-row">
-                        <label>Sort By</label>
-                        <div class="sort-row">
-                            <select id="sort-field">
-                                <option value="">Default</option>
-                            </select>
-                            <select id="sort-order" class="sort-order">
-                                <option value="desc">DESC</option>
-                                <option value="asc">ASC</option>
-                            </select>
+            <section class="block" data-section="options" aria-labelledby="options-title">
+                <header class="block-head">
+                    <h2 id="options-title">Results</h2>
+                </header>
+                <div class="options">
+                    <div class="option option-top" id="market-group">
+                        <span class="option-label">Markets</span>
+                        <div class="market-picker">
+                            <select id="market-select" class="input select" aria-label="Add market"></select>
+                            <div id="market-chips" class="chips"></div>
                         </div>
                     </div>
-                    <div class="option-row">
-                        <label>Limit</label>
-                        <input type="number" id="limit-input" value="100" min="1" max="5000">
+                    <label class="option" id="index-group">
+                        <span class="option-label">Index</span>
+                        <select id="index-select" class="input select">
+                            <option value="">All stocks</option>
+                        </select>
+                    </label>
+                    <div class="option">
+                        <span class="option-label">Sort by</span>
+                        <div class="sort">
+                            <div class="field-with-interval">
+                                <div class="sort-field" id="sort-field-slot"></div>
+                                <select id="sort-interval" class="input select interval-select" aria-label="Timeframe of sort field" hidden></select>
+                            </div>
+                            <div class="toggle" role="group" aria-label="Sort order">
+                                <button type="button" class="toggle-btn active" data-order="desc" aria-pressed="true">Desc</button>
+                                <button type="button" class="toggle-btn" data-order="asc" aria-pressed="false">Asc</button>
+                            </div>
+                        </div>
                     </div>
+                    <label class="option">
+                        <span class="option-label">Rows</span>
+                        <input type="number" id="limit-input" class="input input-num" value="100" min="1" max="5000">
+                    </label>
                 </div>
             </section>
-        </aside>
+        </div>
 
-        <!-- Right Panel: Code Output -->
-        <section class="code-panel">
-            <div class="code-header">
-                <div class="code-title">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="16 18 22 12 16 6"></polyline>
-                        <polyline points="8 6 2 12 8 18"></polyline>
-                    </svg>
-                    <span>Python Code</span>
-                </div>
-                <button id="copy-btn" class="btn-copy">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Right: generated code -->
+        <section class="output" aria-label="Generated Python code">
+            <header class="output-head">
+                <span class="filename">screener.py</span>
+                <button id="copy-btn" class="btn btn-copy" type="button">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
-                    <span>Copy</span>
+                    <span class="copy-label">Copy code</span>
                 </button>
-            </div>
-            <div class="code-container">
-                <pre><code id="generated-code" class="language-python"></code></pre>
-            </div>
+            </header>
+            <div class="code" id="generated-code" role="region" aria-label="Python code" tabindex="0"></div>
         </section>
     </main>
 
-    <!-- Filter Row Template -->
+    <!-- Filter row template -->
     <template id="filter-template">
-        <div class="filter-row">
-            <select class="filter-field">
-                <option value="">Select field...</option>
-            </select>
-            <select class="filter-operator">
-                <option value=">">></option>
-                <option value=">=">≥</option>
-                <option value="<"><</option>
-                <option value="<=">≤</option>
-                <option value="==">==</option>
-                <option value="!=">≠</option>
+        <div class="filter">
+            <div class="filter-field field-with-interval">
+                <select class="input select interval-select filter-interval" aria-label="Timeframe" hidden></select>
+            </div>
+            <select class="input select filter-operator" aria-label="Operator">
+                <option value="&gt;">&gt;</option>
+                <option value="&gt;=">&ge;</option>
+                <option value="&lt;">&lt;</option>
+                <option value="&lt;=">&le;</option>
+                <option value="==">=</option>
+                <option value="!=">&ne;</option>
                 <option value="between">between</option>
                 <option value="isin">in list</option>
+                <option value="not_in">not in list</option>
             </select>
-            <input type="text" class="filter-value" placeholder="Value">
-            <input type="text" class="filter-value2" placeholder="Max" style="display:none;">
-            <button class="btn-remove" title="Remove">×</button>
+            <input type="text" class="input filter-value" placeholder="Value" aria-label="Value">
+            <input type="text" class="input filter-value2" placeholder="Max" aria-label="Maximum value" hidden>
+            <button class="icon-btn filter-remove" type="button" aria-label="Remove filter">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                    <line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line>
+                </svg>
+            </button>
         </div>
     </template>
 
@@ -215,6 +168,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js" integrity="sha384-FWJTgPmIGm1+zpNhubuHRC/ulS1UK7hAZ7qiUUmKD8yGfPcn5ZXYBd2qRgi6L8Tu" crossorigin="anonymous"></script>
     <script src="js/field-data.js"></script>
     <script src="js/code-generator.js"></script>
+    <script src="js/field-search.js"></script>
+    <script src="js/field-picker.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

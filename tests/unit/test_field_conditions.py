@@ -155,6 +155,13 @@ class TestFieldWithIntervalConditions:
         assert cond.operation == FilterOperator.IN_RANGE
         assert cond.value == [30, 70]
 
+    def test_field_with_interval_suffix_rejects_interval(self):
+        """A timeframe variant such as 'EMA12|5' cannot take another interval."""
+        assert StockField.RELATIVE_STRENGTH_INDEX_14.accepts_interval()
+        assert not StockField.EMA12_5.accepts_interval()
+        with pytest.raises(ValueError):
+            StockField.EMA12_5.with_interval('60')
+
 
 class TestFieldWithHistoryConditions:
     """Test comparison operators on FieldWithHistory."""
