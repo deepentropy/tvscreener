@@ -7,7 +7,12 @@ Exposes market screener functionality via the Model Context Protocol.
 from __future__ import annotations
 
 import json
-from mcp.server.fastmcp import FastMCP
+
+# mcp 2.x renamed FastMCP to MCPServer and removed mcp.server.fastmcp (#60)
+try:
+    from mcp.server.mcpserver import MCPServer as FastMCP
+except ImportError:
+    from mcp.server.fastmcp import FastMCP
 
 from .tools import (
     search_fields,
