@@ -2,6 +2,16 @@
 
 All notable changes to tvscreener.
 
+## [0.5.1] - 23/09/2026
+
+### Fixed
+
+- **`tvscreener-mcp` now works with mcp 2.x** (#60)
+  - mcp 2.x renamed `FastMCP` to `MCPServer`, which made the server crash at startup
+  - The server supports both mcp 1.x and 2.x
+
+---
+
 ## [0.5.0] - 15/09/2026
 
 ### Fixed
