@@ -2,7 +2,7 @@
 
 All notable changes to tvscreener.
 
-## [Unreleased]
+## [0.6.0] - 14/10/2026
 
 ### Added
 
