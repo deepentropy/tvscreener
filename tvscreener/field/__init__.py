@@ -227,7 +227,7 @@ class Field(Enum):
         or standard enum equality for Field-to-Field comparisons.
 
         Example:
-            >>> StockField.SECTOR == 'Technology'
+            >>> StockField.SECTOR == 'Electronic Technology'
         """
         # For enum-to-enum comparison, use standard Enum equality
         if isinstance(other, Field):
@@ -244,7 +244,7 @@ class Field(Enum):
         or standard enum inequality for Field-to-Field comparisons.
 
         Example:
-            >>> StockField.SECTOR != 'Technology'
+            >>> StockField.SECTOR != 'Electronic Technology'
         """
         # For enum-to-enum comparison, use standard Enum inequality
         if isinstance(other, Field):
@@ -285,7 +285,7 @@ class Field(Enum):
         Check if field value is in a list of values.
 
         Example:
-            >>> StockField.SECTOR.isin(['Technology', 'Healthcare'])
+            >>> StockField.SECTOR.isin(['Electronic Technology', 'Health Technology'])
             >>> StockField.EXCHANGE.isin([Exchange.NASDAQ, Exchange.NYSE])
         """
         from tvscreener.filter import FieldCondition, FilterOperator

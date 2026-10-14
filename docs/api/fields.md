@@ -45,7 +45,7 @@ StockField.PRICE.not_between(50, 200)   # Value outside range
 ### List Methods
 
 ```python
-StockField.SECTOR.isin(['Technology', 'Healthcare'])
+StockField.SECTOR.isin(['Electronic Technology', 'Health Technology'])
 StockField.SECTOR.not_in(['Finance', 'Utilities'])
 ```
 

@@ -34,7 +34,7 @@ class FieldCondition:
     This class enables Pythonic comparison syntax like:
         StockField.PRICE > 100
         StockField.VOLUME.between(1e6, 10e6)
-        StockField.SECTOR == 'Technology'
+        StockField.SECTOR == 'Electronic Technology'
 
     Field-to-field comparisons are also supported:
         StockField.EXPONENTIAL_MOVING_AVERAGE_5 >= StockField.EXPONENTIAL_MOVING_AVERAGE_25

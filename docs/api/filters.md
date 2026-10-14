@@ -12,7 +12,7 @@ from tvscreener import StockField
 # These create FieldCondition objects
 condition1 = StockField.PRICE > 100
 condition2 = StockField.PE_RATIO_TTM.between(10, 25)
-condition3 = StockField.SECTOR.isin(['Technology', 'Healthcare'])
+condition3 = StockField.SECTOR.isin(['Electronic Technology', 'Health Technology'])
 ```
 
 ### Properties

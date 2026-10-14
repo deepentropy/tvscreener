@@ -24,6 +24,14 @@ class TestMCPServer(unittest.TestCase):
             "get_top_movers", "list_sectors", "list_filter_operators",
         }, names)
 
+    def test_list_sectors_returns_tradingview_sectors(self):
+        from tvscreener.field import Sector
+        from tvscreener.mcp.server import list_sectors
+
+        listed = {line.strip()[2:] for line in list_sectors().splitlines()[1:]}
+        self.assertEqual({s.value for s in Sector if s is not Sector.ANY}, listed)
+        self.assertNotIn("Healthcare", listed)
+
 
 if __name__ == '__main__':
     unittest.main()

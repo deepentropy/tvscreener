@@ -14,6 +14,7 @@ try:
 except ImportError:
     from mcp.server.fastmcp import FastMCP
 
+from ..field import Sector
 from .tools import (
     search_fields,
     get_field_categories,
@@ -221,7 +222,8 @@ def search_stocks(
         max_price: Maximum stock price in USD
         min_market_cap_billions: Minimum market cap in billions USD
         max_market_cap_billions: Maximum market cap in billions USD
-        sectors: Comma-separated sectors (Technology, Healthcare, Financial, etc.)
+        sectors: Comma-separated TradingView sectors (Electronic Technology, Health Technology, Finance, etc.).
+            Use list_sectors for the full list.
         sort_by: Sort by 'market_cap', 'price', 'volume', or 'change'
         limit: Maximum results (default 25, max 100)
     """
@@ -334,12 +336,7 @@ def get_top_movers(
 @mcp.tool()
 def list_sectors() -> str:
     """List available stock sectors for filtering."""
-    sectors = [
-        "Technology", "Healthcare", "Financial", "Consumer Cyclical",
-        "Communication Services", "Industrials", "Consumer Defensive",
-        "Energy", "Basic Materials", "Real Estate", "Utilities",
-        "Electronic Technology", "Technology Services", "Producer Manufacturing"
-    ]
+    sectors = [s.value for s in Sector if s is not Sector.ANY]
     return "Available sectors:\n" + "\n".join(f"  - {s}" for s in sectors)
 
 
