@@ -82,7 +82,12 @@ ss = StockScreener()
 ss.where(StockField.PRICE > 50)
 ss.where(StockField.VOLUME >= 1_000_000)
 ss.where(StockField.MARKET_CAPITALIZATION.between(1e9, 50e9))
-ss.where(StockField.SECTOR.isin(['Technology', 'Healthcare']))
+ss.where(StockField.SECTOR.isin([
+    'Electronic Technology',
+    'Technology Services',
+    'Health Technology',
+    'Health Services',
+]))
 df = ss.get()
 ```
 
