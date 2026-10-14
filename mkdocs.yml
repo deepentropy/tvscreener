@@ -96,6 +96,7 @@ nav:
     - Bond Screener: screeners/bond.md
     - Futures Screener: screeners/futures.md
     - Coin Screener: screeners/coin.md
+    - Option Screener: screeners/option.md
   - Examples:
     - Stock Screening: examples/stock-screening.md
     - Technical Analysis: examples/technical-analysis.md

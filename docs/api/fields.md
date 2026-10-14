@@ -12,6 +12,7 @@ Field enums provide type-safe access to screener data.
 | `BondField` | `BondScreener` | ~201 |
 | `FuturesField` | `FuturesScreener` | ~393 |
 | `CoinField` | `CoinScreener` | ~3,026 |
+| `OptionField` | `OptionScreener` | 28 |
 
 ## Import
 

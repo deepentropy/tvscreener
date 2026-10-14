@@ -2,6 +2,19 @@
 
 All notable changes to tvscreener.
 
+## [Unreleased]
+
+### Added
+
+- **`OptionScreener` and `OptionField`** (#53)
+  - Option chains from the TradingView options scanner, for one or more underlyings (`OptionScreener("NASDAQ:AAPL")`)
+  - Greeks (delta, gamma, theta, vega, rho), implied volatility (mid, bid, ask), theoretical price, bid/ask
+  - Expiration is returned as a datetime; expiration filters accept dates, ISO strings or `YYYYMMDD` integers
+- **`get_iv_term_structure(symbol)`** (#53)
+  - Implied volatility by time to expiration: one point per listed expiration and standard tenors (1w to 1y)
+
+---
+
 ## [0.5.2] - 23/09/2026
 
 ### Fixed

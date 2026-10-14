@@ -176,6 +176,14 @@ df = futs.get()
 # Coin Screener (NEW) - CEX and DEX coins
 coins = tvs.CoinScreener()
 df = coins.get()
+
+# Option Screener - option chains with greeks and IV (underlying required)
+opts = tvs.OptionScreener("NASDAQ:AAPL")
+opts.where(tvs.OptionField.DELTA.between(0.4, 0.6))
+df = opts.get()
+
+# Implied volatility term structure
+df = tvs.get_iv_term_structure("NASDAQ:AAPL")
 ```
 
 ### Fluent API

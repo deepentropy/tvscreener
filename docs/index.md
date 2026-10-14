@@ -10,7 +10,7 @@
 
 ## Features
 
-- **6 Screener Types**: Stock, Crypto, Forex, Bond, Futures, and Coin
+- **7 Screener Types**: Stock, Crypto, Forex, Bond, Futures, Coin, and Option
 - **Pythonic Filtering**: Use `>`, `<`, `>=`, `<=`, `==`, `!=` operators directly on fields
 - **3,500+ Fields**: Access all TradingView fields including fundamentals, technicals, and more
 - **Index Filtering**: Filter by S&P 500, NASDAQ 100, Dow Jones, and 50+ other indices
