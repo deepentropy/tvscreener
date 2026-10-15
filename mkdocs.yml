@@ -91,6 +91,8 @@ nav:
     - Styled Output: guide/styled-output.md
     - Presets & Calendars: guide/presets-calendars.md
     - Scanner Helpers: guide/scanner-helpers.md
+    - Financials and Events: guide/fundamentals.md
+    - News and Filings: guide/news-documents.md
   - Screeners:
     - Stock Screener: screeners/stock.md
     - Crypto Screener: screeners/crypto.md

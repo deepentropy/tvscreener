@@ -22,6 +22,21 @@ df = get_yield_curve("US")
 | `yield` | Yield in percent |
 | `change` | Yield change since the previous close (percentage points) |
 
+## Yield Matrix
+
+`get_yield_matrix()` puts several countries side by side: one row per country, one column per tenor, yields in percent.
+
+```python
+from tvscreener import get_yield_matrix
+
+df = get_yield_matrix(["US", "DE", "GB", "JP"])
+df = get_yield_matrix(tenors=["3M", "2Y", "10Y", "30Y"])   # every country, selected tenors
+
+slope = df["10Y"] - df["2Y"]                                # 2s10s slope by country
+```
+
+Missing tenors are `NaN`.
+
 ## Screener
 
 ```python

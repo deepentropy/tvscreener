@@ -67,3 +67,27 @@ df = get_ipo_calendar("2026-10-01", "2026-10-31", markets=Market.ALL)
 ```
 
 Columns: `date`, `status`, `offer_price`, `price_range`, `offered_shares`, `deal_amount`, `market_cap`. Values are in USD.
+
+### Economic Events
+
+`get_economic_calendar()` returns data releases, central bank decisions and speeches. It reads TradingView's economic calendar, not the scanner, so it takes countries instead of markets.
+
+```python
+from tvscreener import get_economic_calendar
+
+df = get_economic_calendar("2026-10-12", "2026-10-18")                        # every country
+df = get_economic_calendar("2026-10-15", countries=["US", "EU"], importance="high")
+```
+
+| Column | Description |
+|--------|-------------|
+| `date` | Release time (UTC) |
+| `country`, `currency` | `EU` for the euro area |
+| `title`, `indicator`, `period` | Event name, indicator and the period it covers (e.g. `Sep`) |
+| `actual`, `forecast`, `previous` | Values; `actual` is empty until the release |
+| `unit`, `scale` | e.g. `%`, or `K` / `M` / `B` |
+| `importance` | `low`, `medium` or `high`. `importance=` keeps events at or above that level |
+| `ticker` | Indicator symbol, e.g. `ECONOMICS:USEHS`, usable with `EconomicsScreener` and `get_symbol()` |
+| `category`, `source`, `reference_date`, `id` | |
+
+The server returns at most 2,000 events per request; longer ranges are split automatically.

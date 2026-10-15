@@ -195,6 +195,22 @@ df = fs.get()
 print(f"Columns: {len(df.columns)}")  # ~393
 ```
 
+## Forward Curve
+
+`get_forward_curve()` returns every listed contract month of a futures root, sorted by expiration.
+
+```python
+from tvscreener import get_forward_curve
+
+df = get_forward_curve("NYMEX:CL")       # crude oil
+df = get_forward_curve("CME_MINI:ES1!")  # a continuous symbol works too
+
+contango = df["close"].iloc[-1] > df["close"].iloc[0]
+```
+
+Columns: `symbol`, `name`, `description`, `expiration`, `close`, `change` (%), `volume`, `open_interest`, `currency`.
+The result is empty when the root is unknown. `search_symbols("ES", type="futures")` finds roots.
+
 ## Notes
 
 - Futures symbols typically end with `1!` for the front-month contract

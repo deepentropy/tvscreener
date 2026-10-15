@@ -1,4 +1,5 @@
-"""Earnings, dividends and IPO calendars, built on the same scanner queries as TradingView's calendar pages."""
+"""Earnings, dividends and IPO calendars, built on the same scanner queries as TradingView's calendar pages,
+and the economic calendar."""
 import datetime as dt
 import json
 
@@ -8,8 +9,13 @@ import requests
 from tvscreener.field import Market
 
 SCAN_URL = "https://scanner.tradingview.com/global/scan"
+ECONOMIC_CALENDAR_URL = "https://economic-calendar.tradingview.com/events"
 REQUEST_TIMEOUT = 60
 PAGE_SIZE = 5000
+# The economic calendar returns at most this many events per request
+ECONOMIC_CALENDAR_LIMIT = 2000
+
+IMPORTANCE = {"low": -1, "medium": 0, "high": 1}
 
 REQUEST_HEADERS = {
     'Content-Type': 'application/json',
@@ -202,3 +208,67 @@ def get_ipo_calendar(start=None, end=None, markets=None):
         "deal_amount": raw["ipo_deal_amount_usd"],
         "market_cap": raw["ipo_market_cap_usd"],
     })
+
+
+def _economic_events(t0, t1, params):
+    """Events between two UTC timestamps, splitting the range while a request hits the server limit."""
+    iso = lambda t: dt.datetime.fromtimestamp(t, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    response = requests.get(ECONOMIC_CALENDAR_URL, params={**params, "from": iso(t0), "to": iso(t1)},
+                            headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT)
+    response.raise_for_status()
+    events = response.json().get("result") or []
+    if len(events) < ECONOMIC_CALENDAR_LIMIT or t1 - t0 <= 3600:
+        return events
+    middle = (t0 + t1) / 2
+    return _economic_events(t0, middle, params) + _economic_events(middle, t1, params)
+
+
+def get_economic_calendar(start=None, end=None, countries=None, importance=None):
+    """
+    Economic events (data releases, central bank decisions, speeches) between two dates.
+
+    :param start: First day (date, datetime or ISO string); default today
+    :param end: Last day, inclusive; default ``start``
+    :param countries: ISO country code or list of them, e.g. "US" or ["US", "EU", "DE"]; default all countries
+    :param importance: Minimum importance: "low", "medium" or "high"; default all events
+    :return: DataFrame sorted by date with columns: date (UTC), country, currency, title, indicator,
+        period, actual, forecast, previous, unit, scale, importance ("low", "medium", "high"),
+        category, ticker, source, reference_date (UTC), id.
+        ``ticker`` is the economic indicator symbol (e.g. "ECONOMICS:USCPI"), usable with
+        EconomicsScreener and get_symbol(). ``actual`` is empty until the release.
+    :raises ValueError: If ``importance`` is not "low", "medium" or "high"
+    """
+    t0, t1 = _range(start, end if end is not None else start)
+    params = {}
+    if countries:
+        params["countries"] = ",".join(c.upper() for c in ([countries] if isinstance(countries, str) else countries))
+    if importance is not None:
+        if importance not in IMPORTANCE:
+            raise ValueError(f"importance must be one of {list(IMPORTANCE)}, got {importance!r}")
+        params["minImportance"] = IMPORTANCE[importance]
+
+    events = {e["id"]: e for e in _economic_events(t0, t1, params)}.values()
+    columns = ["date", "country", "currency", "title", "indicator", "period", "actual", "forecast", "previous",
+               "unit", "scale", "importance", "category", "ticker", "source", "reference_date", "id"]
+    df = pd.DataFrame([{
+        "date": e.get("date"),
+        "country": e.get("country"),
+        "currency": e.get("currency"),
+        "title": e.get("title"),
+        "indicator": e.get("indicator"),
+        "period": e.get("period") or None,
+        "actual": e.get("actual"),
+        "forecast": e.get("forecast"),
+        "previous": e.get("previous"),
+        "unit": e.get("unit"),
+        "scale": e.get("scale"),
+        "importance": {v: k for k, v in IMPORTANCE.items()}.get(e.get("importance")),
+        "category": e.get("category"),
+        "ticker": e.get("ticker"),
+        "source": e.get("source"),
+        "reference_date": e.get("referenceDate"),
+        "id": e.get("id"),
+    } for e in events], columns=columns)
+    df["date"] = pd.to_datetime(df["date"], utc=True, format="ISO8601")
+    df["reference_date"] = pd.to_datetime(df["reference_date"], utc=True, format="ISO8601")
+    return df.sort_values(["date", "country"], ignore_index=True)

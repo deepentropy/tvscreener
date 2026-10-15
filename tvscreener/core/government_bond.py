@@ -105,3 +105,46 @@ def get_yield_curve(country="US"):
         "change": raw["change_abs"],
         "description": raw["description"],
     })
+
+
+_ISO_TENOR = re.compile(r"P(\d+)([MY])$")
+
+
+def _tenor_months(tenor):
+    """'10Y' -> 120, '3M' -> 3."""
+    return int(tenor[:-1]) * (12 if tenor.endswith("Y") else 1)
+
+
+def get_yield_matrix(countries=None, tenors=None):
+    """
+    Government bond yields of several countries side by side, one column per tenor.
+
+    :param countries: ISO country code or list of them, e.g. ["US", "DE", "JP"]; default every country
+    :param tenors: Tenor or list of tenors to keep, e.g. ["3M", "2Y", "10Y", "30Y"]; default all
+    :return: DataFrame of yields in percent, one row per country (index), one column per tenor,
+        sorted from the shortest tenor. Missing tenors are NaN.
+    """
+    columns = ["country_code", "close", "term-to-maturity"]
+    filters = [{"left": "typespecs", "operation": "has", "right": ["yield"]},
+               {"left": "close", "operation": "nempty"}]
+    if countries:
+        countries = [countries] if isinstance(countries, str) else countries
+        filters.append({"left": "country_code", "operation": "in_range", "right": [c.upper() for c in countries]})
+    payload = {"columns": columns, "filter": filters, "range": [0, 5000]}
+    response = requests.post(get_url("bonds"), data=json.dumps(payload), headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT)
+    response.raise_for_status()
+    raw = pd.DataFrame([d["d"] for d in response.json().get("data") or []], columns=columns)
+
+    tenor = raw["term-to-maturity"].str.extract(_ISO_TENOR)
+    raw["tenor"] = tenor[0].astype("Int64").astype("string") + tenor[1]
+    raw = raw.dropna(subset=["tenor"])
+    matrix = raw.pivot_table(index="country_code", columns="tenor", values="close", aggfunc="first")
+    if tenors:
+        wanted = [t.upper() for t in ([tenors] if isinstance(tenors, str) else tenors)]
+        ordered = sorted({f"{int(t[:-1])}{t[-1]}" for t in wanted}, key=_tenor_months)
+    else:
+        ordered = sorted(matrix.columns, key=_tenor_months)
+    matrix = matrix.reindex(columns=ordered)
+    matrix.index.name = "country"
+    matrix.columns.name = "tenor"
+    return matrix

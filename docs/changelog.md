@@ -2,6 +2,40 @@
 
 All notable changes to tvscreener.
 
+## [0.8.0] - 15/10/2026
+
+### Added
+
+- **Financial statements**: `get_financials(symbol, statement, period)`
+  - Income statement, balance sheet, cash flow and statistics, by fiscal year, quarter, half-year or TTM
+  - About 20 years and 32 quarters for large companies
+  - TradingView's layout for each company type (industrial, bank, insurer)
+  - `get_fundamentals_config()` returns the field catalogue
+- **Real-time quotes**: `stream_quotes(symbols)` yields each quote change pushed by TradingView, including pre/after-market prices and the delay (`update_mode`)
+- **Corporate events and seasonals**
+  - `get_corporate_events(symbol)`: recent dividends, earnings (actual vs estimate, next release) and splits
+  - `get_seasonals(symbol)`: monthly returns by year
+- **Economic calendar**: `get_economic_calendar(start, end, countries, importance)` with actual, forecast and previous values
+- **Filings and transcripts**
+  - `get_documents(symbol)`: 10-Q, 10-K, earnings releases, transcripts
+  - `get_document(id)`: transcript or summary text
+  - `get_earnings_calls(symbol)`: call dates, live transcript and recording links
+- **News**
+  - `get_news()` filters: `provider`, `market`, `sector`, `corp_activity` (insider trading, ESG, analyst ratings...), `country`, `priority`
+  - New `id` column; `get_article(id)` reads TradingView's news API
+- **Market helpers**
+  - `search_symbols(text, type, exchange, country)`: search by ticker, name, ISIN or CUSIP
+  - `get_peers(symbol)`: largest companies of the same industry
+  - `get_forward_curve(root)`: futures term structure
+  - `get_yield_matrix(countries, tenors)`: government yields of several countries by tenor
+  - `get_volatility_smile(symbol, expiration)`: implied volatility by strike or moneyness
+- New dependency: `websocket-client`. It is used by `get_financials`, `stream_quotes`, `get_corporate_events` and `get_seasonals`
+
+### Changed
+
+- `get_article()` takes a story `id` (news API) or a `story_path` (web page). The argument is renamed from `story_path` to `story`
+- Article text keeps paragraph breaks, and symbol and link text
+
 ## [0.7.0] - 15/10/2026
 
 ### Added

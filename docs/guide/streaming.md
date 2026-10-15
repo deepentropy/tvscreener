@@ -1,6 +1,9 @@
 # Streaming
 
-Get real-time updates with the streaming feature.
+Two ways to follow prices:
+
+- `Screener.stream()` re-runs a screener query at a fixed interval (below).
+- `stream_quotes()` receives quotes for a list of symbols as TradingView pushes them ([Real-Time Quotes](#real-time-quotes)).
 
 ## Overview
 
@@ -185,3 +188,36 @@ for df in ss.stream(interval=5):
 3. **Use appropriate intervals**: Balance freshness vs. API load
 4. **Handle errors**: Wrap in try/except for network issues
 5. **Clean up**: Always have a way to stop the stream
+
+## Real-Time Quotes
+
+`stream_quotes()` opens TradingView's data websocket and yields each change as it is pushed. Nothing is polled.
+
+```python
+from tvscreener import stream_quotes
+
+for quote in stream_quotes(["NASDAQ:AAPL", "BINANCE:BTCUSDT"], duration=60):
+    print(quote["symbol"], quote.get("price"), quote["updated"])
+```
+
+Each update is a dict with:
+
+- `symbol`
+- `updated`: the fields that changed in this update
+- the latest value of every field received so far
+
+The first updates for a symbol can be partial (for example only `bid` and `ask`).
+
+| Parameter | Description |
+|-----------|-------------|
+| `fields` | Readable names from `QUOTE_FIELDS`, or raw TradingView quote fields. Default `DEFAULT_QUOTE_FIELDS` |
+| `on_update` | Callback called with each update |
+| `max_updates` | Stop after N updates |
+| `duration` | Stop after N seconds |
+
+Available names: `price`, `change`, `change_percent`, `volume`, `bid`, `ask`, `bid_size`, `ask_size`, `open`, `high`, `low`, `prev_close`, `time`, `extended_price`, `extended_change`, `extended_change_percent`, `extended_time`, `session`, `update_mode`, `description`, `currency`, `exchange`, `type`. Times are UTC datetimes.
+
+!!! note "Real time or delayed"
+    Without a TradingView account, US stocks (Cboe One) and crypto are real time. Some exchanges are delayed: `update_mode` is then e.g. `delayed_streaming_900` (15 minutes). `extended_*` fields hold pre-market and after-hours prices.
+
+An unknown symbol yields one update with an `error` key.

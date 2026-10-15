@@ -35,6 +35,62 @@ Get the results as a Pandas Dataframe
 
 **This is an unofficial, third-party library and is not affiliated with, endorsed by, or connected to TradingView™ in any way.** TradingView™ is a trademark of TradingView™, Inc. This independent project provides a Python interface to publicly available data from TradingView's screener. Use of this library is at your own risk and subject to TradingView's terms of service.
 
+# What's New in v0.8.0
+
+**Beyond the screener** - tvscreener now reads the data behind TradingView's symbol pages, charts and calendars. No account needed.
+
+### Financial Statements
+
+About 20 years of annual and 8 years of quarterly statements, in TradingView's layout (industrial, bank or insurer):
+
+```python
+import tvscreener as tvs
+
+income = tvs.get_financials("NASDAQ:AAPL")                         # income statement, by fiscal year
+balance = tvs.get_financials("NASDAQ:AAPL", "balance_sheet", "FQ")  # balance sheet, by quarter
+income["Total revenue"].pct_change()                                # revenue growth
+```
+
+### Real-Time Quotes
+
+Quotes pushed by TradingView as they change, including pre/after-market prices:
+
+```python
+for quote in tvs.stream_quotes(["NASDAQ:AAPL", "BINANCE:BTCUSDT"], duration=60):
+    print(quote["symbol"], quote.get("price"), quote["updated"])
+```
+
+### Events, Seasonals and the Economic Calendar
+
+```python
+events = tvs.get_corporate_events("NASDAQ:AAPL")      # dividends, earnings vs estimates, splits
+seasonals = tvs.get_seasonals("NASDAQ:AAPL")          # monthly returns by year
+macro = tvs.get_economic_calendar("2026-10-12", "2026-10-18", countries=["US", "EU"], importance="high")
+```
+
+### News, Filings and Earnings Call Transcripts
+
+```python
+news = tvs.get_news("NASDAQ:AAPL", corp_activity="insider_trading")   # also: provider, market, sector...
+docs = tvs.get_documents("NASDAQ:AAPL", category="call_transcript")    # 10-Q, 10-K, transcripts
+transcript = tvs.get_document(docs["transcript_id"].iloc[0])
+calls = tvs.get_earnings_calls("NASDAQ:AAPL")                          # dates, transcript and audio links
+```
+
+### Market Helpers
+
+```python
+tvs.search_symbols("US0378331005")                      # by ticker, name, ISIN or CUSIP
+tvs.get_peers("NASDAQ:AAPL")                            # largest companies of the same industry
+tvs.get_forward_curve("NYMEX:CL")                       # futures term structure
+tvs.get_yield_matrix(["US", "DE", "JP"])                # government yields by country and tenor
+tvs.get_volatility_smile("NASDAQ:AAPL", "2026-11-13")   # implied volatility by strike
+```
+
+Guides: [Financials and Events](https://deepentropy.github.io/tvscreener/docs/guide/fundamentals/) · [News and Filings](https://deepentropy.github.io/tvscreener/docs/guide/news-documents/) · [Real-Time Quotes](https://deepentropy.github.io/tvscreener/docs/guide/streaming/#real-time-quotes)
+
+---
+
 # What's New in v0.2.0
 
 **MCP Server Integration** - This release adds Model Context Protocol (MCP) support, enabling AI assistants like Claude to query market data directly.
@@ -117,8 +173,11 @@ The library now validates that you're using the correct field types with each sc
 
 - Query **Stock**, **ETF**, **Forex**, **Crypto**, **Bond**, **Government Bond**, **Futures**, **Coin**, **Option**, **Index** and **Economics** Screeners
 - **OR / nested filters** with `|` and `&`, and operators such as `has()`, `above_pct()`, `in_day_range()`
-- **TradingView presets** (gainers, losers, all-time highs...) and **earnings, dividend and IPO calendars**
-- **Yield curves**, IV term structure and single-symbol lookups
+- **TradingView presets** (gainers, losers, all-time highs...) and **earnings, dividend, IPO and economic calendars**
+- **Financial statements**: about 20 years of annual and 8 years of quarterly income statement, balance sheet and cash flow
+- **Real-time quotes** pushed by TradingView, recent dividends, earnings and splits, and **seasonals**
+- **News** with filters, **filings and earnings call transcripts**
+- **Yield curves and matrix**, futures forward curves, IV term structure and smile, symbol search, peers and single-symbol lookups
 - All the **fields available**: 13,000+ fields across all screener types
 - **Any time interval** (`no need to be a registered user` - 1D, 5m, 1h, etc.)
 - **Fluent API** with `select()` and `where()` methods for cleaner code
@@ -223,6 +282,34 @@ df = tvs.StockScreener().set_preset(tvs.Preset.GAINERS).get()
 earnings = tvs.get_earnings_calendar("2026-10-12", "2026-10-18")
 dividends = tvs.get_dividends_calendar("2026-10-12", "2026-10-18")
 ipos = tvs.get_ipo_calendar("2026-10-01", "2026-10-31", markets=tvs.Market.ALL)
+macro = tvs.get_economic_calendar("2026-10-12", "2026-10-18", countries=["US", "EU"], importance="high")
+```
+
+### Financials, Events and Real-Time Quotes
+
+```python
+income = tvs.get_financials("NASDAQ:AAPL", "income", "FY")       # ~20 fiscal years
+balance = tvs.get_financials("NASDAQ:AAPL", "balance_sheet", "FQ")
+events = tvs.get_corporate_events("NASDAQ:AAPL")                  # dividends, earnings, splits
+seasonals = tvs.get_seasonals("NASDAQ:AAPL")                      # monthly returns by year
+
+for quote in tvs.stream_quotes(["NASDAQ:AAPL", "BINANCE:BTCUSDT"], duration=60):
+    print(quote["symbol"], quote.get("price"))
+```
+
+### News, Filings and Market Helpers
+
+```python
+news = tvs.get_news("NASDAQ:AAPL", corp_activity="insider_trading")
+text = tvs.get_article(news["id"].iloc[0])
+docs = tvs.get_documents("NASDAQ:AAPL", category="call_transcript")
+transcript = tvs.get_document(docs["transcript_id"].iloc[0])
+
+tvs.search_symbols("US0378331005")             # ISIN -> NASDAQ:AAPL and other listings
+tvs.get_peers("NASDAQ:AAPL")
+tvs.get_forward_curve("NYMEX:CL")
+tvs.get_yield_matrix(["US", "DE", "JP"])
+tvs.get_volatility_smile("NASDAQ:AAPL", "2026-11-13")
 ```
 
 ### Fluent API
@@ -401,6 +488,9 @@ for df in ss.stream(interval=30, max_iterations=10):
 | [Filtering](https://deepentropy.github.io/tvscreener/docs/guide/filtering/) | Complete filtering reference |
 | [Stock Screening](https://deepentropy.github.io/tvscreener/docs/examples/stock-screening/) | Value, momentum, dividend strategies |
 | [Technical Analysis](https://deepentropy.github.io/tvscreener/docs/examples/technical-analysis/) | RSI, MACD, multi-timeframe |
+| [Financials and Events](https://deepentropy.github.io/tvscreener/docs/guide/fundamentals/) | Statements, dividends, earnings, seasonals |
+| [News and Filings](https://deepentropy.github.io/tvscreener/docs/guide/news-documents/) | Filtered news, 10-Q/10-K, call transcripts |
+| [Streaming](https://deepentropy.github.io/tvscreener/docs/guide/streaming/) | Screener refreshes and real-time quotes |
 | [API Reference](https://deepentropy.github.io/tvscreener/docs/api/screeners/) | Screeners, Fields, Enums |
 
 ### Jupyter Notebooks

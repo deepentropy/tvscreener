@@ -1,9 +1,13 @@
-"""Helpers for the TradingView scanner endpoints that are not screener queries."""
+"""Helpers for the TradingView scanner endpoints that are not screener queries, and symbol search."""
+import json
+
 import pandas as pd
 import requests
 
 SCANNER_URL = "https://scanner.tradingview.com"
+SYMBOL_SEARCH_URL = "https://symbol-search.tradingview.com/symbol_search/v3/"
 REQUEST_TIMEOUT = 30
+SEARCH_PAGE_SIZE = 50
 
 REQUEST_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -89,3 +93,95 @@ def get_metainfo(market):
         [{"name": f["n"], "type": f.get("t"), "values": f.get("r")} for f in fields],
         columns=["name", "type", "values"],
     )
+
+
+def _search_ticker(item):
+    """Full ticker of a search result. Futures are returned as their root (e.g. "CME_MINI:ES")."""
+    prefix = item.get("prefix") or (item.get("source_id") if item.get("type") == "futures" else None)
+    return f"{prefix or item.get('exchange')}:{item.get('symbol')}"
+
+
+def search_symbols(text, type=None, exchange=None, country=None, limit=50, lang="en"):
+    """
+    Search TradingView symbols by ticker, name, ISIN or CUSIP, like the website's search box.
+
+    :param text: Search text, e.g. "AAPL", "apple", "US0378331005"
+    :param type: Asset type: "stock", "funds", "futures", "forex", "crypto", "index", "bond", "economic";
+        default all types
+    :param exchange: Exchange to search in, e.g. "NASDAQ", "XETR"
+    :param country: ISO country code that ranks the listings of that country first, e.g. "DE"
+    :param limit: Maximum number of results (50 per request)
+    :param lang: Language of the descriptions
+    :return: DataFrame with columns: symbol (exchange-prefixed), ticker, description, type, exchange,
+        currency, country, isin, cusip, typespecs, is_primary_listing.
+        Futures are returned as their root (e.g. "CME_MINI:ES"), usable with get_forward_curve().
+    """
+    params = {"text": text, "hl": "0", "lang": lang, "domain": "production"}
+    if type:
+        params["search_type"] = type
+    if exchange:
+        params["exchange"] = exchange
+    if country:
+        params["country"] = country.upper()
+    items = []
+    while len(items) < limit:
+        params["start"] = len(items)
+        response = requests.get(SYMBOL_SEARCH_URL, params=params, headers=REQUEST_HEADERS, timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        result = response.json()
+        page = result.get("symbols") or []
+        items += page
+        if len(page) < SEARCH_PAGE_SIZE or not result.get("symbols_remaining"):
+            break
+    columns = ["symbol", "ticker", "description", "type", "exchange", "currency", "country", "isin", "cusip",
+               "typespecs", "is_primary_listing"]
+    return pd.DataFrame([{
+        "symbol": _search_ticker(item),
+        "ticker": item.get("symbol"),
+        "description": item.get("description"),
+        "type": item.get("type"),
+        "exchange": item.get("exchange"),
+        "currency": item.get("currency_code"),
+        "country": item.get("country"),
+        "isin": item.get("isin"),
+        "cusip": item.get("cusip"),
+        "typespecs": item.get("typespecs"),
+        "is_primary_listing": item.get("is_primary_listing"),
+    } for item in items[:limit]], columns=columns)
+
+
+def get_peers(symbol, n=10, by="industry"):
+    """
+    Companies of the same industry (or sector) and market as a stock, largest first.
+
+    TradingView's "related symbols" use the same rule: primary listings of the same
+    industry in the same market, ordered by market capitalization.
+
+    :param symbol: Exchange-prefixed stock symbol, e.g. "NASDAQ:AAPL"
+    :param n: Number of peers
+    :param by: "industry" or "sector"
+    :return: DataFrame with columns: symbol, name, description, industry, sector, market_cap, close,
+        change (%), currency. The stock itself is excluded.
+    :raises ValueError: If ``by`` is invalid, or the symbol is unknown or has no industry
+    """
+    if by not in ("industry", "sector"):
+        raise ValueError(f"by must be 'industry' or 'sector', got {by!r}")
+    info = get_symbol(symbol, by, "market")
+    if not info or not info.get(by) or not info.get("market"):
+        raise ValueError(f"{symbol} is unknown or has no {by}")
+    columns = ["name", "description", "industry", "sector", "market_cap_basic", "close", "change", "currency"]
+    payload = {
+        "columns": columns,
+        "filter": [{"left": by, "operation": "equal", "right": info[by]},
+                   {"left": "is_primary", "operation": "equal", "right": True},
+                   {"left": "market_cap_basic", "operation": "nempty"}],
+        "sort": {"sortBy": "market_cap_basic", "sortOrder": "desc"},
+        "range": [0, n + 1],
+    }
+    response = requests.post(f"{SCANNER_URL}/{info['market']}/scan", data=json.dumps(payload),
+                             headers={**REQUEST_HEADERS, 'Content-Type': 'application/json'}, timeout=REQUEST_TIMEOUT)
+    response.raise_for_status()
+    data = [d for d in response.json().get("data") or [] if d["s"] != symbol][:n]
+    df = pd.DataFrame([d["d"] for d in data], columns=columns).rename(columns={"market_cap_basic": "market_cap"})
+    df.insert(0, "symbol", [d["s"] for d in data])
+    return df

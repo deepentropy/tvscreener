@@ -12,11 +12,13 @@
 
 - **11 Screener Types**: Stock, ETF, Crypto, Forex, Bond, Government Bond, Futures, Coin, Option, Index, and Economics
 - **Pythonic Filtering**: Use `>`, `<`, `>=`, `<=`, `==`, `!=` operators directly on fields, and combine them with `|` (OR) and `&`
-- **Presets and Calendars**: TradingView's market movers, and earnings, dividend and IPO calendars
+- **Presets and Calendars**: TradingView's market movers, and earnings, dividend, IPO and economic calendars
+- **Financial Statements**: up to 20 years of annual and 8 years of quarterly statements, dividends, earnings and seasonals
+- **News, Filings and Transcripts**: filtered news, 10-Q/10-K lists, earnings call transcripts
 - **3,500+ Fields**: Access all TradingView fields including fundamentals, technicals, and more
 - **Index Filtering**: Filter by S&P 500, NASDAQ 100, Dow Jones, and 50+ other indices
 - **Multi-Timeframe**: Use any technical indicator with different timeframes
-- **Real-time Streaming**: Stream live data updates
+- **Real-time Streaming**: Stream screener refreshes, or real-time quotes pushed by TradingView
 - **Styled Output**: Beautiful formatted tables matching TradingView's style
 
 ## Quick Example

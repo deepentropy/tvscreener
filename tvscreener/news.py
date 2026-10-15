@@ -6,6 +6,7 @@ import pandas as pd
 import requests
 
 NEWS_URL = "https://news-mediator.tradingview.com/public/news-flow/v2/news"
+STORY_URL = "https://news-mediator.tradingview.com/public/news/v1/story"
 ARTICLE_BASE_URL = "https://www.tradingview.com"
 REQUEST_TIMEOUT = 30
 
@@ -16,22 +17,35 @@ REQUEST_HEADERS = {
 }
 
 
-def get_news(symbol=None, lang="en"):
+def get_news(symbol=None, lang="en", provider=None, market=None, sector=None, corp_activity=None,
+             country=None, priority=None):
     """
-    Get news headlines from TradingView.
+    Get news headlines from TradingView (up to 200, newest first).
+
+    Filters are combined with AND, and each takes one value.
 
     :param symbol: TradingView symbol (e.g. "NASDAQ:AAPL", "BINANCE:BTCUSDT"). If None, returns global news.
     :param lang: Language code (default "en")
-    :return: DataFrame with columns: title, published, provider, related_symbols, story_path, urgency
+    :param provider: News provider id, e.g. "reuters", "dow-jones", "business_wire", "tradingview", "zacks"
+    :param market: "stock", "etf", "crypto", "forex", "index", "futures", "bond", "corp_bond" or "economic"
+    :param sector: Stock sector, e.g. "Electronic Technology", "Finance"
+    :param corp_activity: Corporate activity: "ipo", "earnings", "earnings_calls", "dividends", "share_buybacks",
+        "strategy_business_products", "mergers_and_acquisitions", "management", "insider_trading",
+        "ownership_changes", "esg", "recommendation" (analyst ratings) or "credit_ratings"
+    :param country: ISO country code of the market, e.g. "US", "GB"
+    :param priority: "flash", "important", "top_stories" or "key_facts"
+    :return: DataFrame with columns: id, title, published, provider, related_symbols, story_path, urgency
     """
+    filters = {"lang": lang, "symbol": symbol, "provider": provider, "market": market, "sector": sector,
+               "corp_activity": corp_activity, "market_country": country.upper() if country else None,
+               "priority": priority}
     params = {
-        "filter": [f"lang:{lang}"],
+        # The API rejects filters that are not in alphabetical order
+        "filter": sorted(f"{key}:{value}" for key, value in filters.items() if value),
         "client": "overview",
         "streaming": "false",
         "user_prostatus": "non_pro",
     }
-    if symbol:
-        params["filter"].append(f"symbol:{symbol}")
 
     response = requests.get(
         NEWS_URL,
@@ -46,6 +60,7 @@ def get_news(symbol=None, lang="en"):
     for item in data.get("items", []):
         related = [s["symbol"] for s in item.get("relatedSymbols", [])]
         rows.append({
+            "id": item.get("id"),
             "title": item.get("title"),
             "published": datetime.fromtimestamp(item["published"], tz=timezone.utc),
             "provider": item.get("provider", {}).get("name"),
@@ -54,16 +69,27 @@ def get_news(symbol=None, lang="en"):
             "urgency": item.get("urgency"),
         })
 
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows, columns=["id", "title", "published", "provider", "related_symbols", "story_path",
+                                       "urgency"])
 
 
-def get_article(story_path):
+def get_article(story):
     """
-    Fetch the full article text from a TradingView news story path.
+    Fetch the full article text of a TradingView news story.
 
-    :param story_path: Story path from get_news() (e.g. "/news/reuters.com,2026:newsml_...")
-    :return: Article text as string
+    :param story: Story ``id`` from get_news() (e.g. "DJN_DN20261015001560:0"), read from TradingView's
+        news API; or its ``story_path`` / URL (e.g. "/news/reuters.com,2026:newsml_..."), read from the web page
+    :return: Article text as string. Paywalled stories return their summary.
+    :raises requests.HTTPError: If the story does not exist
     """
+    if not story.startswith(("/", "http")):
+        response = requests.get(STORY_URL, params={"id": story, "lang": "en"}, headers=REQUEST_HEADERS,
+                                timeout=REQUEST_TIMEOUT)
+        response.raise_for_status()
+        data = response.json()
+        return _ast_to_text(data.get("ast_description")) or data.get("short_description") or ""
+
+    story_path = story
     if story_path.startswith("http"):
         url = story_path
     else:
@@ -122,14 +148,21 @@ def _extract_from_ast(html):
     return ""
 
 
+_BLOCK_NODES = {"root", "list"}
+
+
 def _ast_to_text(node):
-    """Recursively extract text from a TradingView AST node."""
+    """Recursively extract text from a TradingView AST node, one block (paragraph, list item) per line block."""
     if isinstance(node, str):
         return node
-    if isinstance(node, dict):
-        children = node.get("children", [])
-        texts = [_ast_to_text(c) for c in children]
-        if node.get("type") == "p":
-            return "\n\n".join(t for t in texts if t)
-        return "".join(t for t in texts if t)
-    return ""
+    if not isinstance(node, dict):
+        return ""
+    params = node.get("params") or {}
+    if node.get("type") == "symbol":
+        return params.get("text") or params.get("symbol") or ""
+    if node.get("type") == "url":
+        return params.get("linkText") or params.get("url") or ""
+    texts = [_ast_to_text(c) for c in node.get("children", [])]
+    if node.get("type") in _BLOCK_NODES:
+        return "\n\n".join(t.strip() for t in texts if t and t.strip())
+    return "".join(texts)

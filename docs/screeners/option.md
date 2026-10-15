@@ -90,6 +90,18 @@ df = os_.get()
 smile = df.pivot_table(index="Strike", columns="Option Type", values="Implied Volatility")
 ```
 
+`get_volatility_smile()` returns TradingView's fitted smile for one expiration directly, from its volatility chart:
+
+```python
+from tvscreener import get_volatility_smile
+
+df = get_volatility_smile("NASDAQ:AAPL", "2026-11-13")                  # columns: strike, iv
+df = get_volatility_smile("NASDAQ:AAPL", "2026-11-13", x="moneyness")   # log-moneyness, 0 at the money
+df = get_volatility_smile("SP:SPX", "2026-11-13", root="SPXW")          # option root differs from the ticker
+```
+
+`iv` is a fraction. It raises `requests.HTTPError` (404) when the expiration does not exist.
+
 ## IV Term Structure
 
 `get_iv_term_structure()` returns the implied volatility of an underlying by time to expiration.

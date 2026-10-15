@@ -2,6 +2,7 @@
 # This file is for convenience during development
 pandas>=1.3.0
 requests>=2.27.1
+websocket-client>=1.6.0
 
 # Development dependencies
 # To install with dev dependencies, use: pip install -e ".[dev]"
