@@ -68,20 +68,22 @@ for field in recs:
 Pre-defined groups of commonly used fields:
 
 ```python
+from tvscreener import get_preset
+
 # Valuation fields
-ss.select(*StockField.valuations())
+ss.select(*get_preset('stock_valuation'))
 
 # Dividend fields
-ss.select(*StockField.dividends())
+ss.select(*get_preset('stock_dividend'))
 
 # Oscillator fields
-ss.select(*StockField.oscillators())
+ss.select(*get_preset('stock_oscillators'))
 
 # Moving averages
-ss.select(*StockField.moving_averages())
+ss.select(*get_preset('stock_moving_averages'))
 
 # Performance fields
-ss.select(*StockField.performance())
+ss.select(*get_preset('stock_performance'))
 ```
 
 ## Field Properties
@@ -106,7 +108,7 @@ ss.select(
     StockField.OPEN,
     StockField.HIGH,
     StockField.LOW,
-    StockField.CLOSE,
+    StockField.PRICE,
     StockField.VOLUME
 )
 ```
@@ -118,7 +120,7 @@ ss.select(
     StockField.PE_RATIO_TTM,
     StockField.PRICE_TO_BOOK_FY,
     StockField.PRICE_TO_SALES_FY,
-    StockField.EV_TO_EBITDA_TTM,
+    StockField.ENTERPRISE_VALUEEBITDA_TTM,
     StockField.MARKET_CAPITALIZATION
 )
 ```
@@ -130,7 +132,7 @@ ss.select(
     StockField.DIVIDEND_YIELD_FY,
     StockField.DIVIDENDS_PER_SHARE_FY,
     StockField.PAYOUT_RATIO_TTM,
-    StockField.EX_DIVIDEND_DATE
+    StockField.EX_DIVIDEND_DATE_UPCOMING
 )
 ```
 
@@ -141,10 +143,10 @@ ss.select(
     StockField.CHANGE_PERCENT,
     StockField.WEEKLY_PERFORMANCE,
     StockField.MONTHLY_PERFORMANCE,
-    StockField.PERFORMANCE_3_MONTH,
-    StockField.PERFORMANCE_6_MONTH,
-    StockField.PERFORMANCE_YTD,
-    StockField.PERFORMANCE_1_YEAR
+    StockField.MONTH_PERFORMANCE_3,
+    StockField.MONTH_PERFORMANCE_6,
+    StockField.YTD_PERFORMANCE,
+    StockField.YEARLY_PERFORMANCE
 )
 ```
 

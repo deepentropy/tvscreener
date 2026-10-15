@@ -1,5 +1,6 @@
 import json
 import time
+import warnings
 from typing import Iterator, Callable, Optional, Union, List
 
 import pandas as pd
@@ -48,6 +49,15 @@ default_max_range = DEFAULT_MAX_RANGE
 default_sort_stocks = DEFAULT_SORT_STOCKS
 default_sort_crypto = DEFAULT_SORT_CRYPTO
 default_sort_forex = DEFAULT_SORT_FOREX
+
+
+def _warn_deprecated(fields):
+    for field in fields:
+        if getattr(field, 'deprecated', False):
+            warnings.warn(
+                f"{field.name} ({field.field_name}) is deprecated: TradingView returns no data for it",
+                DeprecationWarning, stacklevel=3,
+            )
 
 
 def _uniquify(names: list) -> list:
@@ -192,6 +202,7 @@ class Screener:
 
     def add_filter(self, filter_type: Field | ExtraFilter, operation: FilterOperator, values: Enum or str):
         self._validate_field_type(filter_type)
+        _warn_deprecated([filter_type])
         filter_ = Filter(filter_type, operation, self._prepare_filter_values(filter_type, values))
         # Case where the filter already exists, and we want to add more values
         existing_filter = self._get_filter(filter_.field)
@@ -235,6 +246,7 @@ class Screener:
         if isinstance(condition_or_field, ConditionGroup):
             for condition in condition_or_field.conditions():
                 self._validate_field_type(condition.field)
+            _warn_deprecated([c.field for c in condition_or_field.conditions()])
             self.filter_groups.append(condition_or_field)
         elif isinstance(condition_or_field, FieldCondition):
             # New Pythonic syntax: ss.where(StockField.PRICE > 100)
@@ -255,6 +267,7 @@ class Screener:
             >>> ss = StockScreener()
             >>> ss.select(StockField.NAME, StockField.PRICE, StockField.VOLUME)
         """
+        _warn_deprecated(fields)
         self.specific_fields = list(fields)
         return self
 
@@ -268,10 +281,45 @@ class Screener:
             >>> ss = StockScreener()
             >>> ss.select_all()
             >>> df = ss.get()  # Returns all ~3000+ stock fields
+
+        Deprecated fields (no data from TradingView) are left out.
         """
         if self._field_type is None:
             raise ValueError("Cannot select all fields: screener has no field type defined")
-        self.specific_fields = list(self._field_type)
+        self.specific_fields = [f for f in self._field_type if not f.deprecated]
+        return self
+
+    def metainfo(self) -> pd.DataFrame:
+        """
+        Get the field catalogue of this screener's scanner market.
+
+        :return: DataFrame with columns: name, type, values
+
+        Example:
+            >>> StockScreener().metainfo()
+        """
+        from tvscreener.scanner import get_metainfo
+        return get_metainfo(self.url.rstrip('/').split('/')[-2])
+
+    def set_currency(self, currency: str) -> 'Screener':
+        """
+        Convert fundamental values (market cap, revenue, EPS, enterprise value...) to one currency.
+
+        Prices (close, open...) stay in the symbol's currency. ``fundamental_currency_code``
+        shows the currency used. Without this setting, StockScreener (global scanner)
+        returns fundamentals in USD; single-market scanners use the local currency.
+
+        :param currency: ISO currency code, e.g. "usd", "eur", "jpy"
+        :return: self for method chaining
+
+        Example:
+            >>> ss = StockScreener().set_markets(Market.JAPAN, Market.GERMANY).set_currency("eur")
+        """
+        if not (isinstance(currency, str) and len(currency) == 3 and currency.isalpha()):
+            raise ValueError(f"currency must be a 3-letter ISO code such as 'usd', got {currency!r}")
+        conversion = dict(self.misc.get("price_conversion", {}))
+        conversion["to_currency"] = currency.lower()
+        self.add_misc("price_conversion", conversion)
         return self
 
     def add_option(self, key, value):
@@ -336,6 +384,10 @@ class Screener:
                 ]}
         return payload
 
+    def _request_url(self) -> str:
+        """URL of the scan request; subclasses can route to another scanner market."""
+        return self.url
+
     def get(self, print_request=False):
         """
         Get the screener data from TradingView.
@@ -350,16 +402,17 @@ class Screener:
 
         payload = self._build_payload(list(columns.keys()))
         payload_json = json.dumps(payload, indent=4)
+        url = self._request_url()
 
         if print_request:
-            print(f"Request: {self.url}")
+            print(f"Request: {url}")
             print("Payload:")
             print(payload_json)
 
         try:
             # Fixed: Add timeout to prevent hanging indefinitely
             response = requests.post(
-                self.url,
+                url,
                 data=payload_json,
                 timeout=REQUEST_TIMEOUT,
                 headers=REQUEST_HEADERS
@@ -372,7 +425,7 @@ class Screener:
                 raise MalformedRequestException(
                     response.status_code,
                     response.text,
-                    self.url,
+                    url,
                     payload_json
                 )
 
@@ -380,14 +433,14 @@ class Screener:
             raise MalformedRequestException(
                 408,  # Request Timeout
                 f"Request timed out after {REQUEST_TIMEOUT} seconds",
-                self.url,
+                url,
                 payload_json
             )
         except requests.RequestException as e:
             raise MalformedRequestException(
                 0,  # Unknown status code
                 str(e),
-                self.url,
+                url,
                 payload_json
             )
 

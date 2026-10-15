@@ -57,7 +57,7 @@ STOCK_DIVIDEND_FIELDS = [
     StockField.NAME,
     StockField.DIVIDENDS_YIELD,
     StockField.DIVIDENDS_YIELD_CURRENT,
-    StockField.DIVIDEND_YIELD_FORWARD,
+    StockField.DIVIDENDS_YIELD_FY,
     StockField.DIVIDEND_PAYOUT_RATIO_TTM,
     StockField.CONTINUOUS_DIVIDEND_GROWTH,
     StockField.CONTINUOUS_DIVIDEND_PAYOUT,
@@ -210,7 +210,7 @@ BOND_BASIC_FIELDS = [
 
 BOND_YIELD_FIELDS = [
     BondField.NAME,
-    BondField.COUPON,
+    BondField.CURRENT_COUPON,
     BondField.CURRENT_YIELD,
     BondField.YIELD_TO_MATURITY,
 ]
@@ -259,8 +259,8 @@ COIN_PRICE_FIELDS = [
 
 COIN_MARKET_FIELDS = [
     CoinField.NAME,
-    CoinField.MARKET_CAP,
-    CoinField.VOLUME,
+    CoinField.MARKET_CAP_CALC,
+    CoinField.N24H_VOL_CMC,
 ]
 
 

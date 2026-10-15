@@ -96,8 +96,9 @@ Strong momentum with expanding histogram:
 ```python
 ss = StockScreener()
 
-# Note: Field-to-field comparisons (e.g., MACD > Signal) are NOT supported by the TradingView API.
-# Retrieve data and filter with pandas instead:
+# Field-to-field filters also work in where(), e.g.
+# ss.where(StockField.MACD_LEVEL_12_26 > StockField.MACD_SIGNAL_12_26).
+# This example filters with pandas after get():
 ss.where(StockField.MACD_LEVEL_12_26 > 0)
 ss.where(StockField.CHANGE_PERCENT > 2)
 ss.where(StockField.VOLUME >= 500_000)
@@ -112,14 +113,14 @@ ss.select(
 df = ss.get()
 
 # Filter for MACD > Signal using pandas
-bullish_macd = df[df['MACD (12, 26)'] > df['MACD Signal (12, 26)']]
+bullish_macd = df[df['MACD Level (12, 26)'] > df['MACD Signal (12, 26)']]
 ```
 
 ## Moving Average Strategies
 
 ### Golden Cross Setup
 
-Note: Field-to-field comparisons are NOT supported by the TradingView API.
+Note: field-to-field filters also work in `where()`, e.g. `where(Field.PRICE > Field.SIMPLE_MOVING_AVERAGE_50)`. These examples filter with pandas after `get()`.
 Retrieve data and filter with pandas:
 
 ```python
@@ -158,8 +159,8 @@ df = ss.get()
 
 # Filter for death cross using pandas
 death_cross = df[
-    (df['SMA50'] < df['SMA200']) &
-    (df['Price'] < df['SMA50'])
+    (df['Simple Moving Average (50)'] < df['Simple Moving Average (200)']) &
+    (df['Price'] < df['Simple Moving Average (50)'])
 ]
 ```
 
@@ -184,9 +185,9 @@ df = ss.get()
 
 # Filter for EMA stack using pandas
 ema_stack = df[
-    (df['Price'] > df['EMA20']) &
-    (df['EMA20'] > df['EMA50']) &
-    (df['EMA50'] > df['EMA200'])
+    (df['Price'] > df['Exponential Moving Average (20)']) &
+    (df['Exponential Moving Average (20)'] > df['Exponential Moving Average (50)']) &
+    (df['Exponential Moving Average (50)'] > df['Exponential Moving Average (200)'])
 ]
 ```
 
@@ -222,15 +223,15 @@ df = ss.get()
 ```python
 ss = StockScreener()
 
-ss.where(StockField.STOCHASTIC_K_14_3_3 < 20)
-ss.where(StockField.STOCHASTIC_D_14_3_3 < 20)
+ss.where(StockField.STOCHASTIC_PERCENTK_14_3_3 < 20)
+ss.where(StockField.STOCHASTIC_PERCENTD_14_3_3 < 20)
 ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
-    StockField.STOCHASTIC_K_14_3_3,
-    StockField.STOCHASTIC_D_14_3_3
+    StockField.STOCHASTIC_PERCENTK_14_3_3,
+    StockField.STOCHASTIC_PERCENTD_14_3_3
 )
 
 df = ss.get()
@@ -243,20 +244,20 @@ df = ss.get()
 ```python
 ss = StockScreener()
 
-ss.where(StockField.STOCHASTIC_K_14_3_3 < 30)  # In oversold zone
+ss.where(StockField.STOCHASTIC_PERCENTK_14_3_3 < 30)  # In oversold zone
 ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
-    StockField.STOCHASTIC_K_14_3_3,
-    StockField.STOCHASTIC_D_14_3_3
+    StockField.STOCHASTIC_PERCENTK_14_3_3,
+    StockField.STOCHASTIC_PERCENTD_14_3_3
 )
 
 df = ss.get()
 
 # Filter for %K > %D (bullish cross) using pandas
-bullish_stoch = df[df['Stoch %K'] > df['Stoch %D']]
+bullish_stoch = df[df['Stochastic %K (14, 3, 3)'] > df['Stochastic %D (14, 3, 3)']]
 ```
 
 ## Multi-Timeframe Analysis
@@ -386,8 +387,8 @@ df = ss.get()
 # Filter for trend confirmation using pandas
 # (Field-to-field comparisons must be done in pandas)
 trending = df[
-    (df['Price'] > df['SMA50']) &
-    (df['SMA50'] > df['SMA200'])
+    (df['Price'] > df['Simple Moving Average (50)']) &
+    (df['Simple Moving Average (50)'] > df['Simple Moving Average (200)'])
 ]
 ```
 
@@ -398,7 +399,7 @@ ss = StockScreener()
 
 # Oversold conditions
 ss.where(StockField.RELATIVE_STRENGTH_INDEX_14 < 35)
-ss.where(StockField.STOCHASTIC_K_14_3_3 < 25)
+ss.where(StockField.STOCHASTIC_PERCENTK_14_3_3 < 25)
 
 # But showing signs of reversal
 ss.where(StockField.CHANGE_PERCENT > 0)  # Up today
@@ -411,7 +412,7 @@ ss.select(
     StockField.PRICE,
     StockField.CHANGE_PERCENT,
     StockField.RELATIVE_STRENGTH_INDEX_14,
-    StockField.STOCHASTIC_K_14_3_3
+    StockField.STOCHASTIC_PERCENTK_14_3_3
 )
 
 df = ss.get()
@@ -441,8 +442,8 @@ df = ss.get()
 # Filter for price within 3% of 200 SMA using pandas
 # (Field-to-field comparisons must be done in pandas)
 near_support = df[
-    (df['Price'] > df['SMA200'] * 0.97) &
-    (df['Price'] < df['SMA200'] * 1.03)
+    (df['Price'] > df['Simple Moving Average (200)'] * 0.97) &
+    (df['Price'] < df['Simple Moving Average (200)'] * 1.03)
 ]
 ```
 
@@ -453,7 +454,7 @@ near_support = df[
 ```python
 ss = StockScreener()
 
-ss.where(StockField.CANDLE_ENGULFING_BULLISH == True)
+ss.where(StockField.CANDLE_ENGULFING_BULLISH == 1)
 ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
@@ -471,7 +472,7 @@ df = ss.get()
 ```python
 ss = StockScreener()
 
-ss.where(StockField.CANDLE_MORNINGSTAR == True)
+ss.where(StockField.CANDLE_MORNINGSTAR == 1)
 ss.where(StockField.VOLUME >= 500_000)
 
 df = ss.get()
@@ -482,7 +483,7 @@ df = ss.get()
 ```python
 ss = StockScreener()
 
-ss.where(StockField.CANDLE_DOJI == True)
+ss.where(StockField.CANDLE_DOJI == 1)
 ss.where(StockField.RELATIVE_STRENGTH_INDEX_14 < 40)  # Near oversold
 ss.where(StockField.VOLUME >= 500_000)
 

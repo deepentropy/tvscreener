@@ -89,6 +89,8 @@ nav:
     - Time Intervals: guide/time-intervals.md
     - Streaming: guide/streaming.md
     - Styled Output: guide/styled-output.md
+    - Presets & Calendars: guide/presets-calendars.md
+    - Scanner Helpers: guide/scanner-helpers.md
   - Screeners:
     - Stock Screener: screeners/stock.md
     - Crypto Screener: screeners/crypto.md
@@ -97,6 +99,10 @@ nav:
     - Futures Screener: screeners/futures.md
     - Coin Screener: screeners/coin.md
     - Option Screener: screeners/option.md
+    - ETF Screener: screeners/etf.md
+    - Economics Screener: screeners/economics.md
+    - Index Screener: screeners/index.md
+    - Government Bonds: screeners/government-bonds.md
   - Examples:
     - Stock Screening: examples/stock-screening.md
     - Technical Analysis: examples/technical-analysis.md
@@ -107,3 +113,4 @@ nav:
     - Filters: api/filters.md
     - Enums: api/enums.md
   - Changelog: changelog.md
+  - Field Changes 0.7: field-changes.md

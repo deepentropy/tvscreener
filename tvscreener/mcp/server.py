@@ -14,7 +14,10 @@ try:
 except ImportError:
     from mcp.server.fastmcp import FastMCP
 
-from ..field import Sector
+from ..field import Sector, Market
+from ..calendars import get_earnings_calendar, get_dividends_calendar, get_ipo_calendar
+from ..core.government_bond import get_yield_curve
+from ..scanner import get_symbol
 from .tools import (
     search_fields,
     get_field_categories,
@@ -28,7 +31,8 @@ from .tools import (
 mcp = FastMCP(
     "tvscreener",
     instructions=(
-        "Query market screener for stocks, crypto, and forex via tvscreener library. "
+        "Query TradingView screeners (stocks, ETFs, crypto, forex, bonds, futures, indices, "
+        "economic indicators) via tvscreener. Also: earnings/dividend/IPO calendars, yield curves. "
         "Use discover_fields to find available fields, then use custom_query for flexible filtering."
     )
 )
@@ -51,7 +55,7 @@ def discover_fields(
 
     Args:
         search_term: Keyword to search (e.g., "rsi", "volume", "earnings", "dividend", "macd", "moving_average")
-        asset_type: "stock", "crypto", "forex", "bond", "futures", or "coin"
+        asset_type: "stock", "etf", "crypto", "forex", "bond", "government_bond", "futures", "coin", "index" or "economics"
         limit: Maximum results (default 20)
 
     Returns:
@@ -83,7 +87,7 @@ def list_field_types(asset_type: str = "stock") -> str:
     Use this to explore what types of data are available before using discover_fields.
 
     Args:
-        asset_type: "stock", "crypto", "forex", "bond", "futures", or "coin"
+        asset_type: "stock", "etf", "crypto", "forex", "bond", "government_bond", "futures", "coin", "index" or "economics"
 
     Returns:
         Categories and sample field names
@@ -112,7 +116,8 @@ def custom_query(
     filters: str | list | dict | None = None,
     sort_by: str | None = None,
     ascending: bool = False,
-    limit: int = 25
+    limit: int = 25,
+    preset: str | None = None
 ) -> str:
     """
     Flexible query with any fields and filters.
@@ -120,7 +125,7 @@ def custom_query(
     Use discover_fields first to find available field names.
 
     Args:
-        asset_type: "stock", "crypto", "forex", "bond", "futures", or "coin"
+        asset_type: "stock", "etf", "crypto", "forex", "bond", "government_bond", "futures", "coin", "index" or "economics"
         fields: Comma-separated field names to return (e.g., "NAME,PRICE,RSI,MACD_LEVEL_12_26")
                 If not specified, returns default fields.
         filters: JSON array of filter conditions, all combined with AND. Each filter has:
@@ -140,6 +145,8 @@ def custom_query(
         sort_by: Field name to sort by
         ascending: Sort direction (default False = descending)
         limit: Maximum results (default 25, max 100)
+        preset: TradingView preset for stock/etf (e.g. "gainers", "losers", "most_volatile",
+                "unusual_volume", "all_time_high", "oversold", "high_dividend"). Combined with filters.
 
     Returns:
         Markdown table with query results
@@ -200,7 +207,8 @@ def custom_query(
             filters=filter_list,
             sort_by=sort_by,
             ascending=ascending,
-            limit=limit
+            limit=limit,
+            preset=preset
         )
 
         if df.empty:
@@ -396,6 +404,83 @@ def list_filter_operators() -> str:
     result += '```'
 
     return result
+
+
+# =============================================================================
+# CALENDARS, RATES AND SINGLE SYMBOLS
+# =============================================================================
+
+def _markets_arg(markets: str | None):
+    if not markets:
+        return None
+    if markets.strip().upper() == "ALL":
+        return Market.ALL
+    return [m.strip().lower() for m in markets.split(",")]
+
+
+@mcp.tool()
+def get_calendar(
+    kind: str = "earnings",
+    start: str | None = None,
+    end: str | None = None,
+    markets: str | None = None,
+    limit: int = 50
+) -> str:
+    """
+    Earnings, dividend or IPO calendar for a date range.
+
+    Args:
+        kind: "earnings", "dividends" or "ipo"
+        start: First day, YYYY-MM-DD (default today)
+        end: Last day, YYYY-MM-DD, inclusive (default start)
+        markets: Comma-separated markets (e.g. "america,germany") or "ALL" (default america)
+        limit: Maximum rows (default 50, max 200); earnings are sorted by date then market cap
+    """
+    functions = {"earnings": get_earnings_calendar, "dividends": get_dividends_calendar, "ipo": get_ipo_calendar}
+    if kind not in functions:
+        return f"Unknown kind {kind!r}; use earnings, dividends or ipo"
+    try:
+        df = functions[kind](start, end, markets=_markets_arg(markets))
+    except Exception as e:
+        return f"Error: {e}"
+    if df.empty:
+        return f"No {kind} events in this period."
+    return f"{len(df)} {kind} events:\n\n" + df.head(min(limit, 200)).to_markdown(index=False)
+
+
+@mcp.tool()
+def yield_curve(country: str = "US") -> str:
+    """
+    Government bond yield curve of a country (yields in percent by tenor).
+
+    Args:
+        country: ISO country code, e.g. "US", "DE", "JP", "GB", "FR", "IT"
+    """
+    try:
+        df = get_yield_curve(country)
+    except Exception as e:
+        return f"Error: {e}"
+    if df.empty:
+        return f"No benchmark yields for {country}."
+    return df.to_markdown(index=False)
+
+
+@mcp.tool()
+def symbol_data(symbol: str, fields: str) -> str:
+    """
+    Any fields of one symbol.
+
+    Args:
+        symbol: Exchange-prefixed symbol, e.g. "NASDAQ:AAPL", "BINANCE:BTCUSDT"
+        fields: Comma-separated API field names, e.g. "close,market_cap_basic,RSI,price_earnings_ttm"
+    """
+    try:
+        data = get_symbol(symbol, *[f.strip() for f in fields.split(",") if f.strip()])
+    except Exception as e:
+        return f"Error: {e}"
+    if data is None:
+        return f"Symbol {symbol} not found."
+    return json.dumps(data, indent=2, default=str)
 
 
 def run():

@@ -57,9 +57,9 @@ CryptoField.VOLATILITY                    # Daily volatility
 ```python
 CryptoField.WEEKLY_PERFORMANCE      # 7d change
 CryptoField.MONTHLY_PERFORMANCE     # 30d change
-CryptoField.PERFORMANCE_3_MONTH     # 90d change
-CryptoField.PERFORMANCE_YTD         # Year to date
-CryptoField.PERFORMANCE_1_YEAR      # 1 year
+CryptoField.MONTH_PERFORMANCE_3     # 90d change
+CryptoField.YTD_PERFORMANCE         # Year to date
+CryptoField.YEARLY_PERFORMANCE      # 1 year
 ```
 
 ## Example Screens

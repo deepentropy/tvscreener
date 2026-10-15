@@ -1,0 +1,966 @@
+# Field Changes in 0.7
+
+Generated on 15/10/2026 by `scripts/generate_fields.py` (#64).
+
+- **Added**: fields listed in TradingView's `/{market}/metainfo` that returned data on real symbols.
+- **Deprecated**: fields that returned no data on any sample (up to 20,000 symbols, two sort orders).
+  They still work but raise a `DeprecationWarning` in `select()` and `where()`, and `select_all()` leaves them out.
+  A deprecated field can belong to another asset type (e.g. fund flows on `ForexField`) or be retired by TradingView.
+
+| Enum | Added | Deprecated |
+|------|-------|------------|
+| `StockField` | 129 | 26 |
+| `CryptoField` | 33 | 131 |
+| `ForexField` | 31 | 108 |
+| `BondField` | 29 | 34 |
+| `FuturesField` | 29 | 34 |
+| `CoinField` | 56 | 257 |
+| `EconomicsField` (new) | 37 | 0 |
+| `IndexField` (new) | 358 | 0 |
+| `GovernmentBondField` (new) | 129 | 0 |
+
+## StockField
+
+??? note "Added (129)"
+
+    - `CANDLE_DARKCLOUDCOVER_BEARISH`: `Candle.DarkCloudCover.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BEARISH`: `Candle.DojiStar.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BULLISH`: `Candle.DojiStar.Bullish` (timeframes)
+    - `CANDLE_DOWNSIDETASUKIGAP_BEARISH`: `Candle.DownsideTasukiGap.Bearish` (timeframes)
+    - `CANDLE_EVENINGDOJISTAR_BEARISH`: `Candle.EveningDojiStar.Bearish` (timeframes)
+    - `CANDLE_FALLINGTHREEMETHODS_BEARISH`: `Candle.FallingThreeMethods.Bearish` (timeframes)
+    - `CANDLE_FALLINGWINDOW_BEARISH`: `Candle.FallingWindow.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BEARISH`: `Candle.HaramiCross.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BULLISH`: `Candle.HaramiCross.Bullish` (timeframes)
+    - `CANDLE_MORNINGDOJISTAR_BULLISH`: `Candle.MorningDojiStar.Bullish` (timeframes)
+    - `CANDLE_ONNECK_BEARISH`: `Candle.OnNeck.Bearish` (timeframes)
+    - `CANDLE_PIERCING_BULLISH`: `Candle.Piercing.Bullish` (timeframes)
+    - `CANDLE_RISINGTHREEMETHODS_BULLISH`: `Candle.RisingThreeMethods.Bullish` (timeframes)
+    - `CANDLE_RISINGWINDOW_BULLISH`: `Candle.RisingWindow.Bullish` (timeframes)
+    - `CANDLE_TWEEZERBOTTOM_BULLISH`: `Candle.TweezerBottom.Bullish` (timeframes)
+    - `CANDLE_TWEEZERTOP_BEARISH`: `Candle.TweezerTop.Bearish` (timeframes)
+    - `CANDLE_UPSIDETASUKIGAP_BULLISH`: `Candle.UpsideTasukiGap.Bullish` (timeframes)
+    - `PERF_10Y_ABS`: `Perf.10Y_abs`
+    - `PERF_1M_ABS`: `Perf.1M_abs`
+    - `PERF_3M_ABS`: `Perf.3M_abs`
+    - `PERF_3Y_ABS`: `Perf.3Y_abs`
+    - `PERF_5D_ABS`: `Perf.5D_abs`
+    - `PERF_5Y_ABS`: `Perf.5Y_abs`
+    - `PERF_6M_ABS`: `Perf.6M_abs`
+    - `PERF_ALL_ABS`: `Perf.All_abs`
+    - `PERF_W_ABS`: `Perf.W_abs`
+    - `PERF_YTD_ABS`: `Perf.YTD_abs`
+    - `PERF_Y_ABS`: `Perf.Y_abs`
+    - `BOOK_VALUE_PER_SHARE_ESTIMATE_FH`: `book_value_per_share_estimate_fh`
+    - `BOOK_VALUE_PER_SHARE_ESTIMATE_FQ`: `book_value_per_share_estimate_fq`
+    - `BOOK_VALUE_PER_SHARE_ESTIMATE_FY`: `book_value_per_share_estimate_fy`
+    - `CAPITAL_EXPENDITURES_ESTIMATE_FH`: `capital_expenditures_estimate_fh`
+    - `CAPITAL_EXPENDITURES_ESTIMATE_FQ`: `capital_expenditures_estimate_fq`
+    - `CAPITAL_EXPENDITURES_ESTIMATE_FY`: `capital_expenditures_estimate_fy`
+    - `CAPITAL_EXPENDITURES_ESTIMATE_NTM`: `capital_expenditures_estimate_ntm`
+    - `CASH_F_FINANCING_ACTIVITIES_ESTIMATE_FH`: `cash_f_financing_activities_estimate_fh`
+    - `CASH_F_FINANCING_ACTIVITIES_ESTIMATE_FQ`: `cash_f_financing_activities_estimate_fq`
+    - `CASH_F_FINANCING_ACTIVITIES_ESTIMATE_FY`: `cash_f_financing_activities_estimate_fy`
+    - `CASH_F_FINANCING_ACTIVITIES_ESTIMATE_NTM`: `cash_f_financing_activities_estimate_ntm`
+    - `CASH_F_INVESTING_ACTIVITIES_ESTIMATE_FH`: `cash_f_investing_activities_estimate_fh`
+    - `CASH_F_INVESTING_ACTIVITIES_ESTIMATE_FQ`: `cash_f_investing_activities_estimate_fq`
+    - `CASH_F_INVESTING_ACTIVITIES_ESTIMATE_FY`: `cash_f_investing_activities_estimate_fy`
+    - `CASH_F_INVESTING_ACTIVITIES_ESTIMATE_NTM`: `cash_f_investing_activities_estimate_ntm`
+    - `CASH_F_OPERATING_ACTIVITIES_ESTIMATE_FH`: `cash_f_operating_activities_estimate_fh`
+    - `CASH_F_OPERATING_ACTIVITIES_ESTIMATE_FQ`: `cash_f_operating_activities_estimate_fq`
+    - `CASH_F_OPERATING_ACTIVITIES_ESTIMATE_FY`: `cash_f_operating_activities_estimate_fy`
+    - `CASH_F_OPERATING_ACTIVITIES_ESTIMATE_NTM`: `cash_f_operating_activities_estimate_ntm`
+    - `CASH_N_SHORT_TERM_INVEST_ESTIMATE_FH`: `cash_n_short_term_invest_estimate_fh`
+    - `CASH_N_SHORT_TERM_INVEST_ESTIMATE_FQ`: `cash_n_short_term_invest_estimate_fq`
+    - `CASH_N_SHORT_TERM_INVEST_ESTIMATE_FY`: `cash_n_short_term_invest_estimate_fy`
+    - `CFI_CODE`: `cfi_code`
+    - `COST_OF_GOODS_ESTIMATE_FH`: `cost_of_goods_estimate_fh`
+    - `COST_OF_GOODS_ESTIMATE_FQ`: `cost_of_goods_estimate_fq`
+    - `COST_OF_GOODS_ESTIMATE_FY`: `cost_of_goods_estimate_fy`
+    - `COST_OF_GOODS_ESTIMATE_NTM`: `cost_of_goods_estimate_ntm`
+    - `DAILY_BAR_TIME`: `daily-bar.time`
+    - `DOCUMENTS`: `documents`
+    - `DPS_ESTIMATE_FH`: `dps_estimate_fh`
+    - `DPS_ESTIMATE_FQ`: `dps_estimate_fq`
+    - `DPS_ESTIMATE_FY`: `dps_estimate_fy`
+    - `DPS_ESTIMATE_NTM`: `dps_estimate_ntm`
+    - `EARNINGS_FQ_H`: `earnings_fq_h`
+    - `EBIT_ESTIMATE_FH`: `ebit_estimate_fh`
+    - `EBIT_ESTIMATE_FQ`: `ebit_estimate_fq`
+    - `EBIT_ESTIMATE_FY`: `ebit_estimate_fy`
+    - `EBIT_ESTIMATE_NTM`: `ebit_estimate_ntm`
+    - `EBITDA_ESTIMATE_FH`: `ebitda_estimate_fh`
+    - `EBITDA_ESTIMATE_FQ`: `ebitda_estimate_fq`
+    - `EBITDA_ESTIMATE_FY`: `ebitda_estimate_fy`
+    - `EBITDA_ESTIMATE_NTM`: `ebitda_estimate_ntm`
+    - `ENTERPRISE_VALUE_EBIT_FWD`: `enterprise_value_ebit_fwd`
+    - `ENTERPRISE_VALUE_EBITDA_FWD`: `enterprise_value_ebitda_fwd`
+    - `ENTERPRISE_VALUE_SALES_FWD`: `enterprise_value_sales_fwd`
+    - `EPS_ESTIMATE_NTM`: `eps_estimate_ntm`
+    - `FREE_CASH_FLOW_ESTIMATE_FH`: `free_cash_flow_estimate_fh`
+    - `FREE_CASH_FLOW_ESTIMATE_FQ`: `free_cash_flow_estimate_fq`
+    - `FREE_CASH_FLOW_ESTIMATE_FY`: `free_cash_flow_estimate_fy`
+    - `FREE_CASH_FLOW_ESTIMATE_NTM`: `free_cash_flow_estimate_ntm`
+    - `GROSS_PROFIT_ESTIMATE_FH`: `gross_profit_estimate_fh`
+    - `GROSS_PROFIT_ESTIMATE_FQ`: `gross_profit_estimate_fq`
+    - `GROSS_PROFIT_ESTIMATE_FY`: `gross_profit_estimate_fy`
+    - `GROSS_PROFIT_ESTIMATE_NTM`: `gross_profit_estimate_ntm`
+    - `INCOME_FROM_CONT_OPS_FH`: `income_from_cont_ops_fh`
+    - `INCOME_FROM_CONT_OPS_FQ`: `income_from_cont_ops_fq`
+    - `INCOME_FROM_CONT_OPS_FY`: `income_from_cont_ops_fy`
+    - `INCOME_FROM_CONT_OPS_TTM`: `income_from_cont_ops_ttm`
+    - `IPO_DEAL_AMOUNT`: `ipo_deal_amount`
+    - `IPO_MARKET_CAP`: `ipo_market_cap`
+    - `IPO_OFFER_PRICE`: `ipo_offer_price`
+    - `IPO_OFFER_PRICE_PERFORMANCE`: `ipo_offer_price_performance`
+    - `IPO_PRICE_RANGE`: `ipo_price_range`
+    - `IPO_PRICE_RANGE_MAX`: `ipo_price_range_max`
+    - `IPO_PRICE_RANGE_MIN`: `ipo_price_range_min`
+    - `IPO_SPLITFACTOR_TO_OFFER`: `ipo_splitfactor_to_offer`
+    - `LAST_PRICE_UPDATE_TIME`: `last-price-update-time`
+    - `LAST_PRICE_UPDATE_TIME_INTRADAY`: `last-price-update-time-intraday`
+    - `MINUTE_BAR_TIME`: `minute-bar.time`
+    - `NET_INCOME_ESTIMATE_FH`: `net_income_estimate_fh`
+    - `NET_INCOME_ESTIMATE_FQ`: `net_income_estimate_fq`
+    - `NET_INCOME_ESTIMATE_FY`: `net_income_estimate_fy`
+    - `NET_INCOME_ESTIMATE_NTM`: `net_income_estimate_ntm`
+    - `NET_REVENUE_AFTER_PROVISION_FH`: `net_revenue_after_provision_fh`
+    - `NET_REVENUE_AFTER_PROVISION_FQ`: `net_revenue_after_provision_fq`
+    - `NET_REVENUE_AFTER_PROVISION_FY`: `net_revenue_after_provision_fy`
+    - `NET_REVENUE_AFTER_PROVISION_TTM`: `net_revenue_after_provision_ttm`
+    - `NET_REVENUE_FH`: `net_revenue_fh`
+    - `NET_REVENUE_FQ`: `net_revenue_fq`
+    - `NET_REVENUE_FY`: `net_revenue_fy`
+    - `NET_REVENUE_TTM`: `net_revenue_ttm`
+    - `PRICE_BOOK_FWD`: `price_book_fwd`
+    - `PRICE_EARNINGS_FWD`: `price_earnings_fwd`
+    - `PRICE_SALES_FWD`: `price_sales_fwd`
+    - `RESEARCH_AND_DEV_ESTIMATE_FH`: `research_and_dev_estimate_fh`
+    - `RESEARCH_AND_DEV_ESTIMATE_FQ`: `research_and_dev_estimate_fq`
+    - `RESEARCH_AND_DEV_ESTIMATE_FY`: `research_and_dev_estimate_fy`
+    - `RESEARCH_AND_DEV_ESTIMATE_NTM`: `research_and_dev_estimate_ntm`
+    - `REVENUE_ESTIMATE_NTM`: `revenue_estimate_ntm`
+    - `REVENUES_FQ_H`: `revenues_fq_h`
+    - `SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_FH`: `sell_gen_admin_exp_total_estimate_fh`
+    - `SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_FQ`: `sell_gen_admin_exp_total_estimate_fq`
+    - `SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_FY`: `sell_gen_admin_exp_total_estimate_fy`
+    - `SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_NTM`: `sell_gen_admin_exp_total_estimate_ntm`
+    - `SUBSESSIONS`: `subsessions`
+    - `TOTAL_ASSETS_ESTIMATE_FH`: `total_assets_estimate_fh`
+    - `TOTAL_ASSETS_ESTIMATE_FQ`: `total_assets_estimate_fq`
+    - `TOTAL_ASSETS_ESTIMATE_FY`: `total_assets_estimate_fy`
+    - `TOTAL_DEBT_ESTIMATE_FH`: `total_debt_estimate_fh`
+    - `TOTAL_DEBT_ESTIMATE_FQ`: `total_debt_estimate_fq`
+    - `TOTAL_DEBT_ESTIMATE_FY`: `total_debt_estimate_fy`
+
+??? note "Deprecated (26)"
+
+    - `DIVIDEND_YIELD_FORWARD`: `dividend_yield_recent`
+    - `PERF_Y_MARKETCAP`: `Perf.Y.MarketCap`
+    - `EXPECTED_ANNUAL_DIVIDENDS`: `expected_annual_dividends`
+    - `FREQUENCY_RECENT`: `frequency_recent`
+    - `DEBT_TO_ASSETS`: `debt_to_assets`
+    - `LONG_TERM_CAPITAL`: `long_term_capital`
+    - `INVERSE_FLAG`: `inverse_flag`
+    - `PRICE_EARNINGS_FORWARD_FY`: `price_earnings_forward_fy`
+    - `GROSS_MARGIN_PERCENT_TTM_2`: `gross_margin_percent_ttm`
+    - `FREQUENCY_UPCOMING`: `frequency_upcoming`
+    - `DIVIDEND_YIELD_UPCOMING`: `dividend_yield_upcoming`
+    - `YIELD_UPCOMING`: `yield_upcoming`
+    - `DIVIDEND_FREQUENCY_RECENT`: `dividend_frequency_recent`
+    - `DIVIDEND_FREQUENCY_UPCOMING`: `dividend_frequency_upcoming`
+    - `YIELD_RECENT`: `yield_recent`
+    - `INDEX_PRIORITY`: `index_priority`
+    - `CASH_RATIO`: `cash_ratio`
+    - `TOTAL_CAPITAL`: `total_capital`
+    - `PREFERRED_DIVIDENDS`: `preferred_dividends`
+    - `MATURITY_DATE`: `maturity_date`
+    - `EXPIRATION`: `expiration`
+    - `BASE_CURRENCY_KIND`: `base_currency_kind`
+    - `CRYPTOASSET_INFO_DESCRIPTION`: `cryptoasset-info.description`
+    - `DAYS_TO_MATURITY`: `days_to_maturity`
+    - `COUPON`: `coupon`
+    - `CRYPTOASSET_INFO_ID`: `cryptoasset-info.id`
+
+## CryptoField
+
+??? note "Added (33)"
+
+    - `CANDLE_DARKCLOUDCOVER_BEARISH`: `Candle.DarkCloudCover.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BEARISH`: `Candle.DojiStar.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BULLISH`: `Candle.DojiStar.Bullish` (timeframes)
+    - `CANDLE_DOWNSIDETASUKIGAP_BEARISH`: `Candle.DownsideTasukiGap.Bearish` (timeframes)
+    - `CANDLE_EVENINGDOJISTAR_BEARISH`: `Candle.EveningDojiStar.Bearish` (timeframes)
+    - `CANDLE_FALLINGTHREEMETHODS_BEARISH`: `Candle.FallingThreeMethods.Bearish` (timeframes)
+    - `CANDLE_FALLINGWINDOW_BEARISH`: `Candle.FallingWindow.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BEARISH`: `Candle.HaramiCross.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BULLISH`: `Candle.HaramiCross.Bullish` (timeframes)
+    - `CANDLE_MORNINGDOJISTAR_BULLISH`: `Candle.MorningDojiStar.Bullish` (timeframes)
+    - `CANDLE_ONNECK_BEARISH`: `Candle.OnNeck.Bearish` (timeframes)
+    - `CANDLE_PIERCING_BULLISH`: `Candle.Piercing.Bullish` (timeframes)
+    - `CANDLE_RISINGTHREEMETHODS_BULLISH`: `Candle.RisingThreeMethods.Bullish` (timeframes)
+    - `CANDLE_RISINGWINDOW_BULLISH`: `Candle.RisingWindow.Bullish` (timeframes)
+    - `CANDLE_TWEEZERBOTTOM_BULLISH`: `Candle.TweezerBottom.Bullish` (timeframes)
+    - `CANDLE_TWEEZERTOP_BEARISH`: `Candle.TweezerTop.Bearish` (timeframes)
+    - `CANDLE_UPSIDETASUKIGAP_BULLISH`: `Candle.UpsideTasukiGap.Bullish` (timeframes)
+    - `PERF_10Y_ABS`: `Perf.10Y_abs`
+    - `PERF_1M_ABS`: `Perf.1M_abs`
+    - `PERF_3M_ABS`: `Perf.3M_abs`
+    - `PERF_3Y_ABS`: `Perf.3Y_abs`
+    - `PERF_5D_ABS`: `Perf.5D_abs`
+    - `PERF_5Y_ABS`: `Perf.5Y_abs`
+    - `PERF_6M_ABS`: `Perf.6M_abs`
+    - `PERF_ALL_ABS`: `Perf.All_abs`
+    - `PERF_W_ABS`: `Perf.W_abs`
+    - `PERF_YTD_ABS`: `Perf.YTD_abs`
+    - `PERF_Y_ABS`: `Perf.Y_abs`
+    - `DAILY_BAR_TIME`: `daily-bar.time`
+    - `LAST_PRICE_UPDATE_TIME`: `last-price-update-time`
+    - `LAST_PRICE_UPDATE_TIME_INTRADAY`: `last-price-update-time-intraday`
+    - `MINUTE_BAR_TIME`: `minute-bar.time`
+    - `SUBSESSIONS`: `subsessions`
+
+??? note "Deprecated (131)"
+
+    - `N24H_VOL_CHANGE_CMC`: `24h_vol_change_cmc`
+    - `N24H_VOL_CMC`: `24h_vol_cmc`
+    - `N24H_VOL_TO_MARKET_CAP`: `24h_vol_to_market_cap`
+    - `ADX_100_1M`: `ADX_100|1M`
+    - `EMA200_1M`: `EMA200|1M`
+    - `EMA250_1M`: `EMA250|1M`
+    - `EMA300_1M`: `EMA300|1M`
+    - `HULLMA200_1M`: `HullMA200|1M`
+    - `SMA200_1M`: `SMA200|1M`
+    - `SMA250_1M`: `SMA250|1M`
+    - `SMA300_1M`: `SMA300|1M`
+    - `VALUE_TRADED`: `Value.Traded`
+    - `VALUE_TRADED_1`: `Value.Traded|1`
+    - `VALUE_TRADED_120`: `Value.Traded|120`
+    - `VALUE_TRADED_15`: `Value.Traded|15`
+    - `VALUE_TRADED_1M`: `Value.Traded|1M`
+    - `VALUE_TRADED_1W`: `Value.Traded|1W`
+    - `VALUE_TRADED_240`: `Value.Traded|240`
+    - `VALUE_TRADED_30`: `Value.Traded|30`
+    - `VALUE_TRADED_5`: `Value.Traded|5`
+    - `VALUE_TRADED_60`: `Value.Traded|60`
+    - `ACTIVE_ADDRESSES_RATIO`: `active_addresses_ratio`
+    - `ADDRESSES_ACTIVE`: `addresses_active`
+    - `ADDRESSES_NEW`: `addresses_new`
+    - `ADDRESSES_TOTAL`: `addresses_total`
+    - `ADDRESSES_ZERO_BALANCE`: `addresses_zero_balance`
+    - `ALTRANK`: `altrank`
+    - `AT_THE_MONEY_ADDRESSES_PERCENTAGE`: `at_the_money_addresses_percentage`
+    - `AVERAGE_TRANSACTION_USD`: `average_transaction_usd`
+    - `AVG_BALANCE`: `avg_balance`
+    - `BREAK_EVEN_ADDRESSES_PERCENTAGE`: `break_even_addresses_percentage`
+    - `CIRCULATING_TO_MAX_SUPPLY_RATIO`: `circulating_to_max_supply_ratio`
+    - `CONTRIBUTORSACTIVE`: `contributorsactive`
+    - `CONTRIBUTORSCREATED`: `contributorscreated`
+    - `COUNTRY`: `country`
+    - `COUPON`: `coupon`
+    - `CRYPTO_BLOCKCHAIN_ECOSYSTEMS`: `crypto_blockchain_ecosystems`
+    - `CRYPTO_CATEGORIES`: `crypto_categories`
+    - `CRYPTO_COMMON_CATEGORIES`: `crypto_common_categories`
+    - `CRYPTO_CONSENSUS_ALGORITHMS`: `crypto_consensus_algorithms`
+    - `CRYPTO_TOTAL_RANK`: `crypto_total_rank`
+    - `CRYPTOASSET_MINUS_INFO_DESCRIPTION`: `cryptoasset-info.description`
+    - `CRYPTOASSET_MINUS_INFO_ID`: `cryptoasset-info.id`
+    - `DAYS_TO_MATURITY`: `days_to_maturity`
+    - `GALAXYSCORE`: `galaxyscore`
+    - `GITHUB_COMMITS`: `github_commits`
+    - `IN_THE_MONEY_ADDRESSES_PERCENTAGE`: `in_the_money_addresses_percentage`
+    - `INDEXES`: `indexes`
+    - `INTERACTIONS`: `interactions`
+    - `IS_SHARIAH_COMPLIANT`: `is_shariah_compliant`
+    - `IS_SYMBOL_PRIMARY_LISTING`: `is_symbol_primary_listing`
+    - `LARGE_TX_COUNT`: `large_tx_count`
+    - `LARGE_TX_VOLUME_USD`: `large_tx_volume_usd`
+    - `LOSSES_ADDRESSES_PERCENTAGE`: `losses_addresses_percentage`
+    - `MARKET_CAP`: `market_cap`
+    - `MARKET_CAP_TO_TVL`: `market_cap_to_tvl`
+    - `MATURITY_DATE`: `maturity_date`
+    - `MAX_SUPPLY`: `max_supply`
+    - `NVT`: `nvt`
+    - `OUT_THE_MONEY_ADDRESSES_PERCENTAGE`: `out_the_money_addresses_percentage`
+    - `POST_CHANGE`: `post_change`
+    - `POST_CHANGE_1`: `post_change|1`
+    - `POST_CHANGE_120`: `post_change|120`
+    - `POST_CHANGE_15`: `post_change|15`
+    - `POST_CHANGE_1M`: `post_change|1M`
+    - `POST_CHANGE_1W`: `post_change|1W`
+    - `POST_CHANGE_240`: `post_change|240`
+    - `POST_CHANGE_30`: `post_change|30`
+    - `POST_CHANGE_5`: `post_change|5`
+    - `POST_CHANGE_60`: `post_change|60`
+    - `POSTMARKET_CHANGE`: `postmarket_change`
+    - `POSTMARKET_CHANGE_ABS`: `postmarket_change_abs`
+    - `POSTSACTIVE`: `postsactive`
+    - `POSTSCREATED`: `postscreated`
+    - `PRE_CHANGE`: `pre_change`
+    - `PRE_CHANGE_ABS`: `pre_change_abs`
+    - `PRE_CHANGE_ABS_1`: `pre_change_abs|1`
+    - `PRE_CHANGE_ABS_120`: `pre_change_abs|120`
+    - `PRE_CHANGE_ABS_15`: `pre_change_abs|15`
+    - `PRE_CHANGE_ABS_1M`: `pre_change_abs|1M`
+    - `PRE_CHANGE_ABS_1W`: `pre_change_abs|1W`
+    - `PRE_CHANGE_ABS_240`: `pre_change_abs|240`
+    - `PRE_CHANGE_ABS_30`: `pre_change_abs|30`
+    - `PRE_CHANGE_ABS_5`: `pre_change_abs|5`
+    - `PRE_CHANGE_ABS_60`: `pre_change_abs|60`
+    - `PRE_CHANGE_1`: `pre_change|1`
+    - `PRE_CHANGE_120`: `pre_change|120`
+    - `PRE_CHANGE_15`: `pre_change|15`
+    - `PRE_CHANGE_1M`: `pre_change|1M`
+    - `PRE_CHANGE_1W`: `pre_change|1W`
+    - `PRE_CHANGE_240`: `pre_change|240`
+    - `PRE_CHANGE_30`: `pre_change|30`
+    - `PRE_CHANGE_5`: `pre_change|5`
+    - `PRE_CHANGE_60`: `pre_change|60`
+    - `PREMARKET_CHANGE`: `premarket_change`
+    - `PREMARKET_CHANGE_ABS`: `premarket_change_abs`
+    - `PREMARKET_CHANGE_FROM_OPEN`: `premarket_change_from_open`
+    - `PREMARKET_CHANGE_FROM_OPEN_ABS`: `premarket_change_from_open_abs`
+    - `PREMARKET_GAP`: `premarket_gap`
+    - `PROFIT_ADDRESSES_PERCENTAGE`: `profit_addresses_percentage`
+    - `RATES_CF`: `rates_cf`
+    - `RATES_CURRENT`: `rates_current`
+    - `RATES_DIVIDEND_RECENT`: `rates_dividend_recent`
+    - `RATES_DIVIDEND_UPCOMING`: `rates_dividend_upcoming`
+    - `RATES_EARNINGS_FQ`: `rates_earnings_fq`
+    - `RATES_EARNINGS_NEXT_FQ`: `rates_earnings_next_fq`
+    - `RATES_FH`: `rates_fh`
+    - `RATES_FQ`: `rates_fq`
+    - `RATES_FY`: `rates_fy`
+    - `RATES_MC`: `rates_mc`
+    - `RATES_PT`: `rates_pt`
+    - `RATES_TIME_SERIES`: `rates_time_series`
+    - `RATES_TTM`: `rates_ttm`
+    - `SENTIMENT`: `sentiment`
+    - `SOCIAL_VOLUME_24H`: `social_volume_24h`
+    - `SOCIALDOMINANCE`: `socialdominance`
+    - `SUBMARKET`: `submarket`
+    - `SYMBOL`: `symbol`
+    - `TELEGRAM_MEMBERS`: `telegram_members`
+    - `TELEGRAM_NEGATIVE`: `telegram_negative`
+    - `TELEGRAM_POSITIVE`: `telegram_positive`
+    - `TOTAL_ADDRESSES_WITH_BALANCE`: `total_addresses_with_balance`
+    - `TOTAL_TO_MAX_SUPPLY_RATIO`: `total_to_max_supply_ratio`
+    - `TVL`: `tvl`
+    - `TWEETS`: `tweets`
+    - `TWITTER_NEGATIVE`: `twitter_negative`
+    - `TWITTER_POSITIVE`: `twitter_positive`
+    - `TXS_COUNT`: `txs_count`
+    - `TXS_VOLUME`: `txs_volume`
+    - `TXS_VOLUME_USD`: `txs_volume_usd`
+    - `VELOCITY`: `velocity`
+
+## ForexField
+
+??? note "Added (31)"
+
+    - `CANDLE_DARKCLOUDCOVER_BEARISH`: `Candle.DarkCloudCover.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BEARISH`: `Candle.DojiStar.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BULLISH`: `Candle.DojiStar.Bullish` (timeframes)
+    - `CANDLE_DOWNSIDETASUKIGAP_BEARISH`: `Candle.DownsideTasukiGap.Bearish` (timeframes)
+    - `CANDLE_EVENINGDOJISTAR_BEARISH`: `Candle.EveningDojiStar.Bearish` (timeframes)
+    - `CANDLE_FALLINGTHREEMETHODS_BEARISH`: `Candle.FallingThreeMethods.Bearish` (timeframes)
+    - `CANDLE_FALLINGWINDOW_BEARISH`: `Candle.FallingWindow.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BEARISH`: `Candle.HaramiCross.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BULLISH`: `Candle.HaramiCross.Bullish` (timeframes)
+    - `CANDLE_MORNINGDOJISTAR_BULLISH`: `Candle.MorningDojiStar.Bullish` (timeframes)
+    - `CANDLE_ONNECK_BEARISH`: `Candle.OnNeck.Bearish` (timeframes)
+    - `CANDLE_PIERCING_BULLISH`: `Candle.Piercing.Bullish` (timeframes)
+    - `CANDLE_RISINGTHREEMETHODS_BULLISH`: `Candle.RisingThreeMethods.Bullish` (timeframes)
+    - `CANDLE_RISINGWINDOW_BULLISH`: `Candle.RisingWindow.Bullish` (timeframes)
+    - `CANDLE_TWEEZERBOTTOM_BULLISH`: `Candle.TweezerBottom.Bullish` (timeframes)
+    - `CANDLE_TWEEZERTOP_BEARISH`: `Candle.TweezerTop.Bearish` (timeframes)
+    - `CANDLE_UPSIDETASUKIGAP_BULLISH`: `Candle.UpsideTasukiGap.Bullish` (timeframes)
+    - `PERF_10Y_ABS`: `Perf.10Y_abs`
+    - `PERF_1M_ABS`: `Perf.1M_abs`
+    - `PERF_3M_ABS`: `Perf.3M_abs`
+    - `PERF_3Y_ABS`: `Perf.3Y_abs`
+    - `PERF_5D_ABS`: `Perf.5D_abs`
+    - `PERF_5Y_ABS`: `Perf.5Y_abs`
+    - `PERF_6M_ABS`: `Perf.6M_abs`
+    - `PERF_ALL_ABS`: `Perf.All_abs`
+    - `PERF_W_ABS`: `Perf.W_abs`
+    - `PERF_YTD_ABS`: `Perf.YTD_abs`
+    - `PERF_Y_ABS`: `Perf.Y_abs`
+    - `LAST_PRICE_UPDATE_TIME`: `last-price-update-time`
+    - `LAST_PRICE_UPDATE_TIME_INTRADAY`: `last-price-update-time-intraday`
+    - `SUBSESSIONS`: `subsessions`
+
+??? note "Deprecated (108)"
+
+    - `PERF_1M_MARKETCAP`: `Perf.1M.MarketCap`
+    - `PERF_1W_MARKETCAP`: `Perf.1W.MarketCap`
+    - `PERF_1Y_MARKETCAP`: `Perf.1Y.MarketCap`
+    - `PERF_3M_MARKETCAP`: `Perf.3M.MarketCap`
+    - `PERF_5Y_MARKETCAP`: `Perf.5Y.MarketCap`
+    - `PERF_6M_MARKETCAP`: `Perf.6M.MarketCap`
+    - `PERF_YTD_MARKETCAP`: `Perf.YTD.MarketCap`
+    - `VALUE_TRADED`: `Value.Traded`
+    - `VALUE_TRADED_1`: `Value.Traded|1`
+    - `VALUE_TRADED_120`: `Value.Traded|120`
+    - `VALUE_TRADED_15`: `Value.Traded|15`
+    - `VALUE_TRADED_1M`: `Value.Traded|1M`
+    - `VALUE_TRADED_1W`: `Value.Traded|1W`
+    - `VALUE_TRADED_240`: `Value.Traded|240`
+    - `VALUE_TRADED_30`: `Value.Traded|30`
+    - `VALUE_TRADED_5`: `Value.Traded|5`
+    - `VALUE_TRADED_60`: `Value.Traded|60`
+    - `AUM_PERF_1M`: `aum_perf.1M`
+    - `AUM_PERF_1Y`: `aum_perf.1Y`
+    - `AUM_PERF_3M`: `aum_perf.3M`
+    - `AUM_PERF_3Y`: `aum_perf.3Y`
+    - `AUM_PERF_5Y`: `aum_perf.5Y`
+    - `AUM_PERF_YTD`: `aum_perf.YTD`
+    - `COUNTRY_CODE`: `country_code`
+    - `COUPON`: `coupon`
+    - `CRYPTOASSET_MINUS_INFO_DESCRIPTION`: `cryptoasset-info.description`
+    - `CRYPTOASSET_MINUS_INFO_ID`: `cryptoasset-info.id`
+    - `DAYS_TO_MATURITY`: `days_to_maturity`
+    - `EXPIRATION`: `expiration`
+    - `FUND_FLOWS_1M`: `fund_flows.1M`
+    - `FUND_FLOWS_1Y`: `fund_flows.1Y`
+    - `FUND_FLOWS_3M`: `fund_flows.3M`
+    - `FUND_FLOWS_3Y`: `fund_flows.3Y`
+    - `FUND_FLOWS_5Y`: `fund_flows.5Y`
+    - `FUND_FLOWS_YTD`: `fund_flows.YTD`
+    - `FUNDAMENTAL_CURRENCY_CODE`: `fundamental_currency_code`
+    - `INDEX_PRIORITY`: `index_priority`
+    - `INDEXES`: `indexes`
+    - `IS_SHARIAH_COMPLIANT`: `is_shariah_compliant`
+    - `IS_SYMBOL_PRIMARY_LISTING`: `is_symbol_primary_listing`
+    - `LOGOID`: `logoid`
+    - `MATURITY_DATE`: `maturity_date`
+    - `NAV_DISCOUNT_PREMIUM`: `nav_discount_premium`
+    - `NAV_PERF_1M`: `nav_perf.1M`
+    - `NAV_PERF_1Y`: `nav_perf.1Y`
+    - `NAV_PERF_3M`: `nav_perf.3M`
+    - `NAV_PERF_3Y`: `nav_perf.3Y`
+    - `NAV_PERF_5Y`: `nav_perf.5Y`
+    - `NAV_PERF_YTD`: `nav_perf.YTD`
+    - `NAV_TOTAL_RETURN_1M`: `nav_total_return.1M`
+    - `NAV_TOTAL_RETURN_1Y`: `nav_total_return.1Y`
+    - `NAV_TOTAL_RETURN_3M`: `nav_total_return.3M`
+    - `NAV_TOTAL_RETURN_3Y`: `nav_total_return.3Y`
+    - `NAV_TOTAL_RETURN_5Y`: `nav_total_return.5Y`
+    - `NAV_TOTAL_RETURN_6M`: `nav_total_return.6M`
+    - `NAV_TOTAL_RETURN_YTD`: `nav_total_return.YTD`
+    - `POST_CHANGE`: `post_change`
+    - `POST_CHANGE_1`: `post_change|1`
+    - `POST_CHANGE_120`: `post_change|120`
+    - `POST_CHANGE_15`: `post_change|15`
+    - `POST_CHANGE_1M`: `post_change|1M`
+    - `POST_CHANGE_1W`: `post_change|1W`
+    - `POST_CHANGE_240`: `post_change|240`
+    - `POST_CHANGE_30`: `post_change|30`
+    - `POST_CHANGE_5`: `post_change|5`
+    - `POST_CHANGE_60`: `post_change|60`
+    - `POSTMARKET_CHANGE`: `postmarket_change`
+    - `POSTMARKET_CHANGE_ABS`: `postmarket_change_abs`
+    - `PRE_CHANGE`: `pre_change`
+    - `PRE_CHANGE_ABS`: `pre_change_abs`
+    - `PRE_CHANGE_ABS_1`: `pre_change_abs|1`
+    - `PRE_CHANGE_ABS_120`: `pre_change_abs|120`
+    - `PRE_CHANGE_ABS_15`: `pre_change_abs|15`
+    - `PRE_CHANGE_ABS_1M`: `pre_change_abs|1M`
+    - `PRE_CHANGE_ABS_1W`: `pre_change_abs|1W`
+    - `PRE_CHANGE_ABS_240`: `pre_change_abs|240`
+    - `PRE_CHANGE_ABS_30`: `pre_change_abs|30`
+    - `PRE_CHANGE_ABS_5`: `pre_change_abs|5`
+    - `PRE_CHANGE_ABS_60`: `pre_change_abs|60`
+    - `PRE_CHANGE_1`: `pre_change|1`
+    - `PRE_CHANGE_120`: `pre_change|120`
+    - `PRE_CHANGE_15`: `pre_change|15`
+    - `PRE_CHANGE_1M`: `pre_change|1M`
+    - `PRE_CHANGE_1W`: `pre_change|1W`
+    - `PRE_CHANGE_240`: `pre_change|240`
+    - `PRE_CHANGE_30`: `pre_change|30`
+    - `PRE_CHANGE_5`: `pre_change|5`
+    - `PRE_CHANGE_60`: `pre_change|60`
+    - `PREMARKET_CHANGE`: `premarket_change`
+    - `PREMARKET_CHANGE_ABS`: `premarket_change_abs`
+    - `PREMARKET_CHANGE_FROM_OPEN`: `premarket_change_from_open`
+    - `PREMARKET_CHANGE_FROM_OPEN_ABS`: `premarket_change_from_open_abs`
+    - `PREMARKET_GAP`: `premarket_gap`
+    - `RATES_CF`: `rates_cf`
+    - `RATES_CURRENT`: `rates_current`
+    - `RATES_DIVIDEND_RECENT`: `rates_dividend_recent`
+    - `RATES_DIVIDEND_UPCOMING`: `rates_dividend_upcoming`
+    - `RATES_EARNINGS_FQ`: `rates_earnings_fq`
+    - `RATES_EARNINGS_NEXT_FQ`: `rates_earnings_next_fq`
+    - `RATES_FH`: `rates_fh`
+    - `RATES_FQ`: `rates_fq`
+    - `RATES_FY`: `rates_fy`
+    - `RATES_MC`: `rates_mc`
+    - `RATES_PT`: `rates_pt`
+    - `RATES_TIME_SERIES`: `rates_time_series`
+    - `RATES_TTM`: `rates_ttm`
+    - `SUBMARKET`: `submarket`
+    - `SYMBOL`: `symbol`
+
+## BondField
+
+??? note "Added (29)"
+
+    - `BOND_FITCH_OUTLOOK_LT`: `bond_fitch_outlook_lt`
+    - `BOND_FITCH_RATING_LT`: `bond_fitch_rating_lt`
+    - `BOND_MOODYS_RATING_LT`: `bond_moodys_rating_lt`
+    - `CFI_CODE`: `cfi_code`
+    - `CONVEXITY`: `convexity`
+    - `DAILY_BAR_CLOSE`: `daily-bar.close`
+    - `DV_01`: `dv_01`
+    - `F_SPREAD`: `f_spread`
+    - `G_SPREAD`: `g_spread`
+    - `ISSUER_FITCH_OUTLOOK_LT`: `issuer_fitch_outlook_lt`
+    - `ISSUER_FITCH_OUTLOOK_ST`: `issuer_fitch_outlook_st`
+    - `ISSUER_FITCH_RATING_LT`: `issuer_fitch_rating_lt`
+    - `ISSUER_FITCH_RATING_ST`: `issuer_fitch_rating_st`
+    - `ISSUER_MOODYS_OUTLOOK_LT`: `issuer_moodys_outlook_lt`
+    - `ISSUER_MOODYS_RATING_LT`: `issuer_moodys_rating_lt`
+    - `ISSUER_MOODYS_RATING_ST`: `issuer_moodys_rating_st`
+    - `ISSUER_SNP_RATING_LT`: `issuer_snp_rating_lt`
+    - `ISSUER_SNP_RATING_ST`: `issuer_snp_rating_st`
+    - `LAST_PRICE_UPDATE_TIME_INTRADAY`: `last-price-update-time-intraday`
+    - `MACAULAY_DURATION`: `macaulay_duration`
+    - `MATURITY_DATE_2`: `maturity-date`
+    - `MINUTE_BAR_CLOSE`: `minute-bar.close`
+    - `MODIFIED_DURATION`: `modified_duration`
+    - `SUBSESSIONS`: `subsessions`
+    - `YTM_TO_ASK`: `ytm_to_ask`
+    - `YTM_TO_BID`: `ytm_to_bid`
+    - `YTW_TO_ASK`: `ytw_to_ask`
+    - `YTW_TO_BID`: `ytw_to_bid`
+    - `Z_SPREAD`: `z_spread`
+
+??? note "Deprecated (34)"
+
+    - `BOND_CURRENCY`: `Bond.Currency`
+    - `PERF_ALL`: `Perf.All`
+    - `BASE_CURRENCY_KIND`: `base_currency_kind`
+    - `BOND_ISSUER_SNP_OUTLOOK_ST`: `bond_issuer_snp_outlook_st`
+    - `CALL_OPTION`: `call_option`
+    - `COUNTRY_FUND`: `country_fund`
+    - `COUPON`: `coupon`
+    - `CRYPTOASSET_MINUS_INFO_DESCRIPTION`: `cryptoasset-info.description`
+    - `CRYPTOASSET_MINUS_INFO_ID`: `cryptoasset-info.id`
+    - `EXPIRATION`: `expiration`
+    - `FOREX_PRIORITY`: `forex_priority`
+    - `INDEX_PRIORITY`: `index_priority`
+    - `INDEXES`: `indexes`
+    - `IS_SYMBOL_PRIMARY_LISTING`: `is_symbol_primary_listing`
+    - `POSTMARKET_CHANGE`: `postmarket_change`
+    - `POSTMARKET_CHANGE_ABS`: `postmarket_change_abs`
+    - `PREMARKET_CHANGE`: `premarket_change`
+    - `PREMARKET_CHANGE_ABS`: `premarket_change_abs`
+    - `PREMARKET_CHANGE_FROM_OPEN`: `premarket_change_from_open`
+    - `PREMARKET_CHANGE_FROM_OPEN_ABS`: `premarket_change_from_open_abs`
+    - `PREMARKET_GAP`: `premarket_gap`
+    - `PUT_OPTION`: `put_option`
+    - `RATES_CF`: `rates_cf`
+    - `RATES_DIVIDEND_RECENT`: `rates_dividend_recent`
+    - `RATES_DIVIDEND_UPCOMING`: `rates_dividend_upcoming`
+    - `RATES_FH`: `rates_fh`
+    - `RATES_FQ`: `rates_fq`
+    - `RATES_FY`: `rates_fy`
+    - `RATES_PT`: `rates_pt`
+    - `RATES_TIME_SERIES`: `rates_time_series`
+    - `RATES_TTM`: `rates_ttm`
+    - `SUBMARKET`: `submarket`
+    - `SYMBOL`: `symbol`
+    - `TERM_MINUS_TO_MINUS_MATURITY`: `term-to-maturity`
+
+## FuturesField
+
+??? note "Added (29)"
+
+    - `CANDLE_DARKCLOUDCOVER_BEARISH`: `Candle.DarkCloudCover.Bearish`
+    - `CANDLE_DOJISTAR_BEARISH`: `Candle.DojiStar.Bearish`
+    - `CANDLE_DOJISTAR_BULLISH`: `Candle.DojiStar.Bullish`
+    - `CANDLE_DOWNSIDETASUKIGAP_BEARISH`: `Candle.DownsideTasukiGap.Bearish`
+    - `CANDLE_EVENINGDOJISTAR_BEARISH`: `Candle.EveningDojiStar.Bearish`
+    - `CANDLE_FALLINGTHREEMETHODS_BEARISH`: `Candle.FallingThreeMethods.Bearish`
+    - `CANDLE_FALLINGWINDOW_BEARISH`: `Candle.FallingWindow.Bearish`
+    - `CANDLE_HARAMICROSS_BEARISH`: `Candle.HaramiCross.Bearish`
+    - `CANDLE_HARAMICROSS_BULLISH`: `Candle.HaramiCross.Bullish`
+    - `CANDLE_MORNINGDOJISTAR_BULLISH`: `Candle.MorningDojiStar.Bullish`
+    - `CANDLE_ONNECK_BEARISH`: `Candle.OnNeck.Bearish`
+    - `CANDLE_PIERCING_BULLISH`: `Candle.Piercing.Bullish`
+    - `CANDLE_RISINGTHREEMETHODS_BULLISH`: `Candle.RisingThreeMethods.Bullish`
+    - `CANDLE_RISINGWINDOW_BULLISH`: `Candle.RisingWindow.Bullish`
+    - `CANDLE_TWEEZERBOTTOM_BULLISH`: `Candle.TweezerBottom.Bullish`
+    - `CANDLE_TWEEZERTOP_BEARISH`: `Candle.TweezerTop.Bearish`
+    - `CANDLE_UPSIDETASUKIGAP_BULLISH`: `Candle.UpsideTasukiGap.Bullish`
+    - `PERF_10Y_ABS`: `Perf.10Y_abs`
+    - `PERF_1M_ABS`: `Perf.1M_abs`
+    - `PERF_3M_ABS`: `Perf.3M_abs`
+    - `PERF_3Y_ABS`: `Perf.3Y_abs`
+    - `PERF_5D_ABS`: `Perf.5D_abs`
+    - `PERF_5Y_ABS`: `Perf.5Y_abs`
+    - `PERF_6M_ABS`: `Perf.6M_abs`
+    - `PERF_ALL_ABS`: `Perf.All_abs`
+    - `PERF_W_ABS`: `Perf.W_abs`
+    - `PERF_YTD_ABS`: `Perf.YTD_abs`
+    - `PERF_Y_ABS`: `Perf.Y_abs`
+    - `SUBSESSIONS`: `subsessions`
+
+??? note "Deprecated (34)"
+
+    - `VALUE_TRADED`: `Value.Traded`
+    - `COUPON`: `coupon`
+    - `CRYPTOASSET_MINUS_INFO_DESCRIPTION`: `cryptoasset-info.description`
+    - `CRYPTOASSET_MINUS_INFO_ID`: `cryptoasset-info.id`
+    - `DAYS_TO_MATURITY`: `days_to_maturity`
+    - `INDEXES`: `indexes`
+    - `IS_SHARIAH_COMPLIANT`: `is_shariah_compliant`
+    - `IS_SYMBOL_PRIMARY_LISTING`: `is_symbol_primary_listing`
+    - `MATURITY_DATE`: `maturity_date`
+    - `POST_CHANGE`: `post_change`
+    - `POSTMARKET_CHANGE`: `postmarket_change`
+    - `POSTMARKET_CHANGE_ABS`: `postmarket_change_abs`
+    - `PRE_CHANGE`: `pre_change`
+    - `PRE_CHANGE_ABS`: `pre_change_abs`
+    - `PREMARKET_CHANGE`: `premarket_change`
+    - `PREMARKET_CHANGE_ABS`: `premarket_change_abs`
+    - `PREMARKET_CHANGE_FROM_OPEN`: `premarket_change_from_open`
+    - `PREMARKET_CHANGE_FROM_OPEN_ABS`: `premarket_change_from_open_abs`
+    - `PREMARKET_GAP`: `premarket_gap`
+    - `RATES_CF`: `rates_cf`
+    - `RATES_CURRENT`: `rates_current`
+    - `RATES_DIVIDEND_RECENT`: `rates_dividend_recent`
+    - `RATES_DIVIDEND_UPCOMING`: `rates_dividend_upcoming`
+    - `RATES_EARNINGS_FQ`: `rates_earnings_fq`
+    - `RATES_EARNINGS_NEXT_FQ`: `rates_earnings_next_fq`
+    - `RATES_FH`: `rates_fh`
+    - `RATES_FQ`: `rates_fq`
+    - `RATES_FY`: `rates_fy`
+    - `RATES_MC`: `rates_mc`
+    - `RATES_PT`: `rates_pt`
+    - `RATES_TIME_SERIES`: `rates_time_series`
+    - `RATES_TTM`: `rates_ttm`
+    - `SUBMARKET`: `submarket`
+    - `SYMBOL`: `symbol`
+
+## CoinField
+
+??? note "Added (56)"
+
+    - `CANDLE_DARKCLOUDCOVER_BEARISH`: `Candle.DarkCloudCover.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BEARISH`: `Candle.DojiStar.Bearish` (timeframes)
+    - `CANDLE_DOJISTAR_BULLISH`: `Candle.DojiStar.Bullish` (timeframes)
+    - `CANDLE_DOWNSIDETASUKIGAP_BEARISH`: `Candle.DownsideTasukiGap.Bearish` (timeframes)
+    - `CANDLE_EVENINGDOJISTAR_BEARISH`: `Candle.EveningDojiStar.Bearish` (timeframes)
+    - `CANDLE_FALLINGTHREEMETHODS_BEARISH`: `Candle.FallingThreeMethods.Bearish` (timeframes)
+    - `CANDLE_FALLINGWINDOW_BEARISH`: `Candle.FallingWindow.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BEARISH`: `Candle.HaramiCross.Bearish` (timeframes)
+    - `CANDLE_HARAMICROSS_BULLISH`: `Candle.HaramiCross.Bullish` (timeframes)
+    - `CANDLE_MORNINGDOJISTAR_BULLISH`: `Candle.MorningDojiStar.Bullish` (timeframes)
+    - `CANDLE_ONNECK_BEARISH`: `Candle.OnNeck.Bearish` (timeframes)
+    - `CANDLE_PIERCING_BULLISH`: `Candle.Piercing.Bullish` (timeframes)
+    - `CANDLE_RISINGTHREEMETHODS_BULLISH`: `Candle.RisingThreeMethods.Bullish` (timeframes)
+    - `CANDLE_RISINGWINDOW_BULLISH`: `Candle.RisingWindow.Bullish` (timeframes)
+    - `CANDLE_TWEEZERBOTTOM_BULLISH`: `Candle.TweezerBottom.Bullish` (timeframes)
+    - `CANDLE_TWEEZERTOP_BEARISH`: `Candle.TweezerTop.Bearish` (timeframes)
+    - `CANDLE_UPSIDETASUKIGAP_BULLISH`: `Candle.UpsideTasukiGap.Bullish` (timeframes)
+    - `PERF_10Y_ABS`: `Perf.10Y_abs`
+    - `PERF_1M_ABS`: `Perf.1M_abs`
+    - `PERF_3M_ABS`: `Perf.3M_abs`
+    - `PERF_3Y_ABS`: `Perf.3Y_abs`
+    - `PERF_5D_ABS`: `Perf.5D_abs`
+    - `PERF_5Y_ABS`: `Perf.5Y_abs`
+    - `PERF_6M_ABS`: `Perf.6M_abs`
+    - `PERF_ALL_ABS`: `Perf.All_abs`
+    - `PERF_W_ABS`: `Perf.W_abs`
+    - `PERF_YTD_ABS`: `Perf.YTD_abs`
+    - `PERF_Y_ABS`: `Perf.Y_abs`
+    - `DAILY_BAR_TIME`: `daily-bar.time`
+    - `FUNDING_RATE`: `funding_rate`
+    - `LAST_PRICE_UPDATE_TIME`: `last-price-update-time`
+    - `LAST_PRICE_UPDATE_TIME_INTRADAY`: `last-price-update-time-intraday`
+    - `LIQUIDATIONS_VOLUME_12H`: `liquidations_volume_12h`
+    - `LIQUIDATIONS_VOLUME_15M`: `liquidations_volume_15m`
+    - `LIQUIDATIONS_VOLUME_1H`: `liquidations_volume_1h`
+    - `LIQUIDATIONS_VOLUME_24H`: `liquidations_volume_24h`
+    - `LIQUIDATIONS_VOLUME_4H`: `liquidations_volume_4h`
+    - `LONG_LIQUIDATIONS_VOLUME_12H`: `long_liquidations_volume_12h`
+    - `LONG_LIQUIDATIONS_VOLUME_15M`: `long_liquidations_volume_15m`
+    - `LONG_LIQUIDATIONS_VOLUME_1H`: `long_liquidations_volume_1h`
+    - `LONG_LIQUIDATIONS_VOLUME_24H`: `long_liquidations_volume_24h`
+    - `LONG_LIQUIDATIONS_VOLUME_4H`: `long_liquidations_volume_4h`
+    - `MINUTE_BAR_TIME`: `minute-bar.time`
+    - `OPEN_INTEREST`: `open_interest`
+    - `OPEN_INTEREST_CHANGE_PERCENT_12H`: `open_interest_change_percent_12h`
+    - `OPEN_INTEREST_CHANGE_PERCENT_15M`: `open_interest_change_percent_15m`
+    - `OPEN_INTEREST_CHANGE_PERCENT_1H`: `open_interest_change_percent_1h`
+    - `OPEN_INTEREST_CHANGE_PERCENT_24H`: `open_interest_change_percent_24h`
+    - `OPEN_INTEREST_CHANGE_PERCENT_4H`: `open_interest_change_percent_4h`
+    - `OPEN_INTEREST_TO_VOLUME_24H`: `open_interest_to_volume_24h`
+    - `SHORT_LIQUIDATIONS_VOLUME_12H`: `short_liquidations_volume_12h`
+    - `SHORT_LIQUIDATIONS_VOLUME_15M`: `short_liquidations_volume_15m`
+    - `SHORT_LIQUIDATIONS_VOLUME_1H`: `short_liquidations_volume_1h`
+    - `SHORT_LIQUIDATIONS_VOLUME_24H`: `short_liquidations_volume_24h`
+    - `SHORT_LIQUIDATIONS_VOLUME_4H`: `short_liquidations_volume_4h`
+    - `SUBSESSIONS`: `subsessions`
+
+??? note "Deprecated (257)"
+
+    - `N24H_VOL_CHANGE_ABS_5`: `24h_vol_change_abs|5`
+    - `N24H_VOL_CHANGE_5`: `24h_vol_change|5`
+    - `N24H_VOL_PREV_5`: `24h_vol_prev|5`
+    - `N24H_VOL_5`: `24h_vol|5`
+    - `CHAIKINMONEYFLOW`: `ChaikinMoneyFlow`
+    - `CHAIKINMONEYFLOW_1`: `ChaikinMoneyFlow|1`
+    - `CHAIKINMONEYFLOW_120`: `ChaikinMoneyFlow|120`
+    - `CHAIKINMONEYFLOW_15`: `ChaikinMoneyFlow|15`
+    - `CHAIKINMONEYFLOW_1M`: `ChaikinMoneyFlow|1M`
+    - `CHAIKINMONEYFLOW_1W`: `ChaikinMoneyFlow|1W`
+    - `CHAIKINMONEYFLOW_240`: `ChaikinMoneyFlow|240`
+    - `CHAIKINMONEYFLOW_30`: `ChaikinMoneyFlow|30`
+    - `CHAIKINMONEYFLOW_5`: `ChaikinMoneyFlow|5`
+    - `CHAIKINMONEYFLOW_60`: `ChaikinMoneyFlow|60`
+    - `EMA250_1M`: `EMA250|1M`
+    - `EMA300_1M`: `EMA300|1M`
+    - `HULLMA200_1M`: `HullMA200|1M`
+    - `MONEYFLOW`: `MoneyFlow`
+    - `MONEYFLOW_1M`: `MoneyFlow|1M`
+    - `MONEYFLOW_1W`: `MoneyFlow|1W`
+    - `REC_VWMA`: `Rec.VWMA`
+    - `REC_VWMA_1`: `Rec.VWMA|1`
+    - `REC_VWMA_120`: `Rec.VWMA|120`
+    - `REC_VWMA_15`: `Rec.VWMA|15`
+    - `REC_VWMA_1M`: `Rec.VWMA|1M`
+    - `REC_VWMA_1W`: `Rec.VWMA|1W`
+    - `REC_VWMA_240`: `Rec.VWMA|240`
+    - `REC_VWMA_30`: `Rec.VWMA|30`
+    - `REC_VWMA_5`: `Rec.VWMA|5`
+    - `REC_VWMA_60`: `Rec.VWMA|60`
+    - `SMA250_1M`: `SMA250|1M`
+    - `SMA300_1M`: `SMA300|1M`
+    - `VWAP`: `VWAP`
+    - `VWAP_1`: `VWAP|1`
+    - `VWAP_120`: `VWAP|120`
+    - `VWAP_15`: `VWAP|15`
+    - `VWAP_1M`: `VWAP|1M`
+    - `VWAP_1W`: `VWAP|1W`
+    - `VWAP_240`: `VWAP|240`
+    - `VWAP_30`: `VWAP|30`
+    - `VWAP_5`: `VWAP|5`
+    - `VWAP_60`: `VWAP|60`
+    - `VWMA`: `VWMA`
+    - `VWMA_1`: `VWMA|1`
+    - `VWMA_120`: `VWMA|120`
+    - `VWMA_15`: `VWMA|15`
+    - `VWMA_1M`: `VWMA|1M`
+    - `VWMA_1W`: `VWMA|1W`
+    - `VWMA_240`: `VWMA|240`
+    - `VWMA_30`: `VWMA|30`
+    - `VWMA_5`: `VWMA|5`
+    - `VWMA_60`: `VWMA|60`
+    - `VALUE_TRADED`: `Value.Traded`
+    - `VALUE_TRADED_1`: `Value.Traded|1`
+    - `VALUE_TRADED_120`: `Value.Traded|120`
+    - `VALUE_TRADED_15`: `Value.Traded|15`
+    - `VALUE_TRADED_1M`: `Value.Traded|1M`
+    - `VALUE_TRADED_1W`: `Value.Traded|1W`
+    - `VALUE_TRADED_240`: `Value.Traded|240`
+    - `VALUE_TRADED_30`: `Value.Traded|30`
+    - `VALUE_TRADED_5`: `Value.Traded|5`
+    - `VALUE_TRADED_60`: `Value.Traded|60`
+    - `ACTIVE_ADDRESSES_RATIO`: `active_addresses_ratio`
+    - `ADDRESSES_TOTAL`: `addresses_total`
+    - `ADDRESSES_ZERO_BALANCE`: `addresses_zero_balance`
+    - `ASK`: `ask`
+    - `AT_THE_MONEY_ADDRESSES_PERCENTAGE`: `at_the_money_addresses_percentage`
+    - `AVERAGE_VOLUME_10D_CALC`: `average_volume_10d_calc`
+    - `AVERAGE_VOLUME_10D_CALC_1M`: `average_volume_10d_calc|1M`
+    - `AVERAGE_VOLUME_10D_CALC_1W`: `average_volume_10d_calc|1W`
+    - `AVERAGE_VOLUME_30D_CALC`: `average_volume_30d_calc`
+    - `AVERAGE_VOLUME_30D_CALC_1M`: `average_volume_30d_calc|1M`
+    - `AVERAGE_VOLUME_30D_CALC_1W`: `average_volume_30d_calc|1W`
+    - `AVERAGE_VOLUME_60D_CALC`: `average_volume_60d_calc`
+    - `AVERAGE_VOLUME_60D_CALC_1M`: `average_volume_60d_calc|1M`
+    - `AVERAGE_VOLUME_60D_CALC_1W`: `average_volume_60d_calc|1W`
+    - `AVERAGE_VOLUME_60D_CALC_240`: `average_volume_60d_calc|240`
+    - `AVERAGE_VOLUME_90D_CALC`: `average_volume_90d_calc`
+    - `AVERAGE_VOLUME_90D_CALC_1M`: `average_volume_90d_calc|1M`
+    - `AVERAGE_VOLUME_90D_CALC_1W`: `average_volume_90d_calc|1W`
+    - `AVERAGE_VOLUME_90D_CALC_240`: `average_volume_90d_calc|240`
+    - `AVG_BALANCE`: `avg_balance`
+    - `BID`: `bid`
+    - `BID_ASK_SPREAD_PCT`: `bid_ask_spread_pct`
+    - `BLOCKCHAIN_MINUS_ID`: `blockchain-id`
+    - `BREAK_EVEN_ADDRESSES_PERCENTAGE`: `break_even_addresses_percentage`
+    - `CENTRALIZATION`: `centralization`
+    - `COUNTRY`: `country`
+    - `COUPON`: `coupon`
+    - `CRYPTO_CODE`: `crypto_code`
+    - `CRYPTOASSET_MINUS_INFO_DESCRIPTION`: `cryptoasset-info.description`
+    - `CRYPTOASSET_MINUS_INFO_ID`: `cryptoasset-info.id`
+    - `DAYS_TO_MATURITY`: `days_to_maturity`
+    - `DEX_BUY_VOLUME_12H`: `dex_buy_volume_12h`
+    - `DEX_BUY_VOLUME_15M`: `dex_buy_volume_15m`
+    - `DEX_BUY_VOLUME_1H`: `dex_buy_volume_1h`
+    - `DEX_BUY_VOLUME_24H`: `dex_buy_volume_24h`
+    - `DEX_BUY_VOLUME_4H`: `dex_buy_volume_4h`
+    - `DEX_BUYERS_12H`: `dex_buyers_12h`
+    - `DEX_BUYERS_15M`: `dex_buyers_15m`
+    - `DEX_BUYERS_1H`: `dex_buyers_1h`
+    - `DEX_BUYERS_24H`: `dex_buyers_24h`
+    - `DEX_BUYERS_4H`: `dex_buyers_4h`
+    - `DEX_BUYS_12H`: `dex_buys_12h`
+    - `DEX_BUYS_15M`: `dex_buys_15m`
+    - `DEX_BUYS_1H`: `dex_buys_1h`
+    - `DEX_BUYS_24H`: `dex_buys_24h`
+    - `DEX_BUYS_4H`: `dex_buys_4h`
+    - `DEX_CREATED_TIME`: `dex_created_time`
+    - `DEX_SELL_VOLUME_12H`: `dex_sell_volume_12h`
+    - `DEX_SELL_VOLUME_15M`: `dex_sell_volume_15m`
+    - `DEX_SELL_VOLUME_1H`: `dex_sell_volume_1h`
+    - `DEX_SELL_VOLUME_24H`: `dex_sell_volume_24h`
+    - `DEX_SELL_VOLUME_4H`: `dex_sell_volume_4h`
+    - `DEX_SELLERS_12H`: `dex_sellers_12h`
+    - `DEX_SELLERS_15M`: `dex_sellers_15m`
+    - `DEX_SELLERS_1H`: `dex_sellers_1h`
+    - `DEX_SELLERS_24H`: `dex_sellers_24h`
+    - `DEX_SELLERS_4H`: `dex_sellers_4h`
+    - `DEX_SELLS_12H`: `dex_sells_12h`
+    - `DEX_SELLS_15M`: `dex_sells_15m`
+    - `DEX_SELLS_1H`: `dex_sells_1h`
+    - `DEX_SELLS_24H`: `dex_sells_24h`
+    - `DEX_SELLS_4H`: `dex_sells_4h`
+    - `DEX_TOTAL_LIQUIDITY`: `dex_total_liquidity`
+    - `DEX_TOTAL_SUPPLY`: `dex_total_supply`
+    - `DEX_TRADING_VOLUME_12H`: `dex_trading_volume_12h`
+    - `DEX_TRADING_VOLUME_15M`: `dex_trading_volume_15m`
+    - `DEX_TRADING_VOLUME_1H`: `dex_trading_volume_1h`
+    - `DEX_TRADING_VOLUME_24H`: `dex_trading_volume_24h`
+    - `DEX_TRADING_VOLUME_4H`: `dex_trading_volume_4h`
+    - `DEX_TXS_COUNT_12H`: `dex_txs_count_12h`
+    - `DEX_TXS_COUNT_15M`: `dex_txs_count_15m`
+    - `DEX_TXS_COUNT_1H`: `dex_txs_count_1h`
+    - `DEX_TXS_COUNT_24H`: `dex_txs_count_24h`
+    - `DEX_TXS_COUNT_4H`: `dex_txs_count_4h`
+    - `DEX_TXS_COUNT_UNIQ_12H`: `dex_txs_count_uniq_12h`
+    - `DEX_TXS_COUNT_UNIQ_15M`: `dex_txs_count_uniq_15m`
+    - `DEX_TXS_COUNT_UNIQ_1H`: `dex_txs_count_uniq_1h`
+    - `DEX_TXS_COUNT_UNIQ_24H`: `dex_txs_count_uniq_24h`
+    - `DEX_TXS_COUNT_UNIQ_4H`: `dex_txs_count_uniq_4h`
+    - `EXPIRATION`: `expiration`
+    - `FULLY_DILUTED_VALUE`: `fully_diluted_value`
+    - `GAP_UP_ABS_1W`: `gap_up_abs|1W`
+    - `GAP_UP_1W`: `gap_up|1W`
+    - `GITHUB_COMMITS`: `github_commits`
+    - `IN_THE_MONEY_ADDRESSES_PERCENTAGE`: `in_the_money_addresses_percentage`
+    - `INDEXES`: `indexes`
+    - `IS_SHARIAH_COMPLIANT`: `is_shariah_compliant`
+    - `IS_SYMBOL_PRIMARY_LISTING`: `is_symbol_primary_listing`
+    - `LOGOID`: `logoid`
+    - `LOSSES_ADDRESSES_PERCENTAGE`: `losses_addresses_percentage`
+    - `MARKET_CAP`: `market_cap`
+    - `MATURITY_DATE`: `maturity_date`
+    - `OUT_THE_MONEY_ADDRESSES_PERCENTAGE`: `out_the_money_addresses_percentage`
+    - `POST_CHANGE`: `post_change`
+    - `POST_CHANGE_1`: `post_change|1`
+    - `POST_CHANGE_120`: `post_change|120`
+    - `POST_CHANGE_15`: `post_change|15`
+    - `POST_CHANGE_1M`: `post_change|1M`
+    - `POST_CHANGE_1W`: `post_change|1W`
+    - `POST_CHANGE_240`: `post_change|240`
+    - `POST_CHANGE_30`: `post_change|30`
+    - `POST_CHANGE_5`: `post_change|5`
+    - `POST_CHANGE_60`: `post_change|60`
+    - `POSTMARKET_CHANGE`: `postmarket_change`
+    - `POSTMARKET_CHANGE_ABS`: `postmarket_change_abs`
+    - `PRE_CHANGE`: `pre_change`
+    - `PRE_CHANGE_ABS`: `pre_change_abs`
+    - `PRE_CHANGE_ABS_1`: `pre_change_abs|1`
+    - `PRE_CHANGE_ABS_120`: `pre_change_abs|120`
+    - `PRE_CHANGE_ABS_15`: `pre_change_abs|15`
+    - `PRE_CHANGE_ABS_1M`: `pre_change_abs|1M`
+    - `PRE_CHANGE_ABS_1W`: `pre_change_abs|1W`
+    - `PRE_CHANGE_ABS_240`: `pre_change_abs|240`
+    - `PRE_CHANGE_ABS_30`: `pre_change_abs|30`
+    - `PRE_CHANGE_ABS_5`: `pre_change_abs|5`
+    - `PRE_CHANGE_ABS_60`: `pre_change_abs|60`
+    - `PRE_CHANGE_1`: `pre_change|1`
+    - `PRE_CHANGE_120`: `pre_change|120`
+    - `PRE_CHANGE_15`: `pre_change|15`
+    - `PRE_CHANGE_1M`: `pre_change|1M`
+    - `PRE_CHANGE_1W`: `pre_change|1W`
+    - `PRE_CHANGE_240`: `pre_change|240`
+    - `PRE_CHANGE_30`: `pre_change|30`
+    - `PRE_CHANGE_5`: `pre_change|5`
+    - `PRE_CHANGE_60`: `pre_change|60`
+    - `PREMARKET_CHANGE`: `premarket_change`
+    - `PREMARKET_CHANGE_ABS`: `premarket_change_abs`
+    - `PREMARKET_CHANGE_FROM_OPEN`: `premarket_change_from_open`
+    - `PREMARKET_CHANGE_FROM_OPEN_ABS`: `premarket_change_from_open_abs`
+    - `PREMARKET_GAP`: `premarket_gap`
+    - `PROFIT_ADDRESSES_PERCENTAGE`: `profit_addresses_percentage`
+    - `RATES_CF`: `rates_cf`
+    - `RATES_CURRENT`: `rates_current`
+    - `RATES_DIVIDEND_RECENT`: `rates_dividend_recent`
+    - `RATES_DIVIDEND_UPCOMING`: `rates_dividend_upcoming`
+    - `RATES_EARNINGS_FQ`: `rates_earnings_fq`
+    - `RATES_EARNINGS_NEXT_FQ`: `rates_earnings_next_fq`
+    - `RATES_FH`: `rates_fh`
+    - `RATES_FQ`: `rates_fq`
+    - `RATES_FY`: `rates_fy`
+    - `RATES_MC`: `rates_mc`
+    - `RATES_PT`: `rates_pt`
+    - `RATES_TIME_SERIES`: `rates_time_series`
+    - `RATES_TTM`: `rates_ttm`
+    - `RELATIVE_VOLUME_10D_CALC`: `relative_volume_10d_calc`
+    - `RELATIVE_VOLUME_10D_CALC_1`: `relative_volume_10d_calc|1`
+    - `RELATIVE_VOLUME_10D_CALC_120`: `relative_volume_10d_calc|120`
+    - `RELATIVE_VOLUME_10D_CALC_15`: `relative_volume_10d_calc|15`
+    - `RELATIVE_VOLUME_10D_CALC_1M`: `relative_volume_10d_calc|1M`
+    - `RELATIVE_VOLUME_10D_CALC_1W`: `relative_volume_10d_calc|1W`
+    - `RELATIVE_VOLUME_10D_CALC_240`: `relative_volume_10d_calc|240`
+    - `RELATIVE_VOLUME_10D_CALC_30`: `relative_volume_10d_calc|30`
+    - `RELATIVE_VOLUME_10D_CALC_5`: `relative_volume_10d_calc|5`
+    - `RELATIVE_VOLUME_10D_CALC_60`: `relative_volume_10d_calc|60`
+    - `SECTOR`: `sector`
+    - `SUBMARKET`: `submarket`
+    - `SYMBOL`: `symbol`
+    - `TELEGRAM_MEMBERS`: `telegram_members`
+    - `TELEGRAM_NEGATIVE`: `telegram_negative`
+    - `TELEGRAM_POSITIVE`: `telegram_positive`
+    - `TWITTER_NEGATIVE`: `twitter_negative`
+    - `TWITTER_POSITIVE`: `twitter_positive`
+    - `VOLUME`: `volume`
+    - `VOLUME_MINUS_TYPE`: `volume-type`
+    - `VOLUME_BASE_5`: `volume_base|5`
+    - `VOLUME_CHANGE`: `volume_change`
+    - `VOLUME_CHANGE_ABS`: `volume_change_abs`
+    - `VOLUME_CHANGE_ABS_1`: `volume_change_abs|1`
+    - `VOLUME_CHANGE_ABS_120`: `volume_change_abs|120`
+    - `VOLUME_CHANGE_ABS_15`: `volume_change_abs|15`
+    - `VOLUME_CHANGE_ABS_1M`: `volume_change_abs|1M`
+    - `VOLUME_CHANGE_ABS_1W`: `volume_change_abs|1W`
+    - `VOLUME_CHANGE_ABS_240`: `volume_change_abs|240`
+    - `VOLUME_CHANGE_ABS_30`: `volume_change_abs|30`
+    - `VOLUME_CHANGE_ABS_5`: `volume_change_abs|5`
+    - `VOLUME_CHANGE_ABS_60`: `volume_change_abs|60`
+    - `VOLUME_CHANGE_1`: `volume_change|1`
+    - `VOLUME_CHANGE_120`: `volume_change|120`
+    - `VOLUME_CHANGE_15`: `volume_change|15`
+    - `VOLUME_CHANGE_1M`: `volume_change|1M`
+    - `VOLUME_CHANGE_1W`: `volume_change|1W`
+    - `VOLUME_CHANGE_240`: `volume_change|240`
+    - `VOLUME_CHANGE_30`: `volume_change|30`
+    - `VOLUME_CHANGE_5`: `volume_change|5`
+    - `VOLUME_CHANGE_60`: `volume_change|60`
+    - `VOLUME_QUOTE_5`: `volume_quote|5`
+    - `VOLUME_1`: `volume|1`
+    - `VOLUME_120`: `volume|120`
+    - `VOLUME_15`: `volume|15`
+    - `VOLUME_1M`: `volume|1M`
+    - `VOLUME_1W`: `volume|1W`
+    - `VOLUME_240`: `volume|240`
+    - `VOLUME_30`: `volume|30`
+    - `VOLUME_5`: `volume|5`
+    - `VOLUME_60`: `volume|60`
+

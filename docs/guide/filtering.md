@@ -10,7 +10,7 @@ Use Python operators directly on fields:
 |----------|---------|-------------|
 | `>` | `StockField.PRICE > 100` | Greater than |
 | `>=` | `StockField.VOLUME >= 1e6` | Greater than or equal |
-| `<` | `StockField.RSI < 30` | Less than |
+| `<` | `StockField.RELATIVE_STRENGTH_INDEX_14 < 30` | Less than |
 | `<=` | `StockField.PE_RATIO_TTM <= 15` | Less than or equal |
 | `==` | `StockField.COUNTRY == 'United States'` | Equal to |
 | `!=` | `StockField.SECTOR != 'Finance'` | Not equal to |

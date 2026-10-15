@@ -42,8 +42,8 @@ ForexField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
 ForexField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
 ForexField.EXPONENTIAL_MOVING_AVERAGE_20 # EMA 20
 ForexField.AVERAGE_TRUE_RANGE_14         # ATR
-ForexField.STOCHASTIC_K_14_3_3           # Stochastic %K
-ForexField.STOCHASTIC_D_14_3_3           # Stochastic %D
+ForexField.STOCHASTIC_PERCENTK_14_3_3           # Stochastic %K
+ForexField.STOCHASTIC_PERCENTD_14_3_3           # Stochastic %D
 ```
 
 ### Performance
@@ -51,9 +51,9 @@ ForexField.STOCHASTIC_D_14_3_3           # Stochastic %D
 ```python
 ForexField.WEEKLY_PERFORMANCE      # 1 week change
 ForexField.MONTHLY_PERFORMANCE     # 1 month change
-ForexField.PERFORMANCE_3_MONTH     # 3 month change
-ForexField.PERFORMANCE_YTD         # Year to date
-ForexField.PERFORMANCE_1_YEAR      # 1 year
+ForexField.MONTH_PERFORMANCE_3     # 3 month change
+ForexField.YTD_PERFORMANCE         # Year to date
+ForexField.YEARLY_PERFORMANCE      # 1 year
 ```
 
 ## Example Screens
@@ -112,7 +112,7 @@ Price above moving averages:
 
 ```python
 fs = ForexScreener()
-# Note: Field-to-field comparisons are NOT supported by the TradingView API.
+# Note: field-to-field filters also work in `where()`, e.g. `where(Field.PRICE > Field.SIMPLE_MOVING_AVERAGE_50)`. These examples filter with pandas after `get()`.
 # Retrieve data and filter with pandas instead:
 fs.select(
     ForexField.NAME,
@@ -125,8 +125,8 @@ df = fs.get()
 
 # Filter for golden cross using pandas
 golden_cross = df[
-    (df['Price'] > df['SMA 50']) &
-    (df['SMA 50'] > df['SMA 200'])
+    (df['Price'] > df['Simple Moving Average (50)']) &
+    (df['Simple Moving Average (50)'] > df['Simple Moving Average (200)'])
 ]
 ```
 

@@ -79,6 +79,18 @@ ss.set_markets(Market.GERMANY)  # German stocks
 ss.set_markets(Market.ALL)      # Global
 ```
 
+### Currency of Fundamentals
+
+By default, StockScreener returns fundamentals (market cap, revenue, EPS, enterprise value...) in USD. `set_currency()` converts them to another currency:
+
+```python
+ss = StockScreener().set_markets(Market.JAPAN, Market.GERMANY).set_currency("eur")
+ss.select(StockField.PRICE, StockField.MARKET_CAPITALIZATION, StockField.FUNDAMENTAL_CURRENCY_CODE)
+df = ss.get()
+```
+
+Prices stay in each symbol's own currency (`StockField.CURRENCY`). `FUNDAMENTAL_CURRENCY_CODE` shows the currency of the fundamentals. An unknown currency code makes the converted fields empty.
+
 ### Symbol Type Filtering
 
 ```python
@@ -100,7 +112,7 @@ StockField.PRICE           # Current price
 StockField.OPEN            # Day open
 StockField.HIGH            # Day high
 StockField.LOW             # Day low
-StockField.CLOSE           # Previous close
+StockField.PRICE           # Previous close
 StockField.VOLUME          # Trading volume
 StockField.RELATIVE_VOLUME # Volume vs average
 ```
@@ -111,8 +123,8 @@ StockField.RELATIVE_VOLUME # Volume vs average
 StockField.PE_RATIO_TTM              # Price/Earnings
 StockField.PRICE_TO_BOOK_FY          # Price/Book
 StockField.PRICE_TO_SALES_FY         # Price/Sales
-StockField.EV_TO_EBITDA_TTM          # EV/EBITDA
-StockField.PRICE_EARNINGS_TO_GROWTH_TTM  # PEG Ratio
+StockField.ENTERPRISE_VALUEEBITDA_TTM          # EV/EBITDA
+StockField.PRICE_EARNINGS_GROWTH_TTM  # PEG Ratio
 StockField.MARKET_CAPITALIZATION     # Market Cap
 ```
 
@@ -122,7 +134,7 @@ StockField.MARKET_CAPITALIZATION     # Market Cap
 StockField.DIVIDEND_YIELD_FY        # Yield %
 StockField.DIVIDENDS_PER_SHARE_FY   # DPS
 StockField.PAYOUT_RATIO_TTM         # Payout Ratio
-StockField.EX_DIVIDEND_DATE         # Ex-Date
+StockField.EX_DIVIDEND_DATE_UPCOMING         # Ex-Date
 ```
 
 ### Profitability
@@ -154,10 +166,10 @@ StockField.AVERAGE_DIRECTIONAL_INDEX_14  # ADX
 StockField.CHANGE_PERCENT          # Today's change
 StockField.WEEKLY_PERFORMANCE      # 1 week
 StockField.MONTHLY_PERFORMANCE     # 1 month
-StockField.PERFORMANCE_3_MONTH     # 3 months
-StockField.PERFORMANCE_6_MONTH     # 6 months
-StockField.PERFORMANCE_YTD         # Year to date
-StockField.PERFORMANCE_1_YEAR      # 1 year
+StockField.MONTH_PERFORMANCE_3     # 3 months
+StockField.MONTH_PERFORMANCE_6     # 6 months
+StockField.YTD_PERFORMANCE         # Year to date
+StockField.YEARLY_PERFORMANCE      # 1 year
 ```
 
 ## Example Screens
@@ -192,9 +204,9 @@ df = ss.get()
 ```python
 ss = StockScreener()
 ss.set_index(IndexSymbol.SP500)
-ss.where(StockField.PERFORMANCE_3_MONTH > 20)
+ss.where(StockField.MONTH_PERFORMANCE_3 > 20)
 ss.where(StockField.RELATIVE_STRENGTH_INDEX_14.between(50, 70))
-ss.sort_by(StockField.PERFORMANCE_3_MONTH, ascending=False)
+ss.sort_by(StockField.MONTH_PERFORMANCE_3, ascending=False)
 
 df = ss.get()
 ```
@@ -225,8 +237,9 @@ technicals = StockField.technicals()
 # Get all recommendations
 recommendations = StockField.recommendations()
 
-# Get all valuations
-valuations = StockField.valuations()
+# Valuation fields (preset)
+from tvscreener import get_preset
+valuations = get_preset('stock_valuation')
 ```
 
 ## All Fields

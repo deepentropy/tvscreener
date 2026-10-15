@@ -22,6 +22,7 @@ class TestMCPServer(unittest.TestCase):
             "discover_fields", "list_field_types", "custom_query",
             "search_stocks", "search_crypto", "search_forex",
             "get_top_movers", "list_sectors", "list_filter_operators",
+            "get_calendar", "yield_curve", "symbol_data",
         }, names)
 
     def test_list_sectors_returns_tradingview_sectors(self):

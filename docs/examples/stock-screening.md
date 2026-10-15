@@ -40,8 +40,8 @@ ss = StockScreener()
 ss.where(StockField.PE_RATIO_TTM < 15)
 ss.where(StockField.PRICE_TO_BOOK_FY < 1.5)
 ss.where(StockField.CURRENT_RATIO_FY > 2)              # Strong liquidity
-ss.where(StockField.TOTAL_DEBT_TO_EQUITY_FY < 0.5)     # Low debt
-ss.where(StockField.EARNINGS_PER_SHARE_DILUTED_TTM > 0) # Profitable
+ss.where(StockField.DEBT_TO_EQUITY_FY < 0.5)     # Low debt
+ss.where(StockField.EPS_DILUTED_TTM > 0) # Profitable
 
 ss.select(
     StockField.NAME,
@@ -49,7 +49,7 @@ ss.select(
     StockField.PE_RATIO_TTM,
     StockField.PRICE_TO_BOOK_FY,
     StockField.CURRENT_RATIO_FY,
-    StockField.TOTAL_DEBT_TO_EQUITY_FY
+    StockField.DEBT_TO_EQUITY_FY
 )
 
 df = ss.get()
@@ -62,16 +62,16 @@ Growth at a reasonable price:
 ```python
 ss = StockScreener()
 
-ss.where(StockField.PRICE_EARNINGS_TO_GROWTH_TTM.between(0, 1))  # PEG < 1
-ss.where(StockField.EARNINGS_PER_SHARE_DILUTED_GROWTH_TTM > 10)   # Growing earnings
+ss.where(StockField.PRICE_EARNINGS_GROWTH_TTM.between(0, 1))  # PEG < 1
+ss.where(StockField.EPS_DILUTED_TTM_YOY_GROWTH > 10)   # Growing earnings
 ss.where(StockField.MARKET_CAPITALIZATION > 1e9)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
     StockField.PE_RATIO_TTM,
-    StockField.PRICE_EARNINGS_TO_GROWTH_TTM,
-    StockField.EARNINGS_PER_SHARE_DILUTED_GROWTH_TTM
+    StockField.PRICE_EARNINGS_GROWTH_TTM,
+    StockField.EPS_DILUTED_TTM_YOY_GROWTH
 )
 
 df = ss.get()
@@ -109,13 +109,13 @@ Stocks with growing dividends:
 ss = StockScreener()
 
 ss.where(StockField.DIVIDEND_YIELD_FY > 2)
-ss.where(StockField.DPS_COMMON_STOCK_PRIMARY_ISSUE_GROWTH_FY > 5)  # Dividend growing
+ss.where(StockField.DIVIDENDS_PER_SHARE_ANNUAL_YOY_GROWTH > 5)  # Dividend growing
 ss.where(StockField.PAYOUT_RATIO_TTM < 70)
 
 ss.select(
     StockField.NAME,
     StockField.DIVIDEND_YIELD_FY,
-    StockField.DPS_COMMON_STOCK_PRIMARY_ISSUE_GROWTH_FY,
+    StockField.DIVIDENDS_PER_SHARE_ANNUAL_YOY_GROWTH,
     StockField.PAYOUT_RATIO_TTM
 )
 
@@ -151,16 +151,14 @@ df = ss.get()
 ```python
 ss = StockScreener()
 
-# Price near 52-week high
-ss.where(StockField.PRICE_52_WEEK_HIGH > 0)            # Has 52w high data
-ss.where(StockField.HIGH_52_WEEK_PERFORMANCE > -5)     # Within 5% of high
+# Price within 5% of the 52-week high
+ss.where(StockField.PRICE.within_pct(StockField.WEEK_HIGH_52, -5, 0))
 ss.where(StockField.VOLUME > 500_000)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
-    StockField.PRICE_52_WEEK_HIGH,
-    StockField.HIGH_52_WEEK_PERFORMANCE,
+    StockField.WEEK_HIGH_52,
     StockField.VOLUME
 )
 
@@ -173,18 +171,18 @@ df = ss.get()
 ss = StockScreener()
 ss.set_index(IndexSymbol.SP500)
 
-ss.where(StockField.PERFORMANCE_3_MONTH > 20)          # Up 20%+ in 3 months
-ss.where(StockField.PERFORMANCE_1_MONTH > 5)           # Still trending up
+ss.where(StockField.MONTH_PERFORMANCE_3 > 20)          # Up 20%+ in 3 months
+ss.where(StockField.MONTHLY_PERFORMANCE > 5)           # Still trending up
 ss.where(StockField.VOLUME >= 500_000)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
-    StockField.PERFORMANCE_1_MONTH,
-    StockField.PERFORMANCE_3_MONTH,
+    StockField.MONTHLY_PERFORMANCE,
+    StockField.MONTH_PERFORMANCE_3,
     StockField.RELATIVE_STRENGTH_INDEX_14
 )
-ss.sort_by(StockField.PERFORMANCE_3_MONTH, ascending=False)
+ss.sort_by(StockField.MONTH_PERFORMANCE_3, ascending=False)
 
 df = ss.get()
 ```
@@ -198,13 +196,13 @@ ss = StockScreener()
 
 ss.where(StockField.SECTOR == 'Electronic Technology')
 ss.where(StockField.MARKET_CAPITALIZATION > 10e9)
-ss.where(StockField.REVENUE_GROWTH_TTM > 10)
+ss.where(StockField.REVENUE_TTM_YOY_GROWTH > 10)
 
 ss.select(
     StockField.NAME,
     StockField.PRICE,
     StockField.MARKET_CAPITALIZATION,
-    StockField.REVENUE_GROWTH_TTM,
+    StockField.REVENUE_TTM_YOY_GROWTH,
     StockField.PE_RATIO_TTM
 )
 ss.sort_by(StockField.MARKET_CAPITALIZATION, ascending=False)
@@ -218,14 +216,14 @@ df = ss.get()
 ss = StockScreener()
 
 ss.where(StockField.SECTOR.isin(['Health Technology', 'Health Services']))
-ss.where(StockField.REVENUE_GROWTH_TTM > 15)
+ss.where(StockField.REVENUE_TTM_YOY_GROWTH > 15)
 ss.where(StockField.MARKET_CAPITALIZATION.between(1e9, 50e9))  # Mid-cap
 
 ss.select(
     StockField.NAME,
     StockField.SECTOR,
     StockField.MARKET_CAPITALIZATION,
-    StockField.REVENUE_GROWTH_TTM,
+    StockField.REVENUE_TTM_YOY_GROWTH,
     StockField.GROSS_MARGIN_TTM
 )
 
@@ -242,14 +240,14 @@ ss.set_index(IndexSymbol.SP500)
 
 ss.where(StockField.RETURN_ON_EQUITY_TTM > 20)         # ROE > 20%
 ss.where(StockField.RETURN_ON_ASSETS_TTM > 10)         # ROA > 10%
-ss.where(StockField.TOTAL_DEBT_TO_EQUITY_FY < 1)       # Moderate debt
+ss.where(StockField.DEBT_TO_EQUITY_FY < 1)       # Moderate debt
 
 ss.select(
     StockField.NAME,
     StockField.RETURN_ON_EQUITY_TTM,
     StockField.RETURN_ON_ASSETS_TTM,
     StockField.GROSS_MARGIN_TTM,
-    StockField.TOTAL_DEBT_TO_EQUITY_FY
+    StockField.DEBT_TO_EQUITY_FY
 )
 ss.sort_by(StockField.RETURN_ON_EQUITY_TTM, ascending=False)
 
@@ -262,15 +260,15 @@ df = ss.get()
 ss = StockScreener()
 
 ss.where(StockField.NET_MARGIN_TTM > 10)               # Profitable
-ss.where(StockField.REVENUE_GROWTH_TTM > 10)           # Growing revenue
-ss.where(StockField.EARNINGS_PER_SHARE_DILUTED_GROWTH_TTM > 10)  # Growing earnings
+ss.where(StockField.REVENUE_TTM_YOY_GROWTH > 10)           # Growing revenue
+ss.where(StockField.EPS_DILUTED_TTM_YOY_GROWTH > 10)  # Growing earnings
 ss.where(StockField.FREE_CASH_FLOW_TTM > 0)            # Positive free cash flow
 
 ss.select(
     StockField.NAME,
     StockField.NET_MARGIN_TTM,
-    StockField.REVENUE_GROWTH_TTM,
-    StockField.EARNINGS_PER_SHARE_DILUTED_GROWTH_TTM,
+    StockField.REVENUE_TTM_YOY_GROWTH,
+    StockField.EPS_DILUTED_TTM_YOY_GROWTH,
     StockField.FREE_CASH_FLOW_TTM
 )
 
@@ -305,13 +303,13 @@ df = ss.get()
 ss = StockScreener()
 
 ss.where(StockField.MARKET_CAPITALIZATION.between(300e6, 2e9))
-ss.where(StockField.REVENUE_GROWTH_TTM > 25)
+ss.where(StockField.REVENUE_TTM_YOY_GROWTH > 25)
 ss.where(StockField.GROSS_MARGIN_TTM > 40)
 
 ss.select(
     StockField.NAME,
     StockField.MARKET_CAPITALIZATION,
-    StockField.REVENUE_GROWTH_TTM,
+    StockField.REVENUE_TTM_YOY_GROWTH,
     StockField.GROSS_MARGIN_TTM
 )
 

@@ -16,17 +16,55 @@ All notable changes to tvscreener.
   - `in_day_range(start, end)` for dates relative to today
   - `above_pct()`, `below_pct()`, `within_pct()`, `not_within_pct()` to compare with a percentage of another field or a number
   - Available in the MCP `custom_query` tool
+- **Scanner helpers** (#72)
+  - `get_symbol(symbol, *fields)`: any fields of one symbol
+  - `get_enum_values(*ids)`: valid values of enumerable fields (sector, exchange, ETF issuer...)
+  - `get_metainfo(market)` and `Screener.metainfo()`: field catalogue of a scanner market
+- **Field enums regenerated from TradingView's metainfo** (#64)
+  - New `scripts/generate_fields.py`: adds the fields that return data, marks the ones that never do as deprecated
+  - Stocks: analyst estimates (`*_ESTIMATE_FQ/FY/FH/NTM`), forward multiples (`PRICE_EARNINGS_FWD`...), IPO fields, `EARNINGS_FQ_H` / `REVENUES_FQ_H` history
+  - Coin: `FUNDING_RATE`, `OPEN_INTEREST`, open interest change and long/short liquidations (15m to 24h)
+  - Bond: durations, `CONVEXITY`, `DV_01`, Z/G/F spreads, YTM/YTW bid/ask, Moody's and Fitch ratings
+  - All price markets: 17 candlestick patterns, absolute performance (`PERF_*_ABS`)
+  - Deprecated fields warn when used and are left out of `select_all()`. Full lists: [Field Changes](field-changes.md)
+
+| Enum | Added | Deprecated |
+|------|-------|------------|
+| `StockField` | 129 | 26 |
+| `CryptoField` | 33 | 131 |
+| `ForexField` | 31 | 108 |
+| `BondField` | 29 | 34 |
+| `FuturesField` | 29 | 34 |
+| `CoinField` | 56 | 257 |
+| `EconomicsField` (new) | 37 | 0 |
+| `IndexField` (new) | 358 | 0 |
+| `GovernmentBondField` (new) | 129 | 0 |
+
+- **`ETFScreener`** (#69): ETFs and ETNs sorted by AUM; new `INDEX_TRACKED` and readable `*_NAME` ETF fields (`ASSET_CLASS_NAME`, `FOCUS_NAME`...)
+- **`EconomicsScreener`** (#66): 15,000+ economic indicators by country and `EconomicCategory`
+- **`IndexScreener`** (#67): stock indices, index/commodity CFDs and crypto market-cap indices
+- **`GovernmentBondScreener` and `get_yield_curve(country)`** (#68): benchmark government bond yields and prices by tenor
+- **`Field.match(pattern)`**: case-insensitive regex match on text fields
+- **Presets and calendars** (#70)
+  - `StockScreener.set_preset()` with the `Preset` enum (gainers, losers, most volatile, all-time high, oversold...)
+  - `get_earnings_calendar()`, `get_dividends_calendar()`, `get_ipo_calendar()` for a date range and markets
+- **`set_currency()`** (#71)
+  - Converts fundamentals (market cap, revenue, EPS...) to one currency: `ss.set_currency("eur")`
+  - Prices are not converted
 - **Code Generator: new operators and OR**
   - Operators: has any of, has none of, % above, % below, within %, outside %, day range, has a value, is empty
   - AND / OR toggle between filters; OR filters are grouped in one `where()` call
 
 ### Fixed
 
+- **`StockField.DIVIDEND_YIELD_FY`** pointed to `dividend_yield_recent`, which returns no data; it now points to `DIVIDENDS_YIELD_FY`
+- **Docs**: coin examples used `CoinField.MARKET_CAP` / `VOLUME`, which return no data; they use `MARKET_CAP_CALC` / `N24H_VOL_CMC`
 - **`with_history()` rejected 26 indicators** (#65)
   - `StockField` indicators such as `RSI2`, `STOCH_K_5_3_3`, `ADX_PLUS_DI_50` and `MOM_14` have previous-bar values in TradingView but raised `ValueError`
 
 ### Changed
 
+- `StockScreener.set_markets()` returns the screener, so it can be chained
 - Filters on the same field are merged into one `in_range` filter only for the original comparison operations. The new operations are always kept as separate filters.
 
 ---

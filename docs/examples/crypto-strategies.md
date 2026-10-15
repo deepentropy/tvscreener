@@ -130,7 +130,7 @@ df = cs.get()
 
 ### Above Moving Averages
 
-Note: Field-to-field comparisons are NOT supported by the TradingView API.
+Note: field-to-field filters also work in `where()`, e.g. `where(Field.PRICE > Field.SIMPLE_MOVING_AVERAGE_50)`. These examples filter with pandas after `get()`.
 Retrieve data and filter with pandas instead:
 
 ```python
@@ -147,8 +147,8 @@ df = cs.get()
 
 # Filter using pandas
 bullish = df[
-    (df['Price'] > df['SMA 50']) &
-    (df['SMA 50'] > df['SMA 200'])
+    (df['Price'] > df['Simple Moving Average (50)']) &
+    (df['Simple Moving Average (50)'] > df['Simple Moving Average (200)'])
 ]
 
 df = cs.get()

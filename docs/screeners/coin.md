@@ -33,19 +33,19 @@ The Coin Screener has access to **~3,026 fields** covering:
 ### Price & Market
 
 ```python
-CoinField.PRICE                  # Current price
-CoinField.MARKET_CAPITALIZATION  # Market cap
-CoinField.CHANGE_PERCENT         # 24h change
-CoinField.VOLUME                 # 24h volume
+CoinField.CLOSE                  # Current price
+CoinField.MARKET_CAP_CALC          # Market cap
+CoinField.CHANGE         # 24h change
+CoinField.N24H_VOL_CMC           # 24h volume
 ```
 
 ### Technical
 
 ```python
-CoinField.RELATIVE_STRENGTH_INDEX_14    # RSI(14)
-CoinField.MACD_LEVEL_12_26              # MACD
-CoinField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
-CoinField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
+CoinField.RSI    # RSI(14)
+CoinField.MACD_MACD              # MACD
+CoinField.SMA50      # SMA 50
+CoinField.SMA200     # SMA 200
 ```
 
 ### Performance
@@ -63,12 +63,12 @@ CoinField.PERF_Y                  # 1 year
 
 ```python
 cs = CoinScreener()
-cs.sort_by(CoinField.MARKET_CAP, ascending=False)
+cs.sort_by(CoinField.MARKET_CAP_CALC, ascending=False)
 cs.set_range(0, 100)
 cs.select(
     CoinField.NAME,
     CoinField.CLOSE,
-    CoinField.MARKET_CAP,
+    CoinField.MARKET_CAP_CALC,
     CoinField.CHANGE
 )
 
@@ -80,7 +80,7 @@ df = cs.get()
 ```python
 cs = CoinScreener()
 cs.where(CoinField.CHANGE > 10)
-cs.where(CoinField.MARKET_CAP > 10_000_000)  # Min $10M cap
+cs.where(CoinField.MARKET_CAP_CALC > 10_000_000)  # Min $10M cap
 cs.sort_by(CoinField.CHANGE, ascending=False)
 cs.set_range(0, 50)
 
@@ -91,13 +91,13 @@ df = cs.get()
 
 ```python
 cs = CoinScreener()
-cs.where(CoinField.MARKET_CAP > 1e9)  # $1B+ market cap
-cs.where(CoinField.RELATIVE_STRENGTH_INDEX_14 < 35)
+cs.where(CoinField.MARKET_CAP_CALC > 1e9)  # $1B+ market cap
+cs.where(CoinField.RSI < 35)
 cs.select(
     CoinField.NAME,
     CoinField.CLOSE,
-    CoinField.MARKET_CAP,
-    CoinField.RELATIVE_STRENGTH_INDEX_14
+    CoinField.MARKET_CAP_CALC,
+    CoinField.RSI
 )
 
 df = cs.get()
@@ -108,7 +108,7 @@ df = cs.get()
 ```python
 cs = CoinScreener()
 cs.where(CoinField.PERF_W > 20)
-cs.where(CoinField.MARKET_CAP > 100_000_000)
+cs.where(CoinField.MARKET_CAP_CALC > 100_000_000)
 cs.sort_by(CoinField.PERF_W, ascending=False)
 
 df = cs.get()
@@ -120,16 +120,16 @@ df = cs.get()
 cs = CoinScreener()
 
 # Daily RSI moderate
-cs.where(CoinField.RELATIVE_STRENGTH_INDEX_14.between(40, 60))
+cs.where(CoinField.RSI.between(40, 60))
 
 # 4-hour RSI oversold
-rsi_4h = CoinField.RELATIVE_STRENGTH_INDEX_14.with_interval('240')
+rsi_4h = CoinField.RSI.with_interval('240')
 cs.where(rsi_4h < 35)
 
 cs.select(
     CoinField.NAME,
-    CoinField.PRICE,
-    CoinField.RELATIVE_STRENGTH_INDEX_14,
+    CoinField.CLOSE,
+    CoinField.RSI,
     rsi_4h
 )
 

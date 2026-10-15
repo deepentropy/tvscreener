@@ -7,7 +7,7 @@ The **tvscreener Code Generator** is a visual web app that lets you build screen
 ## Features
 
 - **Visual Filter Builder**: Pick a field, an operator and a value. Combine filters with AND or OR
-- **All 6 Screeners**: Stock, Crypto, Forex, Bond, Futures, and Coin
+- **10 Screeners**: Stock, ETF, Crypto, Forex, Bond, Government Bond, Futures, Coin, Index, and Economics
 - **Searchable Fields**: Every field of the screener is reachable by search, in filters, columns and sort. Search also matches initials: `rsi` finds Relative Strength Index (14), `sma50` finds Simple Moving Average (50)
 - **Timeframes**: Apply `with_interval()` to indicators in filters, columns and sort
 - **Markets**: Choose the stock markets to scan with `set_markets()`

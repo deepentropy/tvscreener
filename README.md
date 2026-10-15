@@ -18,8 +18,8 @@
 [![Code Generator](https://img.shields.io/badge/Try%20it-Code%20Generator-2962ff?style=for-the-badge&logo=python&logoColor=white)](https://deepentropy.github.io/tvscreener/)
 
 The Code Generator lets you:
-- Select from 6 screener types (Stock, Crypto, Forex, Bond, Futures, Coin)
-- Build filters visually with 13,000+ fields
+- Select from 10 screener types (Stock, ETF, Crypto, Forex, Bond, Government Bond, Futures, Coin, Index, Economics)
+- Build filters visually with 13,000+ fields, combined with AND / OR
 - Generate ready-to-use Python code
 - Copy and run in your environment
 
@@ -115,7 +115,10 @@ The library now validates that you're using the correct field types with each sc
 
 # Main Features
 
-- Query **Stock**, **Forex**, **Crypto**, **Bond**, **Futures**, and **Coin** Screeners
+- Query **Stock**, **ETF**, **Forex**, **Crypto**, **Bond**, **Government Bond**, **Futures**, **Coin**, **Option**, **Index** and **Economics** Screeners
+- **OR / nested filters** with `|` and `&`, and operators such as `has()`, `above_pct()`, `in_day_range()`
+- **TradingView presets** (gainers, losers, all-time highs...) and **earnings, dividend and IPO calendars**
+- **Yield curves**, IV term structure and single-symbol lookups
 - All the **fields available**: 13,000+ fields across all screener types
 - **Any time interval** (`no need to be a registered user` - 1D, 5m, 1h, etc.)
 - **Fluent API** with `select()` and `where()` methods for cleaner code
@@ -184,6 +187,42 @@ df = opts.get()
 
 # Implied volatility term structure
 df = tvs.get_iv_term_structure("NASDAQ:AAPL")
+
+# ETF Screener - ETFs sorted by assets under management
+etfs = tvs.ETFScreener()
+etfs.where(tvs.StockField.EXPENSE_RATIO < 0.1)
+df = etfs.get()
+
+# Index Screener - indices, CFDs, crypto market caps
+df = tvs.IndexScreener().main_indices().get()
+
+# Economics Screener - 15,000+ economic indicators
+es = tvs.EconomicsScreener()
+es.where(tvs.EconomicsField.COUNTRY_CODE == 'US')
+df = es.get()
+
+# Government bond yield curve
+df = tvs.get_yield_curve("US")
+```
+
+### OR Filters and Presets
+
+```python
+ss = tvs.StockScreener()
+ss.where((tvs.StockField.SECTOR == 'Finance') | (tvs.StockField.SECTOR == 'Utilities'))
+ss.where(tvs.StockField.PRICE.above_pct(tvs.StockField.SIMPLE_MOVING_AVERAGE_50, 5))
+df = ss.get()
+
+# TradingView's own screens
+df = tvs.StockScreener().set_preset(tvs.Preset.GAINERS).get()
+```
+
+### Calendars
+
+```python
+earnings = tvs.get_earnings_calendar("2026-10-12", "2026-10-18")
+dividends = tvs.get_dividends_calendar("2026-10-12", "2026-10-18")
+ipos = tvs.get_ipo_calendar("2026-10-01", "2026-10-31", markets=tvs.Market.ALL)
 ```
 
 ### Fluent API

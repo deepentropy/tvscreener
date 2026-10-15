@@ -146,7 +146,7 @@ ss.where(macd_4h > 0)
 macd_1h = StockField.MACD_LEVEL_12_26.with_interval('60')
 ss.where(macd_1h > 0)
 
-# Note: Field-to-field comparisons (e.g., MACD > Signal) are NOT supported.
+# Field-to-field filters also work in where(), e.g. MACD > signal line.
 # Retrieve data and filter with pandas instead.
 
 df = ss.get()

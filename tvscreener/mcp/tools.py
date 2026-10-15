@@ -9,6 +9,7 @@ from __future__ import annotations
 import tvscreener as tvs
 from tvscreener import (
     StockField, CryptoField, ForexField, BondField, FuturesField, CoinField,
+    EconomicsField, IndexField, GovernmentBondField,
     FilterOperator, FieldCondition, ConditionGroup
 )
 import pandas as pd
@@ -51,6 +52,10 @@ ASSET_CONFIG = {
     "bond": {"field_class": BondField, "screener_class": tvs.BondScreener},
     "futures": {"field_class": FuturesField, "screener_class": tvs.FuturesScreener},
     "coin": {"field_class": CoinField, "screener_class": tvs.CoinScreener},
+    "etf": {"field_class": StockField, "screener_class": tvs.ETFScreener},
+    "economics": {"field_class": EconomicsField, "screener_class": tvs.EconomicsScreener},
+    "index": {"field_class": IndexField, "screener_class": tvs.IndexScreener},
+    "government_bond": {"field_class": GovernmentBondField, "screener_class": tvs.GovernmentBondScreener},
 }
 
 
@@ -182,7 +187,8 @@ def custom_screen(
     filters: list[dict[str, Any]] | None = None,
     sort_by: str | None = None,
     ascending: bool = False,
-    limit: int = 25
+    limit: int = 25,
+    preset: str | None = None
 ) -> pd.DataFrame:
     """
     Flexible screener with custom fields and filters.
@@ -195,12 +201,17 @@ def custom_screen(
         sort_by: Field name to sort by
         ascending: Sort direction
         limit: Maximum results
+        preset: TradingView preset name (stock and etf only), e.g. "gainers"
 
     Returns:
         DataFrame with query results
     """
     config = ASSET_CONFIG.get(asset_type, ASSET_CONFIG["stock"])
     screener = config["screener_class"]()
+    if preset:
+        if not hasattr(screener, "set_preset"):
+            raise ValueError(f"Presets are only available for stock and etf, not {asset_type}")
+        screener.set_preset(preset)
 
     # Select fields
     if select_fields:

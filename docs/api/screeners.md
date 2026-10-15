@@ -13,6 +13,10 @@ All screener classes share a common base API.
 | `FuturesScreener` | `from tvscreener import FuturesScreener` | `FuturesField` |
 | `CoinScreener` | `from tvscreener import CoinScreener` | `CoinField` |
 | `OptionScreener` | `from tvscreener import OptionScreener` | `OptionField` |
+| `ETFScreener` | `from tvscreener import ETFScreener` | `StockField` |
+| `EconomicsScreener` | `from tvscreener import EconomicsScreener` | `EconomicsField` |
+| `IndexScreener` | `from tvscreener import IndexScreener` | `IndexField` |
+| `GovernmentBondScreener` | `from tvscreener import GovernmentBondScreener` | `GovernmentBondField` |
 
 ## Common Methods
 

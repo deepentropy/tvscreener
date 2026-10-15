@@ -65,6 +65,17 @@ class _FilterMethods:
         from tvscreener.filter import FieldCondition, FilterOperator
         return FieldCondition(self, FilterOperator.HAS_NONE_OF, values)
 
+    def match(self, pattern: str) -> 'FieldCondition':
+        """
+        Check if a text field matches a pattern (TradingView's match operation, case-insensitive).
+
+        Example:
+            >>> StockField.DESCRIPTION.match('bank')
+            >>> GovernmentBondField.NAME.match('10Y$')
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.MATCH, pattern)
+
     def is_empty(self) -> 'FieldCondition':
         """
         Check if the field has no value.
@@ -141,12 +152,14 @@ class _FilterMethods:
 
 class Field(_FilterMethods, Enum):
 
-    def __init__(self, label, field_name, format_=None, interval=False, historical=False):
+    def __init__(self, label, field_name, format_=None, interval=False, historical=False, deprecated=False):
         self.label = label
         self.field_name = field_name
         self.format = format_
         self.interval = interval
         self.historical = historical
+        # True when TradingView returns no data for the field (see scripts/generate_fields.py)
+        self.deprecated = deprecated
 
     def has_recommendation(self):
         return self.format == 'recommendation'
@@ -178,7 +191,7 @@ class Field(_FilterMethods, Enum):
 
         Example:
             >>> StockField.search("market cap")
-            [<StockField.MARKET_CAPITALIZATION: ...>, <StockField.MARKET_CAP_BASIC: ...>, ...]
+            [<StockField.MARKET_CAPITALIZATION: ...>, <StockField.PERF_1W_MARKETCAP: ...>, ...]
         """
         query = query.lower()
         return [f for f in cls if query in f.name.lower() or query in f.label.lower()]
@@ -193,7 +206,7 @@ class Field(_FilterMethods, Enum):
 
         Example:
             >>> StockField.by_format('recommendation')
-            [<StockField.RSI: ...>, <StockField.MACD: ...>, ...]
+            [<StockField.RELATIVE_STRENGTH_INDEX_14: ...>, <StockField.MACD_LEVEL_12_26: ...>, ...]
         """
         return [f for f in cls if f.format == format_type]
 
@@ -206,7 +219,7 @@ class Field(_FilterMethods, Enum):
 
         Example:
             >>> StockField.technicals()
-            [<StockField.RSI: ...>, <StockField.MACD: ...>, ...]
+            [<StockField.RELATIVE_STRENGTH_INDEX_14: ...>, <StockField.MACD_LEVEL_12_26: ...>, ...]
         """
         return [f for f in cls if f.interval]
 
@@ -219,7 +232,7 @@ class Field(_FilterMethods, Enum):
 
         Example:
             >>> StockField.with_history()
-            [<StockField.RSI: ...>, <StockField.VOLUME: ...>, ...]
+            [<StockField.RELATIVE_STRENGTH_INDEX_14: ...>, <StockField.VOLUME: ...>, ...]
         """
         return [f for f in cls if f.historical]
 
@@ -232,7 +245,7 @@ class Field(_FilterMethods, Enum):
 
         Example:
             >>> StockField.recommendations()
-            [<StockField.RSI: ...>, <StockField.STOCH_K: ...>, ...]
+            [<StockField.RELATIVE_STRENGTH_INDEX_14: ...>, <StockField.STOCHASTIC_PERCENTK_14_3_3: ...>, ...]
         """
         return [f for f in cls if f.format == 'recommendation']
 
@@ -258,7 +271,7 @@ class Field(_FilterMethods, Enum):
         :raises ValueError: If field does not support intervals or already has one
 
         Example:
-            >>> StockField.RSI.with_interval('1H')
+            >>> StockField.RELATIVE_STRENGTH_INDEX_14.with_interval('1H')
             FieldWithInterval(RSI, interval='1H')
         """
         if not self.interval:
@@ -431,6 +444,7 @@ class FieldWithInterval(_FilterMethods):
         self.format = field.format
         self.interval = True
         self.historical = field.historical
+        self.deprecated = field.deprecated
         self.name = f"{field.name}_{interval}"  # For repr in FieldCondition
 
     def has_recommendation(self):
@@ -512,6 +526,7 @@ class FieldWithHistory(_FilterMethods):
         self.format = field.format
         self.interval = field.interval
         self.historical = True
+        self.deprecated = field.deprecated
         self.name = f"{field.name}_history_{periods}"  # For repr in FieldCondition
 
     def has_recommendation(self):

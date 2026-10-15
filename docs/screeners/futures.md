@@ -25,22 +25,22 @@ The Futures Screener has access to **~393 fields** covering:
 ### Price & Volume
 
 ```python
-FuturesField.PRICE           # Current price
+FuturesField.CLOSE           # Current price
 FuturesField.OPEN            # Day open
 FuturesField.HIGH            # Day high
 FuturesField.LOW             # Day low
 FuturesField.VOLUME          # Trading volume
-FuturesField.CHANGE_PERCENT  # Daily change
+FuturesField.CHANGE  # Daily change
 ```
 
 ### Technical
 
 ```python
-FuturesField.RELATIVE_STRENGTH_INDEX_14    # RSI(14)
-FuturesField.MACD_LEVEL_12_26              # MACD
-FuturesField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
-FuturesField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
-FuturesField.AVERAGE_TRUE_RANGE_14         # ATR
+FuturesField.RSI    # RSI(14)
+FuturesField.MACD_MACD              # MACD
+FuturesField.SMA50      # SMA 50
+FuturesField.SMA200     # SMA 200
+FuturesField.ATR         # ATR
 ```
 
 ### Performance
@@ -62,8 +62,8 @@ fs.sort_by(FuturesField.VOLUME, ascending=False)
 fs.set_range(0, 50)
 fs.select(
     FuturesField.NAME,
-    FuturesField.PRICE,
-    FuturesField.CHANGE_PERCENT,
+    FuturesField.CLOSE,
+    FuturesField.CHANGE,
     FuturesField.VOLUME
 )
 
@@ -74,12 +74,12 @@ df = fs.get()
 
 ```python
 fs = FuturesScreener()
-fs.where(FuturesField.CHANGE_PERCENT > 2)
-fs.sort_by(FuturesField.CHANGE_PERCENT, ascending=False)
+fs.where(FuturesField.CHANGE > 2)
+fs.sort_by(FuturesField.CHANGE, ascending=False)
 fs.select(
     FuturesField.NAME,
-    FuturesField.PRICE,
-    FuturesField.CHANGE_PERCENT
+    FuturesField.CLOSE,
+    FuturesField.CHANGE
 )
 
 df = fs.get()
@@ -89,13 +89,13 @@ df = fs.get()
 
 ```python
 fs = FuturesScreener()
-fs.where(FuturesField.RELATIVE_STRENGTH_INDEX_14 < 30)
+fs.where(FuturesField.RSI < 30)
 fs.select(
     FuturesField.NAME,
-    FuturesField.PRICE,
-    FuturesField.RELATIVE_STRENGTH_INDEX_14
+    FuturesField.CLOSE,
+    FuturesField.RSI
 )
-fs.sort_by(FuturesField.RELATIVE_STRENGTH_INDEX_14, ascending=True)
+fs.sort_by(FuturesField.RSI, ascending=True)
 
 df = fs.get()
 ```
@@ -104,12 +104,12 @@ df = fs.get()
 
 ```python
 fs = FuturesScreener()
-fs.where(FuturesField.AVERAGE_TRUE_RANGE_14 > 0)
-fs.sort_by(FuturesField.AVERAGE_TRUE_RANGE_14, ascending=False)
+fs.where(FuturesField.ATR > 0)
+fs.sort_by(FuturesField.ATR, ascending=False)
 fs.select(
     FuturesField.NAME,
-    FuturesField.PRICE,
-    FuturesField.AVERAGE_TRUE_RANGE_14,
+    FuturesField.CLOSE,
+    FuturesField.ATR,
     FuturesField.VOLATILITY_D
 )
 fs.set_range(0, 20)
@@ -168,16 +168,16 @@ df = fs.get()
 fs = FuturesScreener()
 
 # Daily trend
-fs.where(FuturesField.PRICE > FuturesField.SIMPLE_MOVING_AVERAGE_50)
+fs.where(FuturesField.CLOSE > FuturesField.SMA50)
 
 # 4-hour RSI
-rsi_4h = FuturesField.RELATIVE_STRENGTH_INDEX_14.with_interval('240')
+rsi_4h = FuturesField.RSI.with_interval('240')
 fs.where(rsi_4h.between(40, 60))
 
 fs.select(
     FuturesField.NAME,
-    FuturesField.PRICE,
-    FuturesField.RELATIVE_STRENGTH_INDEX_14,
+    FuturesField.CLOSE,
+    FuturesField.RSI,
     rsi_4h
 )
 

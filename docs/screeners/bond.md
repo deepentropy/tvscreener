@@ -25,27 +25,27 @@ The Bond Screener has access to **~201 fields** covering:
 ### Price & Yield
 
 ```python
-BondField.PRICE           # Current price
-BondField.YIELD           # Current yield
-BondField.CHANGE_PERCENT  # Daily change
+BondField.CLOSE           # Current price
+BondField.CURRENT_YIELD           # Current yield
+BondField.CHANGE  # Daily change
 BondField.OPEN            # Day open
 BondField.HIGH            # Day high
 BondField.LOW             # Day low
 ```
 
-### Technical
+### Risk
 
 ```python
-BondField.RELATIVE_STRENGTH_INDEX_14    # RSI(14)
-BondField.MACD_LEVEL_12_26              # MACD
-BondField.SIMPLE_MOVING_AVERAGE_50      # SMA 50
-BondField.SIMPLE_MOVING_AVERAGE_200     # SMA 200
+BondField.YIELD_TO_MATURITY       # Yield to maturity
+BondField.MODIFIED_DURATION       # Modified duration
+BondField.CONVEXITY               # Convexity
+BondField.Z_SPREAD                # Z-spread
+BondField.CURRENT_COUPON          # Coupon rate
 ```
 
 ### Performance
 
 ```python
-BondField.PERF_ALL                # All time performance
 ```
 
 ## Example Screens
@@ -54,13 +54,13 @@ BondField.PERF_ALL                # All time performance
 
 ```python
 bs = BondScreener()
-bs.sort_by(BondField.YIELD, ascending=False)
+bs.sort_by(BondField.CURRENT_YIELD, ascending=False)
 bs.set_range(0, 50)
 bs.select(
     BondField.NAME,
-    BondField.PRICE,
-    BondField.YIELD,
-    BondField.CHANGE_PERCENT
+    BondField.CLOSE,
+    BondField.CURRENT_YIELD,
+    BondField.CHANGE
 )
 
 df = bs.get()
@@ -70,48 +70,39 @@ df = bs.get()
 
 ```python
 bs = BondScreener()
-bs.sort_by(BondField.CHANGE_PERCENT, ascending=False)
+bs.sort_by(BondField.CHANGE, ascending=False)
 bs.set_range(0, 20)
 bs.select(
     BondField.NAME,
-    BondField.PRICE,
-    BondField.YIELD,
-    BondField.CHANGE_PERCENT
+    BondField.CLOSE,
+    BondField.CURRENT_YIELD,
+    BondField.CHANGE
 )
 
 df = bs.get()
 ```
 
-### RSI Analysis
+### Long Duration, High Yield
 
 ```python
 bs = BondScreener()
-bs.where(BondField.RELATIVE_STRENGTH_INDEX_14 < 40)
+bs.where(BondField.MODIFIED_DURATION > 10)
+bs.where(BondField.YIELD_TO_MATURITY > 5)
 bs.select(
     BondField.NAME,
-    BondField.YIELD,
-    BondField.RELATIVE_STRENGTH_INDEX_14
+    BondField.YIELD_TO_MATURITY,
+    BondField.MODIFIED_DURATION
 )
 
 df = bs.get()
 ```
 
-## Specific Bonds
+## Government Benchmark Yields
 
-Query specific bonds:
+`BondScreener` covers individual bonds. Benchmark government yields such as `TVC:US10Y` are in
+[`GovernmentBondScreener`](government-bonds.md), with `get_yield_curve("US")` for a whole curve.
 
-```python
-bs = BondScreener()
-bs.symbols = {
-    "query": {"types": []},
-    "tickers": ["TVC:US10Y", "TVC:US02Y", "TVC:US30Y"]
-}
-bs.select_all()
-
-df = bs.get()
-```
-
-## Common Bond Symbols
+## Common Benchmark Symbols (GovernmentBondScreener)
 
 | Bond | Symbol |
 |------|--------|
@@ -131,7 +122,7 @@ bs.select_all()
 bs.set_range(0, 100)
 
 df = bs.get()
-print(f"Columns: {len(df.columns)}")  # ~201
+print(f"Columns: {len(df.columns)}")
 ```
 
 ## Notes

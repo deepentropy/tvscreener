@@ -166,3 +166,6 @@ cython_debug/
 
 # uv lock file (not tracked)
 uv.lock
+
+# Reports written by scripts/generate_fields.py
+scripts/output/

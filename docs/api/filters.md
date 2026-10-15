@@ -94,8 +94,9 @@ from tvscreener import FilterOperator
 Created by combining conditions with `|` (OR) and `&` (AND). Sent to TradingView as a `filter2` tree.
 
 ```python
-from tvscreener import StockField
+from tvscreener import StockScreener, StockField
 
+ss = StockScreener()
 group = (StockField.SECTOR == 'Finance') | (StockField.SECTOR == 'Utilities')
 group = group & (StockField.MARKET_CAPITALIZATION > 1e11)
 ss.where(group)

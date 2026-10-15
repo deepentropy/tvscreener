@@ -9,8 +9,8 @@ class BondField(Field):
     ENUM_NAME = 'Label', 'api_name', 'format_type', is_technical, is_oscillator
     """
 
-    BOND_CURRENCY = 'Bond Currency', 'Bond.Currency', 'text', False, False
-    PERF_ALL = 'Perf All', 'Perf.All', 'percent', False, False
+    BOND_CURRENCY = 'Bond Currency', 'Bond.Currency', 'text', False, False, True
+    PERF_ALL = 'Perf All', 'Perf.All', 'percent', False, False, True
     ACCRUED_COUPON_INTEREST = 'Accrued Coupon Interest', 'accrued_coupon_interest', 'float', False, False
     ACTIVE_SYMBOL = 'Active Symbol', 'active_symbol', 'float', False, False
     ALL_TIME_HIGH = 'All Time High', 'all_time_high', 'date', True, False
@@ -23,7 +23,7 @@ class BondField(Field):
     ASK_NET = 'Ask Net', 'ask_net', 'float', False, False
     ASK_PCT = 'Ask Pct', 'ask_pct', 'percent', False, False
     BARS_COUNT = 'Bars Count', 'bars_count', 'float', False, False
-    BASE_CURRENCY_KIND = 'Base Currency Kind', 'base_currency_kind', 'text', False, False
+    BASE_CURRENCY_KIND = 'Base Currency Kind', 'base_currency_kind', 'text', False, False, True
     BID = 'Bid', 'bid', 'float', False, False
     BID_ASK_SPREAD_PCT = 'Bid Ask Spread Pct', 'bid_ask_spread_pct', 'percent', False, False
     BID_NET = 'Bid Net', 'bid_net', 'float', False, False
@@ -33,7 +33,7 @@ class BondField(Field):
     BOND_ISSUER_CR_PARENT = 'Bond Issuer Cr Parent', 'bond_issuer_cr_parent', 'float', False, False
     BOND_ISSUER_CR_PARENT_STOCK_SYMBOL = 'Bond Issuer Cr Parent Stock Symbol', 'bond_issuer_cr_parent_stock_symbol', 'float', False, False
     BOND_ISSUER_SNP_OUTLOOK_LT = 'Bond Issuer S&P Outlook LT', 'bond_issuer_snp_outlook_lt', 'float', False, False
-    BOND_ISSUER_SNP_OUTLOOK_ST = 'Bond Issuer S&P Outlook ST', 'bond_issuer_snp_outlook_st', 'float', False, False
+    BOND_ISSUER_SNP_OUTLOOK_ST = 'Bond Issuer S&P Outlook ST', 'bond_issuer_snp_outlook_st', 'float', False, False, True
     BOND_ISSUER_SNP_RATING_LT = 'Bond Issuer S&P Rating LT', 'bond_issuer_snp_rating_lt', 'float', False, False
     BOND_ISSUER_SNP_RATING_LT_H = 'Bond Issuer S&P Rating LT H', 'bond_issuer_snp_rating_lt_h', 'float', False, False
     BOND_ISSUER_SNP_RATING_ST = 'Bond Issuer S&P Rating ST', 'bond_issuer_snp_rating_st', 'float', False, False
@@ -48,7 +48,7 @@ class BondField(Field):
     CALL_FREQUENCY = 'Call Frequency', 'call_frequency', 'float', False, False
     CALL_NEXT_DATE = 'Call Next Date', 'call_next_date', 'date', False, False
     CALL_NEXT_PRICE = 'Call Next Price', 'call_next_price', 'float', False, False
-    CALL_OPTION = 'Call Option', 'call_option', 'float', False, False
+    CALL_OPTION = 'Call Option', 'call_option', 'float', False, False, True
     CHANGE = 'Change', 'change', 'percent', True, False
     CHANGE_ABS = 'Change Abs', 'change_abs', 'percent', True, False
     CHANGE_FROM_OPEN = 'Change From Open', 'change_from_open', 'percent', True, False
@@ -60,8 +60,8 @@ class BondField(Field):
     COUNTRY = 'Country', 'country', 'text', False, False
     COUNTRY_CODE = 'Country Code', 'country_code', 'text', False, False
     COUNTRY_CODE_FUND = 'Country Code Fund', 'country_code_fund', 'text', False, False
-    COUNTRY_FUND = 'Country Fund', 'country_fund', 'text', False, False
-    COUPON = 'Coupon', 'coupon', 'float', False, False
+    COUNTRY_FUND = 'Country Fund', 'country_fund', 'text', False, False, True
+    COUPON = 'Coupon', 'coupon', 'float', False, False, True
     COUPON_CHANGE_TYPE = 'Coupon Change Type', 'coupon_change_type', 'percent', True, False
     COUPON_CURRENCY = 'Coupon Currency', 'coupon_currency', 'text', False, False
     COUPON_DATE_NEXT = 'Coupon Date Next', 'coupon_date_next', 'date', False, False
@@ -82,8 +82,8 @@ class BondField(Field):
     COVENANT = 'Covenant', 'covenant', 'float', False, False
     CREDIT_ENHANCEMENT_STATUS = 'Credit Enhancement Status', 'credit_enhancement_status', 'float', False, False
     CREDIT_ENHANCEMENT_TYPE = 'Credit Enhancement Type', 'credit_enhancement_type', 'text', False, False
-    CRYPTOASSET_MINUS_INFO_DESCRIPTION = 'Cryptoasset-Info Description', 'cryptoasset-info.description', 'text', False, False
-    CRYPTOASSET_MINUS_INFO_ID = 'Cryptoasset-Info Id', 'cryptoasset-info.id', 'float', False, False
+    CRYPTOASSET_MINUS_INFO_DESCRIPTION = 'Cryptoasset-Info Description', 'cryptoasset-info.description', 'text', False, False, True
+    CRYPTOASSET_MINUS_INFO_ID = 'Cryptoasset-Info Id', 'cryptoasset-info.id', 'float', False, False, True
     CURRENCY = 'Currency', 'currency', 'text', False, False
     CURRENCY_ID = 'Currency Id', 'currency_id', 'text', False, False
     CURRENCY_KIND = 'Currency Kind', 'currency_kind', 'text', False, False
@@ -97,9 +97,9 @@ class BondField(Field):
     DESCRIPTION = 'Description', 'description', 'text', False, False
     DURATION_TYPE = 'Duration Type', 'duration_type', 'percent', False, False
     EXCHANGE = 'Exchange', 'exchange', 'percent', True, False
-    EXPIRATION = 'Expiration', 'expiration', 'percent', False, False
+    EXPIRATION = 'Expiration', 'expiration', 'percent', False, False, True
     FINAL_REDEMPTION_AMOUNT = 'Final Redemption Amount', 'final_redemption_amount', 'float', False, False
-    FOREX_PRIORITY = 'Forex Priority', 'forex_priority', 'float', False, False
+    FOREX_PRIORITY = 'Forex Priority', 'forex_priority', 'float', False, False, True
     FRACTIONAL = 'Fractional', 'fractional', 'float', False, False
     FUNDAMENTAL_CURRENCY_CODE = 'Fundamental Currency Code', 'fundamental_currency_code', 'text', False, False
     GAP = 'Gap', 'gap', 'float', True, False
@@ -108,15 +108,15 @@ class BondField(Field):
     GAP_UP = 'Gap Up', 'gap_up', 'float', True, False
     GAP_UP_ABS = 'Gap Up Abs', 'gap_up_abs', 'float', True, False
     HIGH = 'High', 'high', 'float', True, False
-    INDEX_PRIORITY = 'Index Priority', 'index_priority', 'float', False, False
-    INDEXES = 'Indexes', 'indexes', 'float', False, False
+    INDEX_PRIORITY = 'Index Priority', 'index_priority', 'float', False, False, True
+    INDEXES = 'Indexes', 'indexes', 'float', False, False, True
     INDICATORS_BARS_COUNT = 'Indicators Bars Count', 'indicators_bars_count', 'float', False, False
     INDUSTRY = 'Industry', 'industry', 'text', False, False
     INFLATION_PROTECTION = 'Inflation Protection', 'inflation_protection', 'float', False, False
     IS_BLACKLISTED = 'Is Blacklisted', 'is_blacklisted', 'float', False, False
     IS_PRIMARY = 'Is Primary', 'is_primary', 'float', False, False
     IS_SHARIAH_COMPLIANT = 'Is Shariah Compliant', 'is_shariah_compliant', 'float', False, False
-    IS_SYMBOL_PRIMARY_LISTING = 'Is Symbol Primary Listing', 'is_symbol_primary_listing', 'float', False, False
+    IS_SYMBOL_PRIMARY_LISTING = 'Is Symbol Primary Listing', 'is_symbol_primary_listing', 'float', False, False, True
     ISSUE_AMOUNT = 'Issue Amount', 'issue_amount', 'float', False, False
     ISSUE_DATE = 'Issue Date', 'issue_date', 'date', False, False
     ISSUE_STATUS = 'Issue Status', 'issue_status', 'float', False, False
@@ -151,15 +151,15 @@ class BondField(Field):
     POISON_PUT_OPTION = 'Poison Put Option', 'poison_put_option', 'float', False, False
     POPULARITY_RANK = 'Popularity Rank', 'popularity_rank', 'float', False, False
     POST_CHANGE = 'Post Change', 'post_change', 'percent', True, False
-    POSTMARKET_CHANGE = 'Postmarket Change', 'postmarket_change', 'percent', True, False
-    POSTMARKET_CHANGE_ABS = 'Postmarket Change Abs', 'postmarket_change_abs', 'percent', True, False
+    POSTMARKET_CHANGE = 'Postmarket Change', 'postmarket_change', 'percent', True, False, True
+    POSTMARKET_CHANGE_ABS = 'Postmarket Change Abs', 'postmarket_change_abs', 'percent', True, False, True
     PRE_CHANGE = 'Pre Change', 'pre_change', 'percent', True, False
     PRE_CHANGE_ABS = 'Pre Change Abs', 'pre_change_abs', 'percent', True, False
-    PREMARKET_CHANGE = 'Premarket Change', 'premarket_change', 'percent', True, False
-    PREMARKET_CHANGE_ABS = 'Premarket Change Abs', 'premarket_change_abs', 'percent', True, False
-    PREMARKET_CHANGE_FROM_OPEN = 'Premarket Change From Open', 'premarket_change_from_open', 'percent', True, False
-    PREMARKET_CHANGE_FROM_OPEN_ABS = 'Premarket Change From Open Abs', 'premarket_change_from_open_abs', 'percent', True, False
-    PREMARKET_GAP = 'Premarket Gap', 'premarket_gap', 'float', True, False
+    PREMARKET_CHANGE = 'Premarket Change', 'premarket_change', 'percent', True, False, True
+    PREMARKET_CHANGE_ABS = 'Premarket Change Abs', 'premarket_change_abs', 'percent', True, False, True
+    PREMARKET_CHANGE_FROM_OPEN = 'Premarket Change From Open', 'premarket_change_from_open', 'percent', True, False, True
+    PREMARKET_CHANGE_FROM_OPEN_ABS = 'Premarket Change From Open Abs', 'premarket_change_from_open_abs', 'percent', True, False, True
+    PREMARKET_GAP = 'Premarket Gap', 'premarket_gap', 'float', True, False, True
     PREMATURE_REDEMPTION = 'Premature Redemption', 'premature_redemption', 'float', True, False
     PRICESCALE = 'Pricescale', 'pricescale', 'float', False, False
     PRINCIPAL_REDEMPTION_TYPE = 'Principal Redemption Type', 'principal_redemption_type', 'text', False, False
@@ -167,20 +167,20 @@ class BondField(Field):
     PUT_FREQUENCY = 'Put Frequency', 'put_frequency', 'float', False, False
     PUT_NEXT_DATE = 'Put Next Date', 'put_next_date', 'date', False, False
     PUT_NEXT_PRICE = 'Put Next Price', 'put_next_price', 'float', False, False
-    PUT_OPTION = 'Put Option', 'put_option', 'float', False, False
-    RATES_CF = 'Rates Cf', 'rates_cf', 'float', False, False
+    PUT_OPTION = 'Put Option', 'put_option', 'float', False, False, True
+    RATES_CF = 'Rates Cf', 'rates_cf', 'float', False, False, True
     RATES_CURRENT = 'Rates Current', 'rates_current', 'float', False, False
-    RATES_DIVIDEND_RECENT = 'Rates Dividend Recent', 'rates_dividend_recent', 'float', False, False
-    RATES_DIVIDEND_UPCOMING = 'Rates Dividend Upcoming', 'rates_dividend_upcoming', 'float', False, False
+    RATES_DIVIDEND_RECENT = 'Rates Dividend Recent', 'rates_dividend_recent', 'float', False, False, True
+    RATES_DIVIDEND_UPCOMING = 'Rates Dividend Upcoming', 'rates_dividend_upcoming', 'float', False, False, True
     RATES_EARNINGS_FQ = 'Rates Earnings FQ', 'rates_earnings_fq', 'float', False, False
     RATES_EARNINGS_NEXT_FQ = 'Rates Earnings Next FQ', 'rates_earnings_next_fq', 'float', False, False
-    RATES_FH = 'Rates FH', 'rates_fh', 'float', False, False
-    RATES_FQ = 'Rates FQ', 'rates_fq', 'float', False, False
-    RATES_FY = 'Rates FY', 'rates_fy', 'float', False, False
+    RATES_FH = 'Rates FH', 'rates_fh', 'float', False, False, True
+    RATES_FQ = 'Rates FQ', 'rates_fq', 'float', False, False, True
+    RATES_FY = 'Rates FY', 'rates_fy', 'float', False, False, True
     RATES_MC = 'Rates Mc', 'rates_mc', 'float', False, False
-    RATES_PT = 'Rates Pt', 'rates_pt', 'float', False, False
-    RATES_TIME_SERIES = 'Rates Time Series', 'rates_time_series', 'date', False, False
-    RATES_TTM = 'Rates TTM', 'rates_ttm', 'float', False, False
+    RATES_PT = 'Rates Pt', 'rates_pt', 'float', False, False, True
+    RATES_TIME_SERIES = 'Rates Time Series', 'rates_time_series', 'date', False, False, True
+    RATES_TTM = 'Rates TTM', 'rates_ttm', 'float', False, False, True
     REDEMPTION_TYPE = 'Redemption Type', 'redemption_type', 'text', False, False
     REDEMPTIONS_H = 'Redemptions H', 'redemptions_h', 'float', False, False
     REGION = 'Region', 'region', 'float', False, False
@@ -190,10 +190,10 @@ class BondField(Field):
     SINKING_FUND = 'Sinking Fund', 'sinking_fund', 'float', False, False
     SOCIAL_RESPONSIBILITY = 'Social Responsibility', 'social_responsibility', 'float', False, False
     SOURCE_MINUS_LOGOID = 'Source-Logoid', 'source-logoid', 'text', False, False
-    SUBMARKET = 'Submarket', 'submarket', 'float', False, False
+    SUBMARKET = 'Submarket', 'submarket', 'float', False, False, True
     SUBTYPE = 'Subtype', 'subtype', 'text', False, False
-    SYMBOL = 'Symbol', 'symbol', 'float', False, False
-    TERM_MINUS_TO_MINUS_MATURITY = 'Term-To-Maturity', 'term-to-maturity', 'float', False, False
+    SYMBOL = 'Symbol', 'symbol', 'float', False, False, True
+    TERM_MINUS_TO_MINUS_MATURITY = 'Term-To-Maturity', 'term-to-maturity', 'float', False, False, True
     TIME = 'Time', 'time', 'date', False, False
     TYPE = 'Type', 'type', 'text', False, False
     TYPESPECS = 'Typespecs', 'typespecs', 'text', False, False
@@ -210,6 +210,37 @@ class BondField(Field):
     YIELD_TO_MATURITY = 'Yield To Maturity', 'yield_to_maturity', 'percent', False, False
     YIELD_TO_PUT = 'Yield To Put', 'yield_to_put', 'percent', False, False
     YIELD_TO_WORST = 'Yield To Worst', 'yield_to_worst', 'percent', False, False
+
+    # Added from bond metainfo by scripts/generate_fields.py (15/10/2026)
+    BOND_FITCH_OUTLOOK_LT = 'Bond Fitch Outlook Lt', 'bond_fitch_outlook_lt', 'float', False, False
+    BOND_FITCH_RATING_LT = 'Bond Fitch Rating Lt', 'bond_fitch_rating_lt', 'float', False, False
+    BOND_MOODYS_RATING_LT = 'Bond Moodys Rating Lt', 'bond_moodys_rating_lt', 'float', False, False
+    CFI_CODE = 'CFI Code', 'cfi_code', 'float', False, False
+    CONVEXITY = 'Convexity', 'convexity', 'float', False, False
+    DAILY_BAR_CLOSE = 'Daily Bar Close', 'daily-bar.close', 'float', False, False
+    DV_01 = 'DV 01', 'dv_01', 'float', False, False
+    F_SPREAD = 'F Spread', 'f_spread', 'float', False, False
+    G_SPREAD = 'G Spread', 'g_spread', 'float', False, False
+    ISSUER_FITCH_OUTLOOK_LT = 'Issuer Fitch Outlook Lt', 'issuer_fitch_outlook_lt', 'float', False, False
+    ISSUER_FITCH_OUTLOOK_ST = 'Issuer Fitch Outlook St', 'issuer_fitch_outlook_st', 'float', False, False
+    ISSUER_FITCH_RATING_LT = 'Issuer Fitch Rating Lt', 'issuer_fitch_rating_lt', 'float', False, False
+    ISSUER_FITCH_RATING_ST = 'Issuer Fitch Rating St', 'issuer_fitch_rating_st', 'float', False, False
+    ISSUER_MOODYS_OUTLOOK_LT = 'Issuer Moodys Outlook Lt', 'issuer_moodys_outlook_lt', 'float', False, False
+    ISSUER_MOODYS_RATING_LT = 'Issuer Moodys Rating Lt', 'issuer_moodys_rating_lt', 'float', False, False
+    ISSUER_MOODYS_RATING_ST = 'Issuer Moodys Rating St', 'issuer_moodys_rating_st', 'float', False, False
+    ISSUER_SNP_RATING_LT = 'Issuer Snp Rating Lt', 'issuer_snp_rating_lt', 'float', False, False
+    ISSUER_SNP_RATING_ST = 'Issuer Snp Rating St', 'issuer_snp_rating_st', 'float', False, False
+    LAST_PRICE_UPDATE_TIME_INTRADAY = 'Last Price Update Time Intraday', 'last-price-update-time-intraday', 'date', False, False
+    MACAULAY_DURATION = 'Macaulay Duration', 'macaulay_duration', 'float', False, False
+    MATURITY_DATE_2 = 'Maturity Date (maturity-date)', 'maturity-date', 'float', False, False
+    MINUTE_BAR_CLOSE = 'Minute Bar Close', 'minute-bar.close', 'float', False, False
+    MODIFIED_DURATION = 'Modified Duration', 'modified_duration', 'float', False, False
+    SUBSESSIONS = 'Subsessions', 'subsessions', 'float', False, False
+    YTM_TO_ASK = 'YTM To Ask', 'ytm_to_ask', 'float', False, False
+    YTM_TO_BID = 'YTM To Bid', 'ytm_to_bid', 'float', False, False
+    YTW_TO_ASK = 'YTW To Ask', 'ytw_to_ask', 'float', False, False
+    YTW_TO_BID = 'YTW To Bid', 'ytw_to_bid', 'float', False, False
+    Z_SPREAD = 'Z Spread', 'z_spread', 'float', False, False
 
 
 # Default fields for backward compatibility (original 0 fields)
