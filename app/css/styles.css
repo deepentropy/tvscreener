@@ -1071,7 +1071,9 @@ select {
 .code[data-focus="screener"] .line[data-section="screener"],
 .code[data-focus="filters"] .line[data-section="filters"],
 .code[data-focus="fields"] .line[data-section="fields"],
-.code[data-focus="options"] .line[data-section="options"] {
+.code[data-focus="options"] .line[data-section="options"],
+.code[data-focus="helper"] .line[data-section="helper"],
+.code[data-focus="args"] .line[data-section="args"] {
     opacity: 1;
     background: rgba(43, 80, 224, 0.16);
     border-left-color: #6d8bff;
@@ -1196,5 +1198,133 @@ select {
     *::after {
         animation: none !important;
         transition: none !important;
+    }
+}
+
+/* ---------- Mode tabs (Screeners / Helpers) ---------- */
+
+.mode-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mode-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 10px 12px 9px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.mode-tab + .mode-tab {
+    border-left: 1px solid var(--rule-soft);
+}
+
+.mode-tab:hover {
+    background: var(--paper);
+}
+
+.mode-tab.active {
+    border-bottom-color: var(--signal);
+    background: var(--signal-soft);
+}
+
+.mode-tab.active .tab-label {
+    color: var(--ink);
+}
+
+.mode-new {
+    margin-left: 4px;
+    padding: 1px 6px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--up);
+    border-radius: 999px;
+    vertical-align: 1px;
+}
+
+/* ---------- Helpers ---------- */
+
+.helper-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.helper-group .presets-label {
+    width: 104px;
+}
+
+.helper-pill.active {
+    color: var(--signal);
+    background: var(--signal-soft);
+    border-color: var(--signal);
+}
+
+.helper-desc {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.helper-desc a {
+    color: var(--signal);
+    white-space: nowrap;
+}
+
+.helper-fn {
+    font-family: var(--font-code) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-size: 12.5px !important;
+}
+
+.helper-form .option {
+    grid-template-columns: 104px minmax(0, 1fr);
+}
+
+.helper-check {
+    justify-self: start;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--signal);
+}
+
+.helper-multi {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+}
+
+.helper-multi-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.helper-multi-item input {
+    accent-color: var(--signal);
+}
+
+@media (max-width: 520px) {
+    .helper-group {
+        flex-direction: column;
+        gap: 4px;
     }
 }

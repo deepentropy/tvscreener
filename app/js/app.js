@@ -5,6 +5,7 @@
 const App = {
     // State
     state: {
+        mode: 'screeners',
         screenerType: 'stock',
         filters: [],
         selectedFields: [],
@@ -246,6 +247,27 @@ const App = {
         this.createSortPicker();
         this.bindEvents();
         this.refreshScreenerUI();
+        HelperPanel.init(() => this.updateCode());
+    },
+
+    /**
+     * Switch between the screener builder and the helper functions
+     */
+    setMode(mode) {
+        if (mode === this.state.mode) return;
+        this.state.mode = mode;
+        this.elements.modeTabs.forEach(btn => {
+            const on = btn.dataset.mode === mode;
+            btn.classList.toggle('active', on);
+            btn.setAttribute('aria-selected', String(on));
+        });
+        document.querySelectorAll('.block[data-mode]').forEach(block => {
+            block.hidden = block.dataset.mode !== mode;
+        });
+        this.elements.screenerTabs.hidden = mode !== 'screeners';
+        FieldPicker.close();
+        this.previousLines = null;
+        this.updateCode();
     },
 
     /**
@@ -254,6 +276,8 @@ const App = {
     cacheElements() {
         this.elements = {
             screenerTabs: document.getElementById('screener-tabs'),
+            modeTabs: document.querySelectorAll('.mode-tab'),
+            filename: document.getElementById('filename'),
             fieldsIntervalGroup: document.getElementById('fields-interval-group'),
             fieldsInterval: document.getElementById('fields-interval'),
             fieldsIntervalHint: document.getElementById('fields-interval-hint'),
@@ -530,6 +554,7 @@ const App = {
         });
 
         this.elements.copyBtn.addEventListener('click', () => this.copyCode());
+        this.elements.modeTabs.forEach(btn => btn.addEventListener('click', () => this.setMode(btn.dataset.mode)));
 
         // Highlight the code lines produced by the hovered or focused section
         const code = this.elements.generatedCode;
@@ -794,6 +819,15 @@ const App = {
      * Update generated code
      */
     updateCode() {
+        if (this.state.mode === 'helpers') {
+            const lines = HelperPanel.generateLines();
+            this.elements.filename.textContent = `${HelperPanel.helper().fn.replace(/^get_/, '')}.py`;
+            this.code = lines.map(l => l.text).join('\n');
+            this.renderCode(lines);
+            return;
+        }
+        this.elements.filename.textContent = 'screener.py';
+
         const config = {
             screenerType: this.state.screenerType,
             screenerConfig: this.getScreenerConfig(),

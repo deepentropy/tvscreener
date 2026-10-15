@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tvscreener Code Generator</title>
-    <meta name="description" content="Build a TradingView screener query visually and copy the Python code for tvscreener.">
+    <meta name="description" content="Build a TradingView screener query, or a financials, calendar or news call, and copy the Python code for tvscreener.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232b50e0' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='2 17 8 11 12 15 22 5'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,9 +36,35 @@
     <main class="workspace">
         <!-- Left: query builder -->
         <div class="builder">
+            <nav class="mode-tabs" role="tablist" aria-label="Mode">
+                <button type="button" class="mode-tab active" data-mode="screeners" role="tab" aria-selected="true">
+                    <span class="tab-label">Screeners</span>
+                    <span class="tab-count">Filter and rank symbols</span>
+                </button>
+                <button type="button" class="mode-tab" data-mode="helpers" role="tab" aria-selected="false">
+                    <span class="tab-label">Helpers <span class="mode-new">new</span></span>
+                    <span class="tab-count">Financials, quotes, calendars, news</span>
+                </button>
+            </nav>
+
             <nav class="screener-tabs" id="screener-tabs" role="tablist" aria-label="Screener"></nav>
 
-            <section class="block" data-section="filters" aria-labelledby="filters-title">
+            <section class="block" data-section="helper" data-mode="helpers" aria-labelledby="helper-title" hidden>
+                <header class="block-head">
+                    <h2 id="helper-title">Function</h2>
+                </header>
+                <div id="helper-list" class="helper-list"></div>
+                <p class="helper-desc"><span id="helper-desc"></span> <a id="helper-doc" href="#" target="_blank" rel="noopener">Guide</a></p>
+            </section>
+
+            <section class="block" data-section="args" data-mode="helpers" aria-labelledby="helper-args-title" hidden>
+                <header class="block-head">
+                    <h2 id="helper-args-title" class="helper-fn">Arguments</h2>
+                </header>
+                <div id="helper-form" class="options helper-form"></div>
+            </section>
+
+            <section class="block" data-section="filters" data-mode="screeners" aria-labelledby="filters-title">
                 <header class="block-head">
                     <h2 id="filters-title">Filters</h2>
                     <button class="btn btn-ghost" id="add-filter-btn" type="button">
@@ -50,7 +76,7 @@
                 <p id="filters-hint" class="filters-hint" hidden>Filters joined by OR form one group. Groups are combined with AND.</p>
             </section>
 
-            <section class="block" data-section="fields" aria-labelledby="fields-title">
+            <section class="block" data-section="fields" data-mode="screeners" aria-labelledby="fields-title">
                 <header class="block-head">
                     <h2 id="fields-title">Columns</h2>
                     <div class="block-head-right">
@@ -83,7 +109,7 @@
                 <div id="fields-container" class="field-list" role="group" aria-label="Fields"></div>
             </section>
 
-            <section class="block" data-section="options" aria-labelledby="options-title">
+            <section class="block" data-section="options" data-mode="screeners" aria-labelledby="options-title">
                 <header class="block-head">
                     <h2 id="options-title">Results</h2>
                 </header>
@@ -125,7 +151,7 @@
         <!-- Right: generated code -->
         <section class="output" aria-label="Generated Python code">
             <header class="output-head">
-                <span class="filename">screener.py</span>
+                <span class="filename" id="filename">screener.py</span>
                 <button id="copy-btn" class="btn btn-copy" type="button">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -197,6 +223,7 @@
     <script src="js/code-generator.js"></script>
     <script src="js/field-search.js"></script>
     <script src="js/field-picker.js"></script>
+    <script src="js/helpers.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
