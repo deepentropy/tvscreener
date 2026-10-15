@@ -166,12 +166,26 @@ class TestMcpBuildCondition:
         assert build_condition({"field": "DIVIDENDS_YIELD", "op": "not_empty"}).to_filter().to_dict() == \
             {"left": "dividends_yield", "operation": "nempty"}
 
-    def test_unknown_parts_skipped(self):
-        assert build_condition({"field": "NOT_A_FIELD", "op": ">", "value": 1}) is None
-        assert build_condition({"field": "PRICE", "op": "bogus", "value": 1}) is None
-        cond = build_condition({"or": [{"field": "NOT_A_FIELD", "op": ">", "value": 1},
-                                       {"field": "PRICE", "op": ">", "value": 1}]})
-        assert isinstance(cond, FieldCondition)
+    @pytest.mark.parametrize("spec, message", [
+        ({"field": "NOT_A_FIELD", "op": ">", "value": 1}, "Unknown field"),
+        ({"field": "PRICE", "op": "bogus", "value": 1}, "Unknown op"),
+        ({"field": "PRICE", "operator": ">", "value": 1}, "Unknown filter keys"),
+        ({"field": "PRICE", "value": 1}, "needs 'field' and 'op'"),
+        ({"field": "PRICE", "op": ">"}, "needs a 'value'"),
+        ({"field": "PRICE", "op": "above_pct", "value": 5}, "needs value"),
+        ({"field": "PRICE", "op": "above_pct", "value": ["NOT_A_FIELD", 5]}, "Unknown field"),
+        ({"or": []}, "non-empty list"),
+        ({"or": [{"field": "PRICE", "op": ">", "value": 1}], "field": "PRICE"}, "single key"),
+        ({"or": [{"field": "NOT_A_FIELD", "op": ">", "value": 1}, {"field": "PRICE", "op": ">", "value": 1}]},
+         "Unknown field"),
+        ("PRICE > 1", "must be an object"),
+    ])
+    def test_invalid_filters_raise(self, spec, message):
+        with pytest.raises(ValueError, match=message):
+            build_condition(spec)
+
+    def test_empty_needs_no_value(self):
+        assert build_condition({"field": "DIVIDENDS_YIELD", "op": "empty"}).operation == FilterOperator.EMPTY
 
 
 class TestHistoryFlags:

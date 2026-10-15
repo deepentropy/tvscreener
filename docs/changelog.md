@@ -2,6 +2,19 @@
 
 All notable changes to tvscreener.
 
+## [0.8.1] - 15/10/2026
+
+### Added
+
+- **MCP tools for the 0.8.0 features**
+  - 12 new tools: `financials`, `corporate_events`, `seasonals`, `quotes`, `news`, `company_documents`, `earnings_calls`, `read_text`, `find_symbols`, `peers`, `forward_curve`, `volatility_smile`
+  - `get_calendar` accepts `kind="economic"`, with `countries` and `importance`
+  - `yield_curve` accepts several countries (or `ALL`) and `tenors`, and then returns a matrix
+
+### Fixed
+
+- **MCP `custom_query` no longer ignores invalid input.** Unknown filter keys (e.g. `operator` instead of `op`), fields, operators, `sort_by` fields and asset types now return an error. A missing `op` or `value` also returns an error. Before, a misspelled key quietly became `>=`, and unknown parts were dropped.
+
 ## [0.8.0] - 15/10/2026
 
 ### Added

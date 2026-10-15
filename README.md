@@ -87,6 +87,21 @@ tvs.get_yield_matrix(["US", "DE", "JP"])                # government yields by c
 tvs.get_volatility_smile("NASDAQ:AAPL", "2026-11-13")   # implied volatility by strike
 ```
 
+### For AI Assistants (MCP)
+
+Everything above is also available to Claude and other MCP clients (`pip install tvscreener[mcp]`, then `claude mcp add tvscreener -- tvscreener-mcp`). The server has 24 tools:
+
+| Tools | Data |
+|-------|------|
+| `financials`, `corporate_events`, `seasonals` | Statements, dividends, earnings, splits, monthly returns |
+| `quotes` | Current prices, bid/ask, pre/after-market |
+| `news`, `company_documents`, `earnings_calls`, `read_text` | Filtered news, filings, transcripts and their full text |
+| `find_symbols`, `peers`, `forward_curve`, `volatility_smile` | Symbol search, peers, futures and options |
+| `get_calendar` (`kind="economic"`), `yield_curve` (several countries) | Economic calendar, yield matrix |
+| `discover_fields`, `custom_query`, `search_stocks`... | Screeners, as before |
+
+`custom_query` now rejects unknown fields, filter keys and operators with a clear message instead of ignoring them.
+
 Guides: [Financials and Events](https://deepentropy.github.io/tvscreener/docs/guide/fundamentals/) · [News and Filings](https://deepentropy.github.io/tvscreener/docs/guide/news-documents/) · [Real-Time Quotes](https://deepentropy.github.io/tvscreener/docs/guide/streaming/#real-time-quotes)
 
 ---

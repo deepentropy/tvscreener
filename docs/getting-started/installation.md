@@ -44,6 +44,7 @@ tvscreener automatically installs these dependencies:
 |---------|---------|
 | `pandas` | DataFrames for results |
 | `requests` | HTTP requests to TradingView |
+| `websocket-client` | TradingView's data websocket (financials, real-time quotes, events, seasonals) |
 
 ## Optional Dependencies
 
@@ -58,6 +59,14 @@ tvscreener-mcp
 # Register with Claude Code
 claude mcp add tvscreener -- tvscreener-mcp
 ```
+
+The server exposes 24 tools:
+
+- **Screeners:** `discover_fields`, `custom_query`, `search_stocks`, `search_crypto`, `search_forex`, `get_top_movers`, `symbol_data`
+- **Company data:** `financials`, `corporate_events`, `seasonals`, `quotes`, `peers`
+- **News and filings:** `news`, `company_documents`, `earnings_calls`, `read_text`
+- **Markets:** `get_calendar` (earnings, dividends, IPO, economic), `yield_curve`, `forward_curve`, `volatility_smile`, `find_symbols`
+- **Reference:** `list_field_types`, `list_sectors`, `list_filter_operators`
 
 For styled output (colored tables):
 
