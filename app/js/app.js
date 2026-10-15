@@ -31,7 +31,11 @@ const App = {
         forex: 'Forex',
         bond: 'Bond',
         futures: 'Futures',
-        coin: 'Coin'
+        coin: 'Coin',
+        etf: 'ETF',
+        index: 'Index',
+        government_bond: 'Gov Bonds',
+        economics: 'Economics'
     },
 
     // Preset labels
@@ -68,7 +72,21 @@ const App = {
             basic: ['NAME', 'PRICE', 'CHANGE_PERCENT', 'VOLUME']
         },
         coin: {
-            basic: ['NAME', 'PRICE', 'CHANGE_PERCENT', 'VOLUME', 'MARKET_CAPITALIZATION']
+            basic: ['NAME', 'CLOSE', 'CHANGE', 'N24H_VOL_CMC', 'MARKET_CAP_CALC']
+        },
+        etf: {
+            basic: ['NAME', 'PRICE', 'CHANGE_PERCENT', 'AUM', 'EXPENSE_RATIO', 'ASSET_CLASS_NAME', 'ISSUER'],
+            performance: ['NAME', 'PRICE', 'NAV_TOTAL_RETURN_1M', 'NAV_TOTAL_RETURN_YTD', 'NAV_TOTAL_RETURN_1Y', 'FUND_FLOWS_3M'],
+            dividends: ['NAME', 'PRICE', 'DIVIDENDS_YIELD', 'DIVIDENDS_FREQUENCY', 'DIVIDEND_TREATMENT']
+        },
+        index: {
+            basic: ['NAME', 'DESCRIPTION', 'CLOSE', 'CHANGE', 'TYPESPECS']
+        },
+        government_bond: {
+            basic: ['NAME', 'DESCRIPTION', 'COUNTRY_CODE', 'CLOSE', 'CHANGE_ABS', 'DAYS_TO_MATURITY']
+        },
+        economics: {
+            basic: ['NAME', 'DESCRIPTION', 'COUNTRY_CODE', 'ECONOMIC_CATEGORY_ID', 'CLOSE', 'TIME']
         }
     },
 

@@ -170,7 +170,7 @@ select {
 
 .screener-tabs {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     background: var(--surface);
     border: 1px solid var(--rule);
     border-radius: var(--radius);
@@ -193,8 +193,17 @@ select {
     transition: background 0.15s, border-color 0.15s;
 }
 
-.screener-tab:last-child {
+.screener-tab:nth-child(5n) {
     border-right: none;
+}
+
+/* Second row of tabs */
+.screener-tab:nth-child(n + 6) {
+    border-top: 1px solid var(--rule-soft);
+}
+
+.tab-label {
+    white-space: nowrap;
 }
 
 .screener-tab:hover {

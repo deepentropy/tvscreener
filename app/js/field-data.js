@@ -714,15 +714,6 @@ const FIELD_DATA = {
           "category": "Dividends"
         },
         {
-          "name": "DIVIDEND_YIELD_FORWARD",
-          "label": "Dividend Yield Forward",
-          "fieldName": "dividend_yield_recent",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
           "name": "DONCHIAN_CHANNELS_LOWER_BAND_20",
           "label": "Donchian Channels Lower Band (20)",
           "fieldName": "DonchCh20.Lower",
@@ -3801,15 +3792,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "PERF_Y_MARKETCAP",
-          "label": "Market Cap Performance 1Y %",
-          "fieldName": "Perf.Y.MarketCap",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "PERF_YTD_MARKETCAP",
           "label": "Market Cap Performance YTD %",
           "fieldName": "Perf.YTD.MarketCap",
@@ -3826,15 +3808,6 @@ const FIELD_DATA = {
           "interval": true,
           "historical": false,
           "category": "Volatility"
-        },
-        {
-          "name": "EXPECTED_ANNUAL_DIVIDENDS",
-          "label": "Expected Annual Dividends",
-          "fieldName": "expected_annual_dividends",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "EARNINGS_PER_SHARE_FORECAST_FQ",
@@ -3990,15 +3963,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "FREQUENCY_RECENT",
-          "label": "Frequency Recent",
-          "fieldName": "frequency_recent",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "RECOMMENDATION_SELL",
           "label": "Recommendation Sell",
           "fieldName": "recommendation_sell",
@@ -4015,15 +3979,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "DEBT_TO_ASSETS",
-          "label": "Debt to Assets",
-          "fieldName": "debt_to_assets",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "EX_DIVIDEND_DATE_UPCOMING",
@@ -4062,15 +4017,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "LONG_TERM_CAPITAL",
-          "label": "Long Term Capital",
-          "fieldName": "long_term_capital",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "EARNINGS_PER_SHARE_DILUTED_FY",
           "label": "Earnings per Share Diluted FY",
           "fieldName": "earnings_per_share_diluted_fy",
@@ -4084,15 +4030,6 @@ const FIELD_DATA = {
           "label": "Rtc",
           "fieldName": "rtc",
           "format": "currency",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "INVERSE_FLAG",
-          "label": "Inverse Flag",
-          "fieldName": "inverse_flag",
-          "format": "round",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -4222,15 +4159,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "PRICE_EARNINGS_FORWARD_FY",
-          "label": "Price Earnings Forward FY",
-          "fieldName": "price_earnings_forward_fy",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
         },
         {
           "name": "DIVIDEND_PAYOUT_RATIO_PERCENT_FY",
@@ -4818,15 +4746,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "GROSS_MARGIN_PERCENT_TTM_2",
-          "label": "Gross Margin Percent TTM",
-          "fieldName": "gross_margin_percent_ttm",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Profitability"
-        },
-        {
           "name": "DIVIDENDS_YIELD_FQ",
           "label": "Dividends Yield FQ",
           "fieldName": "dividends_yield_fq",
@@ -4971,15 +4890,6 @@ const FIELD_DATA = {
           "category": "Earnings"
         },
         {
-          "name": "FREQUENCY_UPCOMING",
-          "label": "Frequency Upcoming",
-          "fieldName": "frequency_upcoming",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "FREE_CASH_FLOW_TTM_H",
           "label": "Free Cash Flow TTM H",
           "fieldName": "free_cash_flow_ttm_h",
@@ -5122,15 +5032,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Growth"
-        },
-        {
-          "name": "DIVIDEND_YIELD_UPCOMING",
-          "label": "Dividend Yield Upcoming",
-          "fieldName": "dividend_yield_upcoming",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "NET_INCOME_FQ",
@@ -5365,15 +5266,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "YIELD_UPCOMING",
-          "label": "Yield Upcoming",
-          "fieldName": "yield_upcoming",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "CAPEX_PER_SHARE_FQ",
@@ -5673,15 +5565,6 @@ const FIELD_DATA = {
           "category": "Balance Sheet"
         },
         {
-          "name": "DIVIDEND_FREQUENCY_RECENT",
-          "label": "Dividend Frequency Recent",
-          "fieldName": "dividend_frequency_recent",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
           "name": "TOTAL_REVENUE_TTM_H",
           "label": "Total Revenue TTM H",
           "fieldName": "total_revenue_ttm_h",
@@ -5860,24 +5743,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "DIVIDEND_FREQUENCY_UPCOMING",
-          "label": "Dividend Frequency Upcoming",
-          "fieldName": "dividend_frequency_upcoming",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "YIELD_RECENT",
-          "label": "Yield Recent",
-          "fieldName": "yield_recent",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "RESEARCH_AND_DEV_FH",
@@ -6456,15 +6321,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "INDEX_PRIORITY",
-          "label": "Index Priority",
-          "fieldName": "index_priority",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "RATES_TIME_SERIES",
           "label": "Rates Time Series",
           "fieldName": "rates_time_series",
@@ -6472,15 +6328,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "CASH_RATIO",
-          "label": "Cash Ratio",
-          "fieldName": "cash_ratio",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "TOTAL_DEBT_FY",
@@ -6652,24 +6499,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Balance Sheet"
-        },
-        {
-          "name": "TOTAL_CAPITAL",
-          "label": "Total Capital",
-          "fieldName": "total_capital",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PREFERRED_DIVIDENDS",
-          "label": "Preferred Dividends",
-          "fieldName": "preferred_dividends",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "NCAVPS_RATIO_FH",
@@ -6951,15 +6780,6 @@ const FIELD_DATA = {
           "category": "Earnings"
         },
         {
-          "name": "MATURITY_DATE",
-          "label": "Maturity Date",
-          "fieldName": "maturity_date",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
-        },
-        {
           "name": "TOTAL_DEBT_TO_EBITDA_FQ",
           "label": "Total Debt to EBITDA FQ",
           "fieldName": "total_debt_to_ebitda_fq",
@@ -6976,15 +6796,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Valuation"
-        },
-        {
-          "name": "EXPIRATION",
-          "label": "Expiration",
-          "fieldName": "expiration",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "FREE_CASH_FLOW_CAGR_5Y",
@@ -7012,24 +6823,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "BASE_CURRENCY_KIND",
-          "label": "Base Currency Kind",
-          "fieldName": "base_currency_kind",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CRYPTOASSET_INFO_DESCRIPTION",
-          "label": "Cryptoasset-info Description",
-          "fieldName": "cryptoasset-info.description",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "EARNINGS_PER_SHARE_BASIC_CAGR_5Y",
@@ -7084,15 +6877,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "DAYS_TO_MATURITY",
-          "label": "Days to Maturity",
-          "fieldName": "days_to_maturity",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
         },
         {
           "name": "CURRENCY_KIND",
@@ -7156,15 +6940,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Valuation"
-        },
-        {
-          "name": "COUPON",
-          "label": "Coupon",
-          "fieldName": "coupon",
-          "format": "round",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "NEG_CAPITAL_EXPENDITURES_FH",
@@ -7255,15 +7030,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "CRYPTOASSET_INFO_ID",
-          "label": "Cryptoasset-info Id",
-          "fieldName": "cryptoasset-info.id",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "EPS_SURPRISE_FQ",
@@ -31744,9 +31510,1269 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
+        },
+        {
+          "name": "BOOK_VALUE_PER_SHARE_ESTIMATE_FH",
+          "label": "Book Value Per Share Estimate (FH)",
+          "fieldName": "book_value_per_share_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOOK_VALUE_PER_SHARE_ESTIMATE_FQ",
+          "label": "Book Value Per Share Estimate (FQ)",
+          "fieldName": "book_value_per_share_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOOK_VALUE_PER_SHARE_ESTIMATE_FY",
+          "label": "Book Value Per Share Estimate (FY)",
+          "fieldName": "book_value_per_share_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DARKCLOUDCOVER_BEARISH",
+          "label": "Candle.DarkCloudCover.Bearish",
+          "fieldName": "Candle.DarkCloudCover.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BEARISH",
+          "label": "Candle.DojiStar.Bearish",
+          "fieldName": "Candle.DojiStar.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BULLISH",
+          "label": "Candle.DojiStar.Bullish",
+          "fieldName": "Candle.DojiStar.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOWNSIDETASUKIGAP_BEARISH",
+          "label": "Candle.DownsideTasukiGap.Bearish",
+          "fieldName": "Candle.DownsideTasukiGap.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGDOJISTAR_BEARISH",
+          "label": "Candle.EveningDojiStar.Bearish",
+          "fieldName": "Candle.EveningDojiStar.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGTHREEMETHODS_BEARISH",
+          "label": "Candle.FallingThreeMethods.Bearish",
+          "fieldName": "Candle.FallingThreeMethods.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGWINDOW_BEARISH",
+          "label": "Candle.FallingWindow.Bearish",
+          "fieldName": "Candle.FallingWindow.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BEARISH",
+          "label": "Candle.HaramiCross.Bearish",
+          "fieldName": "Candle.HaramiCross.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BULLISH",
+          "label": "Candle.HaramiCross.Bullish",
+          "fieldName": "Candle.HaramiCross.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGDOJISTAR_BULLISH",
+          "label": "Candle.MorningDojiStar.Bullish",
+          "fieldName": "Candle.MorningDojiStar.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ONNECK_BEARISH",
+          "label": "Candle.OnNeck.Bearish",
+          "fieldName": "Candle.OnNeck.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_PIERCING_BULLISH",
+          "label": "Candle.Piercing.Bullish",
+          "fieldName": "Candle.Piercing.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGTHREEMETHODS_BULLISH",
+          "label": "Candle.RisingThreeMethods.Bullish",
+          "fieldName": "Candle.RisingThreeMethods.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGWINDOW_BULLISH",
+          "label": "Candle.RisingWindow.Bullish",
+          "fieldName": "Candle.RisingWindow.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERBOTTOM_BULLISH",
+          "label": "Candle.TweezerBottom.Bullish",
+          "fieldName": "Candle.TweezerBottom.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERTOP_BEARISH",
+          "label": "Candle.TweezerTop.Bearish",
+          "fieldName": "Candle.TweezerTop.Bearish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_UPSIDETASUKIGAP_BULLISH",
+          "label": "Candle.UpsideTasukiGap.Bullish",
+          "fieldName": "Candle.UpsideTasukiGap.Bullish",
+          "format": "round",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CAPITAL_EXPENDITURES_ESTIMATE_FH",
+          "label": "Capital Expenditures Estimate (FH)",
+          "fieldName": "capital_expenditures_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CAPITAL_EXPENDITURES_ESTIMATE_FQ",
+          "label": "Capital Expenditures Estimate (FQ)",
+          "fieldName": "capital_expenditures_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CAPITAL_EXPENDITURES_ESTIMATE_FY",
+          "label": "Capital Expenditures Estimate (FY)",
+          "fieldName": "capital_expenditures_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CAPITAL_EXPENDITURES_ESTIMATE_NTM",
+          "label": "Capital Expenditures Estimate (NTM)",
+          "fieldName": "capital_expenditures_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_FINANCING_ACTIVITIES_ESTIMATE_FH",
+          "label": "Cash F Financing Activities Estimate (FH)",
+          "fieldName": "cash_f_financing_activities_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_FINANCING_ACTIVITIES_ESTIMATE_FQ",
+          "label": "Cash F Financing Activities Estimate (FQ)",
+          "fieldName": "cash_f_financing_activities_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_FINANCING_ACTIVITIES_ESTIMATE_FY",
+          "label": "Cash F Financing Activities Estimate (FY)",
+          "fieldName": "cash_f_financing_activities_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_FINANCING_ACTIVITIES_ESTIMATE_NTM",
+          "label": "Cash F Financing Activities Estimate (NTM)",
+          "fieldName": "cash_f_financing_activities_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_INVESTING_ACTIVITIES_ESTIMATE_FH",
+          "label": "Cash F Investing Activities Estimate (FH)",
+          "fieldName": "cash_f_investing_activities_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_INVESTING_ACTIVITIES_ESTIMATE_FQ",
+          "label": "Cash F Investing Activities Estimate (FQ)",
+          "fieldName": "cash_f_investing_activities_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_INVESTING_ACTIVITIES_ESTIMATE_FY",
+          "label": "Cash F Investing Activities Estimate (FY)",
+          "fieldName": "cash_f_investing_activities_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_INVESTING_ACTIVITIES_ESTIMATE_NTM",
+          "label": "Cash F Investing Activities Estimate (NTM)",
+          "fieldName": "cash_f_investing_activities_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_F_OPERATING_ACTIVITIES_ESTIMATE_FH",
+          "label": "Cash F Operating Activities Estimate (FH)",
+          "fieldName": "cash_f_operating_activities_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "CASH_F_OPERATING_ACTIVITIES_ESTIMATE_FQ",
+          "label": "Cash F Operating Activities Estimate (FQ)",
+          "fieldName": "cash_f_operating_activities_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "CASH_F_OPERATING_ACTIVITIES_ESTIMATE_FY",
+          "label": "Cash F Operating Activities Estimate (FY)",
+          "fieldName": "cash_f_operating_activities_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "CASH_F_OPERATING_ACTIVITIES_ESTIMATE_NTM",
+          "label": "Cash F Operating Activities Estimate (NTM)",
+          "fieldName": "cash_f_operating_activities_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "CASH_N_SHORT_TERM_INVEST_ESTIMATE_FH",
+          "label": "Cash N Short Term Invest Estimate (FH)",
+          "fieldName": "cash_n_short_term_invest_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_N_SHORT_TERM_INVEST_ESTIMATE_FQ",
+          "label": "Cash N Short Term Invest Estimate (FQ)",
+          "fieldName": "cash_n_short_term_invest_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CASH_N_SHORT_TERM_INVEST_ESTIMATE_FY",
+          "label": "Cash N Short Term Invest Estimate (FY)",
+          "fieldName": "cash_n_short_term_invest_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CFI_CODE",
+          "label": "CFI Code",
+          "fieldName": "cfi_code",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COST_OF_GOODS_ESTIMATE_FH",
+          "label": "Cost Of Goods Estimate (FH)",
+          "fieldName": "cost_of_goods_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COST_OF_GOODS_ESTIMATE_FQ",
+          "label": "Cost Of Goods Estimate (FQ)",
+          "fieldName": "cost_of_goods_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COST_OF_GOODS_ESTIMATE_FY",
+          "label": "Cost Of Goods Estimate (FY)",
+          "fieldName": "cost_of_goods_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COST_OF_GOODS_ESTIMATE_NTM",
+          "label": "Cost Of Goods Estimate (NTM)",
+          "fieldName": "cost_of_goods_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DAILY_BAR_TIME",
+          "label": "Daily Bar Time",
+          "fieldName": "daily-bar.time",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DOCUMENTS",
+          "label": "Documents",
+          "fieldName": "documents",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DPS_ESTIMATE_FH",
+          "label": "DPS Estimate (FH)",
+          "fieldName": "dps_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DPS_ESTIMATE_FQ",
+          "label": "DPS Estimate (FQ)",
+          "fieldName": "dps_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DPS_ESTIMATE_FY",
+          "label": "DPS Estimate (FY)",
+          "fieldName": "dps_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DPS_ESTIMATE_NTM",
+          "label": "DPS Estimate (NTM)",
+          "fieldName": "dps_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EARNINGS_FQ_H",
+          "label": "Earnings FQ H",
+          "fieldName": "earnings_fq_h",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "EBITDA_ESTIMATE_FH",
+          "label": "EBITDA Estimate (FH)",
+          "fieldName": "ebitda_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBITDA_ESTIMATE_FQ",
+          "label": "EBITDA Estimate (FQ)",
+          "fieldName": "ebitda_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBITDA_ESTIMATE_FY",
+          "label": "EBITDA Estimate (FY)",
+          "fieldName": "ebitda_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBITDA_ESTIMATE_NTM",
+          "label": "EBITDA Estimate (NTM)",
+          "fieldName": "ebitda_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBIT_ESTIMATE_FH",
+          "label": "EBIT Estimate (FH)",
+          "fieldName": "ebit_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBIT_ESTIMATE_FQ",
+          "label": "EBIT Estimate (FQ)",
+          "fieldName": "ebit_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBIT_ESTIMATE_FY",
+          "label": "EBIT Estimate (FY)",
+          "fieldName": "ebit_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EBIT_ESTIMATE_NTM",
+          "label": "EBIT Estimate (NTM)",
+          "fieldName": "ebit_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ENTERPRISE_VALUE_EBITDA_FWD",
+          "label": "Enterprise Value EBITDA (Forward)",
+          "fieldName": "enterprise_value_ebitda_fwd",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ENTERPRISE_VALUE_EBIT_FWD",
+          "label": "Enterprise Value EBIT (Forward)",
+          "fieldName": "enterprise_value_ebit_fwd",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ENTERPRISE_VALUE_SALES_FWD",
+          "label": "Enterprise Value Sales (Forward)",
+          "fieldName": "enterprise_value_sales_fwd",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EPS_ESTIMATE_NTM",
+          "label": "EPS Estimate (NTM)",
+          "fieldName": "eps_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "FREE_CASH_FLOW_ESTIMATE_FH",
+          "label": "Free Cash Flow Estimate (FH)",
+          "fieldName": "free_cash_flow_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FREE_CASH_FLOW_ESTIMATE_FQ",
+          "label": "Free Cash Flow Estimate (FQ)",
+          "fieldName": "free_cash_flow_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FREE_CASH_FLOW_ESTIMATE_FY",
+          "label": "Free Cash Flow Estimate (FY)",
+          "fieldName": "free_cash_flow_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FREE_CASH_FLOW_ESTIMATE_NTM",
+          "label": "Free Cash Flow Estimate (NTM)",
+          "fieldName": "free_cash_flow_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GROSS_PROFIT_ESTIMATE_FH",
+          "label": "Gross Profit Estimate (FH)",
+          "fieldName": "gross_profit_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GROSS_PROFIT_ESTIMATE_FQ",
+          "label": "Gross Profit Estimate (FQ)",
+          "fieldName": "gross_profit_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GROSS_PROFIT_ESTIMATE_FY",
+          "label": "Gross Profit Estimate (FY)",
+          "fieldName": "gross_profit_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GROSS_PROFIT_ESTIMATE_NTM",
+          "label": "Gross Profit Estimate (NTM)",
+          "fieldName": "gross_profit_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "INCOME_FROM_CONT_OPS_FH",
+          "label": "Income From Cont Ops (FH)",
+          "fieldName": "income_from_cont_ops_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "INCOME_FROM_CONT_OPS_FQ",
+          "label": "Income From Cont Ops (FQ)",
+          "fieldName": "income_from_cont_ops_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "INCOME_FROM_CONT_OPS_FY",
+          "label": "Income From Cont Ops (FY)",
+          "fieldName": "income_from_cont_ops_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "INCOME_FROM_CONT_OPS_TTM",
+          "label": "Income From Cont Ops (TTM)",
+          "fieldName": "income_from_cont_ops_ttm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "IPO_DEAL_AMOUNT",
+          "label": "IPO Deal Amount",
+          "fieldName": "ipo_deal_amount",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IPO_MARKET_CAP",
+          "label": "IPO Market Cap",
+          "fieldName": "ipo_market_cap",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Valuation"
+        },
+        {
+          "name": "IPO_OFFER_PRICE",
+          "label": "IPO Offer Price",
+          "fieldName": "ipo_offer_price",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IPO_OFFER_PRICE_PERFORMANCE",
+          "label": "IPO Offer Price Performance",
+          "fieldName": "ipo_offer_price_performance",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Performance"
+        },
+        {
+          "name": "IPO_PRICE_RANGE",
+          "label": "IPO Price Range",
+          "fieldName": "ipo_price_range",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IPO_PRICE_RANGE_MAX",
+          "label": "IPO Price Range Max",
+          "fieldName": "ipo_price_range_max",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IPO_PRICE_RANGE_MIN",
+          "label": "IPO Price Range Min",
+          "fieldName": "ipo_price_range_min",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IPO_SPLITFACTOR_TO_OFFER",
+          "label": "IPO Splitfactor To Offer",
+          "fieldName": "ipo_splitfactor_to_offer",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME",
+          "label": "Last Price Update Time",
+          "fieldName": "last-price-update-time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MINUTE_BAR_TIME",
+          "label": "Minute Bar Time",
+          "fieldName": "minute-bar.time",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_INCOME_ESTIMATE_FH",
+          "label": "Net Income Estimate (FH)",
+          "fieldName": "net_income_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "NET_INCOME_ESTIMATE_FQ",
+          "label": "Net Income Estimate (FQ)",
+          "fieldName": "net_income_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "NET_INCOME_ESTIMATE_FY",
+          "label": "Net Income Estimate (FY)",
+          "fieldName": "net_income_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "NET_INCOME_ESTIMATE_NTM",
+          "label": "Net Income Estimate (NTM)",
+          "fieldName": "net_income_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "NET_REVENUE_AFTER_PROVISION_FH",
+          "label": "Net Revenue After Provision (FH)",
+          "fieldName": "net_revenue_after_provision_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_AFTER_PROVISION_FQ",
+          "label": "Net Revenue After Provision (FQ)",
+          "fieldName": "net_revenue_after_provision_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_AFTER_PROVISION_FY",
+          "label": "Net Revenue After Provision (FY)",
+          "fieldName": "net_revenue_after_provision_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_AFTER_PROVISION_TTM",
+          "label": "Net Revenue After Provision (TTM)",
+          "fieldName": "net_revenue_after_provision_ttm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_FH",
+          "label": "Net Revenue (FH)",
+          "fieldName": "net_revenue_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_FQ",
+          "label": "Net Revenue (FQ)",
+          "fieldName": "net_revenue_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_FY",
+          "label": "Net Revenue (FY)",
+          "fieldName": "net_revenue_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NET_REVENUE_TTM",
+          "label": "Net Revenue (TTM)",
+          "fieldName": "net_revenue_ttm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICE_BOOK_FWD",
+          "label": "Price Book (Forward)",
+          "fieldName": "price_book_fwd",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICE_EARNINGS_FWD",
+          "label": "Price Earnings (Forward)",
+          "fieldName": "price_earnings_fwd",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Earnings"
+        },
+        {
+          "name": "PRICE_SALES_FWD",
+          "label": "Price Sales (Forward)",
+          "fieldName": "price_sales_fwd",
+          "format": "round",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "RESEARCH_AND_DEV_ESTIMATE_FH",
+          "label": "Research And Dev Estimate (FH)",
+          "fieldName": "research_and_dev_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Valuation"
+        },
+        {
+          "name": "RESEARCH_AND_DEV_ESTIMATE_FQ",
+          "label": "Research And Dev Estimate (FQ)",
+          "fieldName": "research_and_dev_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Valuation"
+        },
+        {
+          "name": "RESEARCH_AND_DEV_ESTIMATE_FY",
+          "label": "Research And Dev Estimate (FY)",
+          "fieldName": "research_and_dev_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Valuation"
+        },
+        {
+          "name": "RESEARCH_AND_DEV_ESTIMATE_NTM",
+          "label": "Research And Dev Estimate (NTM)",
+          "fieldName": "research_and_dev_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Valuation"
+        },
+        {
+          "name": "REVENUES_FQ_H",
+          "label": "Revenues FQ H",
+          "fieldName": "revenues_fq_h",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REVENUE_ESTIMATE_NTM",
+          "label": "Revenue Estimate (NTM)",
+          "fieldName": "revenue_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_FH",
+          "label": "Sell Gen Admin Exp Total Estimate (FH)",
+          "fieldName": "sell_gen_admin_exp_total_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_FQ",
+          "label": "Sell Gen Admin Exp Total Estimate (FQ)",
+          "fieldName": "sell_gen_admin_exp_total_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_FY",
+          "label": "Sell Gen Admin Exp Total Estimate (FY)",
+          "fieldName": "sell_gen_admin_exp_total_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SELL_GEN_ADMIN_EXP_TOTAL_ESTIMATE_NTM",
+          "label": "Sell Gen Admin Exp Total Estimate (NTM)",
+          "fieldName": "sell_gen_admin_exp_total_estimate_ntm",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "TOTAL_ASSETS_ESTIMATE_FH",
+          "label": "Total Assets Estimate (FH)",
+          "fieldName": "total_assets_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "TOTAL_ASSETS_ESTIMATE_FQ",
+          "label": "Total Assets Estimate (FQ)",
+          "fieldName": "total_assets_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "TOTAL_ASSETS_ESTIMATE_FY",
+          "label": "Total Assets Estimate (FY)",
+          "fieldName": "total_assets_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "TOTAL_DEBT_ESTIMATE_FH",
+          "label": "Total Debt Estimate (FH)",
+          "fieldName": "total_debt_estimate_fh",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "TOTAL_DEBT_ESTIMATE_FQ",
+          "label": "Total Debt Estimate (FQ)",
+          "fieldName": "total_debt_estimate_fq",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "TOTAL_DEBT_ESTIMATE_FY",
+          "label": "Total Debt Estimate (FY)",
+          "fieldName": "total_debt_estimate_fy",
+          "format": "currency",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "INDEX_TRACKED",
+          "label": "Index Tracked",
+          "fieldName": "index_tracked",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ASSET_CLASS_NAME",
+          "label": "Asset Class Name",
+          "fieldName": "asset_class.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "CATEGORY_NAME",
+          "label": "Category Name",
+          "fieldName": "category.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FOCUS_NAME",
+          "label": "Focus Name",
+          "fieldName": "focus.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NICHE_NAME",
+          "label": "Niche Name",
+          "fieldName": "niche.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "STRATEGY_NAME",
+          "label": "Strategy Name",
+          "fieldName": "strategy.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SELECTION_CRITERIA_NAME",
+          "label": "Selection Criteria Name",
+          "fieldName": "selection_criteria.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "WEIGHTING_SCHEME_NAME",
+          "label": "Weighting Scheme Name",
+          "fieldName": "weighting_scheme.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HOLDINGS_REGION_NAME",
+          "label": "Holdings Region Name",
+          "fieldName": "holdings_region.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ACTIVELY_MANAGED_NAME",
+          "label": "Actively Managed Name",
+          "fieldName": "actively_managed.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "K1_FORM_NAME",
+          "label": "K1 Form Name",
+          "fieldName": "k1_form.tr",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
         }
       ],
-      "fieldCount": 3526
+      "fieldCount": 3640
     },
     "crypto": {
       "name": "Crypto Screener",
@@ -31792,15 +32818,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "N24H_VOL_CHANGE_CMC",
-          "label": "24H Vol Change Cmc",
-          "fieldName": "24h_vol_change_cmc",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "VOLUME_24H_CHANGE_PERCENT",
           "label": "Volume 24h Change %",
           "fieldName": "24h_vol_change|5",
@@ -31810,27 +32827,9 @@ const FIELD_DATA = {
           "category": "Volume"
         },
         {
-          "name": "N24H_VOL_CMC",
-          "label": "24H Vol Cmc",
-          "fieldName": "24h_vol_cmc",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "N24H_VOL_PREV_5",
           "label": "24H Vol Prev|5",
           "fieldName": "24h_vol_prev|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Valuation"
-        },
-        {
-          "name": "N24H_VOL_TO_MARKET_CAP",
-          "label": "24H Vol To Market Cap",
-          "fieldName": "24h_vol_to_market_cap",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -33865,15 +34864,6 @@ const FIELD_DATA = {
           "name": "ADX_100_15",
           "label": "ADX 100|15",
           "fieldName": "ADX_100|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADX_100_1M",
-          "label": "ADX 100|1M",
-          "fieldName": "ADX_100|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -39370,15 +40360,6 @@ const FIELD_DATA = {
           "category": "Moving Averages"
         },
         {
-          "name": "EMA200_1M",
-          "label": "Ema200|1M",
-          "fieldName": "EMA200|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
           "name": "EMA200_1W",
           "label": "Ema200|1W",
           "fieldName": "EMA200|1W",
@@ -39634,15 +40615,6 @@ const FIELD_DATA = {
           "name": "EMA250_15",
           "label": "Ema250|15",
           "fieldName": "EMA250|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "EMA250_1M",
-          "label": "Ema250|1M",
-          "fieldName": "EMA250|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -39994,15 +40966,6 @@ const FIELD_DATA = {
           "name": "EMA300_15",
           "label": "Ema300|15",
           "fieldName": "EMA300|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "EMA300_1M",
-          "label": "Ema300|1M",
-          "fieldName": "EMA300|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -41434,15 +42397,6 @@ const FIELD_DATA = {
           "name": "HULLMA200_15",
           "label": "Hullma200|15",
           "fieldName": "HullMA200|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "HULLMA200_1M",
-          "label": "Hullma200|1M",
-          "fieldName": "HullMA200|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -50305,15 +51259,6 @@ const FIELD_DATA = {
           "category": "Moving Averages"
         },
         {
-          "name": "SMA200_1M",
-          "label": "Sma200|1M",
-          "fieldName": "SMA200|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
           "name": "SMA200_1W",
           "label": "Sma200|1W",
           "fieldName": "SMA200|1W",
@@ -50569,15 +51514,6 @@ const FIELD_DATA = {
           "name": "SMA250_15",
           "label": "Sma250|15",
           "fieldName": "SMA250|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "SMA250_1M",
-          "label": "Sma250|1M",
-          "fieldName": "SMA250|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -50929,15 +51865,6 @@ const FIELD_DATA = {
           "name": "SMA300_15",
           "label": "Sma300|15",
           "fieldName": "SMA300|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "SMA300_1M",
-          "label": "Sma300|1M",
-          "fieldName": "SMA300|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -54481,96 +55408,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "VALUE_TRADED",
-          "label": "Value Traded",
-          "fieldName": "Value.Traded",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1",
-          "label": "Value Traded|1",
-          "fieldName": "Value.Traded|1",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_120",
-          "label": "Value Traded|120",
-          "fieldName": "Value.Traded|120",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_15",
-          "label": "Value Traded|15",
-          "fieldName": "Value.Traded|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1M",
-          "label": "Value Traded|1M",
-          "fieldName": "Value.Traded|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1W",
-          "label": "Value Traded|1W",
-          "fieldName": "Value.Traded|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_240",
-          "label": "Value Traded|240",
-          "fieldName": "Value.Traded|240",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_30",
-          "label": "Value Traded|30",
-          "fieldName": "Value.Traded|30",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_5",
-          "label": "Value Traded|5",
-          "fieldName": "Value.Traded|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_60",
-          "label": "Value Traded|60",
-          "fieldName": "Value.Traded|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "VOLATILITY",
           "label": "Volatility",
           "fieldName": "Volatility.D",
@@ -54688,54 +55525,9 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "ACTIVE_ADDRESSES_RATIO",
-          "label": "Active Addresses Ratio",
-          "fieldName": "active_addresses_ratio",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "ACTIVE_SYMBOL",
           "label": "Active Symbol",
           "fieldName": "active_symbol",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADDRESSES_ACTIVE",
-          "label": "Addresses Active",
-          "fieldName": "addresses_active",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADDRESSES_NEW",
-          "label": "Addresses New",
-          "fieldName": "addresses_new",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADDRESSES_TOTAL",
-          "label": "Addresses Total",
-          "fieldName": "addresses_total",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADDRESSES_ZERO_BALANCE",
-          "label": "Addresses Zero Balance",
-          "fieldName": "addresses_zero_balance",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -54787,15 +55579,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "ALTRANK",
-          "label": "Altrank",
-          "fieldName": "altrank",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "ASK",
           "label": "Ask",
           "fieldName": "ask",
@@ -54803,24 +55586,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Price"
-        },
-        {
-          "name": "AT_THE_MONEY_ADDRESSES_PERCENTAGE",
-          "label": "At The Money Addresses Percentage",
-          "fieldName": "at_the_money_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "AVERAGE_TRANSACTION_USD",
-          "label": "Average Transaction Usd",
-          "fieldName": "average_transaction_usd",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "AVERAGE_VOLUME_10_DAY",
@@ -55507,15 +56272,6 @@ const FIELD_DATA = {
           "category": "Volume"
         },
         {
-          "name": "AVG_BALANCE",
-          "label": "Avg Balance",
-          "fieldName": "avg_balance",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "BARS_COUNT",
           "label": "Bars Count",
           "fieldName": "bars_count",
@@ -55637,15 +56393,6 @@ const FIELD_DATA = {
           "label": "Blockchain-Id",
           "fieldName": "blockchain-id",
           "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "BREAK_EVEN_ADDRESSES_PERCENTAGE",
-          "label": "Break Even Addresses Percentage",
-          "fieldName": "break_even_addresses_percentage",
-          "format": "percent",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -56164,15 +56911,6 @@ const FIELD_DATA = {
           "category": "Crypto Specific"
         },
         {
-          "name": "CIRCULATING_TO_MAX_SUPPLY_RATIO",
-          "label": "Circulating To Max Supply Ratio",
-          "fieldName": "circulating_to_max_supply_ratio",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "PRICE",
           "label": "Price",
           "fieldName": "close",
@@ -56272,60 +57010,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "CONTRIBUTORSACTIVE",
-          "label": "Contributorsactive",
-          "fieldName": "contributorsactive",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CONTRIBUTORSCREATED",
-          "label": "Contributorscreated",
-          "fieldName": "contributorscreated",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "COUNTRY",
-          "label": "Country",
-          "fieldName": "country",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "COUPON",
-          "label": "Coupon",
-          "fieldName": "coupon",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "CRYPTO_BLOCKCHAIN_ECOSYSTEMS",
-          "label": "Crypto Blockchain Ecosystems",
-          "fieldName": "crypto_blockchain_ecosystems",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CRYPTO_CATEGORIES",
-          "label": "Crypto Categories",
-          "fieldName": "crypto_categories",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "CRYPTO_CODE",
           "label": "Crypto Code",
           "fieldName": "crypto_code",
@@ -56333,51 +57017,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "CRYPTO_COMMON_CATEGORIES",
-          "label": "Crypto Common Categories",
-          "fieldName": "crypto_common_categories",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CRYPTO_CONSENSUS_ALGORITHMS",
-          "label": "Crypto Consensus Algorithms",
-          "fieldName": "crypto_consensus_algorithms",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CRYPTO_TOTAL_RANK",
-          "label": "Crypto Total Rank",
-          "fieldName": "crypto_total_rank",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_DESCRIPTION",
-          "label": "Cryptoasset-Info Description",
-          "fieldName": "cryptoasset-info.description",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_ID",
-          "label": "Cryptoasset-Info Id",
-          "fieldName": "cryptoasset-info.id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "CURRENCY",
@@ -56414,15 +57053,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "DAYS_TO_MATURITY",
-          "label": "Days To Maturity",
-          "fieldName": "days_to_maturity",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
         },
         {
           "name": "DESCRIPTION",
@@ -56920,15 +57550,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "GALAXYSCORE",
-          "label": "Galaxyscore",
-          "fieldName": "galaxyscore",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "GAP_PERCENT",
           "label": "Gap %",
           "fieldName": "gap",
@@ -57379,15 +58000,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "GITHUB_COMMITS",
-          "label": "Github Commits",
-          "fieldName": "github_commits",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "HIGH",
           "label": "High",
           "fieldName": "high",
@@ -57472,24 +58084,6 @@ const FIELD_DATA = {
           "name": "HIGH_60",
           "label": "High|60",
           "fieldName": "high|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IN_THE_MONEY_ADDRESSES_PERCENTAGE",
-          "label": "In The Money Addresses Percentage",
-          "fieldName": "in_the_money_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "INDEXES",
-          "label": "Indexes",
-          "fieldName": "indexes",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -57586,15 +58180,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "INTERACTIONS",
-          "label": "Interactions",
-          "fieldName": "interactions",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "IS_BLACKLISTED",
           "label": "Is Blacklisted",
           "fieldName": "is_blacklisted",
@@ -57607,24 +58192,6 @@ const FIELD_DATA = {
           "name": "IS_PRIMARY",
           "label": "Is Primary",
           "fieldName": "is_primary",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SHARIAH_COMPLIANT",
-          "label": "Is Shariah Compliant",
-          "fieldName": "is_shariah_compliant",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SYMBOL_PRIMARY_LISTING",
-          "label": "Is Symbol Primary Listing",
-          "fieldName": "is_symbol_primary_listing",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -57647,24 +58214,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "LARGE_TX_COUNT",
-          "label": "Large Tx Count",
-          "fieldName": "large_tx_count",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "LARGE_TX_VOLUME_USD",
-          "label": "Large Tx Volume Usd",
-          "fieldName": "large_tx_volume_usd",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
         },
         {
           "name": "LAST_BAR_UPDATE_TIME",
@@ -57761,15 +58310,6 @@ const FIELD_DATA = {
           "label": "Logoid",
           "fieldName": "logoid",
           "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "LOSSES_ADDRESSES_PERCENTAGE",
-          "label": "Losses Addresses Percentage",
-          "fieldName": "losses_addresses_percentage",
-          "format": "percent",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -57892,15 +58432,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "MARKET_CAP",
-          "label": "Market Cap",
-          "fieldName": "market_cap",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Valuation"
-        },
-        {
           "name": "MARKET_CAPITALIZATION",
           "label": "Market Capitalization",
           "fieldName": "market_cap_calc",
@@ -57917,33 +58448,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Valuation"
-        },
-        {
-          "name": "MARKET_CAP_TO_TVL",
-          "label": "Market Cap To Tvl",
-          "fieldName": "market_cap_to_tvl",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Valuation"
-        },
-        {
-          "name": "MATURITY_DATE",
-          "label": "Maturity Date",
-          "fieldName": "maturity_date",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
-        },
-        {
-          "name": "MAX_SUPPLY",
-          "label": "Max Supply",
-          "fieldName": "max_supply",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Crypto Specific"
         },
         {
           "name": "MINMOV",
@@ -57971,15 +58475,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "NVT",
-          "label": "Nvt",
-          "fieldName": "nvt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "OPEN",
@@ -58072,366 +58567,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "OUT_THE_MONEY_ADDRESSES_PERCENTAGE",
-          "label": "Out The Money Addresses Percentage",
-          "fieldName": "out_the_money_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE",
-          "label": "Post Change",
-          "fieldName": "post_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1",
-          "label": "Post Change|1",
-          "fieldName": "post_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_120",
-          "label": "Post Change|120",
-          "fieldName": "post_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_15",
-          "label": "Post Change|15",
-          "fieldName": "post_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1M",
-          "label": "Post Change|1M",
-          "fieldName": "post_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1W",
-          "label": "Post Change|1W",
-          "fieldName": "post_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_240",
-          "label": "Post Change|240",
-          "fieldName": "post_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_30",
-          "label": "Post Change|30",
-          "fieldName": "post_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_5",
-          "label": "Post Change|5",
-          "fieldName": "post_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_60",
-          "label": "Post Change|60",
-          "fieldName": "post_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE",
-          "label": "Postmarket Change",
-          "fieldName": "postmarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE_ABS",
-          "label": "Postmarket Change Abs",
-          "fieldName": "postmarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTSACTIVE",
-          "label": "Postsactive",
-          "fieldName": "postsactive",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTSCREATED",
-          "label": "Postscreated",
-          "fieldName": "postscreated",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE",
-          "label": "Pre Change",
-          "fieldName": "pre_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS",
-          "label": "Pre Change Abs",
-          "fieldName": "pre_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1",
-          "label": "Pre Change Abs|1",
-          "fieldName": "pre_change_abs|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_120",
-          "label": "Pre Change Abs|120",
-          "fieldName": "pre_change_abs|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_15",
-          "label": "Pre Change Abs|15",
-          "fieldName": "pre_change_abs|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1M",
-          "label": "Pre Change Abs|1M",
-          "fieldName": "pre_change_abs|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1W",
-          "label": "Pre Change Abs|1W",
-          "fieldName": "pre_change_abs|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_240",
-          "label": "Pre Change Abs|240",
-          "fieldName": "pre_change_abs|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_30",
-          "label": "Pre Change Abs|30",
-          "fieldName": "pre_change_abs|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_5",
-          "label": "Pre Change Abs|5",
-          "fieldName": "pre_change_abs|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_60",
-          "label": "Pre Change Abs|60",
-          "fieldName": "pre_change_abs|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1",
-          "label": "Pre Change|1",
-          "fieldName": "pre_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_120",
-          "label": "Pre Change|120",
-          "fieldName": "pre_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_15",
-          "label": "Pre Change|15",
-          "fieldName": "pre_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1M",
-          "label": "Pre Change|1M",
-          "fieldName": "pre_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1W",
-          "label": "Pre Change|1W",
-          "fieldName": "pre_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_240",
-          "label": "Pre Change|240",
-          "fieldName": "pre_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_30",
-          "label": "Pre Change|30",
-          "fieldName": "pre_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_5",
-          "label": "Pre Change|5",
-          "fieldName": "pre_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_60",
-          "label": "Pre Change|60",
-          "fieldName": "pre_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PREMARKET_CHANGE",
-          "label": "Premarket Change",
-          "fieldName": "premarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_ABS",
-          "label": "Premarket Change Abs",
-          "fieldName": "premarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN",
-          "label": "Premarket Change From Open",
-          "fieldName": "premarket_change_from_open",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN_ABS",
-          "label": "Premarket Change From Open Abs",
-          "fieldName": "premarket_change_from_open_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_GAP",
-          "label": "Premarket Gap",
-          "fieldName": "premarket_gap",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
           "name": "WEEK_HIGH_52",
           "label": "52 Week High",
           "fieldName": "price_52_week_high",
@@ -58477,135 +58612,9 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "PROFIT_ADDRESSES_PERCENTAGE",
-          "label": "Profit Addresses Percentage",
-          "fieldName": "profit_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "PROVIDER_MINUS_ID",
           "label": "Provider-Id",
           "fieldName": "provider-id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CF",
-          "label": "Rates Cf",
-          "fieldName": "rates_cf",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CURRENT",
-          "label": "Rates Current",
-          "fieldName": "rates_current",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_DIVIDEND_RECENT",
-          "label": "Rates Dividend Recent",
-          "fieldName": "rates_dividend_recent",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_DIVIDEND_UPCOMING",
-          "label": "Rates Dividend Upcoming",
-          "fieldName": "rates_dividend_upcoming",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_EARNINGS_FQ",
-          "label": "Rates Earnings FQ",
-          "fieldName": "rates_earnings_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_EARNINGS_NEXT_FQ",
-          "label": "Rates Earnings Next FQ",
-          "fieldName": "rates_earnings_next_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_FH",
-          "label": "Rates FH",
-          "fieldName": "rates_fh",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FQ",
-          "label": "Rates FQ",
-          "fieldName": "rates_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FY",
-          "label": "Rates FY",
-          "fieldName": "rates_fy",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_MC",
-          "label": "Rates Mc",
-          "fieldName": "rates_mc",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_PT",
-          "label": "Rates Pt",
-          "fieldName": "rates_pt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TIME_SERIES",
-          "label": "Rates Time Series",
-          "fieldName": "rates_time_series",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TTM",
-          "label": "Rates TTM",
-          "fieldName": "rates_ttm",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -58828,46 +58837,10 @@ const FIELD_DATA = {
           "category": "Metadata"
         },
         {
-          "name": "SENTIMENT",
-          "label": "Sentiment",
-          "fieldName": "sentiment",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "SOCIAL_VOLUME_24H",
-          "label": "Social Volume 24H",
-          "fieldName": "social_volume_24h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "SOCIALDOMINANCE",
-          "label": "Socialdominance",
-          "fieldName": "socialdominance",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "SOURCE_MINUS_LOGOID",
           "label": "Source-Logoid",
           "fieldName": "source-logoid",
           "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "SUBMARKET",
-          "label": "Submarket",
-          "fieldName": "submarket",
-          "format": "float",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -58880,42 +58853,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "SYMBOL",
-          "label": "Symbol",
-          "fieldName": "symbol",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "TELEGRAM_MEMBERS",
-          "label": "Telegram Members",
-          "fieldName": "telegram_members",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TELEGRAM_NEGATIVE",
-          "label": "Telegram Negative",
-          "fieldName": "telegram_negative",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TELEGRAM_POSITIVE",
-          "label": "Telegram Positive",
-          "fieldName": "telegram_positive",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "TIME",
@@ -59017,15 +58954,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "TOTAL_ADDRESSES_WITH_BALANCE",
-          "label": "Total Addresses With Balance",
-          "fieldName": "total_addresses_with_balance",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "TOTAL_COINS",
           "label": "Total Coins",
           "fieldName": "total_shares_diluted",
@@ -59053,82 +58981,10 @@ const FIELD_DATA = {
           "category": "Crypto Specific"
         },
         {
-          "name": "TOTAL_TO_MAX_SUPPLY_RATIO",
-          "label": "Total To Max Supply Ratio",
-          "fieldName": "total_to_max_supply_ratio",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "TRADED_VOLUME",
           "label": "Traded Volume",
           "fieldName": "total_value_traded",
           "format": "missing",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "TVL",
-          "label": "Tvl",
-          "fieldName": "tvl",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TWEETS",
-          "label": "Tweets",
-          "fieldName": "tweets",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TWITTER_NEGATIVE",
-          "label": "Twitter Negative",
-          "fieldName": "twitter_negative",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TWITTER_POSITIVE",
-          "label": "Twitter Positive",
-          "fieldName": "twitter_positive",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TXS_COUNT",
-          "label": "Txs Count",
-          "fieldName": "txs_count",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TXS_VOLUME",
-          "label": "Txs Volume",
-          "fieldName": "txs_volume",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "TXS_VOLUME_USD",
-          "label": "Txs Volume Usd",
-          "fieldName": "txs_volume_usd",
-          "format": "number_group",
           "interval": false,
           "historical": false,
           "category": "Volume"
@@ -59255,15 +59111,6 @@ const FIELD_DATA = {
           "label": "Update Time",
           "fieldName": "update_time",
           "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VELOCITY",
-          "label": "Velocity",
-          "fieldName": "velocity",
-          "format": "float",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -59726,9 +59573,306 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Volume"
+        },
+        {
+          "name": "CANDLE_DARKCLOUDCOVER_BEARISH",
+          "label": "Candle.DarkCloudCover.Bearish",
+          "fieldName": "Candle.DarkCloudCover.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BEARISH",
+          "label": "Candle.DojiStar.Bearish",
+          "fieldName": "Candle.DojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BULLISH",
+          "label": "Candle.DojiStar.Bullish",
+          "fieldName": "Candle.DojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOWNSIDETASUKIGAP_BEARISH",
+          "label": "Candle.DownsideTasukiGap.Bearish",
+          "fieldName": "Candle.DownsideTasukiGap.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGDOJISTAR_BEARISH",
+          "label": "Candle.EveningDojiStar.Bearish",
+          "fieldName": "Candle.EveningDojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGTHREEMETHODS_BEARISH",
+          "label": "Candle.FallingThreeMethods.Bearish",
+          "fieldName": "Candle.FallingThreeMethods.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGWINDOW_BEARISH",
+          "label": "Candle.FallingWindow.Bearish",
+          "fieldName": "Candle.FallingWindow.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BEARISH",
+          "label": "Candle.HaramiCross.Bearish",
+          "fieldName": "Candle.HaramiCross.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BULLISH",
+          "label": "Candle.HaramiCross.Bullish",
+          "fieldName": "Candle.HaramiCross.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGDOJISTAR_BULLISH",
+          "label": "Candle.MorningDojiStar.Bullish",
+          "fieldName": "Candle.MorningDojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ONNECK_BEARISH",
+          "label": "Candle.OnNeck.Bearish",
+          "fieldName": "Candle.OnNeck.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_PIERCING_BULLISH",
+          "label": "Candle.Piercing.Bullish",
+          "fieldName": "Candle.Piercing.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGTHREEMETHODS_BULLISH",
+          "label": "Candle.RisingThreeMethods.Bullish",
+          "fieldName": "Candle.RisingThreeMethods.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGWINDOW_BULLISH",
+          "label": "Candle.RisingWindow.Bullish",
+          "fieldName": "Candle.RisingWindow.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERBOTTOM_BULLISH",
+          "label": "Candle.TweezerBottom.Bullish",
+          "fieldName": "Candle.TweezerBottom.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERTOP_BEARISH",
+          "label": "Candle.TweezerTop.Bearish",
+          "fieldName": "Candle.TweezerTop.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_UPSIDETASUKIGAP_BULLISH",
+          "label": "Candle.UpsideTasukiGap.Bullish",
+          "fieldName": "Candle.UpsideTasukiGap.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DAILY_BAR_TIME",
+          "label": "Daily Bar Time",
+          "fieldName": "daily-bar.time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME",
+          "label": "Last Price Update Time",
+          "fieldName": "last-price-update-time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MINUTE_BAR_TIME",
+          "label": "Minute Bar Time",
+          "fieldName": "minute-bar.time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
         }
       ],
-      "fieldCount": 3108
+      "fieldCount": 3010
     },
     "forex": {
       "name": "Forex Screener",
@@ -71528,33 +71672,6 @@ const FIELD_DATA = {
           "category": "Performance"
         },
         {
-          "name": "PERF_1M_MARKETCAP",
-          "label": "Perf 1M Marketcap",
-          "fieldName": "Perf.1M.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PERF_1W_MARKETCAP",
-          "label": "Perf 1W Marketcap",
-          "fieldName": "Perf.1W.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PERF_1Y_MARKETCAP",
-          "label": "Perf 1Y Marketcap",
-          "fieldName": "Perf.1Y.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "MONTH_PERFORMANCE_3",
           "label": "3-Month Performance",
           "fieldName": "Perf.3M",
@@ -71562,15 +71679,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Performance"
-        },
-        {
-          "name": "PERF_3M_MARKETCAP",
-          "label": "Perf 3M Marketcap",
-          "fieldName": "Perf.3M.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "PERF_3Y",
@@ -71600,15 +71708,6 @@ const FIELD_DATA = {
           "category": "Performance"
         },
         {
-          "name": "PERF_5Y_MARKETCAP",
-          "label": "Perf 5Y Marketcap",
-          "fieldName": "Perf.5Y.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "MONTH_PERFORMANCE_6",
           "label": "6-Month Performance",
           "fieldName": "Perf.6M",
@@ -71616,15 +71715,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Performance"
-        },
-        {
-          "name": "PERF_6M_MARKETCAP",
-          "label": "Perf 6M Marketcap",
-          "fieldName": "Perf.6M.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "ALL_TIME_PERFORMANCE",
@@ -71661,15 +71751,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Performance"
-        },
-        {
-          "name": "PERF_YTD_MARKETCAP",
-          "label": "Perf YTD Marketcap",
-          "fieldName": "Perf.YTD.MarketCap",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "PIVOT_CAMARILLA_P",
@@ -82472,96 +82553,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "VALUE_TRADED",
-          "label": "Value Traded",
-          "fieldName": "Value.Traded",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1",
-          "label": "Value Traded|1",
-          "fieldName": "Value.Traded|1",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_120",
-          "label": "Value Traded|120",
-          "fieldName": "Value.Traded|120",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_15",
-          "label": "Value Traded|15",
-          "fieldName": "Value.Traded|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1M",
-          "label": "Value Traded|1M",
-          "fieldName": "Value.Traded|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1W",
-          "label": "Value Traded|1W",
-          "fieldName": "Value.Traded|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_240",
-          "label": "Value Traded|240",
-          "fieldName": "Value.Traded|240",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_30",
-          "label": "Value Traded|30",
-          "fieldName": "Value.Traded|30",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_5",
-          "label": "Value Traded|5",
-          "fieldName": "Value.Traded|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_60",
-          "label": "Value Traded|60",
-          "fieldName": "Value.Traded|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "VOLATILITY",
           "label": "Volatility",
           "fieldName": "Volatility.D",
@@ -82740,60 +82731,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Price"
-        },
-        {
-          "name": "AUM_PERF_1M",
-          "label": "Aum Perf 1M",
-          "fieldName": "aum_perf.1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "AUM_PERF_1Y",
-          "label": "Aum Perf 1Y",
-          "fieldName": "aum_perf.1Y",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "AUM_PERF_3M",
-          "label": "Aum Perf 3M",
-          "fieldName": "aum_perf.3M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "AUM_PERF_3Y",
-          "label": "Aum Perf 3Y",
-          "fieldName": "aum_perf.3Y",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "AUM_PERF_5Y",
-          "label": "Aum Perf 5Y",
-          "fieldName": "aum_perf.5Y",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "AUM_PERF_YTD",
-          "label": "Aum Perf YTD",
-          "fieldName": "aum_perf.YTD",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "AVERAGE_VOLUME_10D_CALC",
@@ -83876,42 +83813,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "COUNTRY_CODE",
-          "label": "Country Code",
-          "fieldName": "country_code",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "COUPON",
-          "label": "Coupon",
-          "fieldName": "coupon",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_DESCRIPTION",
-          "label": "Cryptoasset-Info Description",
-          "fieldName": "cryptoasset-info.description",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_ID",
-          "label": "Cryptoasset-Info Id",
-          "fieldName": "cryptoasset-info.id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "CURRENCY",
           "label": "Currency",
           "fieldName": "currency",
@@ -83948,15 +83849,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "DAYS_TO_MATURITY",
-          "label": "Days To Maturity",
-          "fieldName": "days_to_maturity",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
-        },
-        {
           "name": "DESCRIPTION",
           "label": "Description",
           "fieldName": "description",
@@ -83973,15 +83865,6 @@ const FIELD_DATA = {
           "interval": true,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "EXPIRATION",
-          "label": "Expiration",
-          "fieldName": "expiration",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "FIRST_BAR_TIME",
@@ -84024,69 +83907,6 @@ const FIELD_DATA = {
           "label": "Fractional",
           "fieldName": "fractional",
           "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUND_FLOWS_1M",
-          "label": "Fund Flows 1M",
-          "fieldName": "fund_flows.1M",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUND_FLOWS_1Y",
-          "label": "Fund Flows 1Y",
-          "fieldName": "fund_flows.1Y",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUND_FLOWS_3M",
-          "label": "Fund Flows 3M",
-          "fieldName": "fund_flows.3M",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUND_FLOWS_3Y",
-          "label": "Fund Flows 3Y",
-          "fieldName": "fund_flows.3Y",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUND_FLOWS_5Y",
-          "label": "Fund Flows 5Y",
-          "fieldName": "fund_flows.5Y",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUND_FLOWS_YTD",
-          "label": "Fund Flows YTD",
-          "fieldName": "fund_flows.YTD",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FUNDAMENTAL_CURRENCY_CODE",
-          "label": "Fundamental Currency Code",
-          "fieldName": "fundamental_currency_code",
-          "format": "text",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -84632,24 +84452,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "INDEX_PRIORITY",
-          "label": "Index Priority",
-          "fieldName": "index_priority",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "INDEXES",
-          "label": "Indexes",
-          "fieldName": "indexes",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "INDICATORS_BARS_COUNT",
           "label": "Indicators Bars Count",
           "fieldName": "indicators_bars_count",
@@ -84752,24 +84554,6 @@ const FIELD_DATA = {
           "name": "IS_PRIMARY",
           "label": "Is Primary",
           "fieldName": "is_primary",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SHARIAH_COMPLIANT",
-          "label": "Is Shariah Compliant",
-          "fieldName": "is_shariah_compliant",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SYMBOL_PRIMARY_LISTING",
-          "label": "Is Symbol Primary Listing",
-          "fieldName": "is_symbol_primary_listing",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -84879,15 +84663,6 @@ const FIELD_DATA = {
           "label": "Last Bar Update Time|60",
           "fieldName": "last_bar_update_time|60",
           "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "LOGOID",
-          "label": "Logoid",
-          "fieldName": "logoid",
-          "format": "text",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -85010,15 +84785,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "MATURITY_DATE",
-          "label": "Maturity Date",
-          "fieldName": "maturity_date",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
-        },
-        {
           "name": "MINMOV",
           "label": "Minmov",
           "fieldName": "minmov",
@@ -85044,132 +84810,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "NAV_DISCOUNT_PREMIUM",
-          "label": "Nav Discount Premium",
-          "fieldName": "nav_discount_premium",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_PERF_1M",
-          "label": "Nav Perf 1M",
-          "fieldName": "nav_perf.1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_PERF_1Y",
-          "label": "Nav Perf 1Y",
-          "fieldName": "nav_perf.1Y",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_PERF_3M",
-          "label": "Nav Perf 3M",
-          "fieldName": "nav_perf.3M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_PERF_3Y",
-          "label": "Nav Perf 3Y",
-          "fieldName": "nav_perf.3Y",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_PERF_5Y",
-          "label": "Nav Perf 5Y",
-          "fieldName": "nav_perf.5Y",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_PERF_YTD",
-          "label": "Nav Perf YTD",
-          "fieldName": "nav_perf.YTD",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_1M",
-          "label": "Nav Total Return 1M",
-          "fieldName": "nav_total_return.1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_1Y",
-          "label": "Nav Total Return 1Y",
-          "fieldName": "nav_total_return.1Y",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_3M",
-          "label": "Nav Total Return 3M",
-          "fieldName": "nav_total_return.3M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_3Y",
-          "label": "Nav Total Return 3Y",
-          "fieldName": "nav_total_return.3Y",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_5Y",
-          "label": "Nav Total Return 5Y",
-          "fieldName": "nav_total_return.5Y",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_6M",
-          "label": "Nav Total Return 6M",
-          "fieldName": "nav_total_return.6M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "NAV_TOTAL_RETURN_YTD",
-          "label": "Nav Total Return YTD",
-          "fieldName": "nav_total_return.YTD",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "OPEN",
@@ -85271,339 +84911,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "POST_CHANGE",
-          "label": "Post Change",
-          "fieldName": "post_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1",
-          "label": "Post Change|1",
-          "fieldName": "post_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_120",
-          "label": "Post Change|120",
-          "fieldName": "post_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_15",
-          "label": "Post Change|15",
-          "fieldName": "post_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1M",
-          "label": "Post Change|1M",
-          "fieldName": "post_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1W",
-          "label": "Post Change|1W",
-          "fieldName": "post_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_240",
-          "label": "Post Change|240",
-          "fieldName": "post_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_30",
-          "label": "Post Change|30",
-          "fieldName": "post_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_5",
-          "label": "Post Change|5",
-          "fieldName": "post_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_60",
-          "label": "Post Change|60",
-          "fieldName": "post_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE",
-          "label": "Postmarket Change",
-          "fieldName": "postmarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE_ABS",
-          "label": "Postmarket Change Abs",
-          "fieldName": "postmarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE",
-          "label": "Pre Change",
-          "fieldName": "pre_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS",
-          "label": "Pre Change Abs",
-          "fieldName": "pre_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1",
-          "label": "Pre Change Abs|1",
-          "fieldName": "pre_change_abs|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_120",
-          "label": "Pre Change Abs|120",
-          "fieldName": "pre_change_abs|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_15",
-          "label": "Pre Change Abs|15",
-          "fieldName": "pre_change_abs|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1M",
-          "label": "Pre Change Abs|1M",
-          "fieldName": "pre_change_abs|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1W",
-          "label": "Pre Change Abs|1W",
-          "fieldName": "pre_change_abs|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_240",
-          "label": "Pre Change Abs|240",
-          "fieldName": "pre_change_abs|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_30",
-          "label": "Pre Change Abs|30",
-          "fieldName": "pre_change_abs|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_5",
-          "label": "Pre Change Abs|5",
-          "fieldName": "pre_change_abs|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_60",
-          "label": "Pre Change Abs|60",
-          "fieldName": "pre_change_abs|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1",
-          "label": "Pre Change|1",
-          "fieldName": "pre_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_120",
-          "label": "Pre Change|120",
-          "fieldName": "pre_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_15",
-          "label": "Pre Change|15",
-          "fieldName": "pre_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1M",
-          "label": "Pre Change|1M",
-          "fieldName": "pre_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1W",
-          "label": "Pre Change|1W",
-          "fieldName": "pre_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_240",
-          "label": "Pre Change|240",
-          "fieldName": "pre_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_30",
-          "label": "Pre Change|30",
-          "fieldName": "pre_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_5",
-          "label": "Pre Change|5",
-          "fieldName": "pre_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_60",
-          "label": "Pre Change|60",
-          "fieldName": "pre_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PREMARKET_CHANGE",
-          "label": "Premarket Change",
-          "fieldName": "premarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_ABS",
-          "label": "Premarket Change Abs",
-          "fieldName": "premarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN",
-          "label": "Premarket Change From Open",
-          "fieldName": "premarket_change_from_open",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN_ABS",
-          "label": "Premarket Change From Open Abs",
-          "fieldName": "premarket_change_from_open_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_GAP",
-          "label": "Premarket Gap",
-          "fieldName": "premarket_gap",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
           "name": "WEEK_HIGH_52",
           "label": "52 Week High",
           "fieldName": "price_52_week_high",
@@ -85652,123 +84959,6 @@ const FIELD_DATA = {
           "name": "PROVIDER_MINUS_ID",
           "label": "Provider-Id",
           "fieldName": "provider-id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CF",
-          "label": "Rates Cf",
-          "fieldName": "rates_cf",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CURRENT",
-          "label": "Rates Current",
-          "fieldName": "rates_current",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_DIVIDEND_RECENT",
-          "label": "Rates Dividend Recent",
-          "fieldName": "rates_dividend_recent",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_DIVIDEND_UPCOMING",
-          "label": "Rates Dividend Upcoming",
-          "fieldName": "rates_dividend_upcoming",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_EARNINGS_FQ",
-          "label": "Rates Earnings FQ",
-          "fieldName": "rates_earnings_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_EARNINGS_NEXT_FQ",
-          "label": "Rates Earnings Next FQ",
-          "fieldName": "rates_earnings_next_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_FH",
-          "label": "Rates FH",
-          "fieldName": "rates_fh",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FQ",
-          "label": "Rates FQ",
-          "fieldName": "rates_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FY",
-          "label": "Rates FY",
-          "fieldName": "rates_fy",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_MC",
-          "label": "Rates Mc",
-          "fieldName": "rates_mc",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_PT",
-          "label": "Rates Pt",
-          "fieldName": "rates_pt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TIME_SERIES",
-          "label": "Rates Time Series",
-          "fieldName": "rates_time_series",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TTM",
-          "label": "Rates TTM",
-          "fieldName": "rates_ttm",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -85901,28 +85091,10 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "SUBMARKET",
-          "label": "Submarket",
-          "fieldName": "submarket",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "SUBTYPE",
           "label": "Subtype",
           "fieldName": "subtype",
           "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "SYMBOL",
-          "label": "Symbol",
-          "fieldName": "symbol",
-          "format": "float",
           "interval": false,
           "historical": false,
           "category": "Metadata"
@@ -86421,9 +85593,288 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Volume"
+        },
+        {
+          "name": "CANDLE_DARKCLOUDCOVER_BEARISH",
+          "label": "Candle.DarkCloudCover.Bearish",
+          "fieldName": "Candle.DarkCloudCover.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BEARISH",
+          "label": "Candle.DojiStar.Bearish",
+          "fieldName": "Candle.DojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BULLISH",
+          "label": "Candle.DojiStar.Bullish",
+          "fieldName": "Candle.DojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOWNSIDETASUKIGAP_BEARISH",
+          "label": "Candle.DownsideTasukiGap.Bearish",
+          "fieldName": "Candle.DownsideTasukiGap.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGDOJISTAR_BEARISH",
+          "label": "Candle.EveningDojiStar.Bearish",
+          "fieldName": "Candle.EveningDojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGTHREEMETHODS_BEARISH",
+          "label": "Candle.FallingThreeMethods.Bearish",
+          "fieldName": "Candle.FallingThreeMethods.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGWINDOW_BEARISH",
+          "label": "Candle.FallingWindow.Bearish",
+          "fieldName": "Candle.FallingWindow.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BEARISH",
+          "label": "Candle.HaramiCross.Bearish",
+          "fieldName": "Candle.HaramiCross.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BULLISH",
+          "label": "Candle.HaramiCross.Bullish",
+          "fieldName": "Candle.HaramiCross.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGDOJISTAR_BULLISH",
+          "label": "Candle.MorningDojiStar.Bullish",
+          "fieldName": "Candle.MorningDojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ONNECK_BEARISH",
+          "label": "Candle.OnNeck.Bearish",
+          "fieldName": "Candle.OnNeck.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_PIERCING_BULLISH",
+          "label": "Candle.Piercing.Bullish",
+          "fieldName": "Candle.Piercing.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGTHREEMETHODS_BULLISH",
+          "label": "Candle.RisingThreeMethods.Bullish",
+          "fieldName": "Candle.RisingThreeMethods.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGWINDOW_BULLISH",
+          "label": "Candle.RisingWindow.Bullish",
+          "fieldName": "Candle.RisingWindow.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERBOTTOM_BULLISH",
+          "label": "Candle.TweezerBottom.Bullish",
+          "fieldName": "Candle.TweezerBottom.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERTOP_BEARISH",
+          "label": "Candle.TweezerTop.Bearish",
+          "fieldName": "Candle.TweezerTop.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_UPSIDETASUKIGAP_BULLISH",
+          "label": "Candle.UpsideTasukiGap.Bullish",
+          "fieldName": "Candle.UpsideTasukiGap.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME",
+          "label": "Last Price Update Time",
+          "fieldName": "last-price-update-time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
         }
       ],
-      "fieldCount": 2965
+      "fieldCount": 2888
     },
     "bond": {
       "name": "Bond Screener",
@@ -86432,24 +85883,6 @@ const FIELD_DATA = {
       "hasIndex": false,
       "hasMarket": false,
       "fields": [
-        {
-          "name": "BOND_CURRENCY",
-          "label": "Bond Currency",
-          "fieldName": "Bond.Currency",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PERF_ALL",
-          "label": "Perf All",
-          "fieldName": "Perf.All",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
         {
           "name": "ACCRUED_COUPON_INTEREST",
           "label": "Accrued Coupon Interest",
@@ -86559,15 +85992,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "BASE_CURRENCY_KIND",
-          "label": "Base Currency Kind",
-          "fieldName": "base_currency_kind",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "BID",
           "label": "Bid",
           "fieldName": "bid",
@@ -86643,15 +86067,6 @@ const FIELD_DATA = {
           "name": "BOND_ISSUER_SNP_OUTLOOK_LT",
           "label": "Bond Issuer S&P Outlook LT",
           "fieldName": "bond_issuer_snp_outlook_lt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "BOND_ISSUER_SNP_OUTLOOK_ST",
-          "label": "Bond Issuer S&P Outlook ST",
-          "fieldName": "bond_issuer_snp_outlook_st",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -86784,15 +86199,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "CALL_OPTION",
-          "label": "Call Option",
-          "fieldName": "call_option",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "CHANGE",
           "label": "Change",
           "fieldName": "change",
@@ -86890,24 +86296,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "COUNTRY_FUND",
-          "label": "Country Fund",
-          "fieldName": "country_fund",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "COUPON",
-          "label": "Coupon",
-          "fieldName": "coupon",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "COUPON_CHANGE_TYPE",
@@ -87090,24 +86478,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "CRYPTOASSET_MINUS_INFO_DESCRIPTION",
-          "label": "Cryptoasset-Info Description",
-          "fieldName": "cryptoasset-info.description",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_ID",
-          "label": "Cryptoasset-Info Id",
-          "fieldName": "cryptoasset-info.id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "CURRENCY",
           "label": "Currency",
           "fieldName": "currency",
@@ -87225,27 +86595,9 @@ const FIELD_DATA = {
           "category": "Metadata"
         },
         {
-          "name": "EXPIRATION",
-          "label": "Expiration",
-          "fieldName": "expiration",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "FINAL_REDEMPTION_AMOUNT",
           "label": "Final Redemption Amount",
           "fieldName": "final_redemption_amount",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FOREX_PRIORITY",
-          "label": "Forex Priority",
-          "fieldName": "forex_priority",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -87324,24 +86676,6 @@ const FIELD_DATA = {
           "category": "Price"
         },
         {
-          "name": "INDEX_PRIORITY",
-          "label": "Index Priority",
-          "fieldName": "index_priority",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "INDEXES",
-          "label": "Indexes",
-          "fieldName": "indexes",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "INDICATORS_BARS_COUNT",
           "label": "Indicators Bars Count",
           "fieldName": "indicators_bars_count",
@@ -87390,15 +86724,6 @@ const FIELD_DATA = {
           "name": "IS_SHARIAH_COMPLIANT",
           "label": "Is Shariah Compliant",
           "fieldName": "is_shariah_compliant",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SYMBOL_PRIMARY_LISTING",
-          "label": "Is Symbol Primary Listing",
-          "fieldName": "is_symbol_primary_listing",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -87711,24 +87036,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "POSTMARKET_CHANGE",
-          "label": "Postmarket Change",
-          "fieldName": "postmarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE_ABS",
-          "label": "Postmarket Change Abs",
-          "fieldName": "postmarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "PRE_CHANGE",
           "label": "Pre Change",
           "fieldName": "pre_change",
@@ -87745,51 +87052,6 @@ const FIELD_DATA = {
           "interval": true,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "PREMARKET_CHANGE",
-          "label": "Premarket Change",
-          "fieldName": "premarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_ABS",
-          "label": "Premarket Change Abs",
-          "fieldName": "premarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN",
-          "label": "Premarket Change From Open",
-          "fieldName": "premarket_change_from_open",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN_ABS",
-          "label": "Premarket Change From Open Abs",
-          "fieldName": "premarket_change_from_open_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_GAP",
-          "label": "Premarket Gap",
-          "fieldName": "premarket_gap",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
         },
         {
           "name": "PREMATURE_REDEMPTION",
@@ -87855,24 +87117,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "PUT_OPTION",
-          "label": "Put Option",
-          "fieldName": "put_option",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CF",
-          "label": "Rates Cf",
-          "fieldName": "rates_cf",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "RATES_CURRENT",
           "label": "Rates Current",
           "fieldName": "rates_current",
@@ -87880,24 +87124,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "RATES_DIVIDEND_RECENT",
-          "label": "Rates Dividend Recent",
-          "fieldName": "rates_dividend_recent",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_DIVIDEND_UPCOMING",
-          "label": "Rates Dividend Upcoming",
-          "fieldName": "rates_dividend_upcoming",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
         },
         {
           "name": "RATES_EARNINGS_FQ",
@@ -87918,63 +87144,9 @@ const FIELD_DATA = {
           "category": "Earnings"
         },
         {
-          "name": "RATES_FH",
-          "label": "Rates FH",
-          "fieldName": "rates_fh",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FQ",
-          "label": "Rates FQ",
-          "fieldName": "rates_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FY",
-          "label": "Rates FY",
-          "fieldName": "rates_fy",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "RATES_MC",
           "label": "Rates Mc",
           "fieldName": "rates_mc",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_PT",
-          "label": "Rates Pt",
-          "fieldName": "rates_pt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TIME_SERIES",
-          "label": "Rates Time Series",
-          "fieldName": "rates_time_series",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TTM",
-          "label": "Rates TTM",
-          "fieldName": "rates_ttm",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -88062,15 +87234,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "SUBMARKET",
-          "label": "Submarket",
-          "fieldName": "submarket",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "SUBTYPE",
           "label": "Subtype",
           "fieldName": "subtype",
@@ -88078,24 +87241,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "SYMBOL",
-          "label": "Symbol",
-          "fieldName": "symbol",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "TERM_MINUS_TO_MINUS_MATURITY",
-          "label": "Term-To-Maturity",
-          "fieldName": "term-to-maturity",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
         },
         {
           "name": "TIME",
@@ -88240,9 +87385,270 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Dividends"
+        },
+        {
+          "name": "BOND_FITCH_OUTLOOK_LT",
+          "label": "Bond Fitch Outlook Lt",
+          "fieldName": "bond_fitch_outlook_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOND_FITCH_RATING_LT",
+          "label": "Bond Fitch Rating Lt",
+          "fieldName": "bond_fitch_rating_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "BOND_MOODYS_RATING_LT",
+          "label": "Bond Moodys Rating Lt",
+          "fieldName": "bond_moodys_rating_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "CFI_CODE",
+          "label": "CFI Code",
+          "fieldName": "cfi_code",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CONVEXITY",
+          "label": "Convexity",
+          "fieldName": "convexity",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DAILY_BAR_CLOSE",
+          "label": "Daily Bar Close",
+          "fieldName": "daily-bar.close",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DV_01",
+          "label": "DV 01",
+          "fieldName": "dv_01",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "F_SPREAD",
+          "label": "F Spread",
+          "fieldName": "f_spread",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "G_SPREAD",
+          "label": "G Spread",
+          "fieldName": "g_spread",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ISSUER_FITCH_OUTLOOK_LT",
+          "label": "Issuer Fitch Outlook Lt",
+          "fieldName": "issuer_fitch_outlook_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ISSUER_FITCH_OUTLOOK_ST",
+          "label": "Issuer Fitch Outlook St",
+          "fieldName": "issuer_fitch_outlook_st",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ISSUER_FITCH_RATING_LT",
+          "label": "Issuer Fitch Rating Lt",
+          "fieldName": "issuer_fitch_rating_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "ISSUER_FITCH_RATING_ST",
+          "label": "Issuer Fitch Rating St",
+          "fieldName": "issuer_fitch_rating_st",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "ISSUER_MOODYS_OUTLOOK_LT",
+          "label": "Issuer Moodys Outlook Lt",
+          "fieldName": "issuer_moodys_outlook_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ISSUER_MOODYS_RATING_LT",
+          "label": "Issuer Moodys Rating Lt",
+          "fieldName": "issuer_moodys_rating_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "ISSUER_MOODYS_RATING_ST",
+          "label": "Issuer Moodys Rating St",
+          "fieldName": "issuer_moodys_rating_st",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "ISSUER_SNP_RATING_LT",
+          "label": "Issuer Snp Rating Lt",
+          "fieldName": "issuer_snp_rating_lt",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "ISSUER_SNP_RATING_ST",
+          "label": "Issuer Snp Rating St",
+          "fieldName": "issuer_snp_rating_st",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MACAULAY_DURATION",
+          "label": "Macaulay Duration",
+          "fieldName": "macaulay_duration",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "MATURITY_DATE_2",
+          "label": "Maturity Date (maturity-date)",
+          "fieldName": "maturity-date",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "MINUTE_BAR_CLOSE",
+          "label": "Minute Bar Close",
+          "fieldName": "minute-bar.close",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MODIFIED_DURATION",
+          "label": "Modified Duration",
+          "fieldName": "modified_duration",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "YTM_TO_ASK",
+          "label": "YTM To Ask",
+          "fieldName": "ytm_to_ask",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "YTM_TO_BID",
+          "label": "YTM To Bid",
+          "fieldName": "ytm_to_bid",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "YTW_TO_ASK",
+          "label": "YTW To Ask",
+          "fieldName": "ytw_to_ask",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "YTW_TO_BID",
+          "label": "YTW To Bid",
+          "fieldName": "ytw_to_bid",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "Z_SPREAD",
+          "label": "Z Spread",
+          "fieldName": "z_spread",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
         }
       ],
-      "fieldCount": 201
+      "fieldCount": 196
     },
     "futures": {
       "name": "Futures Screener",
@@ -90799,15 +90205,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "VALUE_TRADED",
-          "label": "Value Traded",
-          "fieldName": "Value.Traded",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "VOLATILITY_D",
           "label": "Volatility D",
           "fieldName": "Volatility.D",
@@ -91006,33 +90403,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "COUPON",
-          "label": "Coupon",
-          "fieldName": "coupon",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_DESCRIPTION",
-          "label": "Cryptoasset-Info Description",
-          "fieldName": "cryptoasset-info.description",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_ID",
-          "label": "Cryptoasset-Info Id",
-          "fieldName": "cryptoasset-info.id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "CURRENCY",
           "label": "Currency",
           "fieldName": "currency",
@@ -91067,15 +90437,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "DAYS_TO_MATURITY",
-          "label": "Days To Maturity",
-          "fieldName": "days_to_maturity",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
         },
         {
           "name": "DESCRIPTION",
@@ -91186,15 +90547,6 @@ const FIELD_DATA = {
           "category": "Price"
         },
         {
-          "name": "INDEXES",
-          "label": "Indexes",
-          "fieldName": "indexes",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "INDICATORS_BARS_COUNT",
           "label": "Indicators Bars Count",
           "fieldName": "indicators_bars_count",
@@ -91216,24 +90568,6 @@ const FIELD_DATA = {
           "name": "IS_PRIMARY",
           "label": "Is Primary",
           "fieldName": "is_primary",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SHARIAH_COMPLIANT",
-          "label": "Is Shariah Compliant",
-          "fieldName": "is_shariah_compliant",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SYMBOL_PRIMARY_LISTING",
-          "label": "Is Symbol Primary Listing",
-          "fieldName": "is_symbol_primary_listing",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -91312,15 +90646,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "MATURITY_DATE",
-          "label": "Maturity Date",
-          "fieldName": "maturity_date",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
-        },
-        {
           "name": "MINMOV",
           "label": "Minmov",
           "fieldName": "minmov",
@@ -91373,96 +90698,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE",
-          "label": "Post Change",
-          "fieldName": "post_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE",
-          "label": "Postmarket Change",
-          "fieldName": "postmarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE_ABS",
-          "label": "Postmarket Change Abs",
-          "fieldName": "postmarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE",
-          "label": "Pre Change",
-          "fieldName": "pre_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS",
-          "label": "Pre Change Abs",
-          "fieldName": "pre_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PREMARKET_CHANGE",
-          "label": "Premarket Change",
-          "fieldName": "premarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_ABS",
-          "label": "Premarket Change Abs",
-          "fieldName": "premarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN",
-          "label": "Premarket Change From Open",
-          "fieldName": "premarket_change_from_open",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN_ABS",
-          "label": "Premarket Change From Open Abs",
-          "fieldName": "premarket_change_from_open_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_GAP",
-          "label": "Premarket Gap",
-          "fieldName": "premarket_gap",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
         },
         {
           "name": "PRICE_52_WEEK_HIGH",
@@ -91528,123 +90763,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "RATES_CF",
-          "label": "Rates Cf",
-          "fieldName": "rates_cf",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CURRENT",
-          "label": "Rates Current",
-          "fieldName": "rates_current",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_DIVIDEND_RECENT",
-          "label": "Rates Dividend Recent",
-          "fieldName": "rates_dividend_recent",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_DIVIDEND_UPCOMING",
-          "label": "Rates Dividend Upcoming",
-          "fieldName": "rates_dividend_upcoming",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_EARNINGS_FQ",
-          "label": "Rates Earnings FQ",
-          "fieldName": "rates_earnings_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_EARNINGS_NEXT_FQ",
-          "label": "Rates Earnings Next FQ",
-          "fieldName": "rates_earnings_next_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_FH",
-          "label": "Rates FH",
-          "fieldName": "rates_fh",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FQ",
-          "label": "Rates FQ",
-          "fieldName": "rates_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FY",
-          "label": "Rates FY",
-          "fieldName": "rates_fy",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_MC",
-          "label": "Rates Mc",
-          "fieldName": "rates_mc",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_PT",
-          "label": "Rates Pt",
-          "fieldName": "rates_pt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TIME_SERIES",
-          "label": "Rates Time Series",
-          "fieldName": "rates_time_series",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TTM",
-          "label": "Rates TTM",
-          "fieldName": "rates_ttm",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "RELATIVE_VOLUME_10D_CALC",
           "label": "Relative Volume 10D Calc",
           "fieldName": "relative_volume_10d_calc",
@@ -91672,28 +90790,10 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "SUBMARKET",
-          "label": "Submarket",
-          "fieldName": "submarket",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "SUBTYPE",
           "label": "Subtype",
           "fieldName": "subtype",
           "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "SYMBOL",
-          "label": "Symbol",
-          "fieldName": "symbol",
-          "format": "float",
           "interval": false,
           "historical": false,
           "category": "Metadata"
@@ -91787,9 +90887,270 @@ const FIELD_DATA = {
           "interval": true,
           "historical": false,
           "category": "Volume"
+        },
+        {
+          "name": "CANDLE_DARKCLOUDCOVER_BEARISH",
+          "label": "Candle.DarkCloudCover.Bearish",
+          "fieldName": "Candle.DarkCloudCover.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BEARISH",
+          "label": "Candle.DojiStar.Bearish",
+          "fieldName": "Candle.DojiStar.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BULLISH",
+          "label": "Candle.DojiStar.Bullish",
+          "fieldName": "Candle.DojiStar.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOWNSIDETASUKIGAP_BEARISH",
+          "label": "Candle.DownsideTasukiGap.Bearish",
+          "fieldName": "Candle.DownsideTasukiGap.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGDOJISTAR_BEARISH",
+          "label": "Candle.EveningDojiStar.Bearish",
+          "fieldName": "Candle.EveningDojiStar.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGTHREEMETHODS_BEARISH",
+          "label": "Candle.FallingThreeMethods.Bearish",
+          "fieldName": "Candle.FallingThreeMethods.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGWINDOW_BEARISH",
+          "label": "Candle.FallingWindow.Bearish",
+          "fieldName": "Candle.FallingWindow.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BEARISH",
+          "label": "Candle.HaramiCross.Bearish",
+          "fieldName": "Candle.HaramiCross.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BULLISH",
+          "label": "Candle.HaramiCross.Bullish",
+          "fieldName": "Candle.HaramiCross.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGDOJISTAR_BULLISH",
+          "label": "Candle.MorningDojiStar.Bullish",
+          "fieldName": "Candle.MorningDojiStar.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ONNECK_BEARISH",
+          "label": "Candle.OnNeck.Bearish",
+          "fieldName": "Candle.OnNeck.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_PIERCING_BULLISH",
+          "label": "Candle.Piercing.Bullish",
+          "fieldName": "Candle.Piercing.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGTHREEMETHODS_BULLISH",
+          "label": "Candle.RisingThreeMethods.Bullish",
+          "fieldName": "Candle.RisingThreeMethods.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGWINDOW_BULLISH",
+          "label": "Candle.RisingWindow.Bullish",
+          "fieldName": "Candle.RisingWindow.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERBOTTOM_BULLISH",
+          "label": "Candle.TweezerBottom.Bullish",
+          "fieldName": "Candle.TweezerBottom.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERTOP_BEARISH",
+          "label": "Candle.TweezerTop.Bearish",
+          "fieldName": "Candle.TweezerTop.Bearish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_UPSIDETASUKIGAP_BULLISH",
+          "label": "Candle.UpsideTasukiGap.Bullish",
+          "fieldName": "Candle.UpsideTasukiGap.Bullish",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
         }
       ],
-      "fieldCount": 393
+      "fieldCount": 388
     },
     "coin": {
       "name": "Coin Screener (CEX/DEX)",
@@ -91826,29 +91187,11 @@ const FIELD_DATA = {
           "category": "Valuation"
         },
         {
-          "name": "N24H_VOL_CHANGE_ABS_5",
-          "label": "24H Vol Change Abs|5",
-          "fieldName": "24h_vol_change_abs|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "N24H_VOL_CHANGE_CMC",
           "label": "24H Vol Change Cmc",
           "fieldName": "24h_vol_change_cmc",
           "format": "percent",
           "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "N24H_VOL_CHANGE_5",
-          "label": "24H Vol Change|5",
-          "fieldName": "24h_vol_change|5",
-          "format": "percent",
-          "interval": false,
           "historical": false,
           "category": "Other"
         },
@@ -91862,15 +91205,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "N24H_VOL_PREV_5",
-          "label": "24H Vol Prev|5",
-          "fieldName": "24h_vol_prev|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Valuation"
-        },
-        {
           "name": "N24H_VOL_TO_MARKET_CAP",
           "label": "24H Vol To Market Cap",
           "fieldName": "24h_vol_to_market_cap",
@@ -91878,15 +91212,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Valuation"
-        },
-        {
-          "name": "N24H_VOL_5",
-          "label": "24H Vol|5",
-          "fieldName": "24h_vol|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "ADR",
@@ -98189,96 +97514,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "CHAIKINMONEYFLOW",
-          "label": "Chaikinmoneyflow",
-          "fieldName": "ChaikinMoneyFlow",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_1",
-          "label": "Chaikinmoneyflow|1",
-          "fieldName": "ChaikinMoneyFlow|1",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_120",
-          "label": "Chaikinmoneyflow|120",
-          "fieldName": "ChaikinMoneyFlow|120",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_15",
-          "label": "Chaikinmoneyflow|15",
-          "fieldName": "ChaikinMoneyFlow|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_1M",
-          "label": "Chaikinmoneyflow|1M",
-          "fieldName": "ChaikinMoneyFlow|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_1W",
-          "label": "Chaikinmoneyflow|1W",
-          "fieldName": "ChaikinMoneyFlow|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_240",
-          "label": "Chaikinmoneyflow|240",
-          "fieldName": "ChaikinMoneyFlow|240",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_30",
-          "label": "Chaikinmoneyflow|30",
-          "fieldName": "ChaikinMoneyFlow|30",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_5",
-          "label": "Chaikinmoneyflow|5",
-          "fieldName": "ChaikinMoneyFlow|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CHAIKINMONEYFLOW_60",
-          "label": "Chaikinmoneyflow|60",
-          "fieldName": "ChaikinMoneyFlow|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "DONCHCH20_LOWER",
           "label": "Donchch20 Lower",
           "fieldName": "DonchCh20.Lower",
@@ -99683,15 +98918,6 @@ const FIELD_DATA = {
           "category": "Moving Averages"
         },
         {
-          "name": "EMA250_1M",
-          "label": "Ema250|1M",
-          "fieldName": "EMA250|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
           "name": "EMA250_1W",
           "label": "Ema250|1W",
           "fieldName": "EMA250|1W",
@@ -100037,15 +99263,6 @@ const FIELD_DATA = {
           "name": "EMA300_15",
           "label": "Ema300|15",
           "fieldName": "EMA300|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "EMA300_1M",
-          "label": "Ema300|1M",
-          "fieldName": "EMA300|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -101477,15 +100694,6 @@ const FIELD_DATA = {
           "name": "HULLMA200_15",
           "label": "Hullma200|15",
           "fieldName": "HullMA200|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "HULLMA200_1M",
-          "label": "Hullma200|1M",
-          "fieldName": "HullMA200|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -103436,15 +102644,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "MONEYFLOW",
-          "label": "Moneyflow",
-          "fieldName": "MoneyFlow",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "MONEYFLOW_1",
           "label": "Moneyflow|1",
           "fieldName": "MoneyFlow|1",
@@ -103466,24 +102665,6 @@ const FIELD_DATA = {
           "name": "MONEYFLOW_15",
           "label": "Moneyflow|15",
           "fieldName": "MoneyFlow|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "MONEYFLOW_1M",
-          "label": "Moneyflow|1M",
-          "fieldName": "MoneyFlow|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "MONEYFLOW_1W",
-          "label": "Moneyflow|1W",
-          "fieldName": "MoneyFlow|1W",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -109034,96 +108215,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "REC_VWMA",
-          "label": "Rec VWMA",
-          "fieldName": "Rec.VWMA",
-          "format": "rating",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_1",
-          "label": "Rec VWMA|1",
-          "fieldName": "Rec.VWMA|1",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_120",
-          "label": "Rec VWMA|120",
-          "fieldName": "Rec.VWMA|120",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_15",
-          "label": "Rec VWMA|15",
-          "fieldName": "Rec.VWMA|15",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_1M",
-          "label": "Rec VWMA|1M",
-          "fieldName": "Rec.VWMA|1M",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_1W",
-          "label": "Rec VWMA|1W",
-          "fieldName": "Rec.VWMA|1W",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_240",
-          "label": "Rec VWMA|240",
-          "fieldName": "Rec.VWMA|240",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_30",
-          "label": "Rec VWMA|30",
-          "fieldName": "Rec.VWMA|30",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_5",
-          "label": "Rec VWMA|5",
-          "fieldName": "Rec.VWMA|5",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "REC_VWMA_60",
-          "label": "Rec VWMA|60",
-          "fieldName": "Rec.VWMA|60",
-          "format": "rating",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "REC_WR",
           "label": "Rec Wr",
           "fieldName": "Rec.WR",
@@ -110618,15 +109709,6 @@ const FIELD_DATA = {
           "category": "Moving Averages"
         },
         {
-          "name": "SMA250_1M",
-          "label": "Sma250|1M",
-          "fieldName": "SMA250|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
           "name": "SMA250_1W",
           "label": "Sma250|1W",
           "fieldName": "SMA250|1W",
@@ -110972,15 +110054,6 @@ const FIELD_DATA = {
           "name": "SMA300_15",
           "label": "Sma300|15",
           "fieldName": "SMA300|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "SMA300_1M",
-          "label": "Sma300|1M",
-          "fieldName": "SMA300|1M",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -114344,276 +113417,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "VWAP",
-          "label": "VWAP",
-          "fieldName": "VWAP",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_1",
-          "label": "VWAP|1",
-          "fieldName": "VWAP|1",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_120",
-          "label": "VWAP|120",
-          "fieldName": "VWAP|120",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_15",
-          "label": "VWAP|15",
-          "fieldName": "VWAP|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_1M",
-          "label": "VWAP|1M",
-          "fieldName": "VWAP|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_1W",
-          "label": "VWAP|1W",
-          "fieldName": "VWAP|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_240",
-          "label": "VWAP|240",
-          "fieldName": "VWAP|240",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_30",
-          "label": "VWAP|30",
-          "fieldName": "VWAP|30",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_5",
-          "label": "VWAP|5",
-          "fieldName": "VWAP|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWAP_60",
-          "label": "VWAP|60",
-          "fieldName": "VWAP|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA",
-          "label": "VWMA",
-          "fieldName": "VWMA",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_1",
-          "label": "VWMA|1",
-          "fieldName": "VWMA|1",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_120",
-          "label": "VWMA|120",
-          "fieldName": "VWMA|120",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_15",
-          "label": "VWMA|15",
-          "fieldName": "VWMA|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_1M",
-          "label": "VWMA|1M",
-          "fieldName": "VWMA|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_1W",
-          "label": "VWMA|1W",
-          "fieldName": "VWMA|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_240",
-          "label": "VWMA|240",
-          "fieldName": "VWMA|240",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_30",
-          "label": "VWMA|30",
-          "fieldName": "VWMA|30",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_5",
-          "label": "VWMA|5",
-          "fieldName": "VWMA|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VWMA_60",
-          "label": "VWMA|60",
-          "fieldName": "VWMA|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED",
-          "label": "Value Traded",
-          "fieldName": "Value.Traded",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1",
-          "label": "Value Traded|1",
-          "fieldName": "Value.Traded|1",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_120",
-          "label": "Value Traded|120",
-          "fieldName": "Value.Traded|120",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_15",
-          "label": "Value Traded|15",
-          "fieldName": "Value.Traded|15",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1M",
-          "label": "Value Traded|1M",
-          "fieldName": "Value.Traded|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_1W",
-          "label": "Value Traded|1W",
-          "fieldName": "Value.Traded|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_240",
-          "label": "Value Traded|240",
-          "fieldName": "Value.Traded|240",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_30",
-          "label": "Value Traded|30",
-          "fieldName": "Value.Traded|30",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_5",
-          "label": "Value Traded|5",
-          "fieldName": "Value.Traded|5",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "VALUE_TRADED_60",
-          "label": "Value Traded|60",
-          "fieldName": "Value.Traded|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "VOLATILITY_D",
           "label": "Volatility D",
           "fieldName": "Volatility.D",
@@ -114731,15 +113534,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "ACTIVE_ADDRESSES_RATIO",
-          "label": "Active Addresses Ratio",
-          "fieldName": "active_addresses_ratio",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
           "name": "ACTIVE_SYMBOL",
           "label": "Active Symbol",
           "fieldName": "active_symbol",
@@ -114761,24 +113555,6 @@ const FIELD_DATA = {
           "name": "ADDRESSES_NEW",
           "label": "Addresses New",
           "fieldName": "addresses_new",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADDRESSES_TOTAL",
-          "label": "Addresses Total",
-          "fieldName": "addresses_total",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "ADDRESSES_ZERO_BALANCE",
-          "label": "Addresses Zero Balance",
-          "fieldName": "addresses_zero_balance",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -114839,24 +113615,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "ASK",
-          "label": "Ask",
-          "fieldName": "ask",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Price"
-        },
-        {
-          "name": "AT_THE_MONEY_ADDRESSES_PERCENTAGE",
-          "label": "At The Money Addresses Percentage",
-          "fieldName": "at_the_money_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "AVERAGE_TRANSACTION_USD",
           "label": "Average Transaction Usd",
           "fieldName": "average_transaction_usd",
@@ -114864,15 +113622,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "AVERAGE_VOLUME_10D_CALC",
-          "label": "Average Volume 10D Calc",
-          "fieldName": "average_volume_10d_calc",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
         },
         {
           "name": "AVERAGE_VOLUME_10D_CALC_1",
@@ -114896,24 +113645,6 @@ const FIELD_DATA = {
           "name": "AVERAGE_VOLUME_10D_CALC_15",
           "label": "Average Volume 10D Calc|15",
           "fieldName": "average_volume_10d_calc|15",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_10D_CALC_1M",
-          "label": "Average Volume 10D Calc|1M",
-          "fieldName": "average_volume_10d_calc|1M",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_10D_CALC_1W",
-          "label": "Average Volume 10D Calc|1W",
-          "fieldName": "average_volume_10d_calc|1W",
           "format": "number_group",
           "interval": false,
           "historical": false,
@@ -114956,15 +113687,6 @@ const FIELD_DATA = {
           "category": "Volume"
         },
         {
-          "name": "AVERAGE_VOLUME_30D_CALC",
-          "label": "Average Volume 30D Calc",
-          "fieldName": "average_volume_30d_calc",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
           "name": "AVERAGE_VOLUME_30D_CALC_1",
           "label": "Average Volume 30D Calc|1",
           "fieldName": "average_volume_30d_calc|1",
@@ -114986,24 +113708,6 @@ const FIELD_DATA = {
           "name": "AVERAGE_VOLUME_30D_CALC_15",
           "label": "Average Volume 30D Calc|15",
           "fieldName": "average_volume_30d_calc|15",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_30D_CALC_1M",
-          "label": "Average Volume 30D Calc|1M",
-          "fieldName": "average_volume_30d_calc|1M",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_30D_CALC_1W",
-          "label": "Average Volume 30D Calc|1W",
-          "fieldName": "average_volume_30d_calc|1W",
           "format": "number_group",
           "interval": false,
           "historical": false,
@@ -115046,15 +113750,6 @@ const FIELD_DATA = {
           "category": "Volume"
         },
         {
-          "name": "AVERAGE_VOLUME_60D_CALC",
-          "label": "Average Volume 60D Calc",
-          "fieldName": "average_volume_60d_calc",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
           "name": "AVERAGE_VOLUME_60D_CALC_1",
           "label": "Average Volume 60D Calc|1",
           "fieldName": "average_volume_60d_calc|1",
@@ -115076,33 +113771,6 @@ const FIELD_DATA = {
           "name": "AVERAGE_VOLUME_60D_CALC_15",
           "label": "Average Volume 60D Calc|15",
           "fieldName": "average_volume_60d_calc|15",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_60D_CALC_1M",
-          "label": "Average Volume 60D Calc|1M",
-          "fieldName": "average_volume_60d_calc|1M",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_60D_CALC_1W",
-          "label": "Average Volume 60D Calc|1W",
-          "fieldName": "average_volume_60d_calc|1W",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_60D_CALC_240",
-          "label": "Average Volume 60D Calc|240",
-          "fieldName": "average_volume_60d_calc|240",
           "format": "number_group",
           "interval": false,
           "historical": false,
@@ -115136,15 +113804,6 @@ const FIELD_DATA = {
           "category": "Volume"
         },
         {
-          "name": "AVERAGE_VOLUME_90D_CALC",
-          "label": "Average Volume 90D Calc",
-          "fieldName": "average_volume_90d_calc",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
           "name": "AVERAGE_VOLUME_90D_CALC_1",
           "label": "Average Volume 90D Calc|1",
           "fieldName": "average_volume_90d_calc|1",
@@ -115166,33 +113825,6 @@ const FIELD_DATA = {
           "name": "AVERAGE_VOLUME_90D_CALC_15",
           "label": "Average Volume 90D Calc|15",
           "fieldName": "average_volume_90d_calc|15",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_90D_CALC_1M",
-          "label": "Average Volume 90D Calc|1M",
-          "fieldName": "average_volume_90d_calc|1M",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_90D_CALC_1W",
-          "label": "Average Volume 90D Calc|1W",
-          "fieldName": "average_volume_90d_calc|1W",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "AVERAGE_VOLUME_90D_CALC_240",
-          "label": "Average Volume 90D Calc|240",
-          "fieldName": "average_volume_90d_calc|240",
           "format": "number_group",
           "interval": false,
           "historical": false,
@@ -115224,15 +113856,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Volume"
-        },
-        {
-          "name": "AVG_BALANCE",
-          "label": "Avg Balance",
-          "fieldName": "avg_balance",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "BARS_COUNT",
@@ -115329,51 +113952,6 @@ const FIELD_DATA = {
           "label": "Base Currency Kind",
           "fieldName": "base_currency_kind",
           "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "BID",
-          "label": "Bid",
-          "fieldName": "bid",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Price"
-        },
-        {
-          "name": "BID_ASK_SPREAD_PCT",
-          "label": "Bid Ask Spread Pct",
-          "fieldName": "bid_ask_spread_pct",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "BLOCKCHAIN_MINUS_ID",
-          "label": "Blockchain-Id",
-          "fieldName": "blockchain-id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "BREAK_EVEN_ADDRESSES_PERCENTAGE",
-          "label": "Break Even Addresses Percentage",
-          "fieldName": "break_even_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CENTRALIZATION",
-          "label": "Centralization",
-          "fieldName": "centralization",
-          "format": "float",
           "interval": false,
           "historical": false,
           "category": "Other"
@@ -115874,24 +114452,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "COUNTRY",
-          "label": "Country",
-          "fieldName": "country",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "COUPON",
-          "label": "Coupon",
-          "fieldName": "coupon",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
           "name": "CRYPTO_BLOCKCHAIN_ECOSYSTEMS",
           "label": "Crypto Blockchain Ecosystems",
           "fieldName": "crypto_blockchain_ecosystems",
@@ -115904,15 +114464,6 @@ const FIELD_DATA = {
           "name": "CRYPTO_CATEGORIES",
           "label": "Crypto Categories",
           "fieldName": "crypto_categories",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "CRYPTO_CODE",
-          "label": "Crypto Code",
-          "fieldName": "crypto_code",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -115944,24 +114495,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_DESCRIPTION",
-          "label": "Cryptoasset-Info Description",
-          "fieldName": "cryptoasset-info.description",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
-        },
-        {
-          "name": "CRYPTOASSET_MINUS_INFO_ID",
-          "label": "Cryptoasset-Info Id",
-          "fieldName": "cryptoasset-info.id",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "CURRENCY",
@@ -116000,15 +114533,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "DAYS_TO_MATURITY",
-          "label": "Days To Maturity",
-          "fieldName": "days_to_maturity",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
-        },
-        {
           "name": "DESCRIPTION",
           "label": "Description",
           "fieldName": "description",
@@ -116018,438 +114542,6 @@ const FIELD_DATA = {
           "category": "Metadata"
         },
         {
-          "name": "DEX_BUY_VOLUME_12H",
-          "label": "DEX Buy Volume 12H",
-          "fieldName": "dex_buy_volume_12h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_BUY_VOLUME_15M",
-          "label": "DEX Buy Volume 15M",
-          "fieldName": "dex_buy_volume_15m",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_BUY_VOLUME_1H",
-          "label": "DEX Buy Volume 1H",
-          "fieldName": "dex_buy_volume_1h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_BUY_VOLUME_24H",
-          "label": "DEX Buy Volume 24H",
-          "fieldName": "dex_buy_volume_24h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_BUY_VOLUME_4H",
-          "label": "DEX Buy Volume 4H",
-          "fieldName": "dex_buy_volume_4h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_BUYERS_12H",
-          "label": "DEX Buyers 12H",
-          "fieldName": "dex_buyers_12h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYERS_15M",
-          "label": "DEX Buyers 15M",
-          "fieldName": "dex_buyers_15m",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYERS_1H",
-          "label": "DEX Buyers 1H",
-          "fieldName": "dex_buyers_1h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYERS_24H",
-          "label": "DEX Buyers 24H",
-          "fieldName": "dex_buyers_24h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYERS_4H",
-          "label": "DEX Buyers 4H",
-          "fieldName": "dex_buyers_4h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYS_12H",
-          "label": "DEX Buys 12H",
-          "fieldName": "dex_buys_12h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYS_15M",
-          "label": "DEX Buys 15M",
-          "fieldName": "dex_buys_15m",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYS_1H",
-          "label": "DEX Buys 1H",
-          "fieldName": "dex_buys_1h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYS_24H",
-          "label": "DEX Buys 24H",
-          "fieldName": "dex_buys_24h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_BUYS_4H",
-          "label": "DEX Buys 4H",
-          "fieldName": "dex_buys_4h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_CREATED_TIME",
-          "label": "DEX Created Time",
-          "fieldName": "dex_created_time",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELL_VOLUME_12H",
-          "label": "DEX Sell Volume 12H",
-          "fieldName": "dex_sell_volume_12h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_SELL_VOLUME_15M",
-          "label": "DEX Sell Volume 15M",
-          "fieldName": "dex_sell_volume_15m",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_SELL_VOLUME_1H",
-          "label": "DEX Sell Volume 1H",
-          "fieldName": "dex_sell_volume_1h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_SELL_VOLUME_24H",
-          "label": "DEX Sell Volume 24H",
-          "fieldName": "dex_sell_volume_24h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_SELL_VOLUME_4H",
-          "label": "DEX Sell Volume 4H",
-          "fieldName": "dex_sell_volume_4h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_SELLERS_12H",
-          "label": "DEX Sellers 12H",
-          "fieldName": "dex_sellers_12h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLERS_15M",
-          "label": "DEX Sellers 15M",
-          "fieldName": "dex_sellers_15m",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLERS_1H",
-          "label": "DEX Sellers 1H",
-          "fieldName": "dex_sellers_1h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLERS_24H",
-          "label": "DEX Sellers 24H",
-          "fieldName": "dex_sellers_24h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLERS_4H",
-          "label": "DEX Sellers 4H",
-          "fieldName": "dex_sellers_4h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLS_12H",
-          "label": "DEX Sells 12H",
-          "fieldName": "dex_sells_12h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLS_15M",
-          "label": "DEX Sells 15M",
-          "fieldName": "dex_sells_15m",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLS_1H",
-          "label": "DEX Sells 1H",
-          "fieldName": "dex_sells_1h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLS_24H",
-          "label": "DEX Sells 24H",
-          "fieldName": "dex_sells_24h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_SELLS_4H",
-          "label": "DEX Sells 4H",
-          "fieldName": "dex_sells_4h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TOTAL_LIQUIDITY",
-          "label": "DEX Total Liquidity",
-          "fieldName": "dex_total_liquidity",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TOTAL_SUPPLY",
-          "label": "DEX Total Supply",
-          "fieldName": "dex_total_supply",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Crypto Specific"
-        },
-        {
-          "name": "DEX_TRADING_VOLUME_12H",
-          "label": "DEX Trading Volume 12H",
-          "fieldName": "dex_trading_volume_12h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_TRADING_VOLUME_15M",
-          "label": "DEX Trading Volume 15M",
-          "fieldName": "dex_trading_volume_15m",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_TRADING_VOLUME_1H",
-          "label": "DEX Trading Volume 1H",
-          "fieldName": "dex_trading_volume_1h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_TRADING_VOLUME_24H",
-          "label": "DEX Trading Volume 24H",
-          "fieldName": "dex_trading_volume_24h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_TRADING_VOLUME_4H",
-          "label": "DEX Trading Volume 4H",
-          "fieldName": "dex_trading_volume_4h",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "DEX_TXS_COUNT_12H",
-          "label": "DEX Txs Count 12H",
-          "fieldName": "dex_txs_count_12h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_15M",
-          "label": "DEX Txs Count 15M",
-          "fieldName": "dex_txs_count_15m",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_1H",
-          "label": "DEX Txs Count 1H",
-          "fieldName": "dex_txs_count_1h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_24H",
-          "label": "DEX Txs Count 24H",
-          "fieldName": "dex_txs_count_24h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_4H",
-          "label": "DEX Txs Count 4H",
-          "fieldName": "dex_txs_count_4h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_UNIQ_12H",
-          "label": "DEX Txs Count Uniq 12H",
-          "fieldName": "dex_txs_count_uniq_12h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_UNIQ_15M",
-          "label": "DEX Txs Count Uniq 15M",
-          "fieldName": "dex_txs_count_uniq_15m",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_UNIQ_1H",
-          "label": "DEX Txs Count Uniq 1H",
-          "fieldName": "dex_txs_count_uniq_1h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_UNIQ_24H",
-          "label": "DEX Txs Count Uniq 24H",
-          "fieldName": "dex_txs_count_uniq_24h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "DEX_TXS_COUNT_UNIQ_4H",
-          "label": "DEX Txs Count Uniq 4H",
-          "fieldName": "dex_txs_count_uniq_4h",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "EXCHANGE",
           "label": "Exchange",
           "fieldName": "exchange",
@@ -116457,15 +114549,6 @@ const FIELD_DATA = {
           "interval": true,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "EXPIRATION",
-          "label": "Expiration",
-          "fieldName": "expiration",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Balance Sheet"
         },
         {
           "name": "FIRST_BAR_TIME",
@@ -116480,15 +114563,6 @@ const FIELD_DATA = {
           "name": "FRACTIONAL",
           "label": "Fractional",
           "fieldName": "fractional",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "FULLY_DILUTED_VALUE",
-          "label": "Fully Diluted Value",
-          "fieldName": "fully_diluted_value",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -116747,15 +114821,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "GAP_UP_ABS_1W",
-          "label": "Gap Up Abs|1W",
-          "fieldName": "gap_up_abs|1W",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "GAP_UP_ABS_240",
           "label": "Gap Up Abs|240",
           "fieldName": "gap_up_abs|240",
@@ -116822,15 +114887,6 @@ const FIELD_DATA = {
           "name": "GAP_UP_1M",
           "label": "Gap Up|1M",
           "fieldName": "gap_up|1M",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "GAP_UP_1W",
-          "label": "Gap Up|1W",
-          "fieldName": "gap_up|1W",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -116954,15 +115010,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "GITHUB_COMMITS",
-          "label": "Github Commits",
-          "fieldName": "github_commits",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "HIGH",
           "label": "High",
           "fieldName": "high",
@@ -117047,24 +115094,6 @@ const FIELD_DATA = {
           "name": "HIGH_60",
           "label": "High|60",
           "fieldName": "high|60",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IN_THE_MONEY_ADDRESSES_PERCENTAGE",
-          "label": "In The Money Addresses Percentage",
-          "fieldName": "in_the_money_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "INDEXES",
-          "label": "Indexes",
-          "fieldName": "indexes",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -117182,24 +115211,6 @@ const FIELD_DATA = {
           "name": "IS_PRIMARY",
           "label": "Is Primary",
           "fieldName": "is_primary",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SHARIAH_COMPLIANT",
-          "label": "Is Shariah Compliant",
-          "fieldName": "is_shariah_compliant",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "IS_SYMBOL_PRIMARY_LISTING",
-          "label": "Is Symbol Primary Listing",
-          "fieldName": "is_symbol_primary_listing",
           "format": "float",
           "interval": false,
           "historical": false,
@@ -117332,24 +115343,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "LOGOID",
-          "label": "Logoid",
-          "fieldName": "logoid",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "LOSSES_ADDRESSES_PERCENTAGE",
-          "label": "Losses Addresses Percentage",
-          "fieldName": "losses_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "LOW",
           "label": "Low",
           "fieldName": "low",
@@ -117467,15 +115460,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "MARKET_CAP",
-          "label": "Market Cap",
-          "fieldName": "market_cap",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Valuation"
-        },
-        {
           "name": "MARKET_CAP_CALC",
           "label": "Market Cap Calc",
           "fieldName": "market_cap_calc",
@@ -117501,15 +115485,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Valuation"
-        },
-        {
-          "name": "MATURITY_DATE",
-          "label": "Maturity Date",
-          "fieldName": "maturity_date",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Bond Specific"
         },
         {
           "name": "MAX_SUPPLY",
@@ -117647,123 +115622,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "OUT_THE_MONEY_ADDRESSES_PERCENTAGE",
-          "label": "Out The Money Addresses Percentage",
-          "fieldName": "out_the_money_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE",
-          "label": "Post Change",
-          "fieldName": "post_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1",
-          "label": "Post Change|1",
-          "fieldName": "post_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_120",
-          "label": "Post Change|120",
-          "fieldName": "post_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_15",
-          "label": "Post Change|15",
-          "fieldName": "post_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1M",
-          "label": "Post Change|1M",
-          "fieldName": "post_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_1W",
-          "label": "Post Change|1W",
-          "fieldName": "post_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_240",
-          "label": "Post Change|240",
-          "fieldName": "post_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_30",
-          "label": "Post Change|30",
-          "fieldName": "post_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_5",
-          "label": "Post Change|5",
-          "fieldName": "post_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POST_CHANGE_60",
-          "label": "Post Change|60",
-          "fieldName": "post_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE",
-          "label": "Postmarket Change",
-          "fieldName": "postmarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "POSTMARKET_CHANGE_ABS",
-          "label": "Postmarket Change Abs",
-          "fieldName": "postmarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "POSTSACTIVE",
           "label": "Postsactive",
           "fieldName": "postsactive",
@@ -117780,231 +115638,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE",
-          "label": "Pre Change",
-          "fieldName": "pre_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS",
-          "label": "Pre Change Abs",
-          "fieldName": "pre_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1",
-          "label": "Pre Change Abs|1",
-          "fieldName": "pre_change_abs|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_120",
-          "label": "Pre Change Abs|120",
-          "fieldName": "pre_change_abs|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_15",
-          "label": "Pre Change Abs|15",
-          "fieldName": "pre_change_abs|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1M",
-          "label": "Pre Change Abs|1M",
-          "fieldName": "pre_change_abs|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_1W",
-          "label": "Pre Change Abs|1W",
-          "fieldName": "pre_change_abs|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_240",
-          "label": "Pre Change Abs|240",
-          "fieldName": "pre_change_abs|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_30",
-          "label": "Pre Change Abs|30",
-          "fieldName": "pre_change_abs|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_5",
-          "label": "Pre Change Abs|5",
-          "fieldName": "pre_change_abs|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_ABS_60",
-          "label": "Pre Change Abs|60",
-          "fieldName": "pre_change_abs|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1",
-          "label": "Pre Change|1",
-          "fieldName": "pre_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_120",
-          "label": "Pre Change|120",
-          "fieldName": "pre_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_15",
-          "label": "Pre Change|15",
-          "fieldName": "pre_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1M",
-          "label": "Pre Change|1M",
-          "fieldName": "pre_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_1W",
-          "label": "Pre Change|1W",
-          "fieldName": "pre_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_240",
-          "label": "Pre Change|240",
-          "fieldName": "pre_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_30",
-          "label": "Pre Change|30",
-          "fieldName": "pre_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_5",
-          "label": "Pre Change|5",
-          "fieldName": "pre_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PRE_CHANGE_60",
-          "label": "Pre Change|60",
-          "fieldName": "pre_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "PREMARKET_CHANGE",
-          "label": "Premarket Change",
-          "fieldName": "premarket_change",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_ABS",
-          "label": "Premarket Change Abs",
-          "fieldName": "premarket_change_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN",
-          "label": "Premarket Change From Open",
-          "fieldName": "premarket_change_from_open",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_CHANGE_FROM_OPEN_ABS",
-          "label": "Premarket Change From Open Abs",
-          "fieldName": "premarket_change_from_open_abs",
-          "format": "percent",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
-        },
-        {
-          "name": "PREMARKET_GAP",
-          "label": "Premarket Gap",
-          "fieldName": "premarket_gap",
-          "format": "float",
-          "interval": true,
-          "historical": false,
-          "category": "Moving Averages"
         },
         {
           "name": "PRICE_52_WEEK_HIGH",
@@ -118052,15 +115685,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "PROFIT_ADDRESSES_PERCENTAGE",
-          "label": "Profit Addresses Percentage",
-          "fieldName": "profit_addresses_percentage",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "PROVIDER_MINUS_ID",
           "label": "Provider-Id",
           "fieldName": "provider-id",
@@ -118070,213 +115694,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "RATES_CF",
-          "label": "Rates Cf",
-          "fieldName": "rates_cf",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_CURRENT",
-          "label": "Rates Current",
-          "fieldName": "rates_current",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_DIVIDEND_RECENT",
-          "label": "Rates Dividend Recent",
-          "fieldName": "rates_dividend_recent",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_DIVIDEND_UPCOMING",
-          "label": "Rates Dividend Upcoming",
-          "fieldName": "rates_dividend_upcoming",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Dividends"
-        },
-        {
-          "name": "RATES_EARNINGS_FQ",
-          "label": "Rates Earnings FQ",
-          "fieldName": "rates_earnings_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_EARNINGS_NEXT_FQ",
-          "label": "Rates Earnings Next FQ",
-          "fieldName": "rates_earnings_next_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Earnings"
-        },
-        {
-          "name": "RATES_FH",
-          "label": "Rates FH",
-          "fieldName": "rates_fh",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FQ",
-          "label": "Rates FQ",
-          "fieldName": "rates_fq",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_FY",
-          "label": "Rates FY",
-          "fieldName": "rates_fy",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_MC",
-          "label": "Rates Mc",
-          "fieldName": "rates_mc",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_PT",
-          "label": "Rates Pt",
-          "fieldName": "rates_pt",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TIME_SERIES",
-          "label": "Rates Time Series",
-          "fieldName": "rates_time_series",
-          "format": "date",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RATES_TTM",
-          "label": "Rates TTM",
-          "fieldName": "rates_ttm",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC",
-          "label": "Relative Volume 10D Calc",
-          "fieldName": "relative_volume_10d_calc",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_1",
-          "label": "Relative Volume 10D Calc|1",
-          "fieldName": "relative_volume_10d_calc|1",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_120",
-          "label": "Relative Volume 10D Calc|120",
-          "fieldName": "relative_volume_10d_calc|120",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_15",
-          "label": "Relative Volume 10D Calc|15",
-          "fieldName": "relative_volume_10d_calc|15",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_1M",
-          "label": "Relative Volume 10D Calc|1M",
-          "fieldName": "relative_volume_10d_calc|1M",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_1W",
-          "label": "Relative Volume 10D Calc|1W",
-          "fieldName": "relative_volume_10d_calc|1W",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_240",
-          "label": "Relative Volume 10D Calc|240",
-          "fieldName": "relative_volume_10d_calc|240",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_30",
-          "label": "Relative Volume 10D Calc|30",
-          "fieldName": "relative_volume_10d_calc|30",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_5",
-          "label": "Relative Volume 10D Calc|5",
-          "fieldName": "relative_volume_10d_calc|5",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "RELATIVE_VOLUME_10D_CALC_60",
-          "label": "Relative Volume 10D Calc|60",
-          "fieldName": "relative_volume_10d_calc|60",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
           "name": "RTC",
           "label": "Rtc",
           "fieldName": "rtc",
@@ -118284,15 +115701,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Other"
-        },
-        {
-          "name": "SECTOR",
-          "label": "Sector",
-          "fieldName": "sector",
-          "format": "text",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
         },
         {
           "name": "SENTIMENT",
@@ -118331,15 +115739,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "SUBMARKET",
-          "label": "Submarket",
-          "fieldName": "submarket",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "SUBTYPE",
           "label": "Subtype",
           "fieldName": "subtype",
@@ -118347,42 +115746,6 @@ const FIELD_DATA = {
           "interval": false,
           "historical": false,
           "category": "Metadata"
-        },
-        {
-          "name": "SYMBOL",
-          "label": "Symbol",
-          "fieldName": "symbol",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Metadata"
-        },
-        {
-          "name": "TELEGRAM_MEMBERS",
-          "label": "Telegram Members",
-          "fieldName": "telegram_members",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TELEGRAM_NEGATIVE",
-          "label": "Telegram Negative",
-          "fieldName": "telegram_negative",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TELEGRAM_POSITIVE",
-          "label": "Telegram Positive",
-          "fieldName": "telegram_positive",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
         },
         {
           "name": "TIME",
@@ -118556,24 +115919,6 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
-          "name": "TWITTER_NEGATIVE",
-          "label": "Twitter Negative",
-          "fieldName": "twitter_negative",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
-          "name": "TWITTER_POSITIVE",
-          "label": "Twitter Positive",
-          "fieldName": "twitter_positive",
-          "format": "float",
-          "interval": false,
-          "historical": false,
-          "category": "Other"
-        },
-        {
           "name": "TXS_COUNT",
           "label": "Txs Count",
           "fieldName": "txs_count",
@@ -118736,29 +116081,3702 @@ const FIELD_DATA = {
           "category": "Other"
         },
         {
+          "name": "CANDLE_DARKCLOUDCOVER_BEARISH",
+          "label": "Candle.DarkCloudCover.Bearish",
+          "fieldName": "Candle.DarkCloudCover.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BEARISH",
+          "label": "Candle.DojiStar.Bearish",
+          "fieldName": "Candle.DojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BULLISH",
+          "label": "Candle.DojiStar.Bullish",
+          "fieldName": "Candle.DojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOWNSIDETASUKIGAP_BEARISH",
+          "label": "Candle.DownsideTasukiGap.Bearish",
+          "fieldName": "Candle.DownsideTasukiGap.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGDOJISTAR_BEARISH",
+          "label": "Candle.EveningDojiStar.Bearish",
+          "fieldName": "Candle.EveningDojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGTHREEMETHODS_BEARISH",
+          "label": "Candle.FallingThreeMethods.Bearish",
+          "fieldName": "Candle.FallingThreeMethods.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGWINDOW_BEARISH",
+          "label": "Candle.FallingWindow.Bearish",
+          "fieldName": "Candle.FallingWindow.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BEARISH",
+          "label": "Candle.HaramiCross.Bearish",
+          "fieldName": "Candle.HaramiCross.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BULLISH",
+          "label": "Candle.HaramiCross.Bullish",
+          "fieldName": "Candle.HaramiCross.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGDOJISTAR_BULLISH",
+          "label": "Candle.MorningDojiStar.Bullish",
+          "fieldName": "Candle.MorningDojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ONNECK_BEARISH",
+          "label": "Candle.OnNeck.Bearish",
+          "fieldName": "Candle.OnNeck.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_PIERCING_BULLISH",
+          "label": "Candle.Piercing.Bullish",
+          "fieldName": "Candle.Piercing.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGTHREEMETHODS_BULLISH",
+          "label": "Candle.RisingThreeMethods.Bullish",
+          "fieldName": "Candle.RisingThreeMethods.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGWINDOW_BULLISH",
+          "label": "Candle.RisingWindow.Bullish",
+          "fieldName": "Candle.RisingWindow.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERBOTTOM_BULLISH",
+          "label": "Candle.TweezerBottom.Bullish",
+          "fieldName": "Candle.TweezerBottom.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERTOP_BEARISH",
+          "label": "Candle.TweezerTop.Bearish",
+          "fieldName": "Candle.TweezerTop.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_UPSIDETASUKIGAP_BULLISH",
+          "label": "Candle.UpsideTasukiGap.Bullish",
+          "fieldName": "Candle.UpsideTasukiGap.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DAILY_BAR_TIME",
+          "label": "Daily Bar Time",
+          "fieldName": "daily-bar.time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FUNDING_RATE",
+          "label": "Funding Rate",
+          "fieldName": "funding_rate",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME",
+          "label": "Last Price Update Time",
+          "fieldName": "last-price-update-time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LIQUIDATIONS_VOLUME_12H",
+          "label": "Liquidations Volume 12h",
+          "fieldName": "liquidations_volume_12h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LIQUIDATIONS_VOLUME_15M",
+          "label": "Liquidations Volume 15m",
+          "fieldName": "liquidations_volume_15m",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LIQUIDATIONS_VOLUME_1H",
+          "label": "Liquidations Volume 1h",
+          "fieldName": "liquidations_volume_1h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LIQUIDATIONS_VOLUME_24H",
+          "label": "Liquidations Volume 24h",
+          "fieldName": "liquidations_volume_24h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LIQUIDATIONS_VOLUME_4H",
+          "label": "Liquidations Volume 4h",
+          "fieldName": "liquidations_volume_4h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LONG_LIQUIDATIONS_VOLUME_12H",
+          "label": "Long Liquidations Volume 12h",
+          "fieldName": "long_liquidations_volume_12h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LONG_LIQUIDATIONS_VOLUME_15M",
+          "label": "Long Liquidations Volume 15m",
+          "fieldName": "long_liquidations_volume_15m",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LONG_LIQUIDATIONS_VOLUME_1H",
+          "label": "Long Liquidations Volume 1h",
+          "fieldName": "long_liquidations_volume_1h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LONG_LIQUIDATIONS_VOLUME_24H",
+          "label": "Long Liquidations Volume 24h",
+          "fieldName": "long_liquidations_volume_24h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "LONG_LIQUIDATIONS_VOLUME_4H",
+          "label": "Long Liquidations Volume 4h",
+          "fieldName": "long_liquidations_volume_4h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "MINUTE_BAR_TIME",
+          "label": "Minute Bar Time",
+          "fieldName": "minute-bar.time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST",
+          "label": "Open Interest",
+          "fieldName": "open_interest",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST_CHANGE_PERCENT_12H",
+          "label": "Open Interest Change Percent 12h",
+          "fieldName": "open_interest_change_percent_12h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST_CHANGE_PERCENT_15M",
+          "label": "Open Interest Change Percent 15m",
+          "fieldName": "open_interest_change_percent_15m",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST_CHANGE_PERCENT_1H",
+          "label": "Open Interest Change Percent 1h",
+          "fieldName": "open_interest_change_percent_1h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST_CHANGE_PERCENT_24H",
+          "label": "Open Interest Change Percent 24h",
+          "fieldName": "open_interest_change_percent_24h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST_CHANGE_PERCENT_4H",
+          "label": "Open Interest Change Percent 4h",
+          "fieldName": "open_interest_change_percent_4h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "OPEN_INTEREST_TO_VOLUME_24H",
+          "label": "Open Interest To Volume 24h",
+          "fieldName": "open_interest_to_volume_24h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SHORT_LIQUIDATIONS_VOLUME_12H",
+          "label": "Short Liquidations Volume 12h",
+          "fieldName": "short_liquidations_volume_12h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "SHORT_LIQUIDATIONS_VOLUME_15M",
+          "label": "Short Liquidations Volume 15m",
+          "fieldName": "short_liquidations_volume_15m",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "SHORT_LIQUIDATIONS_VOLUME_1H",
+          "label": "Short Liquidations Volume 1h",
+          "fieldName": "short_liquidations_volume_1h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "SHORT_LIQUIDATIONS_VOLUME_24H",
+          "label": "Short Liquidations Volume 24h",
+          "fieldName": "short_liquidations_volume_24h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "SHORT_LIQUIDATIONS_VOLUME_4H",
+          "label": "Short Liquidations Volume 4h",
+          "fieldName": "short_liquidations_volume_4h",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        }
+      ],
+      "fieldCount": 2825
+    },
+    "etf": {
+      "name": "ETF Screener",
+      "class": "ETFScreener",
+      "fieldClass": "StockField",
+      "hasIndex": false,
+      "hasMarket": true,
+      "fields": [],
+      "fieldCount": 3640
+    },
+    "index": {
+      "name": "Index Screener",
+      "class": "IndexScreener",
+      "fieldClass": "IndexField",
+      "hasIndex": false,
+      "hasMarket": false,
+      "fields": [
+        {
+          "name": "ACTIVE_SYMBOL",
+          "label": "Active Symbol",
+          "fieldName": "active_symbol",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADR",
+          "label": "ADR",
+          "fieldName": "ADR",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADRP",
+          "label": "ADRP",
+          "fieldName": "ADRP",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADX",
+          "label": "ADX",
+          "fieldName": "ADX",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_100",
+          "label": "ADX 100",
+          "fieldName": "ADX_100",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_20",
+          "label": "ADX 20",
+          "fieldName": "ADX_20",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_50",
+          "label": "ADX 50",
+          "fieldName": "ADX_50",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_9",
+          "label": "ADX 9",
+          "fieldName": "ADX_9",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI",
+          "label": "ADX+DI",
+          "fieldName": "ADX+DI",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_100",
+          "label": "ADX+DI 100",
+          "fieldName": "ADX+DI_100",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_100_2",
+          "label": "ADX DI 100",
+          "fieldName": "ADX-DI_100",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_2",
+          "label": "ADX DI",
+          "fieldName": "ADX-DI",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_20",
+          "label": "ADX+DI 20",
+          "fieldName": "ADX+DI_20",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_20_2",
+          "label": "ADX DI 20",
+          "fieldName": "ADX-DI_20",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_50",
+          "label": "ADX+DI 50",
+          "fieldName": "ADX+DI_50",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_50_2",
+          "label": "ADX DI 50",
+          "fieldName": "ADX-DI_50",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_9",
+          "label": "ADX+DI 9",
+          "fieldName": "ADX+DI_9",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ADX_DI_9_2",
+          "label": "ADX DI 9",
+          "fieldName": "ADX-DI_9",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_HIGH",
+          "label": "All Time High",
+          "fieldName": "all_time_high",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_HIGH_DAY",
+          "label": "All Time High Day",
+          "fieldName": "all_time_high_day",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_LOW",
+          "label": "All Time Low",
+          "fieldName": "all_time_low",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_LOW_DAY",
+          "label": "All Time Low Day",
+          "fieldName": "all_time_low_day",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_OPEN",
+          "label": "All Time Open",
+          "fieldName": "all_time_open",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "AO",
+          "label": "AO",
+          "fieldName": "AO",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "AROON_DOWN",
+          "label": "Aroon Down",
+          "fieldName": "Aroon.Down",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "AROON_UP",
+          "label": "Aroon Up",
+          "fieldName": "Aroon.Up",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ASK",
+          "label": "Ask",
+          "fieldName": "ask",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "ATR",
+          "label": "ATR",
+          "fieldName": "ATR",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
+          "name": "ATRP",
+          "label": "ATRP",
+          "fieldName": "ATRP",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
+          "name": "AVERAGE_VOLUME_10D_CALC",
+          "label": "Average Volume 10d Calc",
+          "fieldName": "average_volume_10d_calc",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "AVERAGE_VOLUME_30D_CALC",
+          "label": "Average Volume 30d Calc",
+          "fieldName": "average_volume_30d_calc",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "AVERAGE_VOLUME_60D_CALC",
+          "label": "Average Volume 60d Calc",
+          "fieldName": "average_volume_60d_calc",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "AVERAGE_VOLUME_90D_CALC",
+          "label": "Average Volume 90d Calc",
+          "fieldName": "average_volume_90d_calc",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "AVGVALUE_TRADED_10D",
+          "label": "AvgValue Traded 10d",
+          "fieldName": "AvgValue.Traded_10d",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "AVGVALUE_TRADED_30D",
+          "label": "AvgValue Traded 30d",
+          "fieldName": "AvgValue.Traded_30d",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "AVGVALUE_TRADED_60D",
+          "label": "AvgValue Traded 60d",
+          "fieldName": "AvgValue.Traded_60d",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "AVGVALUE_TRADED_90D",
+          "label": "AvgValue Traded 90d",
+          "fieldName": "AvgValue.Traded_90d",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BARS_COUNT",
+          "label": "Bars Count",
+          "fieldName": "bars_count",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BBPOWER",
+          "label": "BBPower",
+          "fieldName": "BBPower",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BB_BASIS",
+          "label": "BB Basis",
+          "fieldName": "BB.basis",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BB_BASIS_50",
+          "label": "BB Basis 50",
+          "fieldName": "BB.basis_50",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BB_LOWER",
+          "label": "BB Lower",
+          "fieldName": "BB.lower",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BB_LOWER_50",
+          "label": "BB Lower 50",
+          "fieldName": "BB.lower_50",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BB_UPPER",
+          "label": "BB Upper",
+          "fieldName": "BB.upper",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BB_UPPER_50",
+          "label": "BB Upper 50",
+          "fieldName": "BB.upper_50",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BID",
+          "label": "Bid",
+          "fieldName": "bid",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "BID_ASK_SPREAD_PCT",
+          "label": "Bid Ask Spread Pct",
+          "fieldName": "bid_ask_spread_pct",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_3BLACKCROWS",
+          "label": "Candle.3BlackCrows",
+          "fieldName": "Candle.3BlackCrows",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_3WHITESOLDIERS",
+          "label": "Candle.3WhiteSoldiers",
+          "fieldName": "Candle.3WhiteSoldiers",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ABANDONEDBABY_BEARISH",
+          "label": "Candle.AbandonedBaby.Bearish",
+          "fieldName": "Candle.AbandonedBaby.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ABANDONEDBABY_BULLISH",
+          "label": "Candle.AbandonedBaby.Bullish",
+          "fieldName": "Candle.AbandonedBaby.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DARKCLOUDCOVER_BEARISH",
+          "label": "Candle.DarkCloudCover.Bearish",
+          "fieldName": "Candle.DarkCloudCover.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJI",
+          "label": "Candle.Doji",
+          "fieldName": "Candle.Doji",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BEARISH",
+          "label": "Candle.DojiStar.Bearish",
+          "fieldName": "Candle.DojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJISTAR_BULLISH",
+          "label": "Candle.DojiStar.Bullish",
+          "fieldName": "Candle.DojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJI_DRAGONFLY",
+          "label": "Candle.Doji.Dragonfly",
+          "fieldName": "Candle.Doji.Dragonfly",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOJI_GRAVESTONE",
+          "label": "Candle.Doji.Gravestone",
+          "fieldName": "Candle.Doji.Gravestone",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_DOWNSIDETASUKIGAP_BEARISH",
+          "label": "Candle.DownsideTasukiGap.Bearish",
+          "fieldName": "Candle.DownsideTasukiGap.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ENGULFING_BEARISH",
+          "label": "Candle.Engulfing.Bearish",
+          "fieldName": "Candle.Engulfing.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ENGULFING_BULLISH",
+          "label": "Candle.Engulfing.Bullish",
+          "fieldName": "Candle.Engulfing.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGDOJISTAR_BEARISH",
+          "label": "Candle.EveningDojiStar.Bearish",
+          "fieldName": "Candle.EveningDojiStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_EVENINGSTAR",
+          "label": "Candle.EveningStar",
+          "fieldName": "Candle.EveningStar",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGTHREEMETHODS_BEARISH",
+          "label": "Candle.FallingThreeMethods.Bearish",
+          "fieldName": "Candle.FallingThreeMethods.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_FALLINGWINDOW_BEARISH",
+          "label": "Candle.FallingWindow.Bearish",
+          "fieldName": "Candle.FallingWindow.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HAMMER",
+          "label": "Candle.Hammer",
+          "fieldName": "Candle.Hammer",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HANGINGMAN",
+          "label": "Candle.HangingMan",
+          "fieldName": "Candle.HangingMan",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BEARISH",
+          "label": "Candle.HaramiCross.Bearish",
+          "fieldName": "Candle.HaramiCross.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMICROSS_BULLISH",
+          "label": "Candle.HaramiCross.Bullish",
+          "fieldName": "Candle.HaramiCross.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMI_BEARISH",
+          "label": "Candle.Harami.Bearish",
+          "fieldName": "Candle.Harami.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_HARAMI_BULLISH",
+          "label": "Candle.Harami.Bullish",
+          "fieldName": "Candle.Harami.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_INVERTEDHAMMER",
+          "label": "Candle.InvertedHammer",
+          "fieldName": "Candle.InvertedHammer",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_KICKING_BEARISH",
+          "label": "Candle.Kicking.Bearish",
+          "fieldName": "Candle.Kicking.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_KICKING_BULLISH",
+          "label": "Candle.Kicking.Bullish",
+          "fieldName": "Candle.Kicking.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_LONGSHADOW_LOWER",
+          "label": "Candle.LongShadow.Lower",
+          "fieldName": "Candle.LongShadow.Lower",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_LONGSHADOW_UPPER",
+          "label": "Candle.LongShadow.Upper",
+          "fieldName": "Candle.LongShadow.Upper",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MARUBOZU_BLACK",
+          "label": "Candle.Marubozu.Black",
+          "fieldName": "Candle.Marubozu.Black",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MARUBOZU_WHITE",
+          "label": "Candle.Marubozu.White",
+          "fieldName": "Candle.Marubozu.White",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGDOJISTAR_BULLISH",
+          "label": "Candle.MorningDojiStar.Bullish",
+          "fieldName": "Candle.MorningDojiStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_MORNINGSTAR",
+          "label": "Candle.MorningStar",
+          "fieldName": "Candle.MorningStar",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_ONNECK_BEARISH",
+          "label": "Candle.OnNeck.Bearish",
+          "fieldName": "Candle.OnNeck.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_PIERCING_BULLISH",
+          "label": "Candle.Piercing.Bullish",
+          "fieldName": "Candle.Piercing.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGTHREEMETHODS_BULLISH",
+          "label": "Candle.RisingThreeMethods.Bullish",
+          "fieldName": "Candle.RisingThreeMethods.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_RISINGWINDOW_BULLISH",
+          "label": "Candle.RisingWindow.Bullish",
+          "fieldName": "Candle.RisingWindow.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_SHOOTINGSTAR",
+          "label": "Candle.ShootingStar",
+          "fieldName": "Candle.ShootingStar",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_SPINNINGTOP_BLACK",
+          "label": "Candle.SpinningTop.Black",
+          "fieldName": "Candle.SpinningTop.Black",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_SPINNINGTOP_WHITE",
+          "label": "Candle.SpinningTop.White",
+          "fieldName": "Candle.SpinningTop.White",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TRISTAR_BEARISH",
+          "label": "Candle.TriStar.Bearish",
+          "fieldName": "Candle.TriStar.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TRISTAR_BULLISH",
+          "label": "Candle.TriStar.Bullish",
+          "fieldName": "Candle.TriStar.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERBOTTOM_BULLISH",
+          "label": "Candle.TweezerBottom.Bullish",
+          "fieldName": "Candle.TweezerBottom.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_TWEEZERTOP_BEARISH",
+          "label": "Candle.TweezerTop.Bearish",
+          "fieldName": "Candle.TweezerTop.Bearish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CANDLE_UPSIDETASUKIGAP_BULLISH",
+          "label": "Candle.UpsideTasukiGap.Bullish",
+          "fieldName": "Candle.UpsideTasukiGap.Bullish",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CCI20",
+          "label": "CCI20",
+          "fieldName": "CCI20",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "CHAIKINMONEYFLOW",
+          "label": "ChaikinMoneyFlow",
+          "fieldName": "ChaikinMoneyFlow",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CHANGE",
+          "label": "Change",
+          "fieldName": "change",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Change"
+        },
+        {
+          "name": "CHANGE_ABS",
+          "label": "Change Abs",
+          "fieldName": "change_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CHANGE_FROM_OPEN",
+          "label": "Change From Open",
+          "fieldName": "change_from_open",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Change"
+        },
+        {
+          "name": "CHANGE_FROM_OPEN_ABS",
+          "label": "Change From Open Abs",
+          "fieldName": "change_from_open_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CLOSE",
+          "label": "Close",
+          "fieldName": "close",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "CRYPTOASSET_INFO_DESCRIPTION",
+          "label": "Cryptoasset Info Description",
+          "fieldName": "cryptoasset-info.description",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "CRYPTOASSET_INFO_ID",
+          "label": "Cryptoasset Info ID",
+          "fieldName": "cryptoasset-info.id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Balance Sheet"
+        },
+        {
+          "name": "CURRENCY",
+          "label": "Currency",
+          "fieldName": "currency",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "CURRENCY_ID",
+          "label": "Currency ID",
+          "fieldName": "currency_id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CURRENCY_KIND",
+          "label": "Currency Kind",
+          "fieldName": "currency_kind",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CURRENT_SESSION",
+          "label": "Current Session",
+          "fieldName": "current_session",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DESCRIPTION",
+          "label": "Description",
+          "fieldName": "description",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "DONCHCH20_LOWER",
+          "label": "DonchCh20 Lower",
+          "fieldName": "DonchCh20.Lower",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DONCHCH20_MIDDLE",
+          "label": "DonchCh20 Middle",
+          "fieldName": "DonchCh20.Middle",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DONCHCH20_UPPER",
+          "label": "DonchCh20 Upper",
+          "fieldName": "DonchCh20.Upper",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EMA10",
+          "label": "EMA10",
+          "fieldName": "EMA10",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA100",
+          "label": "EMA100",
+          "fieldName": "EMA100",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA12",
+          "label": "EMA12",
+          "fieldName": "EMA12",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA120",
+          "label": "EMA120",
+          "fieldName": "EMA120",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA13",
+          "label": "EMA13",
+          "fieldName": "EMA13",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA14",
+          "label": "EMA14",
+          "fieldName": "EMA14",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA144",
+          "label": "EMA144",
+          "fieldName": "EMA144",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA15",
+          "label": "EMA15",
+          "fieldName": "EMA15",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA150",
+          "label": "EMA150",
+          "fieldName": "EMA150",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA2",
+          "label": "EMA2",
+          "fieldName": "EMA2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA20",
+          "label": "EMA20",
+          "fieldName": "EMA20",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA200",
+          "label": "EMA200",
+          "fieldName": "EMA200",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA21",
+          "label": "EMA21",
+          "fieldName": "EMA21",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA25",
+          "label": "EMA25",
+          "fieldName": "EMA25",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA250",
+          "label": "EMA250",
+          "fieldName": "EMA250",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA26",
+          "label": "EMA26",
+          "fieldName": "EMA26",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA3",
+          "label": "EMA3",
+          "fieldName": "EMA3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA30",
+          "label": "EMA30",
+          "fieldName": "EMA30",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA300",
+          "label": "EMA300",
+          "fieldName": "EMA300",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA34",
+          "label": "EMA34",
+          "fieldName": "EMA34",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA40",
+          "label": "EMA40",
+          "fieldName": "EMA40",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA5",
+          "label": "EMA5",
+          "fieldName": "EMA5",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA50",
+          "label": "EMA50",
+          "fieldName": "EMA50",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA55",
+          "label": "EMA55",
+          "fieldName": "EMA55",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA6",
+          "label": "EMA6",
+          "fieldName": "EMA6",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA60",
+          "label": "EMA60",
+          "fieldName": "EMA60",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA7",
+          "label": "EMA7",
+          "fieldName": "EMA7",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA75",
+          "label": "EMA75",
+          "fieldName": "EMA75",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA8",
+          "label": "EMA8",
+          "fieldName": "EMA8",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA89",
+          "label": "EMA89",
+          "fieldName": "EMA89",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EMA9",
+          "label": "EMA9",
+          "fieldName": "EMA9",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "EXCHANGE",
+          "label": "Exchange",
+          "fieldName": "exchange",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "FIRST_BAR_TIME",
+          "label": "First Bar Time",
+          "fieldName": "first_bar_time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FRACTIONAL",
+          "label": "Fractional",
+          "fieldName": "fractional",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP",
+          "label": "Gap",
+          "fieldName": "gap",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_DOWN",
+          "label": "Gap Down",
+          "fieldName": "gap_down",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_DOWN_ABS",
+          "label": "Gap Down Abs",
+          "fieldName": "gap_down_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_UP",
+          "label": "Gap Up",
+          "fieldName": "gap_up",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_UP_ABS",
+          "label": "Gap Up Abs",
+          "fieldName": "gap_up_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH",
+          "label": "High",
+          "fieldName": "high",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "HIGH_1M",
+          "label": "High 1M",
+          "fieldName": "High.1M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_1M_DATE",
+          "label": "High 1M Date",
+          "fieldName": "High.1M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_3M",
+          "label": "High 3M",
+          "fieldName": "High.3M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_3M_DATE",
+          "label": "High 3M Date",
+          "fieldName": "High.3M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_5D",
+          "label": "High 5D",
+          "fieldName": "High.5D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_6M",
+          "label": "High 6M",
+          "fieldName": "High.6M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_6M_DATE",
+          "label": "High 6M Date",
+          "fieldName": "High.6M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL",
+          "label": "High All",
+          "fieldName": "High.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL_CALC",
+          "label": "High All Calc",
+          "fieldName": "High.All.Calc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL_CALC_DATE",
+          "label": "High All Calc Date",
+          "fieldName": "High.All.Calc.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL_DATE",
+          "label": "High All Date",
+          "fieldName": "High.All.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HULLMA20",
+          "label": "HullMA20",
+          "fieldName": "HullMA20",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HULLMA200",
+          "label": "HullMA200",
+          "fieldName": "HullMA200",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HULLMA9",
+          "label": "HullMA9",
+          "fieldName": "HullMA9",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_BLINE",
+          "label": "Ichimoku BLine",
+          "fieldName": "Ichimoku.BLine",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_BLINE_20_60_120_30",
+          "label": "Ichimoku BLine 20 60 120 30",
+          "fieldName": "Ichimoku.BLine_20_60_120_30",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_CLINE",
+          "label": "Ichimoku CLine",
+          "fieldName": "Ichimoku.CLine",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_CLINE_20_60_120_30",
+          "label": "Ichimoku CLine 20 60 120 30",
+          "fieldName": "Ichimoku.CLine_20_60_120_30",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_LEAD1",
+          "label": "Ichimoku Lead1",
+          "fieldName": "Ichimoku.Lead1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_LEAD1_20_60_120_30",
+          "label": "Ichimoku Lead1 20 60 120 30",
+          "fieldName": "Ichimoku.Lead1_20_60_120_30",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_LEAD2",
+          "label": "Ichimoku Lead2",
+          "fieldName": "Ichimoku.Lead2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ICHIMOKU_LEAD2_20_60_120_30",
+          "label": "Ichimoku Lead2 20 60 120 30",
+          "fieldName": "Ichimoku.Lead2_20_60_120_30",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "INDICATORS_BARS_COUNT",
+          "label": "Indicators Bars Count",
+          "fieldName": "indicators_bars_count",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IS_BLACKLISTED",
+          "label": "Is Blacklisted",
+          "fieldName": "is_blacklisted",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "label": "Is Primary",
+          "fieldName": "is_primary",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KIND",
+          "label": "Kind",
+          "fieldName": "kind",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KIND_DELAY",
+          "label": "Kind Delay",
+          "fieldName": "kind-delay",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KLTCHNL_BASIS",
+          "label": "KltChnl Basis",
+          "fieldName": "KltChnl.basis",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KLTCHNL_LOWER",
+          "label": "KltChnl Lower",
+          "fieldName": "KltChnl.lower",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KLTCHNL_UPPER",
+          "label": "KltChnl Upper",
+          "fieldName": "KltChnl.upper",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_BAR_UPDATE_TIME",
+          "label": "Last Bar Update Time",
+          "fieldName": "last_bar_update_time",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME",
+          "label": "Last Price Update Time",
+          "fieldName": "last-price-update-time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW",
+          "label": "Low",
+          "fieldName": "low",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "LOW_1M",
+          "label": "Low 1M",
+          "fieldName": "Low.1M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_1M_DATE",
+          "label": "Low 1M Date",
+          "fieldName": "Low.1M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_3M",
+          "label": "Low 3M",
+          "fieldName": "Low.3M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_3M_DATE",
+          "label": "Low 3M Date",
+          "fieldName": "Low.3M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_5D",
+          "label": "Low 5D",
+          "fieldName": "Low.5D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_6M",
+          "label": "Low 6M",
+          "fieldName": "Low.6M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_6M_DATE",
+          "label": "Low 6M Date",
+          "fieldName": "Low.6M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_AFTER_HIGH_ALL",
+          "label": "Low After High All",
+          "fieldName": "Low.After.High.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_AFTER_HIGH_ALL_CHANGE",
+          "label": "Low After High All Change",
+          "fieldName": "low_after_high_all_change",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_AFTER_HIGH_ALL_CHANGE_ABS",
+          "label": "Low After High All Change Abs",
+          "fieldName": "low_after_high_all_change_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL",
+          "label": "Low All",
+          "fieldName": "Low.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL_CALC",
+          "label": "Low All Calc",
+          "fieldName": "Low.All.Calc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL_CALC_DATE",
+          "label": "Low All Calc Date",
+          "fieldName": "Low.All.Calc.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL_DATE",
+          "label": "Low All Date",
+          "fieldName": "Low.All.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MACD_HIST",
+          "label": "MACD Hist",
+          "fieldName": "MACD.hist",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "MACD"
+        },
+        {
+          "name": "MACD_MACD",
+          "label": "MACD MACD",
+          "fieldName": "MACD.macd",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "MACD"
+        },
+        {
+          "name": "MACD_SIGNAL",
+          "label": "MACD Signal",
+          "fieldName": "MACD.signal",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "MACD"
+        },
+        {
+          "name": "MARKET",
+          "label": "Market",
+          "fieldName": "market",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MINMOV",
+          "label": "Minmov",
+          "fieldName": "minmov",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MINMOVE2",
+          "label": "Minmove2",
+          "fieldName": "minmove2",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MOM",
+          "label": "MOM",
+          "fieldName": "Mom",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "MOM_14",
+          "label": "MOM 14",
+          "fieldName": "Mom_14",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "MONEYFLOW",
+          "label": "MoneyFlow",
+          "fieldName": "MoneyFlow",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NAME",
+          "label": "Name",
+          "fieldName": "name",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "OPEN",
+          "label": "Open",
+          "fieldName": "open",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "OPEN_ALL_CALC",
+          "label": "Open All Calc",
+          "fieldName": "Open.All.Calc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y",
+          "label": "Perf 10Y",
+          "fieldName": "Perf.10Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M",
+          "label": "Perf 1M",
+          "fieldName": "Perf.1M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M",
+          "label": "Perf 3M",
+          "fieldName": "Perf.3M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y",
+          "label": "Perf 3Y",
+          "fieldName": "Perf.3Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D",
+          "label": "Perf 5D",
+          "fieldName": "Perf.5D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y",
+          "label": "Perf 5Y",
+          "fieldName": "Perf.5Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M",
+          "label": "Perf 6M",
+          "fieldName": "Perf.6M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL",
+          "label": "Perf All",
+          "fieldName": "Perf.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W",
+          "label": "Perf W",
+          "fieldName": "Perf.W",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y",
+          "label": "Perf Y",
+          "fieldName": "Perf.Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD",
+          "label": "Perf YTD",
+          "fieldName": "Perf.YTD",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_MIDDLE",
+          "label": "Pivot M Camarilla Middle",
+          "fieldName": "Pivot.M.Camarilla.Middle",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_R1",
+          "label": "Pivot M Camarilla R1",
+          "fieldName": "Pivot.M.Camarilla.R1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_R2",
+          "label": "Pivot M Camarilla R2",
+          "fieldName": "Pivot.M.Camarilla.R2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_R3",
+          "label": "Pivot M Camarilla R3",
+          "fieldName": "Pivot.M.Camarilla.R3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_S1",
+          "label": "Pivot M Camarilla S1",
+          "fieldName": "Pivot.M.Camarilla.S1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_S2",
+          "label": "Pivot M Camarilla S2",
+          "fieldName": "Pivot.M.Camarilla.S2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CAMARILLA_S3",
+          "label": "Pivot M Camarilla S3",
+          "fieldName": "Pivot.M.Camarilla.S3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_MIDDLE",
+          "label": "Pivot M Classic Middle",
+          "fieldName": "Pivot.M.Classic.Middle",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_R1",
+          "label": "Pivot M Classic R1",
+          "fieldName": "Pivot.M.Classic.R1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_R2",
+          "label": "Pivot M Classic R2",
+          "fieldName": "Pivot.M.Classic.R2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_R3",
+          "label": "Pivot M Classic R3",
+          "fieldName": "Pivot.M.Classic.R3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_S1",
+          "label": "Pivot M Classic S1",
+          "fieldName": "Pivot.M.Classic.S1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_S2",
+          "label": "Pivot M Classic S2",
+          "fieldName": "Pivot.M.Classic.S2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_CLASSIC_S3",
+          "label": "Pivot M Classic S3",
+          "fieldName": "Pivot.M.Classic.S3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_DEMARK_MIDDLE",
+          "label": "Pivot M Demark Middle",
+          "fieldName": "Pivot.M.Demark.Middle",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "PIVOT_M_DEMARK_R1",
+          "label": "Pivot M Demark R1",
+          "fieldName": "Pivot.M.Demark.R1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "PIVOT_M_DEMARK_S1",
+          "label": "Pivot M Demark S1",
+          "fieldName": "Pivot.M.Demark.S1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_MIDDLE",
+          "label": "Pivot M Fibonacci Middle",
+          "fieldName": "Pivot.M.Fibonacci.Middle",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_R1",
+          "label": "Pivot M Fibonacci R1",
+          "fieldName": "Pivot.M.Fibonacci.R1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_R2",
+          "label": "Pivot M Fibonacci R2",
+          "fieldName": "Pivot.M.Fibonacci.R2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_R3",
+          "label": "Pivot M Fibonacci R3",
+          "fieldName": "Pivot.M.Fibonacci.R3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_S1",
+          "label": "Pivot M Fibonacci S1",
+          "fieldName": "Pivot.M.Fibonacci.S1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_S2",
+          "label": "Pivot M Fibonacci S2",
+          "fieldName": "Pivot.M.Fibonacci.S2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_FIBONACCI_S3",
+          "label": "Pivot M Fibonacci S3",
+          "fieldName": "Pivot.M.Fibonacci.S3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_MIDDLE",
+          "label": "Pivot M Woodie Middle",
+          "fieldName": "Pivot.M.Woodie.Middle",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_R1",
+          "label": "Pivot M Woodie R1",
+          "fieldName": "Pivot.M.Woodie.R1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_R2",
+          "label": "Pivot M Woodie R2",
+          "fieldName": "Pivot.M.Woodie.R2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_R3",
+          "label": "Pivot M Woodie R3",
+          "fieldName": "Pivot.M.Woodie.R3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_S1",
+          "label": "Pivot M Woodie S1",
+          "fieldName": "Pivot.M.Woodie.S1",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_S2",
+          "label": "Pivot M Woodie S2",
+          "fieldName": "Pivot.M.Woodie.S2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PIVOT_M_WOODIE_S3",
+          "label": "Pivot M Woodie S3",
+          "fieldName": "Pivot.M.Woodie.S3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "POPULARITY_RANK",
+          "label": "Popularity Rank",
+          "fieldName": "popularity_rank",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "POST_CHANGE",
+          "label": "Post Change",
+          "fieldName": "post_change",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICESCALE",
+          "label": "Pricescale",
+          "fieldName": "pricescale",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICE_52_WEEK_HIGH",
+          "label": "Price 52 Week High",
+          "fieldName": "price_52_week_high",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "PRICE_52_WEEK_HIGH_DATE",
+          "label": "Price 52 Week High Date",
+          "fieldName": "price_52_week_high_date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICE_52_WEEK_LOW",
+          "label": "Price 52 Week Low",
+          "fieldName": "price_52_week_low",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "PRICE_52_WEEK_LOW_DATE",
+          "label": "Price 52 Week Low Date",
+          "fieldName": "price_52_week_low_date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PROVIDER_ID",
+          "label": "Provider ID",
+          "fieldName": "provider-id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "P_SAR",
+          "label": "P SAR",
+          "fieldName": "P.SAR",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "RECOMMEND_ALL",
+          "label": "Recommend All",
+          "fieldName": "Recommend.All",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Recommendations"
+        },
+        {
+          "name": "RECOMMEND_MA",
+          "label": "Recommend MA",
+          "fieldName": "Recommend.MA",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Recommendations"
+        },
+        {
+          "name": "RECOMMEND_OTHER",
+          "label": "Recommend Other",
+          "fieldName": "Recommend.Other",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Recommendations"
+        },
+        {
+          "name": "REC_BBPOWER",
+          "label": "Rec BBPower",
+          "fieldName": "Rec.BBPower",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REC_HULLMA9",
+          "label": "Rec HullMA9",
+          "fieldName": "Rec.HullMA9",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REC_ICHIMOKU",
+          "label": "Rec Ichimoku",
+          "fieldName": "Rec.Ichimoku",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REC_STOCH_RSI",
+          "label": "Rec Stoch RSI",
+          "fieldName": "Rec.Stoch.RSI",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "RSI"
+        },
+        {
+          "name": "REC_UO",
+          "label": "Rec UO",
+          "fieldName": "Rec.UO",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REC_VWMA",
+          "label": "Rec VWMA",
+          "fieldName": "Rec.VWMA",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REC_WR",
+          "label": "Rec WR",
+          "fieldName": "Rec.WR",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "RELATIVE_VOLUME_10D_CALC",
+          "label": "Relative Volume 10d Calc",
+          "fieldName": "relative_volume_10d_calc",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "RELATIVE_VOLUME_INTRADAY_5",
+          "label": "Relative Volume Intraday 5",
+          "fieldName": "relative_volume_intraday|5",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volume"
+        },
+        {
+          "name": "ROC",
+          "label": "ROC",
+          "fieldName": "ROC",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "RSI",
+          "label": "RSI",
+          "fieldName": "RSI",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI10",
+          "label": "RSI10",
+          "fieldName": "RSI10",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI2",
+          "label": "RSI2",
+          "fieldName": "RSI2",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI20",
+          "label": "RSI20",
+          "fieldName": "RSI20",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI21",
+          "label": "RSI21",
+          "fieldName": "RSI21",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI3",
+          "label": "RSI3",
+          "fieldName": "RSI3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI30",
+          "label": "RSI30",
+          "fieldName": "RSI30",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI4",
+          "label": "RSI4",
+          "fieldName": "RSI4",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI5",
+          "label": "RSI5",
+          "fieldName": "RSI5",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI7",
+          "label": "RSI7",
+          "fieldName": "RSI7",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RSI9",
+          "label": "RSI9",
+          "fieldName": "RSI9",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "RSI"
+        },
+        {
+          "name": "RTC",
+          "label": "Rtc",
+          "fieldName": "rtc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SMA10",
+          "label": "SMA10",
+          "fieldName": "SMA10",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA100",
+          "label": "SMA100",
+          "fieldName": "SMA100",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA12",
+          "label": "SMA12",
+          "fieldName": "SMA12",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA120",
+          "label": "SMA120",
+          "fieldName": "SMA120",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA13",
+          "label": "SMA13",
+          "fieldName": "SMA13",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA14",
+          "label": "SMA14",
+          "fieldName": "SMA14",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA144",
+          "label": "SMA144",
+          "fieldName": "SMA144",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA15",
+          "label": "SMA15",
+          "fieldName": "SMA15",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA150",
+          "label": "SMA150",
+          "fieldName": "SMA150",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA2",
+          "label": "SMA2",
+          "fieldName": "SMA2",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA20",
+          "label": "SMA20",
+          "fieldName": "SMA20",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA200",
+          "label": "SMA200",
+          "fieldName": "SMA200",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA21",
+          "label": "SMA21",
+          "fieldName": "SMA21",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA25",
+          "label": "SMA25",
+          "fieldName": "SMA25",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA250",
+          "label": "SMA250",
+          "fieldName": "SMA250",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA26",
+          "label": "SMA26",
+          "fieldName": "SMA26",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA3",
+          "label": "SMA3",
+          "fieldName": "SMA3",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA30",
+          "label": "SMA30",
+          "fieldName": "SMA30",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA300",
+          "label": "SMA300",
+          "fieldName": "SMA300",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA34",
+          "label": "SMA34",
+          "fieldName": "SMA34",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA40",
+          "label": "SMA40",
+          "fieldName": "SMA40",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA5",
+          "label": "SMA5",
+          "fieldName": "SMA5",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA50",
+          "label": "SMA50",
+          "fieldName": "SMA50",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA55",
+          "label": "SMA55",
+          "fieldName": "SMA55",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA6",
+          "label": "SMA6",
+          "fieldName": "SMA6",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA60",
+          "label": "SMA60",
+          "fieldName": "SMA60",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA7",
+          "label": "SMA7",
+          "fieldName": "SMA7",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA75",
+          "label": "SMA75",
+          "fieldName": "SMA75",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA8",
+          "label": "SMA8",
+          "fieldName": "SMA8",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA89",
+          "label": "SMA89",
+          "fieldName": "SMA89",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SMA9",
+          "label": "SMA9",
+          "fieldName": "SMA9",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Moving Averages"
+        },
+        {
+          "name": "SOURCE_LOGOID",
+          "label": "Source Logoid",
+          "fieldName": "source-logoid",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_D",
+          "label": "Stoch D",
+          "fieldName": "Stoch.D",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_D_14_1_3",
+          "label": "Stoch D 14 1 3",
+          "fieldName": "Stoch.D_14_1_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_D_5_3_3",
+          "label": "Stoch D 5 3 3",
+          "fieldName": "Stoch.D_5_3_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_D_6_3_3",
+          "label": "Stoch D 6 3 3",
+          "fieldName": "Stoch.D_6_3_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_D_8_3_3",
+          "label": "Stoch D 8 3 3",
+          "fieldName": "Stoch.D_8_3_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_K",
+          "label": "Stoch K",
+          "fieldName": "Stoch.K",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_K_14_1_3",
+          "label": "Stoch K 14 1 3",
+          "fieldName": "Stoch.K_14_1_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_K_5_3_3",
+          "label": "Stoch K 5 3 3",
+          "fieldName": "Stoch.K_5_3_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_K_6_3_3",
+          "label": "Stoch K 6 3 3",
+          "fieldName": "Stoch.K_6_3_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_K_8_3_3",
+          "label": "Stoch K 8 3 3",
+          "fieldName": "Stoch.K_8_3_3",
+          "format": "float",
+          "interval": true,
+          "historical": true,
+          "category": "Other"
+        },
+        {
+          "name": "STOCH_RSI_D",
+          "label": "Stoch RSI D",
+          "fieldName": "Stoch.RSI.D",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "RSI"
+        },
+        {
+          "name": "STOCH_RSI_K",
+          "label": "Stoch RSI K",
+          "fieldName": "Stoch.RSI.K",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "RSI"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBTYPE",
+          "label": "Subtype",
+          "fieldName": "subtype",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "TIME",
+          "label": "Time",
+          "fieldName": "time",
+          "format": "date",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "TIME_BUSINESS_DAY",
+          "label": "Time Business Day",
+          "fieldName": "time_business_day",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "TYPE",
+          "label": "Type",
+          "fieldName": "type",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "TYPESPECS",
+          "label": "Typespecs",
+          "fieldName": "typespecs",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UO",
+          "label": "UO",
+          "fieldName": "UO",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_MODE",
+          "label": "Update Mode",
+          "fieldName": "update_mode",
+          "format": "text",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_TIME",
+          "label": "Update Time",
+          "fieldName": "update-time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_TIME_2",
+          "label": "Update Time (update_time)",
+          "fieldName": "update_time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "VOLATILITY_D",
+          "label": "Volatility D",
+          "fieldName": "Volatility.D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
+          "name": "VOLATILITY_M",
+          "label": "Volatility M",
+          "fieldName": "Volatility.M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
+          "name": "VOLATILITY_W",
+          "label": "Volatility W",
+          "fieldName": "Volatility.W",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
           "name": "VOLUME",
           "label": "Volume",
           "fieldName": "volume",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_MINUS_TYPE",
-          "label": "Volume-Type",
-          "fieldName": "volume-type",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_BASE_5",
-          "label": "Volume Base|5",
-          "fieldName": "volume_base|5",
-          "format": "number_group",
-          "interval": false,
+          "format": "float",
+          "interval": true,
           "historical": false,
           "category": "Volume"
         },
@@ -118775,265 +119793,1554 @@ const FIELD_DATA = {
           "name": "VOLUME_CHANGE_ABS",
           "label": "Volume Change Abs",
           "fieldName": "volume_change_abs",
-          "format": "percent",
+          "format": "float",
           "interval": true,
           "historical": false,
           "category": "Volume"
         },
         {
-          "name": "VOLUME_CHANGE_ABS_1",
-          "label": "Volume Change Abs|1",
-          "fieldName": "volume_change_abs|1",
-          "format": "percent",
-          "interval": false,
+          "name": "VWAP",
+          "label": "VWAP",
+          "fieldName": "VWAP",
+          "format": "float",
+          "interval": true,
           "historical": false,
-          "category": "Volume"
+          "category": "Other"
         },
         {
-          "name": "VOLUME_CHANGE_ABS_120",
-          "label": "Volume Change Abs|120",
-          "fieldName": "volume_change_abs|120",
-          "format": "percent",
-          "interval": false,
+          "name": "VWMA",
+          "label": "VWMA",
+          "fieldName": "VWMA",
+          "format": "float",
+          "interval": true,
           "historical": false,
-          "category": "Volume"
+          "category": "Other"
         },
         {
-          "name": "VOLUME_CHANGE_ABS_15",
-          "label": "Volume Change Abs|15",
-          "fieldName": "volume_change_abs|15",
-          "format": "percent",
-          "interval": false,
+          "name": "W_R",
+          "label": "W R",
+          "fieldName": "W.R",
+          "format": "float",
+          "interval": true,
           "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_ABS_1M",
-          "label": "Volume Change Abs|1M",
-          "fieldName": "volume_change_abs|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_ABS_1W",
-          "label": "Volume Change Abs|1W",
-          "fieldName": "volume_change_abs|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_ABS_240",
-          "label": "Volume Change Abs|240",
-          "fieldName": "volume_change_abs|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_ABS_30",
-          "label": "Volume Change Abs|30",
-          "fieldName": "volume_change_abs|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_ABS_5",
-          "label": "Volume Change Abs|5",
-          "fieldName": "volume_change_abs|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_ABS_60",
-          "label": "Volume Change Abs|60",
-          "fieldName": "volume_change_abs|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_1",
-          "label": "Volume Change|1",
-          "fieldName": "volume_change|1",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_120",
-          "label": "Volume Change|120",
-          "fieldName": "volume_change|120",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_15",
-          "label": "Volume Change|15",
-          "fieldName": "volume_change|15",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_1M",
-          "label": "Volume Change|1M",
-          "fieldName": "volume_change|1M",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_1W",
-          "label": "Volume Change|1W",
-          "fieldName": "volume_change|1W",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_240",
-          "label": "Volume Change|240",
-          "fieldName": "volume_change|240",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_30",
-          "label": "Volume Change|30",
-          "fieldName": "volume_change|30",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_5",
-          "label": "Volume Change|5",
-          "fieldName": "volume_change|5",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_CHANGE_60",
-          "label": "Volume Change|60",
-          "fieldName": "volume_change|60",
-          "format": "percent",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_QUOTE_5",
-          "label": "Volume Quote|5",
-          "fieldName": "volume_quote|5",
-          "format": "number_group",
-          "interval": false,
-          "historical": true,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_1",
-          "label": "Volume|1",
-          "fieldName": "volume|1",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_120",
-          "label": "Volume|120",
-          "fieldName": "volume|120",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_15",
-          "label": "Volume|15",
-          "fieldName": "volume|15",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_1M",
-          "label": "Volume|1M",
-          "fieldName": "volume|1M",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_1W",
-          "label": "Volume|1W",
-          "fieldName": "volume|1W",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_240",
-          "label": "Volume|240",
-          "fieldName": "volume|240",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_30",
-          "label": "Volume|30",
-          "fieldName": "volume|30",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_5",
-          "label": "Volume|5",
-          "fieldName": "volume|5",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
-        },
-        {
-          "name": "VOLUME_60",
-          "label": "Volume|60",
-          "fieldName": "volume|60",
-          "format": "number_group",
-          "interval": false,
-          "historical": false,
-          "category": "Volume"
+          "category": "Other"
         }
       ],
-      "fieldCount": 3026
+      "fieldCount": 358
+    },
+    "government_bond": {
+      "name": "Government Bond Screener",
+      "class": "GovernmentBondScreener",
+      "fieldClass": "GovernmentBondField",
+      "hasIndex": false,
+      "hasMarket": false,
+      "fields": [
+        {
+          "name": "ACTIVE_SYMBOL",
+          "label": "Active Symbol",
+          "fieldName": "active_symbol",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_HIGH",
+          "label": "All Time High",
+          "fieldName": "all_time_high",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_HIGH_DAY",
+          "label": "All Time High Day",
+          "fieldName": "all_time_high_day",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_LOW",
+          "label": "All Time Low",
+          "fieldName": "all_time_low",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_LOW_DAY",
+          "label": "All Time Low Day",
+          "fieldName": "all_time_low_day",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ALL_TIME_OPEN",
+          "label": "All Time Open",
+          "fieldName": "all_time_open",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "ASK",
+          "label": "Ask",
+          "fieldName": "ask",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "BARS_COUNT",
+          "label": "Bars Count",
+          "fieldName": "bars_count",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BID",
+          "label": "Bid",
+          "fieldName": "bid",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "BID_ASK_SPREAD_PCT",
+          "label": "Bid Ask Spread Pct",
+          "fieldName": "bid_ask_spread_pct",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOND_CHANGE",
+          "label": "Bond Change",
+          "fieldName": "Bond.Change",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOND_CHANGE_2",
+          "label": "Bond Change %",
+          "fieldName": "Bond.Change.%",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOND_CURRENCY",
+          "label": "Bond Currency",
+          "fieldName": "Bond.Currency",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BOND_PRICE",
+          "label": "Bond Price",
+          "fieldName": "Bond.Price",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CHANGE",
+          "label": "Change",
+          "fieldName": "change",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Change"
+        },
+        {
+          "name": "CHANGE_ABS",
+          "label": "Change Abs",
+          "fieldName": "change_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CHANGE_FROM_OPEN",
+          "label": "Change From Open",
+          "fieldName": "change_from_open",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Change"
+        },
+        {
+          "name": "CHANGE_FROM_OPEN_ABS",
+          "label": "Change From Open Abs",
+          "fieldName": "change_from_open_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CLOSE",
+          "label": "Close",
+          "fieldName": "close",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "CLOSE_1_DAYS_BACK",
+          "label": "Close 1 Days Back",
+          "fieldName": "close_1_days_back",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CLOSE_30_DAYS_BACK",
+          "label": "Close 30 Days Back",
+          "fieldName": "close_30_days_back",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CLOSE_365_DAYS_BACK",
+          "label": "Close 365 Days Back",
+          "fieldName": "close_365_days_back",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COUNTRY_CODE",
+          "label": "Country Code",
+          "fieldName": "country_code",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COUNTRY_CODE_FUND",
+          "label": "Country Code Fund",
+          "fieldName": "country_code_fund",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "COUPON",
+          "label": "Coupon",
+          "fieldName": "coupon",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Dividends"
+        },
+        {
+          "name": "CURRENCY",
+          "label": "Currency",
+          "fieldName": "currency",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "CURRENCY_ID",
+          "label": "Currency ID",
+          "fieldName": "currency_id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CURRENCY_KIND",
+          "label": "Currency Kind",
+          "fieldName": "currency_kind",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CURRENT_SESSION",
+          "label": "Current Session",
+          "fieldName": "current_session",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DAYS_TO_MATURITY",
+          "label": "Days To Maturity",
+          "fieldName": "days_to_maturity",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "DESCRIPTION",
+          "label": "Description",
+          "fieldName": "description",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "EXCHANGE",
+          "label": "Exchange",
+          "fieldName": "exchange",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "FIRST_BAR_TIME",
+          "label": "First Bar Time",
+          "fieldName": "first_bar_time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FIRST_BAR_TIME_1D",
+          "label": "First Bar Time 1d",
+          "fieldName": "first_bar_time_1d",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FOREX_PRIORITY",
+          "label": "Forex Priority",
+          "fieldName": "forex_priority",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "FRACTIONAL",
+          "label": "Fractional",
+          "fieldName": "fractional",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP",
+          "label": "Gap",
+          "fieldName": "gap",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_DOWN",
+          "label": "Gap Down",
+          "fieldName": "gap_down",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_DOWN_ABS",
+          "label": "Gap Down Abs",
+          "fieldName": "gap_down_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_UP",
+          "label": "Gap Up",
+          "fieldName": "gap_up",
+          "format": "percent",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_UP_ABS",
+          "label": "Gap Up Abs",
+          "fieldName": "gap_up_abs",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH",
+          "label": "High",
+          "fieldName": "high",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "HIGH_1M",
+          "label": "High 1M",
+          "fieldName": "High.1M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_1M_DATE",
+          "label": "High 1M Date",
+          "fieldName": "High.1M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_3M",
+          "label": "High 3M",
+          "fieldName": "High.3M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_3M_DATE",
+          "label": "High 3M Date",
+          "fieldName": "High.3M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_5D",
+          "label": "High 5D",
+          "fieldName": "High.5D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_6M",
+          "label": "High 6M",
+          "fieldName": "High.6M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_6M_DATE",
+          "label": "High 6M Date",
+          "fieldName": "High.6M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL",
+          "label": "High All",
+          "fieldName": "High.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL_CALC",
+          "label": "High All Calc",
+          "fieldName": "High.All.Calc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL_CALC_DATE",
+          "label": "High All Calc Date",
+          "fieldName": "High.All.Calc.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH_ALL_DATE",
+          "label": "High All Date",
+          "fieldName": "High.All.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "INDEX_PRIORITY",
+          "label": "Index Priority",
+          "fieldName": "index_priority",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "INDICATORS_BARS_COUNT",
+          "label": "Indicators Bars Count",
+          "fieldName": "indicators_bars_count",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IS_BLACKLISTED",
+          "label": "Is Blacklisted",
+          "fieldName": "is_blacklisted",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "label": "Is Primary",
+          "fieldName": "is_primary",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KIND",
+          "label": "Kind",
+          "fieldName": "kind",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KIND_DELAY",
+          "label": "Kind Delay",
+          "fieldName": "kind-delay",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_BAR_UPDATE_TIME",
+          "label": "Last Bar Update Time",
+          "fieldName": "last_bar_update_time",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME",
+          "label": "Last Price Update Time",
+          "fieldName": "last-price-update-time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_PRICE_UPDATE_TIME_INTRADAY",
+          "label": "Last Price Update Time Intraday",
+          "fieldName": "last-price-update-time-intraday",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW",
+          "label": "Low",
+          "fieldName": "low",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "LOW_1M",
+          "label": "Low 1M",
+          "fieldName": "Low.1M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_1M_DATE",
+          "label": "Low 1M Date",
+          "fieldName": "Low.1M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_3M",
+          "label": "Low 3M",
+          "fieldName": "Low.3M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_3M_DATE",
+          "label": "Low 3M Date",
+          "fieldName": "Low.3M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_5D",
+          "label": "Low 5D",
+          "fieldName": "Low.5D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_6M",
+          "label": "Low 6M",
+          "fieldName": "Low.6M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_6M_DATE",
+          "label": "Low 6M Date",
+          "fieldName": "Low.6M.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_AFTER_HIGH_ALL",
+          "label": "Low After High All",
+          "fieldName": "Low.After.High.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_AFTER_HIGH_ALL_CHANGE",
+          "label": "Low After High All Change",
+          "fieldName": "low_after_high_all_change",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_AFTER_HIGH_ALL_CHANGE_ABS",
+          "label": "Low After High All Change Abs",
+          "fieldName": "low_after_high_all_change_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL",
+          "label": "Low All",
+          "fieldName": "Low.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL_CALC",
+          "label": "Low All Calc",
+          "fieldName": "Low.All.Calc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL_CALC_DATE",
+          "label": "Low All Calc Date",
+          "fieldName": "Low.All.Calc.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW_ALL_DATE",
+          "label": "Low All Date",
+          "fieldName": "Low.All.Date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MARKET",
+          "label": "Market",
+          "fieldName": "market",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MATURITY_DATE",
+          "label": "Maturity Date",
+          "fieldName": "maturity_date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "MINMOV",
+          "label": "Minmov",
+          "fieldName": "minmov",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MINMOVE2",
+          "label": "Minmove2",
+          "fieldName": "minmove2",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NAME",
+          "label": "Name",
+          "fieldName": "name",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "OPEN",
+          "label": "Open",
+          "fieldName": "open",
+          "format": "float",
+          "interval": true,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "OPEN_ALL_CALC",
+          "label": "Open All Calc",
+          "fieldName": "Open.All.Calc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y",
+          "label": "Perf 10Y",
+          "fieldName": "Perf.10Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_10Y_ABS",
+          "label": "Performance 10 Years (Abs)",
+          "fieldName": "Perf.10Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M",
+          "label": "Perf 1M",
+          "fieldName": "Perf.1M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_1M_ABS",
+          "label": "Performance 1 Month (Abs)",
+          "fieldName": "Perf.1M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M",
+          "label": "Perf 3M",
+          "fieldName": "Perf.3M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3M_ABS",
+          "label": "Performance 3 Months (Abs)",
+          "fieldName": "Perf.3M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y",
+          "label": "Perf 3Y",
+          "fieldName": "Perf.3Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_3Y_ABS",
+          "label": "Performance 3 Years (Abs)",
+          "fieldName": "Perf.3Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D",
+          "label": "Perf 5D",
+          "fieldName": "Perf.5D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5D_ABS",
+          "label": "Performance 5 Days (Abs)",
+          "fieldName": "Perf.5D_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y",
+          "label": "Perf 5Y",
+          "fieldName": "Perf.5Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_5Y_ABS",
+          "label": "Performance 5 Years (Abs)",
+          "fieldName": "Perf.5Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M",
+          "label": "Perf 6M",
+          "fieldName": "Perf.6M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_6M_ABS",
+          "label": "Performance 6 Months (Abs)",
+          "fieldName": "Perf.6M_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL",
+          "label": "Perf All",
+          "fieldName": "Perf.All",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_ALL_ABS",
+          "label": "Performance All Time (Abs)",
+          "fieldName": "Perf.All_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W",
+          "label": "Perf W",
+          "fieldName": "Perf.W",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_W_ABS",
+          "label": "Performance 1 Week (Abs)",
+          "fieldName": "Perf.W_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y",
+          "label": "Perf Y",
+          "fieldName": "Perf.Y",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD",
+          "label": "Perf YTD",
+          "fieldName": "Perf.YTD",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_YTD_ABS",
+          "label": "Performance Year to Date (Abs)",
+          "fieldName": "Perf.YTD_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PERF_Y_ABS",
+          "label": "Performance 1 Year (Abs)",
+          "fieldName": "Perf.Y_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "POPULARITY_RANK",
+          "label": "Popularity Rank",
+          "fieldName": "popularity_rank",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICESCALE",
+          "label": "Pricescale",
+          "fieldName": "pricescale",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICE_52_WEEK_HIGH",
+          "label": "Price 52 Week High",
+          "fieldName": "price_52_week_high",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "PRICE_52_WEEK_HIGH_DATE",
+          "label": "Price 52 Week High Date",
+          "fieldName": "price_52_week_high_date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PRICE_52_WEEK_LOW",
+          "label": "Price 52 Week Low",
+          "fieldName": "price_52_week_low",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "PRICE_52_WEEK_LOW_DATE",
+          "label": "Price 52 Week Low Date",
+          "fieldName": "price_52_week_low_date",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "PROVIDER_ID",
+          "label": "Provider ID",
+          "fieldName": "provider-id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "REGION",
+          "label": "Region",
+          "fieldName": "region",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "RTC",
+          "label": "Rtc",
+          "fieldName": "rtc",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SOURCE_LOGOID",
+          "label": "Source Logoid",
+          "fieldName": "source-logoid",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBSESSIONS",
+          "label": "Subsessions",
+          "fieldName": "subsessions",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "SUBTYPE",
+          "label": "Subtype",
+          "fieldName": "subtype",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "TERM_TO_MATURITY",
+          "label": "Term To Maturity",
+          "fieldName": "term-to-maturity",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Bond Specific"
+        },
+        {
+          "name": "TIME",
+          "label": "Time",
+          "fieldName": "time",
+          "format": "date",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "TIME_BUSINESS_DAY",
+          "label": "Time Business Day",
+          "fieldName": "time_business_day",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "TYPE",
+          "label": "Type",
+          "fieldName": "type",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "TYPESPECS",
+          "label": "Typespecs",
+          "fieldName": "typespecs",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_MODE",
+          "label": "Update Mode",
+          "fieldName": "update_mode",
+          "format": "text",
+          "interval": true,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_TIME",
+          "label": "Update Time",
+          "fieldName": "update-time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_TIME_2",
+          "label": "Update Time (update_time)",
+          "fieldName": "update_time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "VOLATILITY_D",
+          "label": "Volatility D",
+          "fieldName": "Volatility.D",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
+          "name": "VOLATILITY_M",
+          "label": "Volatility M",
+          "fieldName": "Volatility.M",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volatility"
+        },
+        {
+          "name": "VOLATILITY_W",
+          "label": "Volatility W",
+          "fieldName": "Volatility.W",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Volatility"
+        }
+      ],
+      "fieldCount": 129
+    },
+    "economics": {
+      "name": "Economics Screener",
+      "class": "EconomicsScreener",
+      "fieldClass": "EconomicsField",
+      "hasIndex": false,
+      "hasMarket": false,
+      "fields": [
+        {
+          "name": "ACTIVE_SYMBOL",
+          "label": "Active Symbol",
+          "fieldName": "active_symbol",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "BARS_COUNT",
+          "label": "Bars Count",
+          "fieldName": "bars_count",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CHANGE",
+          "label": "Change",
+          "fieldName": "change",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Change"
+        },
+        {
+          "name": "CHANGE_ABS",
+          "label": "Change Abs",
+          "fieldName": "change_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CHANGE_FROM_OPEN",
+          "label": "Change From Open",
+          "fieldName": "change_from_open",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Change"
+        },
+        {
+          "name": "CHANGE_FROM_OPEN_ABS",
+          "label": "Change From Open Abs",
+          "fieldName": "change_from_open_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CLOSE",
+          "label": "Close",
+          "fieldName": "close",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "COUNTRY_CODE",
+          "label": "Country Code",
+          "fieldName": "country_code",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CURRENCY",
+          "label": "Currency",
+          "fieldName": "currency",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "CURRENCY_ID",
+          "label": "Currency ID",
+          "fieldName": "currency_id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "CURRENCY_KIND",
+          "label": "Currency Kind",
+          "fieldName": "currency_kind",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "DESCRIPTION",
+          "label": "Description",
+          "fieldName": "description",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "ECONOMIC_CATEGORY_ID",
+          "label": "Economic Category ID",
+          "fieldName": "economic-category-id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "EXCHANGE",
+          "label": "Exchange",
+          "fieldName": "exchange",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "GAP",
+          "label": "Gap",
+          "fieldName": "gap",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_DOWN",
+          "label": "Gap Down",
+          "fieldName": "gap_down",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_DOWN_ABS",
+          "label": "Gap Down Abs",
+          "fieldName": "gap_down_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_UP",
+          "label": "Gap Up",
+          "fieldName": "gap_up",
+          "format": "percent",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "GAP_UP_ABS",
+          "label": "Gap Up Abs",
+          "fieldName": "gap_up_abs",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "HIGH",
+          "label": "High",
+          "fieldName": "high",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "IS_BLACKLISTED",
+          "label": "Is Blacklisted",
+          "fieldName": "is_blacklisted",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "label": "Is Primary",
+          "fieldName": "is_primary",
+          "format": "bool",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KIND",
+          "label": "Kind",
+          "fieldName": "kind",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "KIND_DELAY",
+          "label": "Kind Delay",
+          "fieldName": "kind-delay",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LAST_BAR_UPDATE_TIME",
+          "label": "Last Bar Update Time",
+          "fieldName": "last_bar_update_time",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "LOW",
+          "label": "Low",
+          "fieldName": "low",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "MARKET",
+          "label": "Market",
+          "fieldName": "market",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "MEASURE",
+          "label": "Measure",
+          "fieldName": "measure",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "NAME",
+          "label": "Name",
+          "fieldName": "name",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "OPEN",
+          "label": "Open",
+          "fieldName": "open",
+          "format": "float",
+          "interval": false,
+          "historical": false,
+          "category": "Price"
+        },
+        {
+          "name": "TIME",
+          "label": "Time",
+          "fieldName": "time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "TYPE",
+          "label": "Type",
+          "fieldName": "type",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Metadata"
+        },
+        {
+          "name": "TYPESPECS",
+          "label": "Typespecs",
+          "fieldName": "typespecs",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UNIT_ID",
+          "label": "Unit ID",
+          "fieldName": "unit-id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_MODE",
+          "label": "Update Mode",
+          "fieldName": "update_mode",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "UPDATE_TIME",
+          "label": "Update Time",
+          "fieldName": "update_time",
+          "format": "date",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        },
+        {
+          "name": "VALUE_UNIT_ID",
+          "label": "Value Unit ID",
+          "fieldName": "value-unit-id",
+          "format": "text",
+          "interval": false,
+          "historical": false,
+          "category": "Other"
+        }
+      ],
+      "fieldCount": 37
     }
   },
   "operators": [
@@ -119779,6 +122086,7 @@ const FIELD_DATA = {
     "Other"
   ]
 };
+FIELD_DATA.screeners.etf.fields = FIELD_DATA.screeners.stock.fields;
 
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
