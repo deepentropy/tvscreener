@@ -76,6 +76,61 @@ ss.where(StockField.PE_RATIO_TTM.between(5, 25))
 df = ss.get()
 ```
 
+## OR and Nested Conditions
+
+Combine conditions with `|` (OR) and `&` (AND). Python evaluates `|` and `&` before comparisons, so put each comparison in parentheses.
+
+```python
+ss = StockScreener()
+
+# Finance OR Utilities
+ss.where((StockField.SECTOR == 'Finance') | (StockField.SECTOR == 'Utilities'))
+
+# Nested: large cap AND (oversold OR overbought)
+rsi = StockField.RELATIVE_STRENGTH_INDEX_14
+ss.where((StockField.MARKET_CAPITALIZATION > 1e10) & ((rsi < 30) | (rsi > 70)))
+
+df = ss.get()
+```
+
+Groups are sent as TradingView's `filter2` tree. Plain `where()` filters and every group are combined with AND.
+
+## Set, Empty and Date Filters
+
+```python
+# Symbol type tags (typespecs): any of / none of
+ss.where(StockField.TYPESPECS.has('etf'))
+ss.where(StockField.TYPESPECS.has_none_of(['preferred', 'etn']))
+
+# Field has a value / has no value
+ss.where(StockField.DIVIDENDS_YIELD.not_empty())
+ss.where(StockField.DIVIDENDS_YIELD.is_empty())
+
+# Dates relative to today, in days (TradingView's day boundaries)
+ss.where(StockField.UPCOMING_EARNINGS_DATE.in_day_range(0, 7))   # next week
+ss.where(StockField.RECENT_EARNINGS_DATE.in_day_range(-7, 0))    # last week
+```
+
+## Percent Filters
+
+Compare a field with a percentage of another field or a number.
+
+```python
+# Price more than 5% above SMA 50
+ss.where(StockField.PRICE.above_pct(StockField.SIMPLE_MOVING_AVERAGE_50, 5))
+
+# Price more than 10% below SMA 200
+ss.where(StockField.PRICE.below_pct(StockField.SIMPLE_MOVING_AVERAGE_200, 10))
+
+# Price within 5% of the all-time high
+ss.where(StockField.PRICE.within_pct(StockField.ALL_TIME_HIGH, -5, 0))
+
+# Price not within 10% of SMA 200, either side
+ss.where(StockField.PRICE.not_within_pct(StockField.SIMPLE_MOVING_AVERAGE_200, -10, 10))
+```
+
+Percentages are converted to the factors TradingView expects: `above_pct(x, 5)` sends `above% [x, 1.05]`.
+
 ## Market Filters
 
 ### By Exchange

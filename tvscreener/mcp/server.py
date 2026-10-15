@@ -123,10 +123,18 @@ def custom_query(
         asset_type: "stock", "crypto", "forex", "bond", "futures", or "coin"
         fields: Comma-separated field names to return (e.g., "NAME,PRICE,RSI,MACD_LEVEL_12_26")
                 If not specified, returns default fields.
-        filters: JSON array of filter conditions. Each filter has:
+        filters: JSON array of filter conditions, all combined with AND. Each filter has:
                  - field: Field name (use discover_fields to find names)
-                 - op: Operator (">=", ">", "<=", "<", "==", "!=", "match", "in_range")
+                 - op: Operator:
+                   ">=", ">", "<=", "<", "==", "!=", "match", "in_range", "not_in_range",
+                   "has", "has_none_of" (value: list, e.g. TYPESPECS has ["etf"]),
+                   "empty", "not_empty" (no value),
+                   "in_day_range" (value: [start, end] day offsets from today, e.g. [0, 7]),
+                   "above_pct", "below_pct" (value: [field_or_number, pct]),
+                   "within_pct", "not_within_pct" (value: [field_or_number, low_pct, high_pct])
                  - value: Value to compare (use [min, max] array for in_range)
+                 A filter can also be an OR / AND group, nestable:
+                 {"or": [{"field": "SECTOR", "op": "==", "value": "Finance"}, {"field": "SECTOR", "op": "==", "value": "Utilities"}]}
 
                  Example: '[{"field": "PRICE", "op": ">=", "value": 100}, {"field": "RSI", "op": "in_range", "value": [30, 70]}]'
         sort_by: Field name to sort by
@@ -145,6 +153,11 @@ def custom_query(
            fields="NAME,PRICE,DIVIDEND_YIELD_FY"
            filters='[{"field": "DIVIDEND_YIELD_FY", "op": ">=", "value": 3}]'
            sort_by="DIVIDEND_YIELD_FY"
+
+        3. Large banks or utilities, price more than 5% above SMA 50:
+           filters='[{"or": [{"field": "SECTOR", "op": "==", "value": "Finance"}, {"field": "SECTOR", "op": "==", "value": "Utilities"}]},
+                     {"field": "MARKET_CAPITALIZATION", "op": ">", "value": 1e10},
+                     {"field": "PRICE", "op": "above_pct", "value": ["SIMPLE_MOVING_AVERAGE_50", 5]}]'
     """
     # Parse fields
     select_fields = None
@@ -356,6 +369,15 @@ def list_filter_operators() -> str:
         "crosses": "Value crosses another",
         "crosses_up": "Value crosses above another",
         "crosses_down": "Value crosses below another",
+        "has": "Set field (e.g. TYPESPECS) contains any of the values (list)",
+        "has_none_of": "Set field contains none of the values (list)",
+        "empty": "Field has no value (no value needed)",
+        "not_empty": "Field has a value (no value needed)",
+        "in_day_range": "Date within [start, end] day offsets from today (e.g. [0, 7])",
+        "above_pct": "More than pct% above a field or number: [other, pct]",
+        "below_pct": "More than pct% below a field or number: [other, pct]",
+        "within_pct": "Between low% and high% of a field or number: [other, low_pct, high_pct]",
+        "not_within_pct": "Outside low% to high% of a field or number: [other, low_pct, high_pct]",
     }
 
     result = "Available filter operators for custom_query:\n\n"
@@ -367,7 +389,11 @@ def list_filter_operators() -> str:
     result += '  {"field": "PRICE", "op": ">=", "value": 100},\n'
     result += '  {"field": "RSI", "op": "in_range", "value": [30, 70]},\n'
     result += '  {"field": "SECTOR", "op": "match", "value": "Technology"}\n'
-    result += ']\n```'
+    result += ']\n```\n'
+    result += "\nOR / AND groups (nestable):\n"
+    result += '```json\n'
+    result += '{"or": [{"field": "SECTOR", "op": "==", "value": "Finance"}, {"field": "SECTOR", "op": "==", "value": "Utilities"}]}\n'
+    result += '```'
 
     return result
 

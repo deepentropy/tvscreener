@@ -2,6 +2,35 @@
 
 All notable changes to tvscreener.
 
+## [Unreleased]
+
+### Added
+
+- **OR and nested filter logic** (#62)
+  - Combine conditions with `|` and `&`: `ss.where((StockField.SECTOR == 'Finance') | (StockField.SECTOR == 'Utilities'))`
+  - Sent as TradingView's `filter2` tree; new `ConditionGroup` class
+  - MCP `custom_query` accepts `{"or": [...]}` / `{"and": [...]}` groups
+- **New filter operations** (#63)
+  - `has()`, `has_none_of()` for set fields such as `typespecs`
+  - `is_empty()`, `not_empty()`
+  - `in_day_range(start, end)` for dates relative to today
+  - `above_pct()`, `below_pct()`, `within_pct()`, `not_within_pct()` to compare with a percentage of another field or a number
+  - Available in the MCP `custom_query` tool
+- **Code Generator: new operators and OR**
+  - Operators: has any of, has none of, % above, % below, within %, outside %, day range, has a value, is empty
+  - AND / OR toggle between filters; OR filters are grouped in one `where()` call
+
+### Fixed
+
+- **`with_history()` rejected 26 indicators** (#65)
+  - `StockField` indicators such as `RSI2`, `STOCH_K_5_3_3`, `ADX_PLUS_DI_50` and `MOM_14` have previous-bar values in TradingView but raised `ValueError`
+
+### Changed
+
+- Filters on the same field are merged into one `in_range` filter only for the original comparison operations. The new operations are always kept as separate filters.
+
+---
+
 ## [0.6.0] - 14/10/2026
 
 ### Added

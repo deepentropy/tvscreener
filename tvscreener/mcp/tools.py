@@ -9,7 +9,7 @@ from __future__ import annotations
 import tvscreener as tvs
 from tvscreener import (
     StockField, CryptoField, ForexField, BondField, FuturesField, CoinField,
-    FilterOperator
+    FilterOperator, FieldCondition, ConditionGroup
 )
 import pandas as pd
 from typing import TYPE_CHECKING
@@ -32,7 +32,16 @@ FILTER_OP_MAP = {
     "crosses": FilterOperator.CROSSES,
     "crosses_up": FilterOperator.CROSSES_UP,
     "crosses_down": FilterOperator.CROSSES_DOWN,
+    "has": FilterOperator.HAS,
+    "has_none_of": FilterOperator.HAS_NONE_OF,
+    "empty": FilterOperator.EMPTY,
+    "not_empty": FilterOperator.NOT_EMPTY,
+    "in_day_range": FilterOperator.IN_DAY_RANGE,
 }
+
+# Percent operators: value is [other, pct] or [other, low_pct, high_pct],
+# where other is a field name or a number
+PCT_OPS = {"above_pct", "below_pct", "within_pct", "not_within_pct"}
 
 # Mapping from asset type to field class and screener class
 ASSET_CONFIG = {
@@ -134,6 +143,39 @@ def get_field_categories(asset_type: str = "stock") -> dict[str, list[str]]:
     return categories
 
 
+def build_condition(spec: dict[str, Any], asset_type: str = "stock"):
+    """
+    Build a FieldCondition or ConditionGroup from a filter dict.
+
+    A filter is either {"field": str, "op": str, "value": any}, or a group
+    {"or": [filters...]} / {"and": [filters...]} that can be nested.
+    Unknown fields and operators are skipped (None is returned).
+    """
+    for operator in ("or", "and"):
+        if operator in spec:
+            parts = [c for c in (build_condition(s, asset_type) for s in spec[operator]) if c is not None]
+            if not parts:
+                return None
+            return parts[0] if len(parts) == 1 else ConditionGroup(operator, parts)
+
+    field = get_field_enum(spec.get("field"), asset_type)
+    if not field:
+        return None
+    op = spec.get("op", ">=")
+    value = spec.get("value")
+
+    if op in PCT_OPS:
+        other = value[0]
+        if isinstance(other, str):
+            other = get_field_enum(other, asset_type) or other
+        return getattr(field, op)(other, *value[1:])
+
+    filter_op = FILTER_OP_MAP.get(op)
+    if not filter_op:
+        return None
+    return FieldCondition(field, filter_op, value)
+
+
 def custom_screen(
     asset_type: str = "stock",
     select_fields: list[str] | None = None,
@@ -148,7 +190,8 @@ def custom_screen(
     Args:
         asset_type: Asset type
         select_fields: List of field names to return
-        filters: List of filter dicts: {"field": str, "op": str, "value": any}
+        filters: List of filter dicts: {"field": str, "op": str, "value": any},
+                 or groups {"or": [...]} / {"and": [...]} (nestable)
         sort_by: Field name to sort by
         ascending: Sort direction
         limit: Maximum results
@@ -172,19 +215,9 @@ def custom_screen(
     # Apply filters
     if filters:
         for f in filters:
-            field_name = f.get("field")
-            op = f.get("op", ">=")
-            value = f.get("value")
-
-            field = get_field_enum(field_name, asset_type)
-            if not field:
-                continue
-
-            filter_op = FILTER_OP_MAP.get(op)
-            if not filter_op:
-                continue
-
-            screener.where(field, filter_op, value)
+            condition = build_condition(f, asset_type)
+            if condition is not None:
+                screener.where(condition)
 
     # Apply sorting
     if sort_by:

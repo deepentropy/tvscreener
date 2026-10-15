@@ -36,7 +36,110 @@ def add_rec_to_label(label):
     return f"Reco. {label}"
 
 
-class Field(Enum):
+def _pct_to_factor(pct):
+    """Convert a percent offset (5 -> 1.05, -10 -> 0.9) to the factor TradingView expects."""
+    return round(1 + pct / 100, 10)
+
+
+class _FilterMethods:
+    """Filter helpers shared by Field, FieldWithInterval and FieldWithHistory."""
+
+    def has(self, values) -> 'FieldCondition':
+        """
+        Check if a set field (e.g. typespecs) contains any of the values.
+
+        Example:
+            >>> StockField.TYPESPECS.has('etf')
+            >>> StockField.TYPESPECS.has(['etf', 'preferred'])
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.HAS, values)
+
+    def has_none_of(self, values) -> 'FieldCondition':
+        """
+        Check if a set field (e.g. typespecs) contains none of the values.
+
+        Example:
+            >>> StockField.TYPESPECS.has_none_of(['preferred', 'etn'])
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.HAS_NONE_OF, values)
+
+    def is_empty(self) -> 'FieldCondition':
+        """
+        Check if the field has no value.
+
+        Example:
+            >>> StockField.DIVIDENDS_YIELD.is_empty()
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.EMPTY, None)
+
+    def not_empty(self) -> 'FieldCondition':
+        """
+        Check if the field has a value.
+
+        Example:
+            >>> StockField.DIVIDENDS_YIELD.not_empty()
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_EMPTY, None)
+
+    def in_day_range(self, start: int, end: int) -> 'FieldCondition':
+        """
+        Check if a date field falls between two day offsets from today (TradingView's day boundaries).
+
+        Example:
+            >>> StockField.UPCOMING_EARNINGS_DATE.in_day_range(0, 7)   # next 7 days
+            >>> StockField.RECENT_EARNINGS_DATE.in_day_range(-7, 0)    # last 7 days
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_DAY_RANGE, [start, end])
+
+    def above_pct(self, other, pct: float) -> 'FieldCondition':
+        """
+        Check if the field is more than ``pct`` percent above another field or value.
+
+        Example:
+            >>> StockField.PRICE.above_pct(StockField.SIMPLE_MOVING_AVERAGE_50, 5)  # price > 1.05 * SMA50
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.ABOVE_PERCENT, [other, _pct_to_factor(pct)])
+
+    def below_pct(self, other, pct: float) -> 'FieldCondition':
+        """
+        Check if the field is more than ``pct`` percent below another field or value.
+
+        Example:
+            >>> StockField.PRICE.below_pct(StockField.SIMPLE_MOVING_AVERAGE_200, 10)  # price < 0.9 * SMA200
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.BELOW_PERCENT, [other, _pct_to_factor(-pct)])
+
+    def within_pct(self, other, low_pct: float, high_pct: float) -> 'FieldCondition':
+        """
+        Check if the field is between ``low_pct`` and ``high_pct`` percent of another field or value.
+
+        Example:
+            >>> StockField.PRICE.within_pct(StockField.ALL_TIME_HIGH, -5, 0)  # within 5% below the all-time high
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.IN_RANGE_PERCENT,
+                              [other, _pct_to_factor(low_pct), _pct_to_factor(high_pct)])
+
+    def not_within_pct(self, other, low_pct: float, high_pct: float) -> 'FieldCondition':
+        """
+        Check if the field is outside ``low_pct`` to ``high_pct`` percent of another field or value.
+
+        Example:
+            >>> StockField.PRICE.not_within_pct(StockField.SIMPLE_MOVING_AVERAGE_200, -10, 10)
+        """
+        from tvscreener.filter import FieldCondition, FilterOperator
+        return FieldCondition(self, FilterOperator.NOT_IN_RANGE_PERCENT,
+                              [other, _pct_to_factor(low_pct), _pct_to_factor(high_pct)])
+
+
+class Field(_FilterMethods, Enum):
 
     def __init__(self, label, field_name, format_=None, interval=False, historical=False):
         self.label = label
@@ -307,7 +410,7 @@ class FieldCondition:
     pass
 
 
-class FieldWithInterval:
+class FieldWithInterval(_FilterMethods):
     """
     Wrapper for a Field with a time interval modifier.
 
@@ -388,7 +491,7 @@ class FieldWithInterval:
         return FieldCondition(self, FilterOperator.NOT_IN_RANGE, values)
 
 
-class FieldWithHistory:
+class FieldWithHistory(_FilterMethods):
     """
     Wrapper for a Field with historical lookback.
 

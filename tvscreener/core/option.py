@@ -50,14 +50,13 @@ class OptionScreener(Screener):
         self.underlyings = list(symbols)
         return self
 
-    def add_filter(self, filter_type, operation, values):
+    def _prepare_filter_values(self, field, values):
         # Expiration is stored as a YYYYMMDD integer; accept dates as well
-        if filter_type is OptionField.EXPIRATION:
+        if field is OptionField.EXPIRATION:
             if isinstance(values, (list, tuple)):
-                values = [_to_yyyymmdd(v) for v in values]
-            else:
-                values = _to_yyyymmdd(values)
-        super().add_filter(filter_type, operation, values)
+                return [_to_yyyymmdd(v) for v in values]
+            return _to_yyyymmdd(values)
+        return values
 
     def _build_payload(self, requested_columns_):
         if not self.underlyings:

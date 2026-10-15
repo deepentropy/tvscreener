@@ -1114,7 +1114,7 @@ class StockField(Field):
     EMA55_240 = 'Ema55|240', 'EMA55|240', 'round', True, False
     STOCH_K_5_3_3_1 = 'Stoch K 5 3 3[1]', 'Stoch.K_5_3_3[1]', 'round', True, False
     EMA8_5 = 'Ema8|5', 'EMA8|5', 'round', True, False
-    RSI9 = 'Rsi9', 'RSI9', 'round', True, False
+    RSI9 = 'Rsi9', 'RSI9', 'round', True, True
     CANDLE_DOJI_DRAGONFLY_1M = 'Candle Doji Dragonfly|1m', 'Candle.Doji.Dragonfly|1M', 'round', True, False
     EMA20_1 = 'Ema20|1', 'EMA20|1', 'round', True, False
     EMA55_30 = 'Ema55|30', 'EMA55|30', 'round', True, False
@@ -1201,7 +1201,7 @@ class StockField(Field):
     ATRP_1W = 'Atrp|1w', 'ATRP|1W', 'round', True, False
     EMA50_1 = 'Ema50|1', 'EMA50|1', 'round', True, False
     REC_WR_1W = 'Rec Wr|1w', 'Rec.WR|1W', 'round', False, False
-    ADX_DI_100 = 'Adx-di 100', 'ADX-DI_100', 'round', True, False
+    ADX_DI_100 = 'Adx-di 100', 'ADX-DI_100', 'round', True, True
     ADX_DI_9_1M = 'Adx-di 9|1m', 'ADX-DI_9|1M', 'round', True, False
     ICHIMOKU_CLINE_20_60_120_30_60 = 'Ichimoku Cline 20 60 120 30|60', 'Ichimoku.CLine_20_60_120_30|60', 'round', True, False
     PIVOT_M_FIBONACCI_S2_1W = 'Pivot M Fibonacci S2|1w', 'Pivot.M.Fibonacci.S2|1W', 'round', True, False
@@ -1328,7 +1328,7 @@ class StockField(Field):
     EMA144_60 = 'Ema144|60', 'EMA144|60', 'round', True, False
     CANDLE_DOJI_15 = 'Candle Doji|15', 'Candle.Doji|15', 'round', True, False
     HULLMA200_15 = 'Hullma200|15', 'HullMA200|15', 'round', True, False
-    RSI30 = 'Rsi30', 'RSI30', 'round', True, False
+    RSI30 = 'Rsi30', 'RSI30', 'round', True, True
     STOCH_D_6_3_3_1_1 = 'Stoch D 6 3 3[1]|1', 'Stoch.D_6_3_3[1]|1', 'round', True, False
     CANDLE_TRISTAR_BEARISH_1W = 'Candle Tristar Bearish|1w', 'Candle.TriStar.Bearish|1W', 'round', True, False
     ADX_DI_20_1_60 = 'Adx-di 20[1]|60', 'ADX-DI_20[1]|60', 'round', True, False
@@ -1552,7 +1552,7 @@ class StockField(Field):
     ICHIMOKU_LEAD2_5 = 'Ichimoku Lead2|5', 'Ichimoku.Lead2|5', 'round', True, False
     ADX_PLUS_DI_20_1_30 = 'Adx+di 20[1]|30', 'ADX+DI_20[1]|30', 'round', True, False
     SMA10_120 = 'Sma10|120', 'SMA10|120', 'round', True, False
-    ADX_PLUS_DI_50 = 'Adx+di 50', 'ADX+DI_50', 'round', True, False
+    ADX_PLUS_DI_50 = 'Adx+di 50', 'ADX+DI_50', 'round', True, True
     EMA120_1W = 'Ema120|1w', 'EMA120|1W', 'round', True, False
     ADX_9_1W = 'ADX 9|1w', 'ADX_9|1W', 'round', True, False
     SMA15_120 = 'Sma15|120', 'SMA15|120', 'round', True, False
@@ -1693,10 +1693,10 @@ class StockField(Field):
     ADX_PLUS_DI_9_15 = 'Adx+di 9|15', 'ADX+DI_9|15', 'round', True, False
     ICHIMOKU_CLINE_240 = 'Ichimoku Cline|240', 'Ichimoku.CLine|240', 'round', True, False
     ADX_50 = 'ADX 50', 'ADX_50', 'round', True, False
-    STOCH_D_5_3_3 = 'Stoch D 5 3 3', 'Stoch.D_5_3_3', 'round', True, False
+    STOCH_D_5_3_3 = 'Stoch D 5 3 3', 'Stoch.D_5_3_3', 'round', True, True
     AVERAGE_VOLUME_60D_CALC_1 = 'Average Volume 60d Calc|1', 'average_volume_60d_calc|1', 'round', False, False
     EMA26_60 = 'Ema26|60', 'EMA26|60', 'round', True, False
-    ADX_DI_50 = 'Adx-di 50', 'ADX-DI_50', 'round', True, False
+    ADX_DI_50 = 'Adx-di 50', 'ADX-DI_50', 'round', True, True
     RSI5_1 = 'Rsi5|1', 'RSI5|1', 'round', True, False
     ADX_PLUS_DI_100_1_5 = 'Adx+di 100[1]|5', 'ADX+DI_100[1]|5', 'round', True, False
     RSI3_1_60 = 'Rsi3[1]|60', 'RSI3[1]|60', 'round', True, False
@@ -1780,7 +1780,7 @@ class StockField(Field):
     ICHIMOKU_LEAD1_20_60_120_30_5 = 'Ichimoku Lead1 20 60 120 30|5', 'Ichimoku.Lead1_20_60_120_30|5', 'round', True, False
     CANDLE_TRISTAR_BEARISH_1M = 'Candle Tristar Bearish|1m', 'Candle.TriStar.Bearish|1M', 'round', True, False
     SMA55_30 = 'Sma55|30', 'SMA55|30', 'round', True, False
-    RSI5 = 'Rsi5', 'RSI5', 'round', True, False
+    RSI5 = 'Rsi5', 'RSI5', 'round', True, True
     ADX_DI_100_1 = 'Adx-di 100[1]', 'ADX-DI_100[1]', 'round', True, False
     ADX_PLUS_DI_9_1W = 'Adx+di 9|1w', 'ADX+DI_9|1W', 'round', True, False
     MOM_1_60 = 'Mom[1]|60', 'Mom[1]|60', 'round', True, False
@@ -1837,7 +1837,7 @@ class StockField(Field):
     ICHIMOKU_CLINE_15 = 'Ichimoku Cline|15', 'Ichimoku.CLine|15', 'round', True, False
     EMA300_5 = 'Ema300|5', 'EMA300|5', 'round', True, False
     STOCH_D_6_3_3_1_60 = 'Stoch D 6 3 3[1]|60', 'Stoch.D_6_3_3[1]|60', 'round', True, False
-    MOM_14 = 'Mom 14', 'Mom_14', 'round', True, False
+    MOM_14 = 'Mom 14', 'Mom_14', 'round', True, True
     PIVOT_M_CAMARILLA_MIDDLE_120 = 'Pivot M Camarilla Middle|120', 'Pivot.M.Camarilla.Middle|120', 'round', True, False
     STOCH_K_6_3_3_1_1 = 'Stoch K 6 3 3[1]|1', 'Stoch.K_6_3_3[1]|1', 'round', True, False
     EMA3_30 = 'Ema3|30', 'EMA3|30', 'round', True, False
@@ -1864,7 +1864,7 @@ class StockField(Field):
     EMA300_60 = 'Ema300|60', 'EMA300|60', 'round', True, False
     MOM_15 = 'Mom|15', 'Mom|15', 'round', True, False
     ADX_DI_120 = 'Adx-di|120', 'ADX-DI|120', 'round', True, False
-    STOCH_D_6_3_3 = 'Stoch D 6 3 3', 'Stoch.D_6_3_3', 'round', True, False
+    STOCH_D_6_3_3 = 'Stoch D 6 3 3', 'Stoch.D_6_3_3', 'round', True, True
     NAV_TOTAL_RETURN_5Y = 'Nav Total Return 5y', 'nav_total_return.5Y', 'round', False, False
     AVERAGE_VOLUME_90D_CALC_1M = 'Average Volume 90d Calc|1m', 'average_volume_90d_calc|1M', 'round', False, False
     ICHIMOKU_BLINE_1 = 'Ichimoku Bline|1', 'Ichimoku.BLine|1', 'round', True, False
@@ -2016,7 +2016,7 @@ class StockField(Field):
     CANDLE_KICKING_BULLISH_1M = 'Candle Kicking Bullish|1m', 'Candle.Kicking.Bullish|1M', 'round', True, False
     ADX_20_5 = 'ADX 20|5', 'ADX_20|5', 'round', True, False
     EMA2_15 = 'Ema2|15', 'EMA2|15', 'round', True, False
-    ADX_DI_9 = 'Adx-di 9', 'ADX-DI_9', 'round', True, False
+    ADX_DI_9 = 'Adx-di 9', 'ADX-DI_9', 'round', True, True
     CANDLE_DOJI_DRAGONFLY_60 = 'Candle Doji Dragonfly|60', 'Candle.Doji.Dragonfly|60', 'round', True, False
     CANDLE_KICKING_BEARISH_1M = 'Candle Kicking Bearish|1m', 'Candle.Kicking.Bearish|1M', 'round', True, False
     ADX_DI_1_1W = 'Adx-di[1]|1w', 'ADX-DI[1]|1W', 'round', True, False
@@ -2154,17 +2154,17 @@ class StockField(Field):
     ADX_PLUS_DI_50_1M = 'Adx+di 50|1m', 'ADX+DI_50|1M', 'round', True, False
     RSI21_1_60 = 'Rsi21[1]|60', 'RSI21[1]|60', 'round', True, False
     STOCH_K_6_3_3_1 = 'Stoch K 6 3 3[1]', 'Stoch.K_6_3_3[1]', 'round', True, False
-    STOCH_K_5_3_3 = 'Stoch K 5 3 3', 'Stoch.K_5_3_3', 'round', True, False
+    STOCH_K_5_3_3 = 'Stoch K 5 3 3', 'Stoch.K_5_3_3', 'round', True, True
     ADX_DI_1_60 = 'Adx-di[1]|60', 'ADX-DI[1]|60', 'round', True, False
     CANDLE_SPINNINGTOP_WHITE_5 = 'Candle Spinningtop White|5', 'Candle.SpinningTop.White|5', 'round', True, False
     RSI3_1 = 'Rsi3|1', 'RSI3|1', 'round', True, False
     CANDLE_3WHITESOLDIERS_1 = 'Candle 3whitesoldiers|1', 'Candle.3WhiteSoldiers|1', 'round', True, False
     W_R_1M = 'W R|1m', 'W.R|1M', 'round', True, False
     STOCH_D_1_120 = 'Stoch D[1]|120', 'Stoch.D[1]|120', 'round', True, False
-    RSI20 = 'Rsi20', 'RSI20', 'round', True, False
+    RSI20 = 'Rsi20', 'RSI20', 'round', True, True
     ATR_1M = 'Atr|1m', 'ATR|1M', 'round', True, False
     CANDLE_LONGSHADOW_LOWER_1M = 'Candle Longshadow Lower|1m', 'Candle.LongShadow.Lower|1M', 'round', True, False
-    RSI21 = 'Rsi21', 'RSI21', 'round', True, False
+    RSI21 = 'Rsi21', 'RSI21', 'round', True, True
     ADX_20_120 = 'ADX 20|120', 'ADX_20|120', 'round', True, False
     RSI30_1_1W = 'Rsi30[1]|1w', 'RSI30[1]|1W', 'round', True, False
     SMA34_60 = 'Sma34|60', 'SMA34|60', 'round', True, False
@@ -2182,7 +2182,7 @@ class StockField(Field):
     RSI20_1_5 = 'Rsi20[1]|5', 'RSI20[1]|5', 'round', True, False
     ICHIMOKU_BLINE_20_60_120_30_1 = 'Ichimoku Bline 20 60 120 30|1', 'Ichimoku.BLine_20_60_120_30|1', 'round', True, False
     ADX_DI_20_1_1W = 'Adx-di 20[1]|1w', 'ADX-DI_20[1]|1W', 'round', True, False
-    RSI10 = 'Rsi10', 'RSI10', 'round', True, False
+    RSI10 = 'Rsi10', 'RSI10', 'round', True, True
     RSI21_1_5 = 'Rsi21[1]|5', 'RSI21[1]|5', 'round', True, False
     PIVOT_M_CAMARILLA_S2_1 = 'Pivot M Camarilla S2|1', 'Pivot.M.Camarilla.S2|1', 'round', True, False
     PIVOT_M_WOODIE_MIDDLE_30 = 'Pivot M Woodie Middle|30', 'Pivot.M.Woodie.Middle|30', 'round', True, False
@@ -2242,7 +2242,7 @@ class StockField(Field):
     SMA10_240 = 'Sma10|240', 'SMA10|240', 'round', True, False
     BB_LOWER_50_60 = 'BB Lower 50|60', 'BB.lower_50|60', 'round', True, False
     RSI9_1W = 'Rsi9|1w', 'RSI9|1W', 'round', True, False
-    STOCH_D_8_3_3 = 'Stoch D 8 3 3', 'Stoch.D_8_3_3', 'round', True, False
+    STOCH_D_8_3_3 = 'Stoch D 8 3 3', 'Stoch.D_8_3_3', 'round', True, True
     ICHIMOKU_LEAD2_20_60_120_30_120 = 'Ichimoku Lead2 20 60 120 30|120', 'Ichimoku.Lead2_20_60_120_30|120', 'round', True, False
     AVERAGE_VOLUME_10D_CALC_1W = 'Average Volume 10d Calc|1w', 'average_volume_10d_calc|1W', 'round', False, False
     EMA100_60 = 'Ema100|60', 'EMA100|60', 'round', True, False
@@ -2266,7 +2266,7 @@ class StockField(Field):
     SMA60_1M = 'Sma60|1m', 'SMA60|1M', 'round', True, False
     AVERAGE_VOLUME_60D_CALC_1M = 'Average Volume 60d Calc|1m', 'average_volume_60d_calc|1M', 'round', False, False
     PIVOT_M_WOODIE_S2_240 = 'Pivot M Woodie S2|240', 'Pivot.M.Woodie.S2|240', 'round', True, False
-    STOCH_D_14_1_3 = 'Stoch D 14 1 3', 'Stoch.D_14_1_3', 'round', True, False
+    STOCH_D_14_1_3 = 'Stoch D 14 1 3', 'Stoch.D_14_1_3', 'round', True, True
     ADX_9 = 'ADX 9', 'ADX_9', 'round', True, False
     CANDLE_SHOOTINGSTAR_1 = 'Candle Shootingstar|1', 'Candle.ShootingStar|1', 'round', True, False
     RSI30_1 = 'Rsi30|1', 'RSI30|1', 'round', True, False
@@ -2596,7 +2596,7 @@ class StockField(Field):
     SMA3_15 = 'Sma3|15', 'SMA3|15', 'round', True, False
     ADX_PLUS_DI_20_1_60 = 'Adx+di 20[1]|60', 'ADX+DI_20[1]|60', 'round', True, False
     RECOMMEND_ALL_1M = 'Recommend All|1m', 'Recommend.All|1M', 'round', True, False
-    STOCH_K_8_3_3 = 'Stoch K 8 3 3', 'Stoch.K_8_3_3', 'round', True, False
+    STOCH_K_8_3_3 = 'Stoch K 8 3 3', 'Stoch.K_8_3_3', 'round', True, True
     SMA9_5 = 'Sma9|5', 'SMA9|5', 'round', True, False
     RSI_1_30 = 'Rsi[1]|30', 'RSI[1]|30', 'round', True, False
     PIVOT_M_FIBONACCI_S3_15 = 'Pivot M Fibonacci S3|15', 'Pivot.M.Fibonacci.S3|15', 'round', True, False
@@ -2980,7 +2980,7 @@ class StockField(Field):
     SMA40 = 'Sma40', 'SMA40', 'round', True, False
     PIVOT_M_DEMARK_MIDDLE_1W = 'Pivot M Demark Middle|1w', 'Pivot.M.Demark.Middle|1W', 'round', True, False
     PIVOT_M_CAMARILLA_S3_5 = 'Pivot M Camarilla S3|5', 'Pivot.M.Camarilla.S3|5', 'round', True, False
-    ADX_DI_20 = 'Adx-di 20', 'ADX-DI_20', 'round', True, False
+    ADX_DI_20 = 'Adx-di 20', 'ADX-DI_20', 'round', True, True
     RSI20_1_240 = 'Rsi20[1]|240', 'RSI20[1]|240', 'round', True, False
     RSI10_1_5 = 'Rsi10[1]|5', 'RSI10[1]|5', 'round', True, False
     SMA300_120 = 'Sma300|120', 'SMA300|120', 'round', True, False
@@ -3049,7 +3049,7 @@ class StockField(Field):
     STOCH_RSI_K_1W = 'Stoch RSI K|1w', 'Stoch.RSI.K|1W', 'round', True, False
     HULLMA20_15 = 'Hullma20|15', 'HullMA20|15', 'round', True, False
     PIVOT_M_FIBONACCI_S1_15 = 'Pivot M Fibonacci S1|15', 'Pivot.M.Fibonacci.S1|15', 'round', True, False
-    ADX_PLUS_DI_20 = 'Adx+di 20', 'ADX+DI_20', 'round', True, False
+    ADX_PLUS_DI_20 = 'Adx+di 20', 'ADX+DI_20', 'round', True, True
     RSI3_240 = 'Rsi3|240', 'RSI3|240', 'round', True, False
     ADX_DI_9_1_60 = 'Adx-di 9[1]|60', 'ADX-DI_9[1]|60', 'round', True, False
     PIVOT_M_FIBONACCI_R2_240 = 'Pivot M Fibonacci R2|240', 'Pivot.M.Fibonacci.R2|240', 'round', True, False
@@ -3224,7 +3224,7 @@ class StockField(Field):
     CANDLE_HAMMER_240 = 'Candle Hammer|240', 'Candle.Hammer|240', 'round', True, False
     HULLMA200_30 = 'Hullma200|30', 'HullMA200|30', 'round', True, False
     CANDLE_TRISTAR_BEARISH_120 = 'Candle Tristar Bearish|120', 'Candle.TriStar.Bearish|120', 'round', True, False
-    STOCH_K_14_1_3 = 'Stoch K 14 1 3', 'Stoch.K_14_1_3', 'round', True, False
+    STOCH_K_14_1_3 = 'Stoch K 14 1 3', 'Stoch.K_14_1_3', 'round', True, True
     SMA9_60 = 'Sma9|60', 'SMA9|60', 'round', True, False
     ADX_DI_9_120 = 'Adx-di 9|120', 'ADX-DI_9|120', 'round', True, False
     EMA50_30 = 'Ema50|30', 'EMA50|30', 'round', True, False
@@ -3237,7 +3237,7 @@ class StockField(Field):
     EMA50_5 = 'Ema50|5', 'EMA50|5', 'round', True, False
     CANDLE_TRISTAR_BULLISH_1 = 'Candle Tristar Bullish|1', 'Candle.TriStar.Bullish|1', 'round', True, False
     ADX_DI_100_1W = 'Adx-di 100|1w', 'ADX-DI_100|1W', 'round', True, False
-    STOCH_K_6_3_3 = 'Stoch K 6 3 3', 'Stoch.K_6_3_3', 'round', True, False
+    STOCH_K_6_3_3 = 'Stoch K 6 3 3', 'Stoch.K_6_3_3', 'round', True, True
     SMA15_1 = 'Sma15|1', 'SMA15|1', 'round', True, False
     PIVOT_M_WOODIE_MIDDLE_1W = 'Pivot M Woodie Middle|1w', 'Pivot.M.Woodie.Middle|1W', 'round', True, False
     AVGVALUE_TRADED_90D = 'Avgvalue Traded 90d', 'AvgValue.Traded_90d', 'round', False, False
@@ -3266,7 +3266,7 @@ class StockField(Field):
     ADRP_15 = 'Adrp|15', 'ADRP|15', 'round', True, False
     RSI20_15 = 'Rsi20|15', 'RSI20|15', 'round', True, False
     REC_BBPOWER_120 = 'Rec Bbpower|120', 'Rec.BBPower|120', 'round', True, False
-    ADX_PLUS_DI_9 = 'Adx+di 9', 'ADX+DI_9', 'round', True, False
+    ADX_PLUS_DI_9 = 'Adx+di 9', 'ADX+DI_9', 'round', True, True
     CANDLE_MORNINGSTAR_15 = 'Candle Morningstar|15', 'Candle.MorningStar|15', 'round', True, False
     SMA300_240 = 'Sma300|240', 'SMA300|240', 'round', True, False
     MOM_60 = 'Mom|60', 'Mom|60', 'round', True, False
@@ -3282,7 +3282,7 @@ class StockField(Field):
     EMA7_1W = 'Ema7|1w', 'EMA7|1W', 'round', True, False
     PIVOT_M_FIBONACCI_S1_30 = 'Pivot M Fibonacci S1|30', 'Pivot.M.Fibonacci.S1|30', 'round', True, False
     ADX_20 = 'ADX 20', 'ADX_20', 'round', True, False
-    ADX_PLUS_DI_100 = 'Adx+di 100', 'ADX+DI_100', 'round', True, False
+    ADX_PLUS_DI_100 = 'Adx+di 100', 'ADX+DI_100', 'round', True, True
     MACD_HIST_120 = 'MACD Hist|120', 'MACD.hist|120', 'round', True, False
     BB_LOWER_50_30 = 'BB Lower 50|30', 'BB.lower_50|30', 'round', True, False
     SMA120_30 = 'Sma120|30', 'SMA120|30', 'round', True, False
@@ -3423,7 +3423,7 @@ class StockField(Field):
     ADX_PLUS_DI_20_1_15 = 'Adx+di 20[1]|15', 'ADX+DI_20[1]|15', 'round', True, False
     SMA9_30 = 'Sma9|30', 'SMA9|30', 'round', True, False
     CANDLE_3WHITESOLDIERS_30 = 'Candle 3whitesoldiers|30', 'Candle.3WhiteSoldiers|30', 'round', True, False
-    RSI3 = 'Rsi3', 'RSI3', 'round', True, False
+    RSI3 = 'Rsi3', 'RSI3', 'round', True, True
     RSI_1_1 = 'Rsi[1]|1', 'RSI[1]|1', 'round', True, False
     VWMA_1 = 'Vwma|1', 'VWMA|1', 'round', True, False
     BB_UPPER_240 = 'BB Upper|240', 'BB.upper|240', 'round', True, False
@@ -3462,7 +3462,7 @@ class StockField(Field):
     REC_UO_1 = 'Rec Uo|1', 'Rec.UO|1', 'round', True, False
     MOM_14_60 = 'Mom 14|60', 'Mom_14|60', 'round', True, False
     SMA9 = 'Sma9', 'SMA9', 'round', True, False
-    RSI4 = 'Rsi4', 'RSI4', 'round', True, False
+    RSI4 = 'Rsi4', 'RSI4', 'round', True, True
     SMA144_15 = 'Sma144|15', 'SMA144|15', 'round', True, False
     EMA60 = 'Ema60', 'EMA60', 'round', True, False
     ADX_PLUS_DI_100_1_2 = 'Adx+di 100[1]', 'ADX+DI_100[1]', 'round', True, False
@@ -3506,7 +3506,7 @@ class StockField(Field):
     PIVOT_M_CLASSIC_S2_120 = 'Pivot M Classic S2|120', 'Pivot.M.Classic.S2|120', 'round', True, False
     ADX_PLUS_DI_1_240 = 'Adx+di[1]|240', 'ADX+DI[1]|240', 'round', True, False
     ADX_DI_50_15 = 'Adx-di 50|15', 'ADX-DI_50|15', 'round', True, False
-    RSI2 = 'Rsi2', 'RSI2', 'round', True, False
+    RSI2 = 'Rsi2', 'RSI2', 'round', True, True
     SMA60_30 = 'Sma60|30', 'SMA60|30', 'round', True, False
     REC_BBPOWER_1W = 'Rec Bbpower|1w', 'Rec.BBPower|1W', 'round', True, False
     REC_BBPOWER_1M = 'Rec Bbpower|1m', 'Rec.BBPower|1M', 'round', True, False

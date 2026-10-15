@@ -11,7 +11,7 @@ from tvscreener.field import Field, Market, IndexSymbol
 from tvscreener.field.crypto import CryptoField
 from tvscreener.field.forex import ForexField
 from tvscreener.field.stock import StockField
-from tvscreener.filter import FilterOperator, Filter, ExtraFilter
+from tvscreener.filter import FilterOperator, Filter, ExtraFilter, ConditionGroup
 from tvscreener.util import get_columns_to_request, is_status_code_ok
 
 # Configuration constants
@@ -23,6 +23,15 @@ DEFAULT_SORT_CRYPTO = CryptoField.VOLUME_24H_IN_USD
 DEFAULT_SORT_FOREX = ForexField.NAME
 REQUEST_TIMEOUT = 30  # seconds
 MIN_STREAM_INTERVAL = 1.0  # minimum interval for streaming to avoid rate limiting
+
+# Filters on the same field with these operations are merged into one IN_RANGE
+# filter. Other operations (has, above%, empty...) are always kept separate.
+MERGEABLE_OPERATIONS = {
+    FilterOperator.BELOW, FilterOperator.BELOW_OR_EQUAL, FilterOperator.ABOVE,
+    FilterOperator.ABOVE_OR_EQUAL, FilterOperator.CROSSES, FilterOperator.CROSSES_UP,
+    FilterOperator.CROSSES_DOWN, FilterOperator.IN_RANGE, FilterOperator.NOT_IN_RANGE,
+    FilterOperator.EQUAL, FilterOperator.NOT_EQUAL, FilterOperator.MATCH,
+}
 
 # HTTP headers for TradingView API requests
 REQUEST_HEADERS = {
@@ -104,6 +113,7 @@ class Screener:
         self.sort = None
         self.url = None
         self.filters = []
+        self.filter_groups = []
         self.options = {}
         self.symbols = None
         self.misc = {}
@@ -176,12 +186,17 @@ class Screener:
                 f"Use {self._field_type.__name__} fields with {type(self).__name__}."
             )
 
+    def _prepare_filter_values(self, field, values):
+        """Hook for subclasses to convert filter values (e.g. dates) before they are sent."""
+        return values
+
     def add_filter(self, filter_type: Field | ExtraFilter, operation: FilterOperator, values: Enum or str):
         self._validate_field_type(filter_type)
-        filter_ = Filter(filter_type, operation, values)
+        filter_ = Filter(filter_type, operation, self._prepare_filter_values(filter_type, values))
         # Case where the filter already exists, and we want to add more values
         existing_filter = self._get_filter(filter_.field)
-        if existing_filter:
+        if (existing_filter and existing_filter.operation in MERGEABLE_OPERATIONS
+                and filter_.operation in MERGEABLE_OPERATIONS):
             self._merge_filters(existing_filter, filter_)
         else:
             self._add_new_filter(filter_)
@@ -200,7 +215,10 @@ class Screener:
         2. **Legacy syntax** (still supported):
             >>> ss.where(StockField.PRICE, FilterOperator.ABOVE, 100)
 
-        :param condition_or_field: Either a FieldCondition (from comparison) or a Field
+        3. **AND / OR groups**, combined with ``&`` and ``|`` (parentheses are required):
+            >>> ss.where((StockField.SECTOR == 'Finance') | (StockField.SECTOR == 'Utilities'))
+
+        :param condition_or_field: A FieldCondition, a ConditionGroup or a Field (legacy syntax)
         :param operation: Filter operation (only for legacy syntax)
         :param value: Value to compare against (only for legacy syntax)
         :return: self for method chaining
@@ -214,7 +232,11 @@ class Screener:
         """
         from tvscreener.filter import FieldCondition
 
-        if isinstance(condition_or_field, FieldCondition):
+        if isinstance(condition_or_field, ConditionGroup):
+            for condition in condition_or_field.conditions():
+                self._validate_field_type(condition.field)
+            self.filter_groups.append(condition_or_field)
+        elif isinstance(condition_or_field, FieldCondition):
             # New Pythonic syntax: ss.where(StockField.PRICE > 100)
             self.add_filter(condition_or_field.field, condition_or_field.operation, condition_or_field.value)
         else:
@@ -304,6 +326,14 @@ class Screener:
             "columns": requested_columns_,
             **self.misc
         }
+        if self.filter_groups:
+            # Several where() groups are combined with AND; plain filters are ANDed by the API
+            if len(self.filter_groups) == 1:
+                payload["filter2"] = self.filter_groups[0].to_dict(self._prepare_filter_values)
+            else:
+                payload["filter2"] = {"operator": "and", "operands": [
+                    {"operation": group.to_dict(self._prepare_filter_values)} for group in self.filter_groups
+                ]}
         return payload
 
     def get(self, print_request=False):

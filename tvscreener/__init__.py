@@ -27,7 +27,7 @@ from .field.presets import (
     FUTURES_PRICE_FIELDS, FUTURES_TECHNICAL_FIELDS,
     COIN_PRICE_FIELDS, COIN_MARKET_FIELDS,
 )
-from .filter import Filter, FilterOperator, ExtraFilter, FieldCondition
+from .filter import Filter, FilterOperator, ExtraFilter, FieldCondition, ConditionGroup
 from .util import *
 from .beauty import beautify
 from .news import get_news, get_article
@@ -38,7 +38,7 @@ __all__ = [
     "StockScreener", "ForexScreener", "CryptoScreener",
     "BondScreener", "FuturesScreener", "CoinScreener", "OptionScreener",
     "MalformedRequestException",
-    "Field", "Filter", "FilterOperator", "ExtraFilter", "FieldCondition",
+    "Field", "Filter", "FilterOperator", "ExtraFilter", "FieldCondition", "ConditionGroup",
     "StockField", "ForexField", "CryptoField", "BondField", "FuturesField", "CoinField", "OptionField",
     "Market", "Exchange", "Country", "Sector", "Industry", "IndexSymbol",
     "beautify",

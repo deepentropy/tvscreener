@@ -68,6 +68,46 @@ from tvscreener import FilterOperator
 | `.isin(values)` | `FilterOperator.IN_RANGE` |
 | `.not_in(values)` | `FilterOperator.NOT_IN_RANGE` |
 
+### Set, Empty and Date Operators
+
+| Method | FilterOperator | API operation |
+|--------|----------------|---------------|
+| `.has(values)` | `FilterOperator.HAS` | `has` (any of the values) |
+| `.has_none_of(values)` | `FilterOperator.HAS_NONE_OF` | `has_none_of` |
+| `.is_empty()` | `FilterOperator.EMPTY` | `empty` |
+| `.not_empty()` | `FilterOperator.NOT_EMPTY` | `nempty` |
+| `.in_day_range(start, end)` | `FilterOperator.IN_DAY_RANGE` | `in_day_range` (day offsets from today) |
+
+### Percent Operators
+
+`other` is a field or a number. Percentages are converted to factors (`5` becomes `1.05`).
+
+| Method | FilterOperator | Condition |
+|--------|----------------|-----------|
+| `.above_pct(other, pct)` | `FilterOperator.ABOVE_PERCENT` | field > other × (1 + pct/100) |
+| `.below_pct(other, pct)` | `FilterOperator.BELOW_PERCENT` | field < other × (1 − pct/100) |
+| `.within_pct(other, low, high)` | `FilterOperator.IN_RANGE_PERCENT` | other × (1 + low/100) ≤ field ≤ other × (1 + high/100) |
+| `.not_within_pct(other, low, high)` | `FilterOperator.NOT_IN_RANGE_PERCENT` | outside that range |
+
+## ConditionGroup
+
+Created by combining conditions with `|` (OR) and `&` (AND). Sent to TradingView as a `filter2` tree.
+
+```python
+from tvscreener import StockField
+
+group = (StockField.SECTOR == 'Finance') | (StockField.SECTOR == 'Utilities')
+group = group & (StockField.MARKET_CAPITALIZATION > 1e11)
+ss.where(group)
+```
+
+| Property / Method | Description |
+|-------------------|-------------|
+| `operator` | `"and"` or `"or"` |
+| `operands` | `FieldCondition` and nested `ConditionGroup` objects. Nested groups with the same operator are flattened. |
+| `conditions()` | Iterates over every `FieldCondition`, at any depth |
+| `to_dict()` | The `filter2` dictionary |
+
 ## ExtraFilter
 
 Special filters not tied to specific fields.
@@ -111,7 +151,7 @@ ss.where(StockField.VOLUME >= 1_000_000)
 
 ## Filter Chaining
 
-All filters are combined with AND logic:
+All `where()` calls are combined with AND logic. Use `|` inside a call for OR (see ConditionGroup):
 
 ```python
 ss = StockScreener()
