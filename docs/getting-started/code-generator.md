@@ -6,7 +6,7 @@ The **tvscreener Code Generator** is a visual web app that lets you build screen
 
 ## Features
 
-- **Visual Filter Builder**: Pick a field, an operator and a value
+- **Visual Filter Builder**: Pick a field, an operator and a value. Combine filters with AND or OR
 - **All 6 Screeners**: Stock, Crypto, Forex, Bond, Futures, and Coin
 - **Searchable Fields**: Every field of the screener is reachable by search, in filters, columns and sort. Search also matches initials: `rsi` finds Relative Strength Index (14), `sma50` finds Simple Moving Average (50)
 - **Timeframes**: Apply `with_interval()` to indicators in filters, columns and sort
@@ -60,8 +60,28 @@ Operators:
 | between | `ss.where(StockField.PRICE.between(10, 50))` |
 | in list | `ss.where(StockField.SECTOR.isin(['Finance', 'Utilities']))` |
 | not in list | `ss.where(StockField.SECTOR.not_in(['Finance', 'Utilities']))` |
+| has any of | `ss.where(StockField.TYPESPECS.has('etf'))` |
+| has none of | `ss.where(StockField.TYPESPECS.has_none_of(['preferred', 'etn']))` |
+| % above | `ss.where(StockField.PRICE.above_pct(StockField.SIMPLE_MOVING_AVERAGE_50, 5))` |
+| % below | `ss.where(StockField.PRICE.below_pct(StockField.SIMPLE_MOVING_AVERAGE_200, 10))` |
+| within % | `ss.where(StockField.PRICE.within_pct(StockField.ALL_TIME_HIGH, -5, 0))` |
+| outside % | `ss.where(StockField.PRICE.not_within_pct(StockField.SIMPLE_MOVING_AVERAGE_200, -10, 10))` |
+| day range | `ss.where(StockField.UPCOMING_EARNINGS_DATE.in_day_range(0, 7))` |
+| has a value | `ss.where(StockField.DIVIDENDS_YIELD.not_empty())` |
+| is empty | `ss.where(StockField.DIVIDENDS_YIELD.is_empty())` |
 
-For list operators, separate the values with commas.
+For list operators, separate the values with commas. The percent operators add a reference field ("of …"). "day range" takes day offsets from today: `0` to `7` is the next week, `-7` to `0` the last week.
+
+### Combine Filters with OR
+
+From the second filter on, an AND / OR toggle sits above each filter. Filters joined by OR form one group, written as one `where()` call. Groups are combined with AND:
+
+```python
+ss.where(StockField.MARKET_CAPITALIZATION > 10e9)
+ss.where((StockField.SECTOR == 'Finance') | (StockField.SECTOR == 'Utilities'))
+```
+
+An OR filter has a dashed left border.
 
 When the field accepts a timeframe, a timeframe box appears next to it. `1D` is the default and adds nothing to the code. Any other value adds `with_interval()`:
 

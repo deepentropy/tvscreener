@@ -9746,7 +9746,7 @@ const FIELD_DATA = {
           "fieldName": "RSI9",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -10529,7 +10529,7 @@ const FIELD_DATA = {
           "fieldName": "ADX-DI_100",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -11672,7 +11672,7 @@ const FIELD_DATA = {
           "fieldName": "RSI30",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -13688,7 +13688,7 @@ const FIELD_DATA = {
           "fieldName": "ADX+DI_50",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -14957,7 +14957,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.D_5_3_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -14984,7 +14984,7 @@ const FIELD_DATA = {
           "fieldName": "ADX-DI_50",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -15740,7 +15740,7 @@ const FIELD_DATA = {
           "fieldName": "RSI5",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -16253,7 +16253,7 @@ const FIELD_DATA = {
           "fieldName": "Mom_14",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -16496,7 +16496,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.D_6_3_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -17864,7 +17864,7 @@ const FIELD_DATA = {
           "fieldName": "ADX-DI_9",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -19106,7 +19106,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.K_5_3_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -19169,7 +19169,7 @@ const FIELD_DATA = {
           "fieldName": "RSI20",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -19196,7 +19196,7 @@ const FIELD_DATA = {
           "fieldName": "RSI21",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -19358,7 +19358,7 @@ const FIELD_DATA = {
           "fieldName": "RSI10",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -19898,7 +19898,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.D_8_3_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -20114,7 +20114,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.D_14_1_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -23084,7 +23084,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.K_8_3_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -26540,7 +26540,7 @@ const FIELD_DATA = {
           "fieldName": "ADX-DI_20",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -27161,7 +27161,7 @@ const FIELD_DATA = {
           "fieldName": "ADX+DI_20",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -28736,7 +28736,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.K_14_1_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -28853,7 +28853,7 @@ const FIELD_DATA = {
           "fieldName": "Stoch.K_6_3_3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -29114,7 +29114,7 @@ const FIELD_DATA = {
           "fieldName": "ADX+DI_9",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -29258,7 +29258,7 @@ const FIELD_DATA = {
           "fieldName": "ADX+DI_100",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "Other"
         },
         {
@@ -30527,7 +30527,7 @@ const FIELD_DATA = {
           "fieldName": "RSI3",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -30878,7 +30878,7 @@ const FIELD_DATA = {
           "fieldName": "RSI4",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {
@@ -31274,7 +31274,7 @@ const FIELD_DATA = {
           "fieldName": "RSI2",
           "format": "round",
           "interval": true,
-          "historical": false,
+          "historical": true,
           "category": "RSI"
         },
         {

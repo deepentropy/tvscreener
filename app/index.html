@@ -47,6 +47,7 @@
                 </header>
                 <div id="filters-container" class="filters"></div>
                 <p id="no-filters" class="empty">No filters. The screener returns every symbol.</p>
+                <p id="filters-hint" class="filters-hint" hidden>Filters joined by OR form one group. Groups are combined with AND.</p>
             </section>
 
             <section class="block" data-section="fields" aria-labelledby="fields-title">
@@ -139,28 +140,54 @@
 
     <!-- Filter row template -->
     <template id="filter-template">
-        <div class="filter">
-            <div class="filter-field field-with-interval">
-                <select class="input select interval-select filter-interval" aria-label="Timeframe" hidden></select>
+        <div class="filter-item">
+            <div class="filter-join toggle" role="group" aria-label="Combine with the previous filter">
+                <button type="button" class="toggle-btn active" data-join="and" aria-pressed="true">AND</button>
+                <button type="button" class="toggle-btn" data-join="or" aria-pressed="false">OR</button>
             </div>
-            <select class="input select filter-operator" aria-label="Operator">
-                <option value="&gt;">&gt;</option>
-                <option value="&gt;=">&ge;</option>
-                <option value="&lt;">&lt;</option>
-                <option value="&lt;=">&le;</option>
-                <option value="==">=</option>
-                <option value="!=">&ne;</option>
-                <option value="between">between</option>
-                <option value="isin">in list</option>
-                <option value="not_in">not in list</option>
-            </select>
-            <input type="text" class="input filter-value" placeholder="Value" aria-label="Value">
-            <input type="text" class="input filter-value2" placeholder="Max" aria-label="Maximum value" hidden>
-            <button class="icon-btn filter-remove" type="button" aria-label="Remove filter">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-                    <line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line>
-                </svg>
-            </button>
+            <div class="filter">
+                <div class="filter-field field-with-interval">
+                    <select class="input select interval-select filter-interval" aria-label="Timeframe" hidden></select>
+                </div>
+                <select class="input select filter-operator" aria-label="Operator">
+                    <optgroup label="Compare">
+                        <option value="&gt;">&gt;</option>
+                        <option value="&gt;=">&ge;</option>
+                        <option value="&lt;">&lt;</option>
+                        <option value="&lt;=">&le;</option>
+                        <option value="==">=</option>
+                        <option value="!=">&ne;</option>
+                        <option value="between">between</option>
+                    </optgroup>
+                    <optgroup label="List">
+                        <option value="isin">in list</option>
+                        <option value="not_in">not in list</option>
+                        <option value="has">has any of</option>
+                        <option value="has_none_of">has none of</option>
+                    </optgroup>
+                    <optgroup label="Percent of a field">
+                        <option value="above_pct">% above</option>
+                        <option value="below_pct">% below</option>
+                        <option value="within_pct">within %</option>
+                        <option value="not_within_pct">outside %</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option value="in_day_range" title="Days from today, e.g. 0 to 7">day range</option>
+                        <option value="not_empty">has a value</option>
+                        <option value="is_empty">is empty</option>
+                    </optgroup>
+                </select>
+                <input type="text" class="input filter-value" placeholder="Value" aria-label="Value">
+                <input type="text" class="input filter-value2" placeholder="Max" aria-label="Second value" hidden>
+                <div class="filter-ref" hidden>
+                    <span class="filter-ref-label">of</span>
+                </div>
+                <button class="icon-btn filter-remove" type="button" aria-label="Remove filter">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                        <line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </template>
 

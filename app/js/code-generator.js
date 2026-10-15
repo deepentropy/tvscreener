@@ -29,16 +29,12 @@ const CodeGenerator = {
         blank();
         add('screener', this.generateScreenerCreation(config));
 
-        // Filters
-        if (config.filters && config.filters.length > 0) {
+        // Filters: rows joined by OR become one where() call, groups are ANDed
+        const filterLines = this.generateFilterLines(config);
+        if (filterLines.length > 0) {
             blank();
             add('filters', '# Filters');
-            for (const filter of config.filters) {
-                const filterLine = this.generateFilter(filter, config);
-                if (filterLine) {
-                    add('filters', filterLine);
-                }
-            }
+            for (const line of filterLines) add('filters', line);
         }
 
         // Fields
@@ -164,39 +160,108 @@ const CodeGenerator = {
         return `ss = ${screenerClass}()`;
     },
 
+    // Operators by the inputs they need
+    COMPARISONS: ['>', '>=', '<', '<=', '==', '!='],
+    NO_VALUE_OPERATORS: ['is_empty', 'not_empty'],
+    TWO_VALUE_OPERATORS: ['between', 'in_day_range', 'within_pct', 'not_within_pct'],
+    NUMERIC_OPERATORS: ['in_day_range', 'above_pct', 'below_pct', 'within_pct', 'not_within_pct'],
+    REFERENCE_OPERATORS: ['above_pct', 'below_pct', 'within_pct', 'not_within_pct'],
+    LIST_OPERATORS: ['isin', 'not_in', 'has', 'has_none_of'],
+
     /**
-     * Generate a single filter line
+     * Check that a filter has every input its operator needs
      */
-    generateFilter(filter, config) {
-        if (!filter.field || !filter.operator || filter.value === '') {
-            return null;
+    isComplete(filter) {
+        if (!filter.field || !filter.operator) return false;
+        const op = filter.operator;
+        if (this.NO_VALUE_OPERATORS.includes(op)) return true;
+        if (this.REFERENCE_OPERATORS.includes(op) && !filter.ref) return false;
+        const values = this.TWO_VALUE_OPERATORS.includes(op) ? [filter.value, filter.value2] : [filter.value];
+        if (values.some(v => v === undefined || String(v).trim() === '')) return false;
+        if (this.NUMERIC_OPERATORS.includes(op)) return values.every(v => !isNaN(Number(v)));
+        return true;
+    },
+
+    /**
+     * Python expression of one filter condition
+     * @returns {{expr: string, comparison: boolean}|null} comparison is true when the
+     *          expression needs parentheses to be combined with | or &
+     */
+    generateCondition(filter, config) {
+        if (!this.isComplete(filter)) return null;
+
+        const ref = this.fieldRef(filter.field, filter.interval, config);
+        const op = filter.operator;
+        const value = () => this.formatValue(filter.value, filter.format);
+        const number = (v) => String(Number(v));
+        const list = () => filter.value.split(',').map(v => this.formatValue(v.trim(), filter.format));
+
+        if (this.COMPARISONS.includes(op)) {
+            return { expr: `${ref} ${op} ${value()}`, comparison: true };
         }
 
-        const fieldRef = this.fieldRef(filter.field, filter.interval, config);
-
-        switch (filter.operator) {
-            case '>':
-                return `ss.where(${fieldRef} > ${this.formatValue(filter.value, filter.format)})`;
-            case '>=':
-                return `ss.where(${fieldRef} >= ${this.formatValue(filter.value, filter.format)})`;
-            case '<':
-                return `ss.where(${fieldRef} < ${this.formatValue(filter.value, filter.format)})`;
-            case '<=':
-                return `ss.where(${fieldRef} <= ${this.formatValue(filter.value, filter.format)})`;
-            case '==':
-                return `ss.where(${fieldRef} == ${this.formatValue(filter.value, filter.format)})`;
-            case '!=':
-                return `ss.where(${fieldRef} != ${this.formatValue(filter.value, filter.format)})`;
+        const call = (text) => ({ expr: `${ref}.${text}`, comparison: false });
+        const other = () => this.fieldRef(filter.ref, '', config);
+        switch (op) {
             case 'between':
-                return `ss.where(${fieldRef}.between(${this.formatValue(filter.value, filter.format)}, ${this.formatValue(filter.value2, filter.format)}))`;
+                return call(`between(${value()}, ${this.formatValue(filter.value2, filter.format)})`);
             case 'isin':
-            case 'not_in': {
-                const values = filter.value.split(',').map(v => this.formatValue(v.trim(), filter.format));
-                return `ss.where(${fieldRef}.${filter.operator}([${values.join(', ')}]))`;
+            case 'not_in':
+                return call(`${op}([${list().join(', ')}])`);
+            case 'has':
+            case 'has_none_of': {
+                const values = list();
+                return call(`${op}(${values.length === 1 ? values[0] : `[${values.join(', ')}]`})`);
             }
+            case 'is_empty':
+            case 'not_empty':
+                return call(`${op}()`);
+            case 'in_day_range':
+                return call(`in_day_range(${number(filter.value)}, ${number(filter.value2)})`);
+            case 'above_pct':
+            case 'below_pct':
+                return call(`${op}(${other()}, ${number(filter.value)})`);
+            case 'within_pct':
+            case 'not_within_pct':
+                return call(`${op}(${other()}, ${number(filter.value)}, ${number(filter.value2)})`);
             default:
                 return null;
         }
+    },
+
+    /**
+     * Generate the where() lines. A filter joined with OR to the previous one
+     * joins its group; each group becomes one where() call.
+     */
+    generateFilterLines(config) {
+        const groups = [];
+        for (const filter of config.filters || []) {
+            const condition = this.generateCondition(filter, config);
+            if (!condition) continue;
+            if (filter.join === 'or' && groups.length > 0) {
+                groups[groups.length - 1].push(condition);
+            } else {
+                groups.push([condition]);
+            }
+        }
+
+        const lines = [];
+        for (const group of groups) {
+            if (group.length === 1) {
+                lines.push(`ss.where(${group[0].expr})`);
+                continue;
+            }
+            const parts = group.map(c => (c.comparison ? `(${c.expr})` : c.expr));
+            const oneLine = `ss.where(${parts.join(' | ')})`;
+            if (oneLine.length <= 88) {
+                lines.push(oneLine);
+            } else {
+                lines.push('ss.where(');
+                parts.forEach((part, i) => lines.push(`    ${i === 0 ? '' : '| '}${part}`));
+                lines.push(')');
+            }
+        }
+        return lines;
     },
 
     /**

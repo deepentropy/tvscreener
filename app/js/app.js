@@ -81,6 +81,25 @@ const App = {
     commonFilterFields: ['PRICE', 'VOLUME', 'MARKET_CAPITALIZATION', 'CHANGE_PERCENT',
         'PE_RATIO_TTM', 'DIVIDEND_YIELD_FY', 'RELATIVE_STRENGTH_INDEX_14'],
 
+    // Reference fields of the percent operators (% above, within %...)
+    commonReferenceFields: ['SIMPLE_MOVING_AVERAGE_50', 'SIMPLE_MOVING_AVERAGE_200',
+        'SIMPLE_MOVING_AVERAGE_20', 'EXPONENTIAL_MOVING_AVERAGE_20', 'EXPONENTIAL_MOVING_AVERAGE_50',
+        'ALL_TIME_HIGH', 'ALL_TIME_LOW', 'VOLUME_WEIGHTED_AVERAGE_PRICE', 'PRICE'],
+
+    // Value placeholders per operator: [first input, second input]
+    operatorPlaceholders: {
+        between: ['Min', 'Max'],
+        isin: ['a, b, c'],
+        not_in: ['a, b, c'],
+        has: ['a, b, c'],
+        has_none_of: ['a, b, c'],
+        in_day_range: ['From day, e.g. 0', 'To day, e.g. 7'],
+        above_pct: ['Percent, e.g. 5'],
+        below_pct: ['Percent, e.g. 5'],
+        within_pct: ['Low %, e.g. -5', 'High %, e.g. 0'],
+        not_within_pct: ['Low %, e.g. -10', 'High %, e.g. 10']
+    },
+
     commonSortFields: ['MARKET_CAPITALIZATION', 'PRICE', 'CHANGE_PERCENT', 'VOLUME',
         'PE_RATIO_TTM', 'DIVIDEND_YIELD_FY', 'RELATIVE_STRENGTH_INDEX_14'],
 
@@ -226,6 +245,7 @@ const App = {
             marketChips: document.getElementById('market-chips'),
             filtersContainer: document.getElementById('filters-container'),
             noFilters: document.getElementById('no-filters'),
+            filtersHint: document.getElementById('filters-hint'),
             addFilterBtn: document.getElementById('add-filter-btn'),
             fieldSearch: document.getElementById('field-search'),
             fieldCategory: document.getElementById('field-category'),
@@ -568,19 +588,38 @@ const App = {
      */
     addFilter() {
         const template = this.elements.filterTemplate.content.cloneNode(true);
+        const item = template.querySelector('.filter-item');
         const row = template.querySelector('.filter');
         const filterId = Date.now() + Math.random();
 
         const filter = {
             id: filterId,
+            join: 'and',
             field: '',
             operator: '>',
             value: '',
             value2: '',
+            ref: '',
             interval: '',
             format: ''
         };
         this.state.filters.push(filter);
+
+        // AND / OR with the previous filter (hidden on the first one)
+        const joinBtns = item.querySelectorAll('.filter-join .toggle-btn');
+        joinBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filter.join = btn.dataset.join;
+                joinBtns.forEach(b => {
+                    const on = b === btn;
+                    b.classList.toggle('active', on);
+                    b.setAttribute('aria-pressed', String(on));
+                });
+                item.classList.toggle('filter-or', filter.join === 'or');
+                this.updateNoFiltersHint();
+                this.updateCode();
+            });
+        });
 
         const operatorSelect = row.querySelector('.filter-operator');
         const valueInput = row.querySelector('.filter-value');
@@ -603,6 +642,19 @@ const App = {
         });
         row.querySelector('.filter-field').prepend(picker.el);
 
+        // Reference field of the percent operators
+        const refBox = row.querySelector('.filter-ref');
+        const refPicker = FieldPicker.create({
+            getFields: () => this.getFields(),
+            pinned: this.commonReferenceFields,
+            placeholder: 'Reference field',
+            onChange: (field) => {
+                filter.ref = field ? field.name : '';
+                this.updateCode();
+            }
+        });
+        refBox.appendChild(refPicker.el);
+
         intervalSelect.addEventListener('change', () => {
             filter.interval = intervalSelect.value;
             this.updateCode();
@@ -610,12 +662,19 @@ const App = {
 
         const syncOperator = () => {
             const op = operatorSelect.value;
-            row.dataset.direction = op.startsWith('>') ? 'up' : op.startsWith('<') ? 'down' : 'flat';
-            const between = op === 'between';
-            value2Input.hidden = !between;
-            row.classList.toggle('filter-range', between);
-            const list = op === 'isin' || op === 'not_in';
-            valueInput.placeholder = between ? 'Min' : list ? 'a, b, c' : 'Value';
+            const up = op.startsWith('>') || op === 'above_pct';
+            const down = op.startsWith('<') || op === 'below_pct';
+            row.dataset.direction = up ? 'up' : down ? 'down' : 'flat';
+            const noValue = CodeGenerator.NO_VALUE_OPERATORS.includes(op);
+            const twoValues = CodeGenerator.TWO_VALUE_OPERATORS.includes(op);
+            valueInput.hidden = noValue;
+            value2Input.hidden = !twoValues;
+            row.classList.toggle('filter-range', twoValues);
+            row.classList.toggle('filter-novalue', noValue);
+            refBox.hidden = !CodeGenerator.REFERENCE_OPERATORS.includes(op);
+            const [first, second] = this.operatorPlaceholders[op] || ['Value'];
+            valueInput.placeholder = first;
+            value2Input.placeholder = second || 'Max';
         };
 
         operatorSelect.addEventListener('change', () => {
@@ -632,14 +691,14 @@ const App = {
             this.updateCode();
         });
         removeBtn.addEventListener('click', () => {
-            row.remove();
+            item.remove();
             this.state.filters = this.state.filters.filter(f => f.id !== filterId);
             this.updateCode();
             this.updateNoFiltersHint();
         });
 
         syncOperator();
-        this.elements.filtersContainer.appendChild(row);
+        this.elements.filtersContainer.appendChild(item);
         this.updateNoFiltersHint();
         picker.el.click();
     },
@@ -649,6 +708,10 @@ const App = {
      */
     updateNoFiltersHint() {
         this.elements.noFilters.hidden = this.elements.filtersContainer.children.length > 0;
+        // The first filter's AND/OR toggle is hidden, so it never starts an OR
+        const items = [...this.elements.filtersContainer.children];
+        const hasOr = items.slice(1).some(el => el.classList.contains('filter-or'));
+        this.elements.filtersHint.hidden = !hasOr;
     },
 
     /**
@@ -716,7 +779,7 @@ const App = {
         const config = {
             screenerType: this.state.screenerType,
             screenerConfig: this.getScreenerConfig(),
-            filters: this.state.filters.filter(f => f.field && f.value),
+            filters: this.state.filters.filter(f => CodeGenerator.isComplete(f)),
             fields: this.state.selectedFields,
             selectAll: this.state.selectAll,
             index: this.state.index,
