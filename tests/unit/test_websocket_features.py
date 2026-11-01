@@ -10,6 +10,7 @@ from websocket import WebSocketTimeoutException
 from tvscreener import get_financials, get_corporate_events, get_seasonals, stream_quotes, TradingViewWebSocketError
 from tvscreener import _websocket
 from tvscreener._websocket import _parse, get_quote_fields, run_studies, NA
+from tvscreener.fundamentals import _statement_order
 
 
 def frame(payload):
@@ -108,6 +109,24 @@ CONFIG = pd.DataFrame([
 ])
 
 
+def layout_row(id, name, view_mode, parent=None, ordinal=0, category="Balance sheet", period="FY"):
+    return {"id": id, "name": name, "category": category, "period": period, "view_mode": view_mode,
+            "parent": parent, "ordinal": ordinal, "type": "currency", "hidden": False}
+
+
+LAYOUTS = pd.DataFrame([
+    layout_row("equity_fy", "Equity", "industrial"),
+    layout_row("capital_fy", "Capital", "industrial", parent="equity_fy"),
+    layout_row("cash_fy", "Cash", "industrial", ordinal=1),
+    layout_row("debt_fy", "Debt", "industrial", ordinal=2),
+    # As in TradingView's "other" layout: capital is listed twice, once as its own parent
+    layout_row("equity_fy", "Equity", "other"),
+    layout_row("capital_fy", "Capital", "other", parent="equity_fy", ordinal=1),
+    layout_row("capital_fy", "Capital", "other", parent="capital_fy", ordinal=1),
+    layout_row("margin_ttm", "Margin", "industrial", category="Statistics", period="TTM"),
+])
+
+
 class TestFinancials:
 
     @patch("tvscreener.fundamentals.get_fundamentals_config", return_value=CONFIG)
@@ -145,6 +164,59 @@ class TestFinancials:
     def test_invalid_arguments(self, kwargs):
         with pytest.raises(ValueError):
             get_financials("X:A", **kwargs)
+
+    @patch("tvscreener.fundamentals.get_fundamentals_config", return_value=LAYOUTS)
+    @patch("tvscreener.fundamentals.get_quote_fields")
+    def test_company_layout_preferred_over_most_complete(self, mock_quotes, _):
+        # 2 of 2 "other" items are filled, 3 of 4 "industrial" items
+        mock_quotes.return_value = {"X:A": {
+            "fiscal_period_fy_h": [2025], "fund_view_mode": "industrial",
+            "equity_fy_h": [10], "capital_fy_h": [5], "cash_fy_h": [1],
+        }}
+        df = get_financials("X:A", "balance_sheet")
+        assert df.columns.tolist() == ["period_end", "Equity", "Capital", "Cash"]
+
+    @patch("tvscreener.fundamentals.get_fundamentals_config", return_value=LAYOUTS)
+    @patch("tvscreener.fundamentals.get_quote_fields")
+    def test_layout_with_self_parent_and_duplicate_item(self, mock_quotes, _):
+        mock_quotes.return_value = {"X:A": {
+            "fiscal_period_fy_h": [2025], "fund_view_mode": "other", "equity_fy_h": [10], "capital_fy_h": [5],
+        }}
+        df = get_financials("X:A", "balance_sheet")
+        assert df.columns.tolist() == ["period_end", "Equity", "Capital"]
+
+    @patch("tvscreener.fundamentals.get_fundamentals_config", return_value=LAYOUTS)
+    @patch("tvscreener.fundamentals.get_quote_fields")
+    def test_most_complete_layout_without_usable_company_layout(self, mock_quotes, _):
+        mock_quotes.return_value = {"X:A": {
+            "fiscal_period_fy_h": [2025], "fund_view_mode": "banking", "equity_fy_h": [10], "capital_fy_h": [5],
+        }}
+        df = get_financials("X:A", "balance_sheet")
+        assert df.columns.tolist() == ["period_end", "Equity", "Capital"]
+
+    def test_parent_cycle_keeps_items(self):
+        layout = pd.DataFrame([
+            {"id": "a", "parent": "b", "ordinal": 0},
+            {"id": "b", "parent": "a", "ordinal": 1},
+            {"id": "c", "parent": None, "ordinal": 2},
+        ])
+        assert _statement_order(layout)["id"].tolist() == ["c", "a", "b"]
+
+    @patch("tvscreener.fundamentals.get_fundamentals_config", return_value=LAYOUTS)
+    @patch("tvscreener.fundamentals.get_quote_fields")
+    def test_statement_without_period_raises(self, mock_quotes, _):
+        with pytest.raises(ValueError, match="balance_sheet"):
+            get_financials("X:A", "balance_sheet", "TTM")
+        mock_quotes.assert_not_called()
+
+    @patch("tvscreener.fundamentals.get_fundamentals_config", return_value=LAYOUTS)
+    @patch("tvscreener.fundamentals.get_quote_fields")
+    def test_no_data_warns(self, mock_quotes, _):
+        mock_quotes.return_value = {"X:A": {"fiscal_period_fq_h": ["2026-Q3"], "margin_ttm_h": None}}
+        with pytest.warns(UserWarning, match="TTM statistics data for X:A"):
+            df = get_financials("X:A", "statistics", "TTM")
+        assert df.empty
+        assert df.columns.tolist() == ["period_end"]
 
 
 class TestCorporateEvents:

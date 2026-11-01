@@ -32,10 +32,14 @@ The result has one row per fiscal period, oldest first, indexed by the period la
 
 Large companies have about 20 fiscal years and 32 quarters.
 
-Banks, insurers and industrial companies have different statement layouts. The function uses the layout that matches the company's data.
+Banks, insurers, industrial and other companies have different statement layouts. The function uses the company's layout.
 
 !!! note
-    Some periods do not apply to some statements or companies. For example, balance sheets have no `TTM`, and US companies have no `FH`. The result is then empty.
+    Some periods do not apply to some statements or companies:
+
+    - Balance sheets have no `TTM`: the function raises `ValueError`.
+    - When a company has no data for the statement and period, the function issues a warning and returns an empty DataFrame. For example, US companies have no `FH`.
+    - TradingView keeps a `TTM` history for a few items only, such as revenue, net income and free cash flow, and for no statistics. Use `FQ` for the full statement.
 
 `get_fundamentals_config()` returns TradingView's catalogue of fundamental fields: id, name, statement, period and layout.
 

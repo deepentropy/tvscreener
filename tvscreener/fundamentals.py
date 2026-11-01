@@ -4,6 +4,7 @@ import collections
 import datetime as dt
 import functools
 import json
+import warnings
 import zlib
 
 import pandas as pd
@@ -78,13 +79,15 @@ def get_financials(symbol, statement="income", period="FY", labels=True):
     :param symbol: Exchange-prefixed symbol, e.g. "NASDAQ:AAPL"
     :param statement: "income", "balance_sheet", "cash_flow" or "statistics" (ratios, per-share values...)
     :param period: "FY" (annual), "FQ" (quarterly), "FH" (semi-annual) or "TTM" (trailing twelve months,
-        at each quarter end)
+        at each quarter end). TradingView keeps a TTM history for a few items only, and for no statistics.
     :param labels: True for readable column names ("Total revenue"), False for field ids ("total_revenue")
     :return: DataFrame with one row per fiscal period, oldest first, indexed by the period label
         ("2025", "2026-Q3"). The first column is ``period_end`` (UTC); the other columns are the
         statement items, in TradingView's order. Items without data are left out.
         ``df.attrs["currency"]`` is the reporting currency.
-    :raises ValueError: If ``statement`` or ``period`` is invalid, or the symbol is unknown
+        If the company has no data for this statement and period, a warning is issued and the DataFrame is empty.
+    :raises ValueError: If ``statement`` or ``period`` is invalid, the statement does not exist for
+        this period (``balance_sheet`` has no "TTM"), or the symbol is unknown
     """
     if statement not in STATEMENTS:
         raise ValueError(f"statement must be one of {list(STATEMENTS)}, got {statement!r}")
@@ -94,8 +97,11 @@ def get_financials(symbol, statement="income", period="FY", labels=True):
 
     config = get_fundamentals_config()
     items = config[(config["category"] == STATEMENTS[statement]) & (config["period"] == period) & ~config["hidden"]]
+    if items.empty:
+        raise ValueError(f"TradingView has no {statement} for period {period}")
     label_suffix = _PERIOD_LABELS[period]
-    meta = [f"fiscal_period_{label_suffix}_h", f"fiscal_period_end_{label_suffix}_h", "fundamental_currency_code"]
+    meta = [f"fiscal_period_{label_suffix}_h", f"fiscal_period_end_{label_suffix}_h", "fundamental_currency_code",
+            "fund_view_mode"]
     fields = sorted({f"{i}_h" for i in items["id"]})
 
     values = {}
@@ -108,12 +114,16 @@ def get_financials(symbol, statement="income", period="FY", labels=True):
     filled = {k[:-2] for k, v in values.items() if k.endswith("_h") and isinstance(v, list) and any(
         _clean(x) is not None for x in v)} - {m[:-2] for m in meta}
 
-    # Each company type (industrial, banking, insurance...) has its own layout: keep the most complete one
+    # Each company type (industrial, banking, insurance...) has its own layout: use the company's,
+    # or else the most complete one
     sizes = items.groupby("view_mode")["id"].count()
     found = items[items["id"].isin(filled)].groupby("view_mode")["id"].count()
     if found.empty:
+        warnings.warn(f"TradingView has no {period} {statement} data for {symbol}", stacklevel=2)
         return pd.DataFrame(columns=["period_end"])
-    mode = (found / sizes[found.index]).idxmax()
+    mode = values.get("fund_view_mode")
+    if mode not in found.index:
+        mode = (found / sizes[found.index]).idxmax()
     layout = _statement_order(items[items["view_mode"] == mode])
     layout = layout[layout["id"].isin(filled)]
 
@@ -138,20 +148,28 @@ def get_financials(symbol, statement="income", period="FY", labels=True):
 
 
 def _statement_order(layout):
-    """Rows in display order: each item followed by its sub-items, siblings by ordinal."""
+    """
+    Rows in display order: each item followed by its sub-items, siblings by ordinal.
+
+    Some of TradingView's layouts list an item twice, or as its own parent: each item is kept once.
+    """
     ids = set(layout["id"])
     children = collections.defaultdict(list)
     for row in layout.itertuples():
         children[row.parent if row.parent in ids else None].append(row)
-    order = []
+    order = {}
 
     def visit(parent):
         for row in sorted(children[parent], key=lambda r: (r.ordinal is None, r.ordinal)):
-            order.append(row.Index)
-            visit(row.id)
+            if row.id not in order:
+                order[row.id] = row.Index
+                visit(row.id)
 
     visit(None)
-    return layout.loc[order]
+    # Items in a parent cycle cannot be reached from the top
+    for parent in list(children):
+        visit(parent)
+    return layout.loc[list(order.values())]
 
 
 def _ms(series):
