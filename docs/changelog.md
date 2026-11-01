@@ -2,6 +2,13 @@
 
 All notable changes to tvscreener.
 
+## [0.8.2] - 01/11/2026
+
+### Fixed
+
+- **`get_financials` no longer crashes with `RecursionError` or drops items** (#74). It now uses the company's own layout, as reported by TradingView (`fund_view_mode`). Before, many balance sheets (e.g. NVDA, KO, XOM) selected the `other` layout, which lists an item as its own parent.
+- **`get_financials` no longer returns an empty result without explanation** (#73). `balance_sheet` with `TTM` raises `ValueError`, because TradingView has no such fields. When a company has no data for the statement and period, a warning is issued. TradingView keeps a `TTM` history for a few items only, and for no statistics: this is now documented.
+
 ## [0.8.1] - 15/10/2026
 
 ### Added
